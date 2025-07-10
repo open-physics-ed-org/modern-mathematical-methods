@@ -107,8 +107,10 @@ def render_download_buttons(file_path):
     """
     Generate HTML for download buttons for a given file (md or ipynb).
     Uses .download-btn CSS. Follows the pattern from the live site.
+    For .ipynb files, dynamically finds the correct Jupyter Book HTML path.
     """
     import os
+    from pathlib import Path
     stem = os.path.splitext(os.path.basename(file_path))[0]
     ext = os.path.splitext(file_path)[1].lower()
     # Always show these
@@ -121,16 +123,30 @@ def render_download_buttons(file_path):
     # Add ipynb and jupyter for notebooks
     if ext == '.ipynb':
         buttons.append((f'ipynb/{stem}.ipynb', 'IPYNB', '📓', True))
-        # Jupyter HTML link (open in new tab)
-        buttons.append((f'jupyter/content/notebooks/{stem}.html', 'Jupyter', '🔗', False))
+        # Dynamically find the Jupyter Book HTML file
+        jupyter_html = None
+        jupyter_root = Path('docs/jupyter-book/content/notebooks')
+        if jupyter_root.exists():
+            for html_file in jupyter_root.rglob(f'{stem}.html'):
+                # Use the first match found
+                rel_path = html_file.relative_to('docs')
+                jupyter_html = str(rel_path)
+                break
+        if jupyter_html:
+            buttons.append((jupyter_html, 'Jupyter', '🔗', False))
+        else:
+            # Fallback: keep the old (likely broken) path, but mark as disabled
+            buttons.append((f'jupyter/content/notebooks/{stem}.html', 'Jupyter (not found)', '❌', False))
     html = ['<nav class="chapter-downloads" aria-label="Download chapter sources">']
     html.append('<div role="group" aria-label="Download formats">')
     for href, label, icon, is_download in buttons:
         attrs = f'class="download-btn" href="{href}"'
         if is_download:
             attrs += ' download'
-        if label == 'Jupyter':
+        if label.startswith('Jupyter'):
             attrs += ' target="_blank" rel="noopener"'
+        if 'not found' in label:
+            attrs += ' style="pointer-events:none;opacity:0.5;"'
         html.append(f'<a {attrs}><span aria-hidden="true">{icon}</span> {label}</a>')
     html.append('</div></nav>')
     return '\n'.join(html)
