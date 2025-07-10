@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+  <!-- MathJax for LaTeX rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+    <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+    <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+      <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+    </div>
+  </div>
+</header>
+
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+  <main class="site-main container">
+    <button id="theme-toggle" class="theme-toggle-floating" aria-label="Toggle dark/light mode" tabindex="0" title="Toggle dark/light mode">
+  <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
+</button>
+<script>
+  function getPreferredTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return 'dark';
+  }
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const icon = document.getElementById('theme-toggle-icon');
+    if (theme === 'dark') {
+      icon.textContent = '☀️';
+    } else {
+      icon.textContent = '🌙';
+    }
+    localStorage.setItem('theme', theme);
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('theme-toggle');
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    btn.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+    btn.addEventListener('focus', function() {
+      btn.style.boxShadow = '0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12)';
+      btn.style.borderColor = '#ff0';
+    });
+    btn.addEventListener('blur', function() {
+      btn.style.boxShadow = '';
+      btn.style.borderColor = '';
+    });
+    setTheme(getPreferredTheme());
+  });
+</script>
+<style>
+  .theme-toggle-floating {
+    position: fixed;
+    left: 0.7em;
+    top: 5.5em;
+    z-index: 1000;
+    background: var(--button-bg, #222);
+    color: var(--button-fg, #fff);
+    border: 2px solid var(--button-border, #bbb);
+    border-radius: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+  }
+  .theme-toggle-floating:focus {
+    outline: 3px solid #ff0 !important;
+    border-color: #ff0 !important;
+    box-shadow: 0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12) !important;
+  }
+  @media (max-width: 700px) {
+    .theme-toggle-floating {
+      left: 0.3em;
+      top: 0.3em;
+      width: 1.7em;
+      height: 1.7em;
+      font-size: 1em;
+    }
+  }
+</style>
+
+    <nav class="chapter-downloads" aria-label="Download chapter sources">
+<div role="group" aria-label="Download formats">
+<a class="download-btn" href="docs/pdf/activity-what_is_a_model.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+<a class="download-btn" href="docs/md/activity-what_is_a_model.md" download><span aria-hidden="true">✍️</span> MD</a>
+<a class="download-btn" href="docs/docx/activity-what_is_a_model.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+<a class="download-btn" href="docs/tex/activity-what_is_a_model.tex" download><span aria-hidden="true">📐</span> TEX</a>
+<a class="download-btn" href="docs/ipynb/activity-what_is_a_model.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+<a class="download-btn" href="jupyter/content/notebooks/activity-what_is_a_model.html" target="_blank" rel="noopener"><span aria-hidden="true">🔗</span> Jupyter</a>
+</div></nav>
+    <div class="notebook-markdown-cell"><h1 id="29-aug-23-activity-what-is-a-model">29 Aug 23 - Activity: What is a Model?</h1>
+<h2 id="notes">Notes</h2>
+<ul>
+<li><em>Class Meeting:</em> 29 Sept 23</li>
+<li><em>Prior Reading:</em> None necessary</li>
+</ul>
+<h2 id="what-is-mathematical-modeling">What is Mathematical Modeling?</h2>
+<p>Nature reveals itself to us through interactions. We can tell from observations that it is nature's interactions that lead to its evolution. How nature is changing and predicting how it will change in the future is the work of science. In this work, we observe nature and its interactions to make models of those observations. We aim to predict and explain our observations of nature through this building of models.</p>
+<p>In physics, our goals are typically to explain and predict observations of physical phenomenon. Here, we focus ourselves to those canonical things that physicists concern themselves with: motion, fields, waves, atoms, nuclei, and so on. </p>
+<h2 id="models-and-modeling">Models and modeling</h2>
+<p>This course focuses on common physical models and how we use mathematics and computing tools to investigate these models. But, we need to agree on an mutual understanding of a model. In this activity, you will be working in a group to define aspects of a good model for the physical sciences. </p>
+<p>There are plenty of ideas on the internet, I can even <a href="https://bfy.tw/TUdA">provide you a link</a> with plenty of information. But, the point of this activity is for us to define a good model now (given all your prior experiences with models and modeling), and to reflect on that definition as you develop expertise with models and modeling (through your learning in this class).</p></div>
+<div class="notebook-markdown-cell"><h2 id="what-is-a-model">What is a model?</h2>
+<p>We are going to start with this short video made by Geoscientist John Aiken when he was a graduate student at Georgia Tech.</p>
+<p><a href="https://inv.tux.pizza/watch?v=dkTncoPqo5Y"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/dkTncoPqo5Y?width=720&amp;height=405" /></a>
+- Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=dkTncoPqo5Y">https://inv.tux.pizza/watch?v=dkTncoPqo5Y</a>
+- Commercial Link: <a href="https://youtube.com/watch?v=dkTncoPqo5Y">https://youtube.com/watch?v=dkTncoPqo5Y</a></p></div>
+<div class="notebook-markdown-cell"><h3 id="history-and-philosophy-of-science">History and Philosophy of Science</h3>
+<p>If you would like to dive deeper into models and modeling, there's excellent work in history and philosophy of science. The field studies how science develops knowledge, practice, culture, and so on. It studies important events and provides critical information on important and, often, overlooked folks who do science. For example, historian and gender studies professor <a href="https://en.wikipedia.org/wiki/Sharon_Traweek">Sharon Traweek</a> studies the high energy physics field. Her book, <a href="https://en.wikipedia.org/wiki/Beamtimes_and_Lifetimes">Beamtimes and Lifetimes: The World of High Energy Physicists</a> {cite}<code>traweek2009beamtimes</code> is excellent.</p>
+<p>```{admonition} Dame Nancy Cartwright (philosopher of science)
+One of the more interesting scholars in <a href="https://en.wikipedia.org/wiki/Nancy_Cartwright_(philosopher)">Dame Nancy Cartwright</a> who wrote a lot about the 'practice of science.' Her philosophical work informed many of the innovations in physics and broader science education -- including many science courses at MSU. </p>
+<p>Her writing is very interesting, but the style of writing can be a challenge to read. This is the nature of academic writing in different disciplines. Her book called "How The Laws of Physics Lie" {cite}<code>cartwright1983laws</code> is worth a read. Here's a link to the <a href="http://www.generativescience.org/papers/nature/Cartwright-_1983.pdf">first chapter</a>.
+```</p></div>
+<div class="notebook-markdown-cell"><h2 id="what-has-been-your-experience-with-models">What has been your experience with models?</h2>
+<p>Take 2-3 minutes to think about your prior physics class.
+- What models have you used? What makes that a model?
+- What modeling have you done? What makes that modeling?</p></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## Take notes for yourself here
+
+# Idea 1
+# Idea 2</code></pre></div>
+<div class="notebook-markdown-cell"><p>After we have discussed the above questions and generated a long list of experiences, you can move onto the next set of questions below.</p></div>
+<div class="notebook-markdown-cell"><pre><code toggle="toggle">Take 2-3 minutes to think about your prior work with models and modeling?
+- What made a model good or not so good?
+- What kinds of things could you do to make a better model? 
+</code></pre></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## Take notes for yourself here
+
+# Idea 1
+# Idea 2</code></pre></div>
+<div class="notebook-markdown-cell"><p>After we have discussed the above questions and generated a consensus list of good model features, you can move onto the next set of questions below.</p></div>
+<div class="notebook-markdown-cell"><pre><code toggle="toggle">Take 2-3 minutes and write down all the mathematical and/or computing models you have experienced, heard about, seen, or are otherwise familiar.
+</code></pre></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## Take notes for yourself here (use comments)
+
+# Model 1
+# Model 2</code></pre></div>
+  </main>
+  <footer>
+    <footer class="site-footer">
+  <p>Made in Michigan with tons of ☕️  and lots of ❤️ for students and educators everywhere. <br> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="display:inline-block; vertical-align:middle; margin-top:0.5em;"> <img alt="Creative Commons License" style="border-width:0; height:22px; margin-right:0.3em; vertical-align:middle;" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /> </a><a href="https://open-physics-ed-org.github.io/">openphysicsed.org</a></p>
+</footer>
+
+  </footer>
+</body>
+</html>

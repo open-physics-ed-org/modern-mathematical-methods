@@ -176,8 +176,10 @@ Supports: --html, --md, --docx, --tex, --pdf, --jupyter, --ppt, and --files FILE
 
 No build logic yet—just argument parsing and structure.
 """
+
 import argparse
 import sys
+import subprocess
 
 
 # --- Move build_html_all and build_html_for_files above main() ---
@@ -511,6 +513,7 @@ def build_jupyter_for_files(debug=False):
     4. Build Jupyter Book
     """
     def run_script(cmd, desc):
+        import subprocess
         print(f"[JUPYTER BUILD] {desc}...\n  $ {' '.join(cmd)}")
         result = subprocess.run(cmd, capture_output=True, text=True)
         if result.returncode != 0:
@@ -550,7 +553,23 @@ def build_jupyter_for_files(debug=False):
     run_script([sys.executable, 'validate_jb_toc.py', '_toc.yml'], 'Validate _toc.yml for duplicates')
     run_script([sys.executable, 'check_notebook_kernels.py', '--debug'], 'Check notebook kernels')
     # 4. Build Jupyter Book
-    run_script(['jupyter-book', 'build', '.'], 'Jupyter Book build (jupyter-book build .)')
+    # Run jupyter-book build . and stream output live for better feedback
+    print('[JUPYTER BUILD] Jupyter Book build (jupyter-book build .)...\n  $ jupyter-book build .')
+    import subprocess
+    proc = subprocess.Popen(
+        ['jupyter-book', 'build', '.'],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True
+    )
+    while True:
+        line = proc.stdout.readline()
+        if not line:
+            break
+        print(line, end='')
+    proc.wait()
+    if proc.returncode != 0:
+        raise RuntimeError('Step failed: Jupyter Book build (jupyter-book build .)')
 
 def main():
     parser = argparse.ArgumentParser(description="Build site outputs from content.")

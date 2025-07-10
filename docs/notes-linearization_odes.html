@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+  <!-- MathJax for LaTeX rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+    <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+    <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+      <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+    </div>
+  </div>
+</header>
+
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+  <main class="site-main container">
+    <button id="theme-toggle" class="theme-toggle-floating" aria-label="Toggle dark/light mode" tabindex="0" title="Toggle dark/light mode">
+  <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
+</button>
+<script>
+  function getPreferredTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return 'dark';
+  }
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const icon = document.getElementById('theme-toggle-icon');
+    if (theme === 'dark') {
+      icon.textContent = '☀️';
+    } else {
+      icon.textContent = '🌙';
+    }
+    localStorage.setItem('theme', theme);
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('theme-toggle');
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    btn.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+    btn.addEventListener('focus', function() {
+      btn.style.boxShadow = '0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12)';
+      btn.style.borderColor = '#ff0';
+    });
+    btn.addEventListener('blur', function() {
+      btn.style.boxShadow = '';
+      btn.style.borderColor = '';
+    });
+    setTheme(getPreferredTheme());
+  });
+</script>
+<style>
+  .theme-toggle-floating {
+    position: fixed;
+    left: 0.7em;
+    top: 5.5em;
+    z-index: 1000;
+    background: var(--button-bg, #222);
+    color: var(--button-fg, #fff);
+    border: 2px solid var(--button-border, #bbb);
+    border-radius: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+  }
+  .theme-toggle-floating:focus {
+    outline: 3px solid #ff0 !important;
+    border-color: #ff0 !important;
+    box-shadow: 0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12) !important;
+  }
+  @media (max-width: 700px) {
+    .theme-toggle-floating {
+      left: 0.3em;
+      top: 0.3em;
+      width: 1.7em;
+      height: 1.7em;
+      font-size: 1em;
+    }
+  }
+</style>
+
+    <nav class="chapter-downloads" aria-label="Download chapter sources">
+<div role="group" aria-label="Download formats">
+<a class="download-btn" href="docs/pdf/notes-linearization_odes.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+<a class="download-btn" href="docs/md/notes-linearization_odes.md" download><span aria-hidden="true">✍️</span> MD</a>
+<a class="download-btn" href="docs/docx/notes-linearization_odes.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+<a class="download-btn" href="docs/tex/notes-linearization_odes.tex" download><span aria-hidden="true">📐</span> TEX</a>
+<a class="download-btn" href="docs/ipynb/notes-linearization_odes.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+<a class="download-btn" href="jupyter/content/notebooks/notes-linearization_odes.html" target="_blank" rel="noopener"><span aria-hidden="true">🔗</span> Jupyter</a>
+</div></nav>
+    <div class="notebook-markdown-cell"><h1 id="19-sep-23-notes-heading-towards-chaos">19 Sep 23 - Notes: Heading towards Chaos</h1>
+<p>One of the principal motivations for our work thus far has been to get to analyze systems that show suprising and complex behavior. In mechanics, you might have heard of those kinds of behviors as chaotic or exhibiting chaos. It turns out the chaos is a specific kind of behavior that we can find. To motivate us, let's remind ourselves of how cool nature can be.</p>
+<p><a href="https://inv.tux.pizza/watch?v=fDek6cYijxI"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/fDek6cYijxI?width=720&amp;height=405" /></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=fDek6cYijxI">https://inv.tux.pizza/watch?v=fDek6cYijxI</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=fDek6cYijxI">https://youtube.com/watch?v=fDek6cYijxI</a></li>
+</ul></div>
+<div class="notebook-markdown-cell"><h2 id="reminders-of-the-large-angle-pendulum">Reminders of the Large Angle Pendulum</h2>
+<p>Last time we investigated the phase portrait of the large angle pendulum, we we could arrive at by re-writing the differential equation </p>
+<p>$$
+\ddot{\theta} = -\dfrac{g}{L}\sin(\theta)
+$$</p>
+<p>as 2 first-order differential equations:</p>
+<p>$$
+\dot{\theta} = \omega \hspace{0.5in}\text{and}\hspace{0.5in} \dot{\omega} = -\frac{g}{L}\sin(\theta)
+$$</p>
+<p>By setting both of these equations equal to zero simultaneously, we also argued that this system has (<a href="https://faculty.math.illinois.edu/~kapovich/417-16/card.pdf">countably</a>) infinite fixed points at $(n\pi, 0)$ for  $n\in \mathbb{Z}$ in $(\theta,\omega)$ phase space. </p>
+<h3 id="linearization-and-the-jacobian">Linearization and the Jacobian</h3>
+<p>Now we turn to the challenge of characterizing these fixed points with the linearization of the system (see the end of tuesday's activity for some more notes on this). Recall that we can do this by finding the eigenvalues of the Jacobian Matrix of the system at its fixed point. For the system $\dot{x} = f(x,y)$, $\dot{y} = g(x,y)$ the jacobian matrix looks like this:</p>
+<p>$$
+A = \begin{bmatrix} \frac{\partial f}{\partial x} &amp; \frac{\partial f}{\partial y} \ \frac{\partial g}{\partial x} &amp; \frac{\partial g}{\partial y}\end{bmatrix}_{(x^<em>,y^</em>)}
+$$</p>
+<p><strong>&#9989; Try this</strong> </p>
+<p>Calculate the general Jacobian matrix $A$ for this system, then calculate what it is at the fixed point $(0,0)$.</p>
+<p>We have the Jacobian at $(0,0)$ now but we still need to find its eigenvalues. Let's remind ourselves about eigenvalues and eigenvectors.</p></div>
+<div class="notebook-markdown-cell"><h2 id="eigenvalues">Eigenvalues</h2>
+<p>Eigenvalues and the closely related Eigenvectors are indispensible in physics, math, and computational science. These ideas for the basis (pun somewhat intened) for countless problems, from the <a href="https://phys.libretexts.org/Bookshelves/Nuclear_and_Particle_Physics/Introduction_to_Applied_Nuclear_Physics_(Cappellaro)/02%3A_Introduction_to_Quantum_Mechanics/2.04%3A_Energy_Eigenvalue_Problem">energy eigenvalue equation</a> that is the foundation of quantum mechanics, to the stability of complex nonlinear systems, to Normal Modes of oscillators. <em>Eigenproblems</em> show up all over in physics. </p>
+<p>A brief tangent: Once some scientists were using an eigenvalue driven algorithm called principal component analysis to study the genes of people that live in Europe. They found that these eigenvalues/vectors reproduced a map of Europe with surprising accuracy (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2735096/">link</a>). So these tools are extremely, and often unreasonably powerful.</p>
+<p>Eigenvalues are the $\lambda$ in the equation:</p>
+<p>$$
+A\mathbf{v} = \lambda \mathbf{v}
+$$</p>
+<p>Where $A$ is a linear operator of the vector space that $\mathbf{v}$ lives in. In finite-dimensional vector spaces, rhese linear operators are always matrices. There is a bit of physical intuition behind this equation: An eigenvector of $A$ is a vector that only gets stretched or squished by $\lambda$ when $A$ acts on $\mathbf{v}$. </p>
+<h3 id="video-from-3blue1brown">Video from 3Blue1Brown</h3>
+<p>Grant Sanderson makes a lot of great videos on mathematics and statistics. This one about eigenvalues and eigenvectors is particularly good.</p>
+<p><a href="https://inv.tux.pizza/watch?v=PFDu9oVAE-g"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/PFDu9oVAE-g?width=720&amp;height=405" /></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=PFDu9oVAE-g">https://inv.tux.pizza/watch?v=PFDu9oVAE-g</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=PFDu9oVAE-g">https://youtube.com/watch?v=PFDu9oVAE-g</a></li>
+</ul>
+<h3 id="finding-eigenvalues">Finding Eigenvalues</h3>
+<p>To actually find the eigenvalues of a matrix, you solve the <strong>characteristic polynomial</strong> of the matrix, which you obtain by solving the equation:</p>
+<p>$$
+|A - \lambda I | = 0 
+$$</p>
+<p>Where the vertical bars means determinant.</p>
+<p>To find Eigenvectors, simply plug in the values you found for $\lambda$ into the original eigenvalue equation $A\mathbf{v} = \lambda \mathbf{v}$, using $\mathbf{v} = \begin{bmatrix}x \ y\end{bmatrix}$. You'll find some simple relationship between $x$ and $y$. Any scalar multiple of an eigenvector is also an eigenvector so we usually just choose the simplest one. Say if you found that $x = -y$. Then for a nice clean looking eigenvector you could choose $\begin{bmatrix} -1 \ 1\end{bmatrix}$. </p>
+<p><strong>&#9989; Try this</strong> </p>
+<p>Analytically, find the eigenvalues of the Jacobian matrix you calculated earlier. Use the below bullets to identify these eigenvalues with the type of the fixed point.</p>
+<ul>
+<li>$\mathrm{Re}(\lambda) &gt; 0 $ for both eigenvalues: Repeller/Source (unstable)</li>
+<li>$\mathrm{Re}(\lambda) &lt; 0 $ for both eigenvalues: Attractor/Sink  (stable)</li>
+<li>One eigenvalue positive, one negative: Saddle</li>
+<li>Both eigenvalues pure imaginary: Center</li>
+</ul>
+<p>Note: You can actually learn quite a bit more from this analysis, see Strogatz chapter 6. In fact, these eigenvalues can tell us about the nature of the local trajectories. </p></div>
+<div class="notebook-markdown-cell"><h2 id="additional-resources">Additional Resources</h2>
+<h3 id="stability-and-eigenvalues-of-a-linearized-system">Stability and Eigenvalues of a linearized system</h3>
+<p>Steve Brunton at UW does dynamical systems research and has a great video that demonstrates how we make meaning of those eigenvalues.</p>
+<p><a href="https://inv.tux.pizza/watch?v=XXjoh8L1HkE"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/XXjoh8L1HkE?width=720&amp;height=405" /></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=XXjoh8L1HkE">https://inv.tux.pizza/watch?v=XXjoh8L1HkE</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=XXjoh8L1HkE">https://youtube.com/watch?v=XXjoh8L1HkE</a></li>
+</ul>
+<h3 id="eigenvalues-computationally">Eigenvalues, Computationally</h3>
+<p>We can use <code>np.linalg.eig()</code> to find the eigenvalues (and normalized eigenvectors) of a matrix which we represent as numpy array. Below is some doe that does this (note the imaginary unit is represented as $j$ in python):</p></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>import numpy as np
+A = np.array([[0,1],[-1,0]])
+eigvals = np.linalg.eig(A)[0]
+eigvecs = np.linalg.eig(A)[1]
+
+print("eigenvalues:", eigvals)</code></pre><div class="notebook-output-stream">eigenvalues: [0.+1.j 0.-1.j]
+</div></div>
+<div class="notebook-markdown-cell"><p>This can be super handy when you just need to do some quick characterization from the eigenvalues of a matrix. However, be warned - since you only get numerical answers you can lose quite a bit of the nuance that comes from if you had calculated these. We'll see how that can be an issue later in the semester when we tackle normal modes. </p>
+<h3 id="handwritten-notes">Handwritten Notes</h3>
+<ul>
+<li><a href="../../assets/notes/Notes-Linearization_ODEs.pdf">Linearization of ODEs</a></li>
+<li><a href="../../assets/notes/Notes-Linearization_Example.pdf">Linearization example</a></li>
+</ul></div>
+<div class="notebook-markdown-cell"></div>
+  </main>
+  <footer>
+    <footer class="site-footer">
+  <p>Made in Michigan with tons of ☕️  and lots of ❤️ for students and educators everywhere. <br> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="display:inline-block; vertical-align:middle; margin-top:0.5em;"> <img alt="Creative Commons License" style="border-width:0; height:22px; margin-right:0.3em; vertical-align:middle;" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /> </a><a href="https://open-physics-ed-org.github.io/">openphysicsed.org</a></p>
+</footer>
+
+  </footer>
+</body>
+</html>

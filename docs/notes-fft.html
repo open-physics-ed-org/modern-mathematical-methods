@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+  <!-- MathJax for LaTeX rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+    <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+    <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+      <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+    </div>
+  </div>
+</header>
+
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+  <main class="site-main container">
+    <button id="theme-toggle" class="theme-toggle-floating" aria-label="Toggle dark/light mode" tabindex="0" title="Toggle dark/light mode">
+  <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
+</button>
+<script>
+  function getPreferredTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return 'dark';
+  }
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const icon = document.getElementById('theme-toggle-icon');
+    if (theme === 'dark') {
+      icon.textContent = '☀️';
+    } else {
+      icon.textContent = '🌙';
+    }
+    localStorage.setItem('theme', theme);
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('theme-toggle');
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    btn.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+    btn.addEventListener('focus', function() {
+      btn.style.boxShadow = '0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12)';
+      btn.style.borderColor = '#ff0';
+    });
+    btn.addEventListener('blur', function() {
+      btn.style.boxShadow = '';
+      btn.style.borderColor = '';
+    });
+    setTheme(getPreferredTheme());
+  });
+</script>
+<style>
+  .theme-toggle-floating {
+    position: fixed;
+    left: 0.7em;
+    top: 5.5em;
+    z-index: 1000;
+    background: var(--button-bg, #222);
+    color: var(--button-fg, #fff);
+    border: 2px solid var(--button-border, #bbb);
+    border-radius: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+  }
+  .theme-toggle-floating:focus {
+    outline: 3px solid #ff0 !important;
+    border-color: #ff0 !important;
+    box-shadow: 0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12) !important;
+  }
+  @media (max-width: 700px) {
+    .theme-toggle-floating {
+      left: 0.3em;
+      top: 0.3em;
+      width: 1.7em;
+      height: 1.7em;
+      font-size: 1em;
+    }
+  }
+</style>
+
+    <nav class="chapter-downloads" aria-label="Download chapter sources">
+<div role="group" aria-label="Download formats">
+<a class="download-btn" href="docs/pdf/notes-fft.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+<a class="download-btn" href="docs/md/notes-fft.md" download><span aria-hidden="true">✍️</span> MD</a>
+<a class="download-btn" href="docs/docx/notes-fft.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+<a class="download-btn" href="docs/tex/notes-fft.tex" download><span aria-hidden="true">📐</span> TEX</a>
+<a class="download-btn" href="docs/ipynb/notes-fft.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+<a class="download-btn" href="jupyter/content/notebooks/notes-fft.html" target="_blank" rel="noopener"><span aria-hidden="true">🔗</span> Jupyter</a>
+</div></nav>
+    <div class="notebook-markdown-cell"><h1 id="6-oct-23-notes-fast-fourier-transform">6 Oct 23 - Notes: Fast Fourier Transform</h1></div>
+<div class="notebook-markdown-cell"><p>It might not have been obvious to you, but our work so far has expected that our $V(t)$ be a continuous function of time, and that we can sample it any time we want. In reality, you are limited to the response of your equipment, which leads to a phenomenon knows as the <a href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem">Nyquist-Shannon sampling theorem</a>. This theorem states that if you want to study a signal with a frequency $f$, you need to sample it at least $2f$ times per second. This is known as the <a href="https://en.wikipedia.org/wiki/Nyquist_frequency">Nyquist frequency</a>. If you don't sample at least this often, you will get aliasing, which is when a signal at a higher frequency is indistinguishable from a signal at a lower frequency. As you can tell, there's a lot of issues with sampling when it comes to studying signals.</p>
+<h2 id="the-fast-fourier-transform">The Fast Fourier Transform</h2>
+<p>This video from Veritasium really explains the importance of this algorithm. It's a great watch.</p>
+<p><a href="https://inv.tux.pizza/watch?v=nmgFG7PUHfo"><img alt="History of the FFT" src="https://markdown-videos-api.jorgenkh.no/youtube/nmgFG7PUHfo?width=720&amp;height=405" /></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=nmgFG7PUHfo">https://inv.tux.pizza/watch?v=nmgFG7PUHfo</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=nmgFG7PUHfo">https://youtube.com/watch?v=nmgFG7PUHfo</a></li>
+</ul></div>
+<div class="notebook-markdown-cell"><h2 id="the-discrete-fourier-transform">The Discrete Fourier Transform</h2>
+<p>The foundation of this algorithm is the <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform">Discrete Fourier Transform</a>. This is a mathematical operation that takes a discrete signal and transforms it into a continuous function of frequency. The equation for this is:</p>
+<p>We start with complex form of the approximation of the Fourier Series:</p>
+<p>$$f(t) = \sum_{n=-\infty}^{\infty} c_n e^{i n \omega_0 t}$$</p>
+<p>Where $c_n$ is the complex coefficient of the $n$th harmonic, and $\omega_0$ is the fundamental frequency. As we have seen before, we can rewrite this as:</p>
+<p>$$c_n = \frac{1}{T_0} \int_{0}^{0 + T_0} f(t) e^{-i n \omega_0 t} dt$$</p>
+<p>Where $T_0$ is the period of the signal. Sometimes that integral is analytical and sometimes it isn't. If it's real data, it is definitely questionable if it's analytical. So, we can approximate this integral using the trapezoidal rule:</p>
+<p>$$c_n \approx \frac{1}{T_0} \sum_{k=0}^{N-1} f(t_k) e^{-i n \omega_0 t_k} \Delta t$$</p>
+<p>Where $N$ is the number of samples, $t_k$ is the time of the $k$th sample, and $\Delta t$ is the time between samples. We then use this to compute the approximate signal:</p>
+<p>$$f(t) \approx \sum_{n=-\infty}^{\infty} \left( \frac{1}{T_0} \sum_{k=0}^{N-1} f(t_k) e^{-i n \omega_0 t_k} \Delta t \right) e^{i n \omega_0 t}$$</p>
+<p>It's great that the numerical technique is well known and canned tools are available like <code>scipy.integrate.trapz</code>, but here we will start to use <code>scipy.fft</code> to do the heavy lifting for us. </p></div>
+<div class="notebook-markdown-cell"><h2 id="additional-resources">Additional Resources</h2>
+<p>We do not expect you to understand the details of an FFT, how it is derived and how it works when written into a computer program. However, if you are interested, here are some resources that you can use to learn more about the FFT.</p>
+<h3 id="videos">Videos</h3>
+<p>This is an excellent discussion of the underlying mathematics and the setup of the algorithm.</p>
+<p><a href="https://inv.tux.pizza/watch?v=h7apO7q16V0"><img alt="Mathematics of the FFT" src="https://markdown-videos-api.jorgenkh.no/youtube/h7apO7q16V0?width=720&amp;height=405" /></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=h7apO7q16V0">https://inv.tux.pizza/watch?v=h7apO7q16V0</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=h7apO7q16V0">https://youtube.com/watch?v=h7apO7q16V0</a></li>
+</ul>
+<p>This is a presentation of how to implement the FFT using Python code.</p>
+<p><a href="https://inv.tux.pizza/watch?v=Ty0JcR6Dvis"><img alt="Implementing FFT" src="https://markdown-videos-api.jorgenkh.no/youtube/Ty0JcR6Dvis?width=720&amp;height=405" /></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=Ty0JcR6Dvis">https://inv.tux.pizza/watch?v=Ty0JcR6Dvis</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=Ty0JcR6Dvis">https://youtube.com/watch?v=Ty0JcR6Dvis</a></li>
+</ul>
+<h3 id="handwritten-notes">Handwritten notes</h3>
+<ul>
+<li><a href="../assets/notes/Notes-Introduction_to_FFT.pdf">Introduction to FFT</a></li>
+</ul></div>
+<div class="notebook-markdown-cell"></div>
+  </main>
+  <footer>
+    <footer class="site-footer">
+  <p>Made in Michigan with tons of ☕️  and lots of ❤️ for students and educators everywhere. <br> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="display:inline-block; vertical-align:middle; margin-top:0.5em;"> <img alt="Creative Commons License" style="border-width:0; height:22px; margin-right:0.3em; vertical-align:middle;" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /> </a><a href="https://open-physics-ed-org.github.io/">openphysicsed.org</a></p>
+</footer>
+
+  </footer>
+</body>
+</html>

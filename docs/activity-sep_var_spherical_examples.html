@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+  <!-- MathJax for LaTeX rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+    <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+    <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+      <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+    </div>
+  </div>
+</header>
+
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+  <main class="site-main container">
+    <button id="theme-toggle" class="theme-toggle-floating" aria-label="Toggle dark/light mode" tabindex="0" title="Toggle dark/light mode">
+  <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
+</button>
+<script>
+  function getPreferredTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return 'dark';
+  }
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const icon = document.getElementById('theme-toggle-icon');
+    if (theme === 'dark') {
+      icon.textContent = '☀️';
+    } else {
+      icon.textContent = '🌙';
+    }
+    localStorage.setItem('theme', theme);
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('theme-toggle');
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    btn.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+    btn.addEventListener('focus', function() {
+      btn.style.boxShadow = '0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12)';
+      btn.style.borderColor = '#ff0';
+    });
+    btn.addEventListener('blur', function() {
+      btn.style.boxShadow = '';
+      btn.style.borderColor = '';
+    });
+    setTheme(getPreferredTheme());
+  });
+</script>
+<style>
+  .theme-toggle-floating {
+    position: fixed;
+    left: 0.7em;
+    top: 5.5em;
+    z-index: 1000;
+    background: var(--button-bg, #222);
+    color: var(--button-fg, #fff);
+    border: 2px solid var(--button-border, #bbb);
+    border-radius: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+  }
+  .theme-toggle-floating:focus {
+    outline: 3px solid #ff0 !important;
+    border-color: #ff0 !important;
+    box-shadow: 0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12) !important;
+  }
+  @media (max-width: 700px) {
+    .theme-toggle-floating {
+      left: 0.3em;
+      top: 0.3em;
+      width: 1.7em;
+      height: 1.7em;
+      font-size: 1em;
+    }
+  }
+</style>
+
+    <nav class="chapter-downloads" aria-label="Download chapter sources">
+<div role="group" aria-label="Download formats">
+<a class="download-btn" href="docs/pdf/activity-sep_var_spherical_examples.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+<a class="download-btn" href="docs/md/activity-sep_var_spherical_examples.md" download><span aria-hidden="true">✍️</span> MD</a>
+<a class="download-btn" href="docs/docx/activity-sep_var_spherical_examples.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+<a class="download-btn" href="docs/tex/activity-sep_var_spherical_examples.tex" download><span aria-hidden="true">📐</span> TEX</a>
+<a class="download-btn" href="docs/ipynb/activity-sep_var_spherical_examples.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+<a class="download-btn" href="jupyter/content/notebooks/activity-sep_var_spherical_examples.html" target="_blank" rel="noopener"><span aria-hidden="true">🔗</span> Jupyter</a>
+</div></nav>
+    <div class="notebook-markdown-cell"><h1 id="10-oct-23-activity-matching-boundary-conditions-and-plotting-the-potential">10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</h1>
+<h2 id="azimuthally-symmetric-solutions">Azimuthally Symmetric Solutions</h2>
+<p>As we saw, azimuthally symmetric solutions, the electric potential is independent of $\phi$ and the solutions are of the form:</p>
+<p>$$V(r,\theta) = \sum_{n=0}^\infty \sum_{l=0}^\infty \left(A_{nl} r^n + \frac{B_{nl}}{r^{n+1}}\right) P_l(\cos\theta)$$</p>
+<p>where $P_l(\cos\theta)$ are the <a href="https://en.wikipedia.org/wiki/Legendre_polynomials">Legendre polynomials</a>. The coefficients $A_{nl}$ and $B_{nl}$ are determined by the boundary conditions. We will practice solving for these coefficients in this activity.</p></div>
+<div class="notebook-markdown-cell"><p><strong>&#9989; Do this</strong> </p>
+<h3 id="sphere-of-constant-surface-potential">Sphere of constant surface potential</h3>
+<p>Consider a sphere of with a radius $a$. If the potential on the surface is $V_0$, what is the potential inside and outside the sphere?</p>
+<ol>
+<li>Consider the radial solutions (what doesn't blow up?)</li>
+<li>Consider the polar angle solutions, what has to be true? What does that say about terms with $l&gt;0$?</li>
+<li>Write down the solution inside and outside the sphere.</li>
+<li>Make a heat map plot (in $x$ and $y$) of the potential inside and outside the sphere. You can set $a=1$ and $V_0=1$ if that helps.</li>
+</ol></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## your code here</code></pre></div>
+<div class="notebook-markdown-cell"><p><strong>&#9989; Do this</strong> </p>
+<h3 id="sphere-of-variable-potential">Sphere of variable potential</h3>
+<p>Consider a sphere of with a radius $a$. If the potential on the surface is $V(\theta)$, what is the potential inside and outside the sphere?</p>
+<ol>
+<li>Consider the radial solutions (what doesn't blow up?)</li>
+<li>Consider the polar angle solutions, what has to be true? Can you say anything about them?</li>
+<li>What if $V(\theta) = V_0 \cos(\theta)$? What is the potential inside and outside the sphere?</li>
+</ol></div>
+<div class="notebook-markdown-cell"><h3 id="a-thick-spherical-shell">A thick spherical shell</h3>
+<p>Suppose you have a spherical shell of inner radius $a$ and outer radius $b$, and you know the electric potential on the inner ($V(a,\theta) = V_a(\theta)$) and outer ($V(b,\theta) = V_b(\theta)$) surfaces. You want to find the electric potential $V(r,\theta)$ inside the hole ($r<a$) and outside the shell ($r>b$).</p>
+<p>Let's allow:</p>
+<p>$$V_a(\theta) = V_{a0} + V_{a1} \cos(\theta)$$
+$$V_b(\theta) = V_{b0} + V_{b1} \cos(\theta)$$</p>
+<ol>
+<li>What is the general solution? (all three regions)</li>
+<li>What are the boundary conditions for $r$?</li>
+<li>What terms are left in the general solutions?</li>
+<li>Find the unique solution for $V(r,\theta)$ inside the hole ($r<a$) and outside the shell ($r>b$).</li>
+</ol>
+<p>What do you do in the case of $V_a(\theta) = f(\theta)$ and $V_b(\theta) = g(\theta)$ - generic functions?</p></div>
+<div class="notebook-markdown-cell"><h3 id="example-of-polarization">Example of Polarization</h3>
+<p><strong>&#9989; Do this</strong> </p>
+<p>Put a metal sphere of radius $a$ in a uniform electric field $\vec{E} = E_0 \hat{z}$. </p>
+<p><img alt="Sphere in a uniform electric field" src="https://d2vlcm61l7u1fs.cloudfront.net/media%2F2f6%2F2f6e4bc3-0070-470f-9451-6376a4eceddc%2Fphpl2HMKa.png" /></p>
+<p>What is the potential inside and outside the sphere?</p>
+<ol>
+<li>Draw the picture and write down the boundary conditions. What is the potential everywhere on a metal?</li>
+<li>What general solution do you need to use? How do you know?</li>
+<li>What are the boundary conditions for the radial solutions? The polar angle solutions?</li>
+<li>Match your boundary conditions to your general solution. What is the potential inside and outside the sphere?</li>
+<li>Make a heat map plot (in $x$ and $y$) of the potential inside and outside the sphere. You can set $a=1$ and $E_0=1$ if that helps.</li>
+<li>(challenge) Find the polarization charge density on the surface of the sphere. What is the total charge on the sphere?</li>
+</ol></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## your code here</code></pre></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code></code></pre></div>
+  </main>
+  <footer>
+    <footer class="site-footer">
+  <p>Made in Michigan with tons of ☕️  and lots of ❤️ for students and educators everywhere. <br> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="display:inline-block; vertical-align:middle; margin-top:0.5em;"> <img alt="Creative Commons License" style="border-width:0; height:22px; margin-right:0.3em; vertical-align:middle;" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /> </a><a href="https://open-physics-ed-org.github.io/">openphysicsed.org</a></p>
+</footer>
+
+  </footer>
+</body>
+</html>

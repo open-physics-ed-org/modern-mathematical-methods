@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+  <!-- MathJax for LaTeX rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+    <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+    <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+      <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+    </div>
+  </div>
+</header>
+
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+  <main class="site-main container">
+    <button id="theme-toggle" class="theme-toggle-floating" aria-label="Toggle dark/light mode" tabindex="0" title="Toggle dark/light mode">
+  <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
+</button>
+<script>
+  function getPreferredTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return 'dark';
+  }
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const icon = document.getElementById('theme-toggle-icon');
+    if (theme === 'dark') {
+      icon.textContent = '☀️';
+    } else {
+      icon.textContent = '🌙';
+    }
+    localStorage.setItem('theme', theme);
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('theme-toggle');
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    btn.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+    btn.addEventListener('focus', function() {
+      btn.style.boxShadow = '0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12)';
+      btn.style.borderColor = '#ff0';
+    });
+    btn.addEventListener('blur', function() {
+      btn.style.boxShadow = '';
+      btn.style.borderColor = '';
+    });
+    setTheme(getPreferredTheme());
+  });
+</script>
+<style>
+  .theme-toggle-floating {
+    position: fixed;
+    left: 0.7em;
+    top: 5.5em;
+    z-index: 1000;
+    background: var(--button-bg, #222);
+    color: var(--button-fg, #fff);
+    border: 2px solid var(--button-border, #bbb);
+    border-radius: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+  }
+  .theme-toggle-floating:focus {
+    outline: 3px solid #ff0 !important;
+    border-color: #ff0 !important;
+    box-shadow: 0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12) !important;
+  }
+  @media (max-width: 700px) {
+    .theme-toggle-floating {
+      left: 0.3em;
+      top: 0.3em;
+      width: 1.7em;
+      height: 1.7em;
+      font-size: 1em;
+    }
+  }
+</style>
+
+    <nav class="chapter-downloads" aria-label="Download chapter sources">
+<div role="group" aria-label="Download formats">
+<a class="download-btn" href="docs/pdf/notes-em_intro.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+<a class="download-btn" href="docs/md/notes-em_intro.md" download><span aria-hidden="true">✍️</span> MD</a>
+<a class="download-btn" href="docs/docx/notes-em_intro.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+<a class="download-btn" href="docs/tex/notes-em_intro.tex" download><span aria-hidden="true">📐</span> TEX</a>
+<a class="download-btn" href="docs/ipynb/notes-em_intro.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+<a class="download-btn" href="jupyter/content/notebooks/notes-em_intro.html" target="_blank" rel="noopener"><span aria-hidden="true">🔗</span> Jupyter</a>
+</div></nav>
+    <div class="notebook-markdown-cell"><h1 id="26-sept-23-notes-maxwells-equations">26 Sept 23 - Notes: Maxwell's Equations</h1></div>
+<div class="notebook-markdown-cell"><h2 id="electromagnetic-phenomena">Electromagnetic Phenomena</h2>
+<p>You have certainly experienced a wide variety of electromagnetic phenomena in your life -- both natural (e.g., a sun rise, a rainbow, your hair standing on end) and human-made (e.g., switching on a light, using a microwave, using a cell phone). We now know that we can explain many of those phenomenon using a set of four partial differential equations: <a href="https://en.wikipedia.org/wiki/Maxwell%27s_equations">Maxwell's Equations</a>. These equations describe a new mathematical object: a <a href="https://en.wikipedia.org/wiki/Field_(physics)">field</a>. The models that we develop from this theory are still <a href="https://en.wikipedia.org/wiki/Classical_physics">Classical</a> -- in that we don't consider quantum mechanical effects. Rather we treat the fields as continuous functions of space and time.</p>
+<p>While this might not seem that this classical theory is still useful in modern research, it is often the basis for much of the work done in physics. In fact, some important fusion energy research uses <a href="https://en.wikipedia.org/wiki/Magnetic_confinement_fusion">magnetic confinement</a>, which is effectively a classical electromagnetic phenomenon. The South Korean experimental fusion reactor, <a href="https://en.wikipedia.org/wiki/KSTAR">KSTAR</a>, is an example of this type of research, and it recently <a href="https://www.popularmechanics.com/science/energy/a41191247/koreas-fusion-reactor-sustained-temperatures-7-times-hotter-than-the-sun-for-30-seconds/">sustained temperatures of 100 million degrees Celsius</a>.</p>
+<h3 id="magnetic-confinement-in-fusion-energy">Magnetic Confinement in Fusion Energy</h3>
+<p><a href="https://inv.tux.pizza/watch?v=PWCqwZoE0FY"><img alt="Magnetic Confinement" src="https://markdown-videos-api.jorgenkh.no/youtube/PWCqwZoE0FY?width=720&amp;height=405" /></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=PWCqwZoE0FY">https://inv.tux.pizza/watch?v=PWCqwZoE0FY</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=PWCqwZoE0FY">https://youtube.com/watch?v=PWCqwZoE0FY</a></li>
+</ul></div>
+<div class="notebook-markdown-cell"><h2 id="developing-a-complete-theory">Developing a complete theory</h2>
+<p>The work to develop <a href="https://en.wikipedia.org/wiki/Maxwell%27s_equations">Maxwell's Equations</a> was substantial and involved not only theoretical developments but confirmations using experiments. A model of reality is only as good as its ability to predict the results of experiments, which classical electromagnetism does very well (up to the point of quantum phenomena). The resulting Maxwell Equations that describe the electric ($\mathbf{E}$) and magnetic ($\mathbf{B}$) fields (in vacuum) are given by:</p>
+<p>$$
+\textbf{Differential Form:}
+$$</p>
+<p>Gauss's Law for Electricity:</p>
+<p>$$
+\mathbf{\nabla} \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
+$$</p>
+<p>Gauss's Law for Magnetism:</p>
+<p>$$
+\mathbf{\nabla} \cdot \mathbf{B} = 0
+$$</p>
+<p>Faraday's Law of Electromagnetic Induction:</p>
+<p>$$
+\mathbf{\nabla} \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}
+$$</p>
+<p>Ampère's Law with Maxwell's Addition:</p>
+<p>$$
+\mathbf{\nabla} \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
+$$</p>
+<p>$$
+\textbf{Integral Form:}
+$$</p>
+<p>Gauss's Law for Electricity:</p>
+<p>$$
+\oint \mathbf{E} \cdot d\mathbf{A} = \frac{1}{\varepsilon_0} \int \rho dV
+$$</p>
+<p>Gauss's Law for Magnetism:</p>
+<p>$$
+\oint \mathbf{B} \cdot d\mathbf{A} = 0
+$$</p>
+<p>Faraday's Law of Electromagnetic Induction:</p>
+<p>$$
+\oint \mathbf{E} \cdot d\mathbf{l} = -\frac{d}{dt} \int \mathbf{B} \cdot d\mathbf{A}
+$$</p>
+<p>Ampère's Law with Maxwell's Addition:</p>
+<p>$$
+\oint \mathbf{B} \cdot d\mathbf{l} = \mu_0 \int \mathbf{J} \cdot d\mathbf{A} + \mu_0 \varepsilon_0 \frac{d}{dt} \int \mathbf{E} \cdot d\mathbf{A}
+$$</p>
+<p>We will work with different aspects of these equations as we make different assumptions about the physical system.</p>
+<h3 id="a-comment-on-the-development-of-this-theory">A comment on the development of this theory</h3>
+<p>During the development of Classical Electromagnetism, physics research was often lead by single individuals with small armies of technicians, specialists, drafters, secretarial staff, and the like. While presented as the intellectual work of a single person, the work was an effort by a number of underpaid and under-recognized people (including, at the time, women and non-white men) who are unnamed in many books. A classical, and non critical, view of the development appears below in the video, but also in Meyer's book <a href="https://mitpress.mit.edu/9780262130707/a-history-of-electricity-and-magnetism/">A History of Electricity and Magnetism</a>. A more nuanced view of how science develops and is negotiated appears in Traweek's book <a href="https://en.wikipedia.org/wiki/Beamtimes_and_Lifetimes">Beamtimes and Lifetimes</a>.</p>
+<h4 id="the-mechanical-universe">The Mechanical Universe</h4>
+<p>This video from the <a href="https://en.wikipedia.org/wiki/The_Mechanical_Universe">Mechanical Universe series</a> and tells the story of the development of this theory. The video is dated and sexist and the instructor's stories are similarly problematic. The video puts scientists on a pedestal. But, it is worth a watch, both to recognize the history as presented and to reckon with the issues that these perspectives have continued to perpetuate. </p>
+<p><a href="https://inv.tux.pizza/watch?v=SS4tcajTsW8"><img alt="Maxwell's Equations" src="https://markdown-videos-api.jorgenkh.no/youtube/SS4tcajTsW8?width=720&amp;height=405" /></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=SS4tcajTsW8">https://inv.tux.pizza/watch?v=SS4tcajTsW8</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=SS4tcajTsW8">https://youtube.com/watch?v=SS4tcajTsW8</a></li>
+</ul></div>
+<div class="notebook-markdown-cell"></div>
+  </main>
+  <footer>
+    <footer class="site-footer">
+  <p>Made in Michigan with tons of ☕️  and lots of ❤️ for students and educators everywhere. <br> <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="display:inline-block; vertical-align:middle; margin-top:0.5em;"> <img alt="Creative Commons License" style="border-width:0; height:22px; margin-right:0.3em; vertical-align:middle;" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /> </a><a href="https://open-physics-ed-org.github.io/">openphysicsed.org</a></p>
+</footer>
+
+  </footer>
+</body>
+</html>
