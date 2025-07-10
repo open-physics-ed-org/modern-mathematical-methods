@@ -1,3 +1,108 @@
+def build_tex_all(debug=False):
+    """Build LaTeX for all files referenced in the menu/content tree (_content.yml)."""
+    from content_parser import load_and_validate_content_yml, get_all_content_files
+    content = load_and_validate_content_yml('_content.yml')
+    files = get_all_content_files(content)
+    if not files:
+        if debug:
+            print("[WARN] No files found in _content.yml toc.")
+        return
+    if debug:
+        print(f"[INFO] Building LaTeX for {len(files)} files from menu/content tree.")
+    build_tex_for_files(files, debug=debug)
+
+def build_tex_for_files(files, debug=False):
+    """Build LaTeX for specified markdown and notebook files."""
+    import subprocess
+    import sys
+    import os
+    from pathlib import Path
+    import shutil
+    import re
+    repo_root = Path(__file__).parent.resolve()
+    tex_dir = repo_root / 'docs' / 'tex'
+    img_dir = repo_root / 'docs' / 'images'
+    tex_dir.mkdir(parents=True, exist_ok=True)
+    img_dir.mkdir(parents=True, exist_ok=True)
+    missing_files = []
+    for file in files:
+        file_path = Path(file)
+        if not file_path.exists():
+            print(f"[ERROR] File not found: {file}")
+            missing_files.append(file)
+            continue
+        ext = file_path.suffix.lower()
+        stem = file_path.stem
+        out_md = tex_dir / f"{stem}.md"
+        out_tex = tex_dir / f"{stem}.tex"
+        # Step 1: Ensure we have a markdown file with correct image links
+        if ext == '.md':
+            print(f"[INFO] Copying markdown file: {file_path} -> {out_md}")
+            shutil.copy2(file_path, out_md)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                md_content = f.read()
+            def replace_img_link(match):
+                img_path = match.group(1)
+                if img_path.startswith('http'):
+                    return match.group(0)
+                img_filename = os.path.basename(img_path)
+                flat_name = f"{stem}_{img_filename}"
+                src_img = file_path.parent / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                # For tex, use relative path from tex_dir to img_dir
+                rel_path = os.path.relpath(dest_img, tex_dir)
+                return match.group(0).replace(img_path, rel_path)
+            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            with open(out_md, 'w', encoding='utf-8') as f:
+                f.write(new_md_content)
+        elif ext == '.ipynb':
+            print(f"[INFO] Converting notebook to markdown: {file_path} -> {out_md}")
+            import nbformat
+            import subprocess
+            nb = nbformat.read(str(file_path), as_version=4)
+            tmp_md = tex_dir / f"{stem}_tmp.md"
+            cmd = [sys.executable, '-m', 'nbconvert', '--to', 'markdown', str(file_path), '--output', tmp_md.name, '--output-dir', str(tex_dir)]
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            if result.returncode != 0:
+                print(f"[ERROR] nbconvert failed for {file_path}: {result.stderr}")
+                continue
+            with open(tmp_md, 'r', encoding='utf-8') as f:
+                md_content = f.read()
+            def replace_img_link(match):
+                img_path = match.group(1)
+                if img_path.startswith('http'):
+                    return match.group(0)
+                img_filename = os.path.basename(img_path)
+                flat_name = f"{stem}_{img_filename}"
+                src_img = tex_dir / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                rel_path = os.path.relpath(dest_img, tex_dir)
+                return match.group(0).replace(img_path, rel_path)
+            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            with open(out_md, 'w', encoding='utf-8') as f:
+                f.write(new_md_content)
+            tmp_md.unlink()
+        else:
+            print(f"[SKIP] Unsupported file type: {file}")
+            continue
+        # Step 2: Convert markdown to tex with pandoc
+        print(f"[INFO] Converting markdown to tex: {out_md} -> {out_tex}")
+        cmd = ['pandoc', str(out_md), '-o', str(out_tex), '--resource-path', str(img_dir)]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0:
+            print(f"[ERROR] pandoc failed for {out_md}: {result.stderr}")
+            continue
+        print(f"[OK] Built {out_tex} from {file}")
+    if missing_files:
+        print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:")
+        for mf in missing_files:
+            print(f"  - {mf}")
 def render_download_buttons(file_path):
     """
     Generate HTML for download buttons for a given file (md or ipynb).
@@ -8,14 +113,14 @@ def render_download_buttons(file_path):
     ext = os.path.splitext(file_path)[1].lower()
     # Always show these
     buttons = [
-        (f'sources/{stem}/{stem}.pdf', 'PDF', '📄', True),
-        (f'sources/{stem}/{stem}.md', 'MD', '✍️', True),
-        (f'sources/{stem}/{stem}.docx', 'DOCX', '📝', True),
-        (f'sources/{stem}/{stem}.tex', 'TEX', '📐', True),
+        (f'docs/pdf/{stem}.pdf', 'PDF', '📄', True),
+        (f'docs/md/{stem}.md', 'MD', '✍️', True),
+        (f'docs/docx/{stem}.docx', 'DOCX', '📝', True),
+        (f'docs/tex/{stem}.tex', 'TEX', '📐', True),
     ]
     # Add ipynb and jupyter for notebooks
     if ext == '.ipynb':
-        buttons.append((f'sources/{stem}/{stem}.ipynb', 'IPYNB', '📓', True))
+        buttons.append((f'docs/ipynb/{stem}.ipynb', 'IPYNB', '📓', True))
         # Jupyter HTML link (open in new tab)
         buttons.append((f'jupyter/content/notebooks/{stem}.html', 'Jupyter', '🔗', False))
     html = ['<nav class="chapter-downloads" aria-label="Download chapter sources">']
@@ -406,6 +511,19 @@ def main():
     parser.add_argument('--debug', action='store_true', help='Print debug information about menu extraction')
     args = parser.parse_args()
 
+    # LaTeX build
+    if args.tex:
+        if args.debug:
+            print("[INFO] LaTeX build selected.")
+        if args.files:
+            if args.debug:
+                print(f"[INFO] Building LaTeX for specified files: {args.files}")
+            build_tex_for_files(args.files, debug=args.debug)
+        else:
+            if args.debug:
+                print("[INFO] Building LaTeX for all content.")
+            build_tex_all(debug=args.debug)
+
     # Print parsed arguments for now
     if args.debug:
         print("[INFO] Build flags:")
@@ -477,29 +595,24 @@ def build_docx_for_files(files, debug=False):
     import shutil
     import re
     repo_root = Path(__file__).parent.resolve()
-    md_dir = repo_root / 'docs' / 'sources'
     img_dir = repo_root / 'docs' / 'images'
     docx_dir = repo_root / 'docs' / 'docx'
-    md_dir.mkdir(parents=True, exist_ok=True)
     img_dir.mkdir(parents=True, exist_ok=True)
     docx_dir.mkdir(parents=True, exist_ok=True)
     missing_files = []
     for file in files:
         file_path = Path(file)
         if not file_path.exists():
-            debug_print(f"[ERROR] File not found: {file}", debug)
+            print(f"[ERROR] File not found: {file}")
             missing_files.append(file)
             continue
         ext = file_path.suffix.lower()
         stem = file_path.stem
-        out_dir = md_dir / stem
-        out_dir.mkdir(parents=True, exist_ok=True)
-        out_md = out_dir / f"{stem}.md"
+        out_md = docx_dir / f"{stem}.md"
         out_docx = docx_dir / f"{stem}.docx"
         # Step 1: Ensure we have a markdown file with correct image links
         if ext == '.md':
-            if debug:
-                print(f"[INFO] Copying markdown file: {file_path} -> {out_md}")
+            print(f"[INFO] Copying markdown file: {file_path} -> {out_md}")
             shutil.copy2(file_path, out_md)
             with open(file_path, 'r', encoding='utf-8') as f:
                 md_content = f.read()
@@ -513,8 +626,7 @@ def build_docx_for_files(files, debug=False):
                 dest_img = img_dir / flat_name
                 if src_img.exists():
                     shutil.copy2(src_img, dest_img)
-                    if debug:
-                        print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
                 # For docx, use relative path from docx_dir to img_dir
                 rel_path = os.path.relpath(dest_img, docx_dir)
                 return match.group(0).replace(img_path, rel_path)
@@ -522,15 +634,15 @@ def build_docx_for_files(files, debug=False):
             with open(out_md, 'w', encoding='utf-8') as f:
                 f.write(new_md_content)
         elif ext == '.ipynb':
-            if debug:
-                print(f"[INFO] Converting notebook to markdown: {file_path} -> {out_md}")
+            print(f"[INFO] Converting notebook to markdown: {file_path} -> {out_md}")
             import nbformat
+            import subprocess
             nb = nbformat.read(str(file_path), as_version=4)
-            tmp_md = out_dir / f"{stem}_tmp.md"
-            cmd = [sys.executable, '-m', 'nbconvert', '--to', 'markdown', str(file_path), '--output', tmp_md.name, '--output-dir', str(out_dir)]
+            tmp_md = docx_dir / f"{stem}_tmp.md"
+            cmd = [sys.executable, '-m', 'nbconvert', '--to', 'markdown', str(file_path), '--output', tmp_md.name, '--output-dir', str(docx_dir)]
             result = subprocess.run(cmd, capture_output=True, text=True)
             if result.returncode != 0:
-                debug_print(f"[ERROR] nbconvert failed for {file_path}: {result.stderr}", debug)
+                print(f"[ERROR] nbconvert failed for {file_path}: {result.stderr}")
                 continue
             with open(tmp_md, 'r', encoding='utf-8') as f:
                 md_content = f.read()
@@ -540,12 +652,11 @@ def build_docx_for_files(files, debug=False):
                     return match.group(0)
                 img_filename = os.path.basename(img_path)
                 flat_name = f"{stem}_{img_filename}"
-                src_img = out_dir / img_path
+                src_img = docx_dir / img_path
                 dest_img = img_dir / flat_name
                 if src_img.exists():
                     shutil.copy2(src_img, dest_img)
-                    if debug:
-                        print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
                 rel_path = os.path.relpath(dest_img, docx_dir)
                 return match.group(0).replace(img_path, rel_path)
             new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
@@ -553,29 +664,20 @@ def build_docx_for_files(files, debug=False):
                 f.write(new_md_content)
             tmp_md.unlink()
         else:
-            debug_print(f"[SKIP] Unsupported file type: {file}", debug)
+            print(f"[SKIP] Unsupported file type: {file}")
             continue
         # Step 2: Convert markdown to docx with pandoc
-        if debug:
-            print(f"[INFO] Converting markdown to docx: {out_md} -> {out_docx}")
+        print(f"[INFO] Converting markdown to docx: {out_md} -> {out_docx}")
         cmd = ['pandoc', str(out_md), '-o', str(out_docx), '--resource-path', str(img_dir)]
         result = subprocess.run(cmd, capture_output=True, text=True)
         if result.returncode != 0:
-            debug_print(f"[ERROR] pandoc failed for {out_md}: {result.stderr}", debug)
+            print(f"[ERROR] pandoc failed for {out_md}: {result.stderr}")
             continue
-        debug_print(f"[OK] Built {out_docx} from {file}", debug)
+        print(f"[OK] Built {out_docx} from {file}")
     if missing_files:
-        debug_print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:", debug)
+        print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:")
         for mf in missing_files:
-            debug_print(f"  - {mf}", debug)
-    if args.tex:
-        print("[TODO] LaTeX build not yet implemented.")
-    if args.pdf:
-        print("[TODO] PDF build not yet implemented.")
-    if args.jupyter:
-        print("[TODO] Jupyter build not yet implemented.")
-    if args.ppt:
-        print("[TODO] PowerPoint build not yet implemented.")
+            print(f"  - {mf}")
 import re
 import shutil
 from pathlib import Path
@@ -595,7 +697,7 @@ def build_md_all(debug=False):
 def build_md_for_files(files, debug=False):
     """Build Markdown for specified markdown and notebook files."""
     repo_root = Path(__file__).parent.resolve()
-    md_dir = repo_root / 'docs' / 'sources'
+    md_dir = repo_root / 'docs' / 'md'
     img_dir = repo_root / 'docs' / 'images'
     md_dir.mkdir(parents=True, exist_ok=True)
     img_dir.mkdir(parents=True, exist_ok=True)
@@ -603,17 +705,15 @@ def build_md_for_files(files, debug=False):
     for file in files:
         file_path = Path(file)
         if not file_path.exists():
-            debug_print(f"[ERROR] File not found: {file}", debug)
+            if debug:
+                print(f"[ERROR] File not found: {file}")
             missing_files.append(file)
             continue
         ext = file_path.suffix.lower()
         stem = file_path.stem
-        out_dir = md_dir / stem
-        out_dir.mkdir(parents=True, exist_ok=True)
-        out_md = out_dir / f"{stem}.md"
+        out_md = md_dir / f"{stem}.md"
         if ext == '.md':
-            if debug:
-                print(f"[INFO] Copying markdown file: {file_path} -> {out_md}")
+            print(f"[INFO] Copying markdown file: {file_path} -> {out_md}")
             shutil.copy2(file_path, out_md)
             # Copy images referenced in the markdown
             with open(file_path, 'r', encoding='utf-8') as f:
@@ -628,25 +728,24 @@ def build_md_for_files(files, debug=False):
                 dest_img = img_dir / flat_name
                 if src_img.exists():
                     shutil.copy2(src_img, dest_img)
-                    if debug:
-                        print(f"[INFO] Copied image {src_img} -> {dest_img}")
-                # Use ../../images/ for correct relative path from docs/sources/<stem>/
-                return match.group(0).replace(img_path, f"../../images/{flat_name}")
+                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                # Use ../images/ for correct relative path from docs/md/
+                return match.group(0).replace(img_path, f"../images/{flat_name}")
             new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
             with open(out_md, 'w', encoding='utf-8') as f:
                 f.write(new_md_content)
         elif ext == '.ipynb':
-            if debug:
-                print(f"[INFO] Converting notebook to markdown: {file_path} -> {out_md}")
+            print(f"[INFO] Converting notebook to markdown: {file_path} -> {out_md}")
             import nbformat
             import subprocess
             nb = nbformat.read(str(file_path), as_version=4)
-            tmp_md = out_dir / f"{stem}_tmp.md"
+            tmp_md = md_dir / f"{stem}_tmp.md"
             # Use nbconvert to convert to markdown
-            cmd = [sys.executable, '-m', 'nbconvert', '--to', 'markdown', str(file_path), '--output', tmp_md.name, '--output-dir', str(out_dir)]
+            cmd = [sys.executable, '-m', 'nbconvert', '--to', 'markdown', str(file_path), '--output', tmp_md.name, '--output-dir', str(md_dir)]
             result = subprocess.run(cmd, capture_output=True, text=True)
             if result.returncode != 0:
-                debug_print(f"[ERROR] nbconvert failed for {file_path}: {result.stderr}", debug)
+                if debug:
+                    print(f"[ERROR] nbconvert failed for {file_path}: {result.stderr}")
                 continue
             # Read and fix image links in the generated markdown
             with open(tmp_md, 'r', encoding='utf-8') as f:
@@ -657,26 +756,26 @@ def build_md_for_files(files, debug=False):
                     return match.group(0)
                 img_filename = os.path.basename(img_path)
                 flat_name = f"{stem}_{img_filename}"
-                src_img = out_dir / img_path
+                src_img = md_dir / img_path
                 dest_img = img_dir / flat_name
                 if src_img.exists():
                     shutil.copy2(src_img, dest_img)
-                    if debug:
-                        print(f"[INFO] Copied image {src_img} -> {dest_img}")
-                # Use ../../images/ for correct relative path from docs/sources/<stem>/
-                return match.group(0).replace(img_path, f"../../images/{flat_name}")
+                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                # Use ../images/ for correct relative path from docs/md/
+                return match.group(0).replace(img_path, f"../images/{flat_name}")
             new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
             with open(out_md, 'w', encoding='utf-8') as f:
                 f.write(new_md_content)
             tmp_md.unlink()  # Remove temp file
         else:
-            debug_print(f"[SKIP] Unsupported file type: {file}", debug)
+            if debug:
+                print(f"[SKIP] Unsupported file type: {file}")
             continue
-        debug_print(f"[OK] Built {out_md} from {file}", debug)
+        print(f"[OK] Built {out_md} from {file}")
     if missing_files:
-        debug_print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:", debug)
+        print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:")
         for mf in missing_files:
-            debug_print(f"  - {mf}", debug)
+            print(f"  - {mf}")
 
 if __name__ == "__main__":
     main()

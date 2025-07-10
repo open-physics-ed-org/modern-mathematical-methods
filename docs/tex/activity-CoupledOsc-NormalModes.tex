@@ -1,0 +1,341 @@
+\section{17 Oct 23 - Activity: Normal
+Modes}\label{oct-23---activity-normal-modes}
+
+As we begin to work with multi-particle systems, we begin to open the
+number of degrees of freedom of the system. We increase the complexity
+of it and the challenge of modeling it. We will increasingly need tools
+that help us take less tractable issues and make them palatable. One
+such tool that forms the basis of many others is \textbf{Normal Modes}.
+
+Normal modes are ways of breaking up our understanding of a system into
+discrete (potentially infinite and hopefully vanishingly small) pieces.
+This lets us get at the big picture of the system and characterize how
+much we are neglecting. The concept of normal modes underlies much of
+the analysis done in quantum mechanics, field theory, fluid mechanics,
+and signal processing. In fact, numerical routines often make use of
+forms of these modes to do economize calculations -- \emph{especially
+when we move beyond a few hundred bodies in the system}. This stuff is
+part and parcel of most research in physics. For example, how we
+understand the
+\href{https://en.wikipedia.org/wiki/Cosmic_background_radiation}{Cosmic
+Background Radiation} relies on a
+\href{https://www.quantamagazine.org/how-ancient-light-reveals-the-universes-contents-20200128/}{normal
+mode like analysis}.
+
+\subsection{Canonical Coupled
+Oscillators}\label{canonical-coupled-oscillators}
+
+There is still plenty of room for pencil and paper. We will explore this
+numerically later.
+
+We will start with a form of guided lecture and build the understanding
+of these methods together. Then you will apply what you learned to a new
+system.
+
+Let's assume you have a chain of two mass connected by springs (all the
+same \(k\)) as below.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Coupled Oscillator set up. Two oscillators connected by three springs in a horizontal line.}]{../images/activity-CoupledOsc-NormalModes_two-coupled-gliders-diagram.png}}
+\caption{Coupled Oscillator set up. Two oscillators connected by three
+springs in a horizontal line.}
+\end{figure}
+
+\subsubsection{Deriving the Equations of
+Motion}\label{deriving-the-equations-of-motion}
+
+Let's write the Lagrangian for this system to get equations of motion.
+The kinetic and potential energies are:
+
+\[T=\frac{1}{2}m\dot{x}_1^2+\frac{1}{2}m\dot{x}_2^2\]
+\[U=\frac{1}{2}k{x_1}^2+\frac{1}{2}k(x_2-x_1)^2 + \frac{1}{2}k{x_2}^2\]
+
+Thus the Lagrangian is for this system is:
+
+\[L = \frac{1}{2}m\dot{x}_1^2+\frac{1}{2}m\dot{x}_2^2 - \frac{1}{2}k{x_1}^2-\frac{1}{2}k(x_2-x_1)^2 - \frac{1}{2}k{x_2}^2\]
+
+Which produces two equations of motion:
+
+\[\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}_1}\right) - \frac{\partial L}{\partial x_1} = 0\]
+\[\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}_2}\right) - \frac{\partial L}{\partial x_2} = 0\]
+
+Which we can write as:
+
+\[m\ddot{x}_1 = -kx_1 + k(x_2-x_1)\]
+\[m\ddot{x}_2 = -kx_2 + k(x_1-x_2)\]
+
+Or
+
+\[\ddot{x}_1 = -\frac{2k}{m}x_1 + \frac{k}{m}x_2\]
+\[\ddot{x}_2 = -\frac{2k}{m}x_2 + \frac{k}{m}x_1\]
+
+\subsubsection{Finding Normal Modes}\label{finding-normal-modes}
+
+\paragraph{Method 1: Assume a
+Solution}\label{method-1-assume-a-solution}
+
+A normal mode solution is one in which all parts of a system oscillate
+with the same frequency. For linear systems, this can be a very useful
+approach because any solution can be represented as a linear combination
+of normal modes. In general,
+
+\[f(t) = \sum_n c_n \psi_n(t)\]
+
+where \(f(t)\) is the solution, \(c_n\) are constants, and \(\psi_n(t)\)
+are the normal modes. This kind of normal mode analysis forms the basis
+for signal analysis, image processing, and many other fields. For
+non-linear systems, we lose superposition and thus, we lose out ability
+to employ normal modes. However, near equilibria and in other limits,
+normal modes are still used. We will start by assuming a normal mode
+solution for both masses and plug that into our equations of motion.
+
+Assume:
+
+\[x_1(t) = A_1\cos(\omega t + \phi_1)\]
+\[x_2(t) = A_2\cos(\omega t + \phi_2)\]
+
+where \(A_1\), \(A_2\), \(\phi_1\), and \(\phi_2\) are constants to be
+determined. We can plug these into our differential equations and find
+the normal modes. We made a chose for the form of the solution. Other
+forms are acceptable as long as they have two free parameters; it's a
+second order differential equation.
+
+We can plug these into our differential equations and get:
+
+\[-\omega^2A_1\cos(\omega t + \phi_1) = -\frac{k}{m}A_1\cos(\omega t + \phi_1) + \frac{k}{m}(A_2\cos(\omega t + \phi_2)-A_1\cos(\omega t + \phi_1))\]
+\[-\omega^2A_2\cos(\omega t + \phi_2) = -\frac{k}{m}A_2\cos(\omega t + \phi_2) + \frac{k}{m}(A_1\cos(\omega t + \phi_1)-A_2\cos(\omega t + \phi_2))\]
+
+which we can collect the terms \(A_1\) and \(A_2\) and get:
+
+\[-\omega^2A_1\cos(\omega t + \phi_1) + 2\frac{k}{m}A_1\cos(\omega t + \phi_1) = \frac{k}{m}A_2\cos(\omega t + \phi_2)\]
+\[-\omega^2A_2\cos(\omega t + \phi_2) + 2\frac{k}{m}A_2\cos(\omega t + \phi_2) = \frac{k}{m}A_1\cos(\omega t + \phi_1)\]
+
+Which we rewrite as:
+
+\[\left(2\frac{k}{m}-\omega^2\right)A_1\cos(\omega t + \phi_1) = \frac{k}{m}A_2\cos(\omega t + \phi_2)\]
+\[\frac{k}{m}A_1\cos(\omega t + \phi_1)=\left(2\frac{k}{m}-\omega^2\right)A_2\cos(\omega t + \phi_2)\]
+
+Assuming non-zero solutions, we can divide the equations:
+
+\[\dfrac{\left(2\frac{k}{m}-\omega^2\right)}{\frac{k}{m}} = \dfrac{\frac{k}{m}}{\left(2\frac{k}{m}-\omega^2\right)}\]
+
+So that,
+
+\[\left(2\frac{k}{m}-\omega^2\right)^2 = \left(\frac{k}{m}\right)^2\]
+
+Or,
+
+\[\omega^2 = \frac{2k}{m} \pm \frac{k}{m}\]
+
+So, if solution is a normal mode, there's actually two of them it could
+be: one with \(\omega = \sqrt{\frac{3k}{m}}\) and one with
+\(\omega = \sqrt{\frac{k}{m}}\).
+
+\textbf{✅ Do this}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Given the frequencies of the normal mode solutions, find the relative
+  amplitudes of the two masses for each mode. How do the masses move
+  relative to each other?
+\item
+  Consider the following initial conditions, the left mass (\(x_1\)) is
+  displaced by \(x_0\). Everything else is at rest. Find the particular
+  solution for each mass (\(x_1\) and \(x_2\)).
+\item
+  Plot their motion.
+\item
+  (later, if time) develop a numerical solution for \(x_1\) and \(x_2\)
+  for any choice of conditions.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Your code here}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{Method 2: Matrix Analysis (the Eigenvalue
+Problem)}\label{method-2-matrix-analysis-the-eigenvalue-problem}
+
+That analysis to find the normal modes was a bit of a pain in algebra.
+As we add more objects, that pain will grow. We can use a matrix
+approach to make this easier. It's also a systematic approach that as we
+will see plays nicely with computing.
+
+Starting from the equations of motion:
+
+\[\ddot{x}_1 = -\frac{2k}{m}x_1 + \frac{k}{m}x_2\]
+\[\ddot{x}_2 = -\frac{2k}{m}x_2 + \frac{k}{m}x_1\]
+
+We rewrite them as a set of matrix equations for the vector
+\(\mathbf{x} = \begin{bmatrix}x_1\\x_2\end{bmatrix}\):
+
+\[\ddot{\mathbf{x}} = \begin{bmatrix}-\frac{2k}{m} & \frac{k}{m}\\\frac{k}{m} & -\frac{2k}{m}\end{bmatrix}\mathbf{x}\]
+
+This is a form of the equation
+\(\ddot{\mathbf{x}} = \pmb{A} \mathbf{x}\) where \(\pmb{A}\) is the
+coefficient matrix. We can solve this equation by finding the
+eigenvalues and eigenvectors of \(\pmb{A}\). The eigenvalues are the
+frequencies of the normal modes and the eigenvectors are the relative
+amplitudes of the masses. The reason is that the determinant of the
+coefficient matrix when there is a normal mode solution vanishes. That
+is,
+
+\[\det(\pmb{A}+\omega^2\pmb{I}) = 0\]
+
+where \(\pmb{I}\) is the identity matrix. This is a polynomial equation
+in \(\omega^2\) and the roots of that polynomial are the normal mode
+frequencies. This technique is very common in theoretical physics with
+different guesses for the solution forms giving rise to different
+eigenvalue problems (e.g.,
+\href{https://en.wikipedia.org/wiki/Bessel_function}{Bessel functions
+for 2D surface problems} or
+\href{https://en.wikipedia.org/wiki/Hermite_polynomials}{Hermite
+polynomials for the Quantum Harmonic Oscillator}.
+
+\textbf{✅ Do this}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Using the ``determinant of the coefficient matrix'' (really the
+  eigenvalues of \(\pmb{A}\) solved by
+  \(\det(\pmb{A}+\omega^2\pmb{I})\)), find the normal mode \(\omega^2\).
+\item
+  Find the eigenvectors of the coefficient matrix. These are the
+  relative amplitudes of the masses.
+\item
+  These results should agree with the previous method. Do they?
+\item
+  Plot the normal modes solutions.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# your code here}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Applying Normal Modes to a New
+System}\label{applying-normal-modes-to-a-new-system}
+
+\subsubsection{Two vertical pendulums connected by a
+spring}\label{two-vertical-pendulums-connected-by-a-spring}
+
+Consider two vertical pendulums of length \(l\) connected via their
+masses \(M\) by a weak spring \(k\). By weak, we mean that the spring
+constant is small. See below for a canonical setup:
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Coupled pendulua diagram}]{../images/activity-CoupledOsc-NormalModes_coupled_diag.jpg}}
+\caption{Coupled pendulua diagram}
+\end{figure}
+
+\textbf{✅ Do this}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  In this limit, write down the pair of second order linear differential
+  equations for the horizontal motion of each pendulum bob around its
+  equilibrium.
+\item
+  Find and describe the normal modes. Use plots of your choosing to
+  explain what you found.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# your code here}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Three Coupled Oscillators}\label{three-coupled-oscillators}
+
+Consider the setup below consisting of three masses connected by springs
+to each other. We intend to find the normal modes of the system by
+denoting each mass's displacement (\(x_1\), \(x_2\), and \(x_3\)).
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={3 Coupled Oscillators}]{../images/activity-CoupledOsc-NormalModes_3_coupled_osc.png}}
+\caption{3 Coupled Oscillators}
+\end{figure}
+
+\subsection{Finding the Normal Mode
+Frequencies}\label{finding-the-normal-mode-frequencies}
+
+\textbf{✅ Do this}
+
+This is not magic as we will see, it follows from our choices of
+solution. Here's the steps and what you might notice about them:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Guess what the normal modes might look like? Write your guesses down;
+  how should the masses move? (It's ok if you are not sure about all of
+  them, try to determine one of them)
+\item
+  Write down the energy for the whole system, \(T\) and \(U\) (We have
+  done this before, but not for this many particles)
+\item
+  Use the Euler-Lagrange Equation to find the equations of motion for
+  \(x_1\), \(x_2\), and \(x_3\). (We have done this lots, so make sure
+  it feels solid)
+\item
+  Reformulate the equations of motion as a matrix equation
+  \(\ddot{\mathbf{x}} = \mathbf{A} \mathbf{x}\). What is \(\mathbf{A}\)?
+  (We have done this, but only quickly, so take your time)
+\item
+  Consider solutions of the form \(Ce^{i{\omega}t}\), plug that into
+  \(x_1\), \(x_2\), and \(x_3\) to show you get
+  \(\mathbf{A}\mathbf{x} = -\omega^2 \mathbf{x}\). (We have not done
+  this, we just assumed it works! It's ok if this is annoying, we only
+  have to show it once.)
+\item
+  Find the normal mode frequencies by taking the determinant of
+  \(\mathbf{A} - \mathbf{I}\lambda\). Note that this produces the
+  following definition: \(\lambda = -\omega^2\) (We have not done this
+  together and we can if it's confusing.)
+\end{enumerate}
+
+\subsection{Finding the Normal Modes
+Amplitudes}\label{finding-the-normal-modes-amplitudes}
+
+Ok, now we need to find the normal mode amplitudes. That is we assumed
+sinusoidal oscillations, but at what amplitudes? We will show how to do
+this with one frequency (\(\omega_1\)), and then break up the work of
+the the other two. These frequencies are:
+
+\[\omega_A = 2\dfrac{k}{m}; \qquad \omega_B = \left(2-\sqrt{2}\right)\dfrac{k}{m}; \qquad \omega_C = \left(2+\sqrt{2}\right)\dfrac{k}{m}\qquad\]
+
+\textbf{✅ Do this}
+
+After we do the first one, pick another frequencies and repeat. Answer
+the follow questions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What does this motion physically look like? What are the masses doing?
+\item
+  How does the frequency of oscillation make sense? Why is it higher or
+  lower than \(\omega_A\)?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{../assets/notes/Notes-Three_Coupled_Oscillators.pdf}{Partial
+  Solution to Activity}
+\end{itemize}

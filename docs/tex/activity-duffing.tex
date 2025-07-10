@@ -1,0 +1,146 @@
+\section{19 Sep 23 - The Duffing
+Oscillator}\label{sep-23---the-duffing-oscillator}
+
+We have developed a set of tools to investigate differential equations.
+You will now apply those skills to the
+\href{https://en.wikipedia.org/wiki/Duffing_equation}{Duffing
+Oscillator}. The Duffing Oscillator is a second order differential
+equation that is used to model a forced nonlinear spring. The equation
+is given by:
+
+\[\frac{d^2x}{dt^2} + \delta \frac{dx}{dt} + \alpha x + \beta x^3 = \gamma \cos(\omega t)\]
+
+And written in the form \(\ddot{x} = f(x, \dot{x}, t)\), it is:
+
+\[\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3 + \gamma \cos(\omega t)\]
+
+where \(x\) is the position of the oscillator, \(\delta\) is a damping
+term, \(\alpha\) is the stiffness of the spring, \(\beta\) is the
+strength of the non-linear term, \(\gamma\) is the amplitude of the
+driving force, and \(\omega\) is the frequency of the driving force.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Duffing Oscillator}]{https://upload.wikimedia.org/wikipedia/commons/f/fc/Duffing_oscillator_strange_attractor_with_color.gif}}
+\caption{Duffing Oscillator}
+\end{figure}
+
+\emph{From
+\href{https://commons.wikimedia.org/wiki/File:Duffing_oscillator_strange_attractor_with_color.gif}{Wikipedia}}
+
+\subsection{Activity}\label{activity}
+
+This is a complicated oscillator with damping, forcing, and
+non-linearity. We will investigate the behavior of the oscillator for
+different values of the parameters, and you will need to bring all the
+tools we have used so far to bear on this problem. We will perform this
+work systematically, as way of helping you recognize the steps you can
+take to investigate any differential equation. \emph{You are welcome to
+use any of the code that we developed or presented in class.}
+
+\subsubsection{Organizing your analysis}\label{organizing-your-analysis}
+
+The Duffing Oscillator has a lot of different elements and can become
+complicated very quickly. To help start our analysis let's consider
+three models with increasing complexity:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Model 1} (no damping and no forcing)
+  \(\ddot{x} = - \alpha x - \beta x^3\)
+\item
+  \textbf{Model 2} (no forcing)
+  \(\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3\)
+\item
+  \textbf{Model 3} (full model)
+  \(\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3 + \gamma \cos(\omega t)\)
+\end{enumerate}
+
+\textbf{✅ Do this}
+
+\subsubsection{Tasks to complete}\label{tasks-to-complete}
+
+For each of these models, you should produce the following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The fixed points (if they can be found and their linear stability)
+\item
+  A phase portrait of the system
+\item
+  A graph of x(t) for a given set of initial conditions
+\item
+  A graph of a trajectory in the phase portrait
+\item
+  An approximate solution to the differential equation for a limiting
+  case
+\end{enumerate}
+
+\subsubsection{Exploring your models}\label{exploring-your-models}
+
+As you are developing your models, you should consider the following
+questions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What kinds of motion seems possible for each model?
+\item
+  What are the limiting cases for each model? What solutions do they
+  represent? Think about the physical meaning of the parameters.
+\item
+  What relationships exist between the parameters and the motion of the
+  system? That is, what happens when you change the parameters?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Imports to get started}
+
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{from}\NormalTok{ scipy.integrate }\ImportTok{import}\NormalTok{ solve\_ivp}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Routes to Chaos}\label{routes-to-chaos}
+
+One important route to chaotic behavior is through
+\href{https://en.wikipedia.org/wiki/Period-doubling_bifurcation}{period
+doubling}. It is not the only way for a system to become chaotic, but it
+is a characteristic way that a system will tend towards chaos.
+
+\textbf{✅ Do this}
+
+If your code is fully working, you can use known values of the
+parameters to investigate this behavior. For this part of the activity,
+you should use the full model and the following parameters:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Parameter & Value \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(\alpha\) & -1 \\
+\(\beta\) & +1 \\
+\(\delta\) & +0.3 \\
+\(\omega\) & +1.2 \\
+\(\gamma\) & +0.20 to +0.65 \\
+\end{longtable}
+
+Here \(\gamma\) is the only parameter that we will change. Produce phase
+plots of \(x(t)\) and \(x(\dot{x})\) for several choices of \(\gamma\)
+with \(x(0) = 1\) and \(\dot{x}(0) = 0\).

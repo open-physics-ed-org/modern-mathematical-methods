@@ -1,0 +1,253 @@
+\section{19 Oct 23 - Activity: Normal Modes of N Coupled
+Oscillators}\label{oct-23---activity-normal-modes-of-n-coupled-oscillators}
+
+Now that we have discussed and built some facility with Lagrangian
+dynamics, let's see how using it makes our study of normal modes much
+simpler than Newtonian mechanics. We will couple this analysis to
+solving an eigenvalue problem by guessing the form of the solutions.
+This technique is very common in theoretical physics with different
+guesses for the solution forms giving rise to different eigenvalue
+problems (e.g.,
+\href{https://en.wikipedia.org/wiki/Bessel_function}{Bessel functions
+for 2D surface problems} or
+\href{https://en.wikipedia.org/wiki/Hermite_polynomials}{Hermite
+polynomials for the Quantum Harmonic Oscillator}.
+
+\subsection{Three Coupled Oscillators}\label{three-coupled-oscillators}
+
+Consider the setup below consisting of three masses connected by springs
+to each other. We intend to find the normal modes of the system by
+denoting each mass's displacement (\(x_1\), \(x_2\), and \(x_3\)).
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={3 Coupled Oscillators}]{../images/activity-CoupledOsc-NumericalNormalModes_3_coupled_osc.png}}
+\caption{3 Coupled Oscillators}
+\end{figure}
+
+\subsection{Finding the Normal Mode
+Frequencies}\label{finding-the-normal-mode-frequencies}
+
+\textbf{✅ Do this}
+
+This is not magic as we will see, it follows from our choices of
+solution. Here's the steps and what you might notice about them:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Guess what the normal modes might look like? Write your guesses down;
+  how should the masses move? (It's ok if you are not sure about all of
+  them, try to determine one of them)
+\item
+  Write down the energy for the whole system, \(T\) and \(U\) (We have
+  done this before, but not for this many particles)
+\item
+  Use the Euler-Lagrange Equation to find the equations of motion for
+  \(x_1\), \(x_2\), and \(x_3\). (We have done this lots, so make sure
+  it feels solid)
+\item
+  Reformulate the equations of motion as a matrix equation
+  \(\ddot{\mathbf{x}} = \mathbf{A} \mathbf{x}\). What is \(\mathbf{A}\)?
+  (We have done this, but only quickly, so take your time)
+\item
+  Consider solutions of the form \(Ce^{i{\omega}t}\), plug that into
+  \(x_1\), \(x_2\), and \(x_3\) to show you get
+  \(\mathbf{A}\mathbf{x} = -\omega^2 \mathbf{x}\). (We have not done
+  this, we just assumed it works! It's ok if this is annoying, we only
+  have to show it once.)
+\item
+  Find the normal mode frequencies by taking the determinant of
+  \(\mathbf{A} - \mathbf{I}\lambda\). Note that this produces the
+  following definition: \(\lambda = -\omega^2\) (We have not done this
+  together and we can if it's confusing.)
+\end{enumerate}
+
+\subsection{Finding the Normal Modes
+Amplitudes}\label{finding-the-normal-modes-amplitudes}
+
+Ok, now we need to find the normal mode amplitudes. That is we assumed
+sinusoidal oscillations, but at what amplitudes? We will show how to do
+this with one frequency (\(\omega_1\)), and then break up the work of
+the the other two. These frequencies are:
+
+\[\omega^2_A = 2\dfrac{k}{m}; \qquad \omega^2_B = \left(2-\sqrt{2}\right)\dfrac{k}{m}; \qquad \omega^2_C = \left(2+\sqrt{2}\right)\dfrac{k}{m}\qquad\]
+
+\textbf{✅ Do this}
+
+After we do the first one, pick another frequencies and repeat. Answer
+the follow questions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What does this motion physically look like? What are the masses doing?
+\item
+  How does the frequency of oscillation make sense? Why is it higher or
+  lower than \(\omega_A\)?
+\end{enumerate}
+
+\subsection{Finding the Eigenvalues and Eigenvectors using Numerical
+Approaches}\label{finding-the-eigenvalues-and-eigenvectors-using-numerical-approaches}
+
+Now that we have developed solutions for the 3 coupled oscillators,
+let's try to reproduce that work numerically and plots the modes to make
+sense of what they are doing for us.
+
+We can then apply these tools to \(N\) identically coupled 1D
+oscillators.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy.linalg }\ImportTok{as}\NormalTok{ la }\CommentTok{\#\# For the numerical eigenvalue methods}
+\ImportTok{from}\NormalTok{ sympy }\ImportTok{import} \OperatorTok{*} \CommentTok{\#\# For symbolic eigenvalue methods}
+\NormalTok{init\_printing(use\_unicode}\OperatorTok{=}\VariableTok{True}\NormalTok{)  }\CommentTok{\#\# display nice math}
+\end{Highlighting}
+\end{Shaded}
+
+We reduced our normal mode problem to the following:
+
+\[\mathbf{A}\mathbf{x} = -\omega^2\mathbf{x}\]
+
+And earlier we found these eigenvalues and eigenvectors for the 3
+Oscillator model:
+
+\[\omega_A = 2\dfrac{k}{m}; \qquad \omega_B = \left(2-\sqrt{2}\right)\dfrac{k}{m}; \qquad \omega_C = \left(2+\sqrt{2}\right)\dfrac{k}{m}\qquad\]
+
+Python has two main libraries for helping us find these numerically. One
+is \texttt{numpy.linalg}, which is a powerful set of linear algebra
+tools that are used widely. The other is \texttt{sympy}, which is a
+symbolic calculator like Mathematica. Both will help you find
+eigenvalues and eigenvectors, but do so in entirely different ways.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{numpy.linalg} will use the common numerical tools that
+  decompose matrices. For example,
+  \href{https://en.wikipedia.org/wiki/LU_decomposition}{LU
+  decomposition} is one of the most common techniques to use for
+  symmetric and Hermitian matrices, which are the most common in
+  physics.
+\item
+  \texttt{sympy} is a symbolic calculator, that attempts to determine a
+  closed form solution for the eigenvalues. These methods are often
+  proprietary (e.g., Mathematica and Matlab), but the source code for
+  \href{https://github.com/sympy/sympy}{sympy is available to review}.
+\end{itemize}
+
+At issue is that each of these methods requires a slight different
+input. The first method will take a \texttt{numpy} matrix, but the
+second requires a \texttt{sympy} matrix, which can we easily constructed
+from our \texttt{numpy} matrix.
+
+Below, we form both matrices.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M }\OperatorTok{=}\NormalTok{ np.matrix([[}\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{], [}\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{], [}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{2}\NormalTok{]]) }\CommentTok{\#\# numpy matrix}
+\NormalTok{M2 }\OperatorTok{=}\NormalTok{ Matrix(M) }\CommentTok{\#\# Take numpy matrix and make it a sympy one}
+\BuiltInTok{print}\NormalTok{(M)}
+\BuiltInTok{print}\NormalTok{(M2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[[-2  1  0]
+ [ 1 -2  1]
+ [ 0  1 -2]]
+Matrix([[-2, 1, 0], [1, -2, 1], [0, 1, -2]])
+\end{verbatim}
+
+Finding eigenvalues with numpy.lingalg is quite simple. We just call
+\texttt{eigenvals,\ eigenvecs\ =\ la.eig(M)}. Note they are numericaly
+values. Also, these eigenvectors are normalized. Do you notice anything
+strange?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eigenvals, eigenvecs }\OperatorTok{=}\NormalTok{ la.eig(M)}
+\BuiltInTok{print}\NormalTok{(eigenvals)}
+\BuiltInTok{print}\NormalTok{(eigenvecs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[-3.41421356 -2.         -0.58578644]
+[[ 5.00000000e-01  7.07106781e-01  5.00000000e-01]
+ [-7.07106781e-01 -4.05925293e-16  7.07106781e-01]
+ [ 5.00000000e-01 -7.07106781e-01  5.00000000e-01]]
+\end{verbatim}
+
+Finding the eigenvectors and eigenvalues with \texttt{sympy} is just as
+simple. Notice that these are symbolic and the eigenvectors are NOT
+normalized.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M2.eigenvects()}
+\end{Highlighting}
+\end{Shaded}
+
+\(\displaystyle \left[ \left( -2, \  1, \  \left[ \left[\begin{matrix}-1\\0\\1\end{matrix}\right]\right]\right), \  \left( -2 - \sqrt{2}, \  1, \  \left[ \left[\begin{matrix}1\\- \sqrt{2}\\1\end{matrix}\right]\right]\right), \  \left( -2 + \sqrt{2}, \  1, \  \left[ \left[\begin{matrix}1\\\sqrt{2}\\1\end{matrix}\right]\right]\right)\right]\)
+
+\subsection{Plotting the modes}\label{plotting-the-modes}
+
+Awesome. Now we have our modes, but what do they mean? Remember, in a
+given mode every object oscillates at the mode frequency, just with
+different amplitudes. That means everyone has the following form:
+
+\[A\cos(\omega t)\]
+
+just with different \(A\)'s. So plot the motion of each mass in each
+mode. Make sure you have the right frequencies with the right modes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Analysis and Plotting code here}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Extending your work}\label{extending-your-work}
+
+Given what we have done thus far, you can see that we could easily
+construct the matrix for a \(N\) dimensional chain of 1D oscillators. So
+let's do that.
+
+Repeat this analysis for a set of \(N\) oscillators. Your code should be
+able to:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Take a value of \(N\) and construct the right matrix representation
+\item
+  Find the eigenvalues and eigenvectors for this matrix.
+\item
+  (BONUS) plots the modes automatically
+\item
+  (CHALLENGE) time the execution of the analysis
+\end{enumerate}
+
+Be careful not to pick to large of an \(N\) value to work with because
+you could melt your CPU easily. Make sure your code can do something
+like \(N=10\). If you get the timing working, plot time vs number of
+objects to see how the problem scales with more oscillators.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Your code here}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Even further}\label{even-further}
+
+These models can be used with lattices (solid objects). Draw a sketch of
+4 oscillators in a plane connected together in a square shape. Write
+down the energy equations for this system (assume the springs do not
+move laterally much). What do the EOMs look like?

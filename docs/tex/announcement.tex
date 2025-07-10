@@ -1,0 +1,42 @@
+\subsection{🚀 Release v0.9.2 ``Unified Urubu''
+Highlights}\label{release-v0.9.2-unified-urubu-highlights}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unified All-in-One Build:} The \texttt{-\/-all} flag now runs
+  all major build steps in strict order: DOCX (and Markdown) → PDF →
+  Jupyter Book HTML → Custom HTML web output. All output formats are
+  copied to
+  \texttt{docs/sources/\textless{}notebook\_stem\textgreater{}/} for
+  each notebook.
+\item
+  \textbf{Jupyter Book HTML Improvements:} Built into a temp directory,
+  then copied to both \texttt{docs/jupyter/} and
+  \texttt{docs/sources/jupyterbook\_html/} for easy access and
+  deployment.
+\item
+  \textbf{Documentation Overhaul:} \texttt{README.md} and
+  \texttt{build.md} have been fully rewritten to reflect the new build
+  workflow, directory structure, and usage patterns.
+\item
+  \textbf{Output Directory Clarity:} All outputs are organized in
+  \texttt{\_build/} (intermediate) and \texttt{docs/} (final,
+  published), with clear subfolders for each format. Downloadable
+  sources for each notebook are always available in
+  \texttt{docs/sources/\textless{}notebook\_stem\textgreater{}/}.
+\item
+  \textbf{Robust Image Handling:} All referenced images are collected
+  into \texttt{\_build/images/} and linked consistently in all output
+  formats.
+\item
+  \textbf{No Automatic Cleanup:} The build system no longer deletes any
+  files or folders automatically; manual cleanup is recommended if
+  needed.
+\end{itemize}
+
+See the \texttt{releases/} folder for full historical release notes.
+
+For more details and instructions, see the
+\href{https://github.com/dannycab/modern-classical-mechanics/releases}{Release
+Notes}.

@@ -1,0 +1,184 @@
+\section{7 Dec 23 - Activity: The Ising
+Model}\label{dec-23---activity-the-ising-model}
+
+\[E = -J\left(\vec{S}_i\cdot\vec{S}_j\right)\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ random }\ImportTok{as}\NormalTok{ random}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+---------------------------------------------------------------------------
+
+ModuleNotFoundError                       Traceback (most recent call last)
+
+/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb Cell 2 line 1
+----> <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W1sZmlsZQ%3D%3D?line=0'>1</a> import numpy as np
+      <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W1sZmlsZQ%3D%3D?line=1'>2</a> import matplotlib.pyplot as plt
+      <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W1sZmlsZQ%3D%3D?line=2'>3</a> import random as random
+
+
+ModuleNotFoundError: No module named 'numpy'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cellLength }\OperatorTok{=} \DecValTok{20}
+\NormalTok{simulationSteps }\OperatorTok{=} \DecValTok{1000000}
+\NormalTok{couplingConstant }\OperatorTok{=} \FloatTok{1.0} \CommentTok{\#\# J}
+\NormalTok{temperature }\OperatorTok{=} \FloatTok{1.0}
+
+\KeywordTok{def}\NormalTok{ calculateEnergy(spinArray):}
+    \CommentTok{\textquotesingle{}\textquotesingle{}\textquotesingle{}Calculate all the pairwise energy interactions and sum them up}
+\CommentTok{    Do rows and columns separately and add them up.\textquotesingle{}\textquotesingle{}\textquotesingle{}}
+    
+\NormalTok{    rowNeighborInteractionEnergy }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(spinArray[}\DecValTok{0}\NormalTok{:cellLength}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,:]}\OperatorTok{*}\NormalTok{spinArray[}\DecValTok{1}\NormalTok{:cellLength,:])}
+\NormalTok{    columnNeighborInteractionEnergy }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(spinArray[:,}\DecValTok{0}\NormalTok{:cellLength}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\NormalTok{spinArray[:,}\DecValTok{1}\NormalTok{:cellLength])}
+    
+\NormalTok{    totalInteractionEnergy }\OperatorTok{=}\NormalTok{ rowNeighborInteractionEnergy}\OperatorTok{+}\NormalTok{columnNeighborInteractionEnergy}
+    
+    \ControlFlowTok{return} \OperatorTok{{-}}\NormalTok{couplingConstant}\OperatorTok{*}\NormalTok{totalInteractionEnergy}
+
+\CommentTok{\#\# Create an empty square array}
+\NormalTok{spinArray }\OperatorTok{=}\NormalTok{ np.empty([cellLength,cellLength], }\BuiltInTok{int}\NormalTok{)}
+
+\CommentTok{\#\# Populate it with random spins}
+\ControlFlowTok{for}\NormalTok{ row }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(cellLength):}
+    \ControlFlowTok{for}\NormalTok{ column }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(cellLength):}
+        \ControlFlowTok{if}\NormalTok{ random.random()}\OperatorTok{\textless{}}\FloatTok{0.5}\NormalTok{:}
+\NormalTok{            spinArray[row,column] }\OperatorTok{=} \OperatorTok{+}\DecValTok{1}
+        \ControlFlowTok{else}\NormalTok{:}
+\NormalTok{            spinArray[row,column] }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{1}
+
+\CommentTok{\# Calculate the initial energy and magnetization        }
+\NormalTok{energyAtStep }\OperatorTok{=}\NormalTok{ calculateEnergy(spinArray)}
+\NormalTok{magnetizationAtStep }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(spinArray)}
+
+\CommentTok{\#\# Show the spin array }
+\CommentTok{\#\# Black is spin up and white is spin down}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{))}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ plt.pcolor(spinArray, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}Greys\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.axis(}\StringTok{\textquotesingle{}square\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+---------------------------------------------------------------------------
+
+NameError                                 Traceback (most recent call last)
+
+/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb Cell 3 line 1
+     <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W2sZmlsZQ%3D%3D?line=14'>15</a>     return -couplingConstant*totalInteractionEnergy
+     <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W2sZmlsZQ%3D%3D?line=16'>17</a> ## Create an empty square array
+---> <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W2sZmlsZQ%3D%3D?line=17'>18</a> spinArray = np.empty([cellLength,cellLength], int)
+     <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W2sZmlsZQ%3D%3D?line=19'>20</a> ## Populate it with random spins
+     <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W2sZmlsZQ%3D%3D?line=20'>21</a> for row in range(cellLength):
+
+
+NameError: name 'np' is not defined
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Hold onto the values of the magnetization }
+\CommentTok{\#\# for each step in the simulation}
+\NormalTok{magnetizationArray }\OperatorTok{=}\NormalTok{ np.zeros(simulationSteps)}
+
+\CommentTok{\#\# Monte Carlo Loop}
+\ControlFlowTok{for}\NormalTok{ step }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(simulationSteps):}
+    
+    \CommentTok{\#\# Store the magnetization at this step}
+\NormalTok{    magnetizationArray[step] }\OperatorTok{=}\NormalTok{ magnetizationAtStep}
+    
+    \CommentTok{\#\# Store the energy before swapping the spin randomly}
+\NormalTok{    oldEnergy }\OperatorTok{=}\NormalTok{ energyAtStep}
+    
+    \CommentTok{\#\# Select a spin from the cell}
+\NormalTok{    ithSpin }\OperatorTok{=}\NormalTok{ random.randrange(cellLength)}
+\NormalTok{    jthSpin }\OperatorTok{=}\NormalTok{ random.randrange(cellLength)}
+    
+    \CommentTok{\#\# Flip the spin of that one site}
+\NormalTok{    spinArray[ithSpin,jthSpin] }\OperatorTok{=} \OperatorTok{{-}}\NormalTok{spinArray[ithSpin,jthSpin]}
+    
+    \CommentTok{\#\# Calculate the energy after that change}
+\NormalTok{    energyAtStep }\OperatorTok{=}\NormalTok{ calculateEnergy(spinArray)}
+\NormalTok{    deltaE }\OperatorTok{=}\NormalTok{ energyAtStep }\OperatorTok{{-}}\NormalTok{ oldEnergy}
+    
+    \CommentTok{\#\# If the change resulted in an increase in the total energy,}
+    \CommentTok{\#\# evaluate whether to accept the value or not}
+    \ControlFlowTok{if}\NormalTok{ deltaE }\OperatorTok{\textgreater{}} \FloatTok{0.0}\NormalTok{:}
+        
+\NormalTok{        probabilityOfFlip }\OperatorTok{=}\NormalTok{ np.exp(}\OperatorTok{{-}}\NormalTok{deltaE}\OperatorTok{/}\NormalTok{temperature)}
+        
+        \CommentTok{\#\# If the the random value is lower than the probability,}
+        \CommentTok{\#\# reverse the change to the spin, and recalculate the energy}
+        \ControlFlowTok{if}\NormalTok{ random.random()}\OperatorTok{\textgreater{}}\NormalTok{probabilityOfFlip:}
+            
+\NormalTok{            spinArray[ithSpin,jthSpin] }\OperatorTok{=} \OperatorTok{{-}}\NormalTok{spinArray[ithSpin,jthSpin]}
+\NormalTok{            energyAtStep }\OperatorTok{=}\NormalTok{ oldEnergy}
+            \ControlFlowTok{continue}
+        
+\NormalTok{    magnetizationAtStep }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(spinArray)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+---------------------------------------------------------------------------
+
+NameError                                 Traceback (most recent call last)
+
+/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb Cell 4 line 3
+      <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W3sZmlsZQ%3D%3D?line=0'>1</a> ## Hold onto the values of the magnetization 
+      <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W3sZmlsZQ%3D%3D?line=1'>2</a> ## for each step in the simulation
+----> <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W3sZmlsZQ%3D%3D?line=2'>3</a> magnetizationArray = np.zeros(simulationSteps)
+      <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W3sZmlsZQ%3D%3D?line=4'>5</a> ## Monte Carlo Loop
+      <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W3sZmlsZQ%3D%3D?line=5'>6</a> for step in range(simulationSteps):
+      <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W3sZmlsZQ%3D%3D?line=6'>7</a>     
+      <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W3sZmlsZQ%3D%3D?line=7'>8</a>     ## Store the magnetization at this step
+
+
+NameError: name 'np' is not defined
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{))}\OperatorTok{;}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ plt.pcolor(spinArray, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}Greys\textquotesingle{}}\NormalTok{)}\OperatorTok{;}
+\NormalTok{plt.axis(}\StringTok{\textquotesingle{}square\textquotesingle{}}\NormalTok{)}\OperatorTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+---------------------------------------------------------------------------
+
+NameError                                 Traceback (most recent call last)
+
+/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb Cell 5 line 1
+----> <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W4sZmlsZQ%3D%3D?line=0'>1</a> plt.figure(figsize=(8,8));
+      <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W4sZmlsZQ%3D%3D?line=1'>2</a> c = plt.pcolor(spinArray, cmap='Greys');
+      <a href='vscode-notebook-cell:/Users/caballero/repos/teaching/phy415fall23/content/4_distributions/activity-ising_model.ipynb#W4sZmlsZQ%3D%3D?line=2'>3</a> plt.axis('square');
+
+
+NameError: name 'plt' is not defined
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\end{Highlighting}
+\end{Shaded}
+
+plt.figure(figsize=(8,6))
+
+plt.plot(magnetizationArray) plt.ylabel(`Magnetization')
+plt.xlabel(`Simulation Steps')
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\end{Highlighting}
+\end{Shaded}

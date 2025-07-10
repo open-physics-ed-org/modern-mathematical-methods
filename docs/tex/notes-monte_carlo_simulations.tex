@@ -1,0 +1,290 @@
+\section{27 Nov 23 - Notes: Monte Carlo
+Simulations}\label{nov-23---notes-monte-carlo-simulations}
+
+\textbf{Monte Carlo Simulations} are a class of computational algorithms
+that rely on repeated random sampling to obtain numerical results. The
+method is named after the Monte Carlo Casino in Monaco, reflecting its
+foundational principle of randomness and chance. Initially developed as
+part of the Manhattan Project during World War II, Monte Carlo
+simulations have since evolved into a crucial tool in both physics and a
+myriad of other fields.
+
+\subsection{Overview of Monte Carlo
+Simulations}\label{overview-of-monte-carlo-simulations}
+
+At its core, a
+\href{https://en.wikipedia.org/wiki/Monte_Carlo_method}{Monte Carlo
+simulation} involves using randomness to solve problems that might be
+deterministic in principle. It's particularly useful for systems with a
+large number of variables, where traditional analytical methods become
+impractical.
+
+In physics, Monte Carlo methods are indispensable for studying complex
+systems where analytical solutions are unattainable. They are widely
+used in statistical physics, quantum mechanics, and astrophysics, among
+other areas. For instance, as we will show they can help model the
+behavior of gases, liquids, and solids at the atomic level, and simulate
+the evolution of stars and galaxies. In mathematics, these methods offer
+a way to approximate solutions to complex integrals and differential
+equations. While our primary focus here is on physics and astronomy,
+it's worth noting that Monte Carlo methods have been successfully
+applied in numerous other domains. For instance, in finance, they are
+used to model and predict stock market behaviors and in risk analysis.
+In engineering, they help in reliability analysis and optimization
+problems. Even in healthcare, they assist in radiation therapy planning
+and epidemiological studies.
+
+\subsection{How Monte Carlo Simulations
+Work}\label{how-monte-carlo-simulations-work}
+
+\emph{We will go into this later in detail}
+
+Monte Carlo simulations are grounded in the principle of random sampling
+and uses the power of statistical analysis to solve problems that, to be
+honest, the have no business working for. MC sims use randomness to
+explore a large set of possible solutions to a problem, where direct
+computation would be impractical or impossible. They then find the most
+likely outcomes and use them to approximate the true solution.
+
+A key concept for this work is the use of
+\href{https://en.wikipedia.org/wiki/Probability_distribution}{probability
+distributions}. In many physical problems, certain outcomes are more
+likely than others, and these probabilities can be used to guide the
+random sampling process. As westarted to see with microstates and
+macrostates -- at thermal equilibrium the most probable macrostate is
+easily determined.
+
+\subsubsection{Boltzmann Distribution}\label{boltzmann-distribution}
+
+For example, in thermal physics, the distribution of particle energies
+can often be described by the
+\href{https://en.wikipedia.org/wiki/Boltzmann_distribution}{Boltzmann
+distribution}. This distribution tells us that the probability of a
+particle having a certain energy is proportional to the exponential of
+the negative of that energy divided by the temperature. This
+distribution is used in Monte Carlo simulations to determine the
+probability of a particle having a certain energy. The Boltzmann
+distribution is given by:
+
+\[P(E) = \frac{e^{-E/kT}}{Z},\]
+
+where \(E\) is the energy state, \(k\) is the Boltzmann constant, \(T\)
+is the temperature, and \(Z\) is the
+\href{https://en.wikipedia.org/wiki/Partition_function_(statistical_mechanics)}{partition
+function}.
+
+\subsubsection{Lecture Video}\label{lecture-video}
+
+This introduction aims to provide a foundational understanding of Monte
+Carlo methods; we will delve deeper into the workings, applications, and
+mathematical aspects of these simulations.
+
+\href{https://inv.tux.pizza/watch?v=7ESK5SaP-bc}{\pandocbounded{\includegraphics[keepaspectratio,alt={Monte Carlo Simulations}]{https://markdown-videos-api.jorgenkh.no/youtube/7ESK5SaP-bc?width=720&height=405}}}
+
+\begin{itemize}
+\tightlist
+\item
+  Non-Commercial Link: \url{https://inv.tux.pizza/watch?v=7ESK5SaP-bc}
+\item
+  Commercial Link: \url{https://youtube.com/watch?v=7ESK5SaP-bc}
+\end{itemize}
+
+\subsubsection{Basic Components of a Monte Carlo
+Simulation}\label{basic-components-of-a-monte-carlo-simulation}
+
+The basic elements of any Monte Carlo Simulation are as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Random Number Generators (RNGs)}: These are algorithms that
+  generate sequences of numbers that approximate the properties of
+  random numbers. RNGs are the backbone of any Monte Carlo simulation.
+  They are used to generate random samples from probability
+  distributions, which are then used to approximate the solution to a
+  problem.
+\item
+  \textbf{Simulation Algorithms}: An example is the
+  \href{https://en.wikipedia.org/wiki/Metropolis-Hastings_algorithm}{\textbf{Metropolis-Hastings
+  algorithm}}, widely used in statistical physics. This algorithm
+  decides whether to accept or reject a new state based on a probability
+  criterion, allowing for a detailed exploration of the state space of a
+  system.
+\end{enumerate}
+
+In the Metropolis-Hastings algorithm, the probability of moving from a
+state \(i\) to a state \(j\) is given by:
+
+\[P(i \rightarrow j) = \min\left(1, \frac{e^{-E_j/kT}}{e^{-E_i/kT}}\right),\]
+
+where \(E_i\) and \(E_j\) are the energies of states \(i\) and \(j\)
+respectively.
+
+\subsection{Applications in Physics and
+Astronomy}\label{applications-in-physics-and-astronomy}
+
+Monte Carlo simulations are widely used in physics and astronomy, where
+they help in modeling complex systems and phenomena. Here are some
+examples:
+
+\subsubsection{Statistical Physics}\label{statistical-physics}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Phase Transitions and Critical Phenomena}: Monte Carlo
+  simulations are instrumental in studying phase transitions, like the
+  transition from a ferromagnetic to a paramagnetic state, by allowing
+  for the exploration of large lattice systems.
+\item
+  \textbf{Ising Model of Ferromagnetism}: This model uses a lattice
+  where each site has a spin that interacts with its neighbors. Monte
+  Carlo methods help in simulating and understanding the magnetic
+  properties of materials.
+\end{itemize}
+
+\subsubsection{Quantum Mechanics}\label{quantum-mechanics}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Quantum Monte Carlo Methods}: These are used to study systems
+  of many interacting quantum particles, providing insights into the
+  ground state and excited state properties.
+\item
+  \textbf{Applications in Atomic and Molecular Physics}: Monte Carlo
+  methods help in calculating the properties of atoms and molecules,
+  which are otherwise difficult due to the complexity of quantum
+  interactions.
+\end{itemize}
+
+\subsubsection{Astronomy and
+Astrophysics}\label{astronomy-and-astrophysics}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Stellar Evolution Simulations}: By simulating the life cycles
+  of stars, Monte Carlo methods help in understanding phenomena like
+  supernovae, neutron stars, and black hole formation.
+\item
+  \textbf{Galactic Dynamics and Dark Matter Modeling}: They are used to
+  simulate galaxy formation and the distribution of dark matter in the
+  universe.
+\end{itemize}
+
+\subsubsection{Cross-disciplinary
+Examples}\label{cross-disciplinary-examples}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Climate Modeling}: Monte Carlo simulations are used to predict
+  climate change by accounting for the numerous variables and
+  uncertainties in climate systems.
+\item
+  \textbf{Biological Systems}: In biology, they assist in modeling
+  complex systems like protein folding and the spread of diseases.
+\end{itemize}
+
+\subsection{A Common Example: Estimating
+Pi}\label{a-common-example-estimating-pi}
+
+The two most common examples of Monte Carlo are:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estimating Pi}: A simple application of Monte Carlo is the
+  estimation of \(\pi\) by randomly placing points in a square and
+  counting how many fall inside a quarter circle.
+\item
+  \textbf{Roulette Simulations}: A basic gambling game like roulette can
+  be simulated to understand probabilities and expected outcomes in
+  games of chance.
+\end{itemize}
+
+To illustrate the basic principles of Monte Carlo simulations, let's
+look at estimating the value of \(\pi\). The code below drops dots on a
+plane and determines if the dots are inside or outside a circle. The
+ratio of dots inside the circle to the total number of dots is then used
+to approximate the value of \(\pi\). The sliders on the widget
+demonstrate how the accuracy of the approximation improves with the
+number of dots.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ ipywidgets }\ImportTok{as}\NormalTok{ widgets}
+\ImportTok{from}\NormalTok{ IPython.display }\ImportTok{import}\NormalTok{ display}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ monte\_carlo\_pi\_plot(num\_samples):}
+\NormalTok{    inside\_circle }\OperatorTok{=}\NormalTok{ []}
+\NormalTok{    outside\_circle }\OperatorTok{=}\NormalTok{ []}
+
+    \ControlFlowTok{for}\NormalTok{ \_ }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(num\_samples):}
+\NormalTok{        x, y }\OperatorTok{=}\NormalTok{ np.random.uniform(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), np.random.uniform(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+        \ControlFlowTok{if}\NormalTok{ x}\OperatorTok{**}\DecValTok{2} \OperatorTok{+}\NormalTok{ y}\OperatorTok{**}\DecValTok{2} \OperatorTok{\textless{}=} \DecValTok{1}\NormalTok{:}
+\NormalTok{            inside\_circle.append((x, y))}
+        \ControlFlowTok{else}\NormalTok{:}
+\NormalTok{            outside\_circle.append((x, y))}
+
+\NormalTok{    estimated\_pi }\OperatorTok{=} \DecValTok{4} \OperatorTok{*} \BuiltInTok{len}\NormalTok{(inside\_circle) }\OperatorTok{/}\NormalTok{ num\_samples}
+
+    \CommentTok{\# Plotting}
+\NormalTok{    fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{    circle }\OperatorTok{=}\NormalTok{ plt.Circle((}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DecValTok{1}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{, fill}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\NormalTok{    ax.add\_artist(circle)}
+\NormalTok{    ax.set\_xlim(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{    ax.set\_ylim(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{    ax.set\_aspect(}\StringTok{\textquotesingle{}equal\textquotesingle{}}\NormalTok{, adjustable}\OperatorTok{=}\StringTok{\textquotesingle{}box\textquotesingle{}}\NormalTok{)}
+\NormalTok{    ax.scatter(}\OperatorTok{*}\BuiltInTok{zip}\NormalTok{(}\OperatorTok{*}\NormalTok{inside\_circle), color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, s}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{    ax.scatter(}\OperatorTok{*}\BuiltInTok{zip}\NormalTok{(}\OperatorTok{*}\NormalTok{outside\_circle), color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, s}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{    ax.set\_title(}\SpecialStringTok{f"Monte Carlo Estimation of Pi: }\SpecialCharTok{\{}\NormalTok{estimated\_pi}\SpecialCharTok{:.4f\}}\SpecialStringTok{ (Samples: }\SpecialCharTok{\{}\NormalTok{num\_samples}\SpecialCharTok{\}}\SpecialStringTok{)"}\NormalTok{)}
+\NormalTok{    plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create a slider to control the number of samples}
+\NormalTok{slider }\OperatorTok{=}\NormalTok{ widgets.IntSlider(}
+\NormalTok{    value}\OperatorTok{=}\DecValTok{100}\NormalTok{,}
+    \BuiltInTok{min}\OperatorTok{=}\DecValTok{100}\NormalTok{,}
+    \BuiltInTok{max}\OperatorTok{=}\DecValTok{10000}\NormalTok{,}
+\NormalTok{    step}\OperatorTok{=}\DecValTok{100}\NormalTok{,}
+\NormalTok{    description}\OperatorTok{=}\StringTok{\textquotesingle{}Samples:\textquotesingle{}}\NormalTok{,}
+\NormalTok{    continuous\_update}\OperatorTok{=}\VariableTok{False}
+\NormalTok{)}
+
+\CommentTok{\# Create an interactive widget}
+\NormalTok{widgets.interactive(monte\_carlo\_pi\_plot, num\_samples}\OperatorTok{=}\NormalTok{slider)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+interactive(children=(IntSlider(value=100, continuous_update=False, description='Samples:', max=10000, min=100…
+\end{verbatim}
+
+\subsection{Additional Resoures}\label{additional-resoures}
+
+\subsubsection{Lecture Video}\label{lecture-video-1}
+
+If you want to see more about how Monte Carlo simulations can work, in
+particular, with respect to data science, check out this video.
+
+\href{https://inv.tux.pizza/watch?v=EaR3C4e600k}{\pandocbounded{\includegraphics[keepaspectratio,alt={Monte Carlo Simulations in Data Science}]{https://markdown-videos-api.jorgenkh.no/youtube/EaR3C4e600k?width=720&height=405}}}
+
+\begin{itemize}
+\tightlist
+\item
+  Non-Commercial Link: \url{https://inv.tux.pizza/watch?v=EaR3C4e600k}
+\item
+  Commercial Link: \url{https://youtube.com/watch?v=EaR3C4e600k}
+\end{itemize}
