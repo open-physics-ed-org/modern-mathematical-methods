@@ -1,0 +1,27 @@
+import ast
+import astor
+import sys
+
+class ExampleTransformer(ast.NodeTransformer):
+    """
+    Example: Replace all calls to 'old_func' with 'new_func'
+    """
+    def visit_Call(self, node):
+        if isinstance(node.func, ast.Name) and node.func.id == 'old_func':
+            node.func.id = 'new_func'
+        return self.generic_visit(node)
+
+def main(filename):
+    with open(filename, "r", encoding="utf-8") as f:
+        source = f.read()
+    tree = ast.parse(source)
+    tree = ExampleTransformer().visit(tree)
+    new_source = astor.to_source(tree)
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(new_source)
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python ast_edit.py <python_file>")
+        sys.exit(1)
+    main(sys.argv[1])

@@ -940,6 +940,7 @@ def build_pdf_for_files(files, debug=False):
     from pathlib import Path
     import shutil
     import re
+    from sanitize_unicode import sanitize_text as sanitize_unicode
     repo_root = Path(__file__).parent.resolve()
     pdf_dir = repo_root / 'docs' / 'pdf'
     build_pdf_dir = repo_root / '_build' / 'pdf'
@@ -987,8 +988,9 @@ def build_pdf_for_files(files, debug=False):
                 rel_path = os.path.relpath(dest_img, build_pdf_dir)
                 return match.group(0).replace(img_path, rel_path)
             new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            sanitized_md_content = sanitize_unicode(new_md_content)
             with open(out_md, 'w', encoding='utf-8') as f:
-                f.write(new_md_content)
+                f.write(sanitized_md_content)
         elif ext == '.ipynb':
             if debug:
                 print(f"[INFO] Converting notebook to markdown: {file_path} -> {out_md}")
