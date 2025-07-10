@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Classical Mechanics</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+</head>
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Classical Mechanics</h1>
+    </div>
+  </header>
+  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
+  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="about.html">content/about.md</a></li><li><a href="activities.html">content/activities.md</a></li><li><a href="announcement.html">content/announcement.md</a></li><li><a href="cards.html">content/cards.md</a></li><li><a href="index.html">content/index.md</a></li><li><a href="resources.html">content/resources.md</a></li><li><a href="intro.html">content/notebooks/intro.md</a></li><li><a href="activity-duffing.html">content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb</a></li><li><a href="activity-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb</a></li><li><a href="activity_vanderpol.html">content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb</a></li><li><a href="notes-linearization_odes.html">content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb</a></li><li><a href="notes-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb</a></li><li><a href="activity-frames.html">content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb</a></li><li><a href="activity-lagrange_1.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb</a></li><li><a href="activity-lagrange_2.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb</a></li><li><a href="notes-lagrangian-dynamics.html">content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb</a></li><li><a href="notes-numerical_integration_1d.html">content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb</a></li><li><a href="notes_frames.html">content/notebooks/1_mechanics/lagrangian/notes_frames.md</a></li><li><a href="activity-what_is_a_model.html">content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb</a></li><li><a href="notes-SHO.html">content/notebooks/1_mechanics/sho/notes-SHO.ipynb</a></li><li><a href="activity-relaxation_2d.html">content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb</a></li><li><a href="notes-relaxation.html">content/notebooks/2_EM/Numerics/notes-relaxation.ipynb</a></li><li><a href="activity-efields.html">content/notebooks/2_EM/Statics/activity-efields.ipynb</a></li><li><a href="activity-sep_var.html">content/notebooks/2_EM/Statics/activity-sep_var.ipynb</a></li><li><a href="activity-sep_var_spherical.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb</a></li><li><a href="activity-sep_var_spherical_examples.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb</a></li><li><a href="activity-superposition.html">content/notebooks/2_EM/Statics/activity-superposition.ipynb</a></li><li><a href="notes-electric_potential.html">content/notebooks/2_EM/Statics/notes-electric_potential.ipynb</a></li><li><a href="notes-em_intro.html">content/notebooks/2_EM/Statics/notes-em_intro.ipynb</a></li><li><a href="notes-static_fields.html">content/notebooks/2_EM/Statics/notes-static_fields.ipynb</a></li><li><a href="activity-CoupledOsc-NormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb</a></li><li><a href="activity-FFT-applications.html">content/notebooks/3_waves/activity-FFT-applications.ipynb</a></li><li><a href="activity-Waves-1D.html">content/notebooks/3_waves/activity-Waves-1D.ipynb</a></li><li><a href="activity-Waves-Applying_the_FFT.html">content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb</a></li><li><a href="activity-Waves-seriesExpand.html">content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb</a></li><li><a href="activity-Waves-Signals.html">content/notebooks/3_waves/activity-Waves-Signals.ipynb</a></li><li><a href="notes-coupled_oscillations.html">content/notebooks/3_waves/notes-coupled_oscillations.ipynb</a></li><li><a href="notes-fft.html">content/notebooks/3_waves/notes-fft.ipynb</a></li><li><a href="notes-solve_the_wave_eq.html">content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb</a></li><li><a href="notes-Using-FFTs.html">content/notebooks/3_waves/notes-Using-FFTs.ipynb</a></li><li><a href="notes-Waves-Fouriers_Trick.html">content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb</a></li><li><a href="notes-waves_intro.html">content/notebooks/3_waves/notes-waves_intro.ipynb</a></li><li><a href="activity-ising_model.html">content/notebooks/4_distributions/activity-ising_model.ipynb</a></li><li><a href="activity-mc_integration.html">content/notebooks/4_distributions/activity-mc_integration.ipynb</a></li><li><a href="activity-metropolis.html">content/notebooks/4_distributions/activity-metropolis.ipynb</a></li><li><a href="activity-monte_carlo.html">content/notebooks/4_distributions/activity-monte_carlo.ipynb</a></li><li><a href="activity-radioactive_decay.html">content/notebooks/4_distributions/activity-radioactive_decay.ipynb</a></li><li><a href="activity-thermal_contact.html">content/notebooks/4_distributions/activity-thermal_contact.ipynb</a></li><li><a href="activity-zombies.html">content/notebooks/4_distributions/activity-zombies.ipynb</a></li><li><a href="notes-counting_and_combinatorics.html">content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb</a></li><li><a href="notes-mcmc.html">content/notebooks/4_distributions/notes-mcmc.ipynb</a></li><li><a href="notes-monte_carlo_simulations.html">content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb</a></li><li><a href="notes-randomness.html">content/notebooks/4_distributions/notes-randomness.ipynb</a></li><li><a href="project-1.html">content/notebooks/9_assignments/project-1.md</a></li><li><a href="project-2.html">content/notebooks/9_assignments/project-2.md</a></li><li><a href="project-3.html">content/notebooks/9_assignments/project-3.md</a></li><li><a href="project-4.html">content/notebooks/9_assignments/project-4.md</a></li><li><a href="updated_rubric.html">content/notebooks/9_assignments/updated_rubric.md</a></li><li><a href="worked-problem-1.html">content/notebooks/9_assignments/worked-problem-1.md</a></li><li><a href="worked-problem-2.html">content/notebooks/9_assignments/worked-problem-2.md</a></li><li><a href="worked-problem-3.html">content/notebooks/9_assignments/worked-problem-3.md</a></li><li><a href="worked-problem-4.html">content/notebooks/9_assignments/worked-problem-4.md</a></li><li><a href="worked-problem-5.html">content/notebooks/9_assignments/worked-problem-5.md</a></li><li><a href="worked-problem-6.html">content/notebooks/9_assignments/worked-problem-6.md</a></li><li><a href="worked-problem-7.html">content/notebooks/9_assignments/worked-problem-7.md</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
+<!-- Hamburger menu and toggle JS commented out -->
+</nav>
+  <div class="container">
+    <main>
+      
+<nav class="chapter-downloads" aria-label="Download chapter sources">
+  <div role="group" aria-label="Download formats">
+    <a class="download-btn" href="sources/activity-frames/activity-frames.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+    <a class="download-btn" href="sources/activity-frames/activity-frames.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+    <a class="download-btn" href="sources/activity-frames/activity-frames.md" download><span aria-hidden="true">✍️</span> MD</a>
+    <a class="download-btn" href="sources/activity-frames/activity-frames.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+    <a class="download-btn" href="sources/activity-frames/activity-frames.tex" download><span aria-hidden="true">📐</span> TEX</a>
+    <a class="download-btn" href="jupyter/content/notebooks/activity-frames.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+  </div>
+</nav>
+        <div class="markdown-body">
+<main>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="31-Aug-23---Activity:-Frames-and-Coordinates">31 Aug 23 - Activity: Frames and Coordinates<a class="anchor-link" href="#31-Aug-23---Activity:-Frames-and-Coordinates">¶</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Forces-in-different-frames">Forces in different frames<a class="anchor-link" href="#Forces-in-different-frames">¶</a></h2><p>One of the critical things that we must note is that the natural world changes and we observe it. The models (or laws) that we use to describe nature must accurately describe our observations. This is challenging when observers use different frames (or even different coordinates in the same frame) to show we have the same observations. Moving between coordinate systems and frames is a critical skill in physics.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Polar-coordinates">Polar coordinates<a class="anchor-link" href="#Polar-coordinates">¶</a></h2><p>Many problems in physics require the use of non-Cartesian coordinates, such as the Hydrogen atom or the two-body problem. One such coordinate system is <strong>plane-polar coordinates</strong>. In this coordinate system, any vector $\mathbf{r}\in \mathbb{R}^2$ is described by a distance $r$ and angle $\phi$ instead of Cartesian coordinates $x$ and $y$. The following four equations show how points transform in these coordinate systems.</p>
+<p>$$
+x = r\cos \phi \hspace{1in} y = r\sin \phi
+$$</p>
+<p>$$
+r = \sqrt{x^2 + y^2} \hspace{1in} \phi = \arctan(y / x)
+$$</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Getting-Oriented">Getting Oriented<a class="anchor-link" href="#Getting-Oriented">¶</a></h3><p><strong>✅ Do this</strong></p>
+<p>Borrowed from <a href="https://physicscourses.colorado.edu/EducationIssues/ClassicalMechanics/">CU Boulder Physics</a></p>
+<p>A particle moves in the plane. We could describe its motion in two different ways:</p>
+<p><strong>CARTESIAN</strong>: I tell you $x(t)$ and $y(t)$.</p>
+<p><strong>POLAR</strong>: I tell you $r(t)$ and $\phi(t)$. (Here $r(t)$ = $|\mathbf{r}(t)|$, it's the "distance to the origin")</p>
+<ul>
+<li>(a) Draw a picture showing the location of the point at some arbitrary time, labeling $x, y, r, \phi$ and also showing the unit vectors $\hat{x}, \hat{y}, \hat{r},$ and $\hat{\phi}$, all at this one time.</li>
+<li>(b) Using this picture, determine the formula for $\hat{r}(t)$ in terms of the Cartesian unit vectors. You answer should contain $\phi(t)$.</li>
+<li>(c) Write down the analogous expression for $\hat{\phi}(t)$.</li>
+<li>(d) We can claim the position vector in Cartesian coordinates is $\vec{r}(t) = x(t)\hat{x} + y(t)\hat{y}$. Do you agree? Is this consistent with your picture above?</li>
+<li>(e) We can claim the position vector in polar coordinates is just $\vec{r}(t) = r(t)\hat{r}$. Again, do you agree? Why isn't there a $+\phi(t)\hat{\phi}$ term?</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Getting-Kinetic">Getting Kinetic<a class="anchor-link" href="#Getting-Kinetic">¶</a></h3><p><strong>✅ Do this</strong></p>
+<ul>
+<li>(a) Now let's find the velocity, $\vec{v}(t) = d\vec{r}/dt$. In Cartesian coordinates, it's just $\vec{v}(t) = \dot{x}(t)\hat{x} + \dot{y}(t)\hat{y}$. Explain why, in polar coordinates, the velocity can be written as $d\vec{r}/dt = r(t)\:d\hat{r}/dt + dr(t)/dt\:\hat{r}$.</li>
+<li>(b) It appears we need to figure out what $d\hat{r}/dt$ is. Use the formula your determined in question 1b to get started -- first in terms of $\hat{x}$ and $\hat{y}$, and then converting to pure polar.</li>
+<li>(c) Write an expression for $\vec{v}(t)$ in polar coordinates.</li>
+<li>(d) Finally, determine the acceleration $\vec{a} = d\vec{v}(t)/dt$. In Cartesian coordinates, it's just $\vec{a}(t) = \ddot{x(t)}\hat{x} + \ddot{y}(t)\hat{y}$. Work it on in polar coordinates.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Forces-and-acceleration-in-plane-polar-coordinates">Forces and acceleration in plane-polar coordinates<a class="anchor-link" href="#Forces-and-acceleration-in-plane-polar-coordinates">¶</a></h2><p>We can show that the acceleration in plane-polar coordinates is given by:</p>
+<p>$$\mathbf{a} = a_r\hat{r} + a_{\phi}\hat{\phi} = \left(\ddot{r}-r\dot{\phi}^2\right)\hat{r} + \left(r\ddot{\phi}+2\dot{r}\dot{\phi}\right)\hat{\phi}$$</p>
+<p>Because this coordinate system is orthgonal ($\hat{r}\cdot\hat{\phi} = 0$), we can write the Newton's second law in this coordinate system as:</p>
+<p>$$\mathbf{F}_{net} = m\mathbf{a} = m\left(a_r\hat{r} + a_{\phi}\hat{\phi} \right)$$</p>
+<p>So that,</p>
+<p>$$\mathbf{F}_r = m\left(\ddot{r}-r\dot{\phi}^2\right)\hat{r}$$</p>
+<p>and</p>
+<p>$$\mathbf{F}_{\phi} = m\left(r\ddot{\phi}+2\dot{r}\dot{\phi}\right)\hat{\phi}$$</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Example-to-Work-in-a-Group">Example to Work in a Group<a class="anchor-link" href="#Example-to-Work-in-a-Group">¶</a></h3><p><strong>✅ Do this</strong></p>
+<p>Borrowed from <a href="https://bookshop.org/p/books/classical-mechanics-john-r-taylor/17213436?ean=9781891389221">Taylor's Classical Mechanics</a></p>
+<p>Consider a "half-pipe" that has a circular cross section of radius $R$. If we release the skateboard near the bottom of the "half-pipe" approximately how long does it take to get to the bottom?</p>
+<ul>
+<li>Make sure you draw a picture and define your coordinate system.</li>
+<li>Consider all the assumptions you need to make to solve this problem, and write them down.</li>
+<li>Be careful not to make big assumptions too early; try instead to write the forces acting on the skateboard in plane-polar coordinates.</li>
+<li>Do not use Lagrangian dynamics to solve this problem if you know how you, please instead use Newton's Second Law.</li>
+</ul>
+<p><strong>Hint: The equation of motion to small angle oscillation frequency pipeline is real.</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li><a href="../../assets/notes/Notes-Newton_2nd_Plane_polar.pdf">Notes on Newton's Second Law in Plane Polar Coordinates</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>&copy; Modern Classical Mechanics. All rights reserved.</p>
+  </footer>
+</body>
+</html>

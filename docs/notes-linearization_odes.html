@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Classical Mechanics</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+</head>
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Classical Mechanics</h1>
+    </div>
+  </header>
+  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
+  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="about.html">content/about.md</a></li><li><a href="activities.html">content/activities.md</a></li><li><a href="announcement.html">content/announcement.md</a></li><li><a href="cards.html">content/cards.md</a></li><li><a href="index.html">content/index.md</a></li><li><a href="resources.html">content/resources.md</a></li><li><a href="intro.html">content/notebooks/intro.md</a></li><li><a href="activity-duffing.html">content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb</a></li><li><a href="activity-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb</a></li><li><a href="activity_vanderpol.html">content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb</a></li><li><a href="notes-linearization_odes.html">content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb</a></li><li><a href="notes-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb</a></li><li><a href="activity-frames.html">content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb</a></li><li><a href="activity-lagrange_1.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb</a></li><li><a href="activity-lagrange_2.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb</a></li><li><a href="notes-lagrangian-dynamics.html">content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb</a></li><li><a href="notes-numerical_integration_1d.html">content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb</a></li><li><a href="notes_frames.html">content/notebooks/1_mechanics/lagrangian/notes_frames.md</a></li><li><a href="activity-what_is_a_model.html">content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb</a></li><li><a href="notes-SHO.html">content/notebooks/1_mechanics/sho/notes-SHO.ipynb</a></li><li><a href="activity-relaxation_2d.html">content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb</a></li><li><a href="notes-relaxation.html">content/notebooks/2_EM/Numerics/notes-relaxation.ipynb</a></li><li><a href="activity-efields.html">content/notebooks/2_EM/Statics/activity-efields.ipynb</a></li><li><a href="activity-sep_var.html">content/notebooks/2_EM/Statics/activity-sep_var.ipynb</a></li><li><a href="activity-sep_var_spherical.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb</a></li><li><a href="activity-sep_var_spherical_examples.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb</a></li><li><a href="activity-superposition.html">content/notebooks/2_EM/Statics/activity-superposition.ipynb</a></li><li><a href="notes-electric_potential.html">content/notebooks/2_EM/Statics/notes-electric_potential.ipynb</a></li><li><a href="notes-em_intro.html">content/notebooks/2_EM/Statics/notes-em_intro.ipynb</a></li><li><a href="notes-static_fields.html">content/notebooks/2_EM/Statics/notes-static_fields.ipynb</a></li><li><a href="activity-CoupledOsc-NormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb</a></li><li><a href="activity-FFT-applications.html">content/notebooks/3_waves/activity-FFT-applications.ipynb</a></li><li><a href="activity-Waves-1D.html">content/notebooks/3_waves/activity-Waves-1D.ipynb</a></li><li><a href="activity-Waves-Applying_the_FFT.html">content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb</a></li><li><a href="activity-Waves-seriesExpand.html">content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb</a></li><li><a href="activity-Waves-Signals.html">content/notebooks/3_waves/activity-Waves-Signals.ipynb</a></li><li><a href="notes-coupled_oscillations.html">content/notebooks/3_waves/notes-coupled_oscillations.ipynb</a></li><li><a href="notes-fft.html">content/notebooks/3_waves/notes-fft.ipynb</a></li><li><a href="notes-solve_the_wave_eq.html">content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb</a></li><li><a href="notes-Using-FFTs.html">content/notebooks/3_waves/notes-Using-FFTs.ipynb</a></li><li><a href="notes-Waves-Fouriers_Trick.html">content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb</a></li><li><a href="notes-waves_intro.html">content/notebooks/3_waves/notes-waves_intro.ipynb</a></li><li><a href="activity-ising_model.html">content/notebooks/4_distributions/activity-ising_model.ipynb</a></li><li><a href="activity-mc_integration.html">content/notebooks/4_distributions/activity-mc_integration.ipynb</a></li><li><a href="activity-metropolis.html">content/notebooks/4_distributions/activity-metropolis.ipynb</a></li><li><a href="activity-monte_carlo.html">content/notebooks/4_distributions/activity-monte_carlo.ipynb</a></li><li><a href="activity-radioactive_decay.html">content/notebooks/4_distributions/activity-radioactive_decay.ipynb</a></li><li><a href="activity-thermal_contact.html">content/notebooks/4_distributions/activity-thermal_contact.ipynb</a></li><li><a href="activity-zombies.html">content/notebooks/4_distributions/activity-zombies.ipynb</a></li><li><a href="notes-counting_and_combinatorics.html">content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb</a></li><li><a href="notes-mcmc.html">content/notebooks/4_distributions/notes-mcmc.ipynb</a></li><li><a href="notes-monte_carlo_simulations.html">content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb</a></li><li><a href="notes-randomness.html">content/notebooks/4_distributions/notes-randomness.ipynb</a></li><li><a href="project-1.html">content/notebooks/9_assignments/project-1.md</a></li><li><a href="project-2.html">content/notebooks/9_assignments/project-2.md</a></li><li><a href="project-3.html">content/notebooks/9_assignments/project-3.md</a></li><li><a href="project-4.html">content/notebooks/9_assignments/project-4.md</a></li><li><a href="updated_rubric.html">content/notebooks/9_assignments/updated_rubric.md</a></li><li><a href="worked-problem-1.html">content/notebooks/9_assignments/worked-problem-1.md</a></li><li><a href="worked-problem-2.html">content/notebooks/9_assignments/worked-problem-2.md</a></li><li><a href="worked-problem-3.html">content/notebooks/9_assignments/worked-problem-3.md</a></li><li><a href="worked-problem-4.html">content/notebooks/9_assignments/worked-problem-4.md</a></li><li><a href="worked-problem-5.html">content/notebooks/9_assignments/worked-problem-5.md</a></li><li><a href="worked-problem-6.html">content/notebooks/9_assignments/worked-problem-6.md</a></li><li><a href="worked-problem-7.html">content/notebooks/9_assignments/worked-problem-7.md</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
+<!-- Hamburger menu and toggle JS commented out -->
+</nav>
+  <div class="container">
+    <main>
+      
+<nav class="chapter-downloads" aria-label="Download chapter sources">
+  <div role="group" aria-label="Download formats">
+    <a class="download-btn" href="sources/notes-linearization_odes/notes-linearization_odes.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+    <a class="download-btn" href="sources/notes-linearization_odes/notes-linearization_odes.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+    <a class="download-btn" href="sources/notes-linearization_odes/notes-linearization_odes.md" download><span aria-hidden="true">✍️</span> MD</a>
+    <a class="download-btn" href="sources/notes-linearization_odes/notes-linearization_odes.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+    <a class="download-btn" href="sources/notes-linearization_odes/notes-linearization_odes.tex" download><span aria-hidden="true">📐</span> TEX</a>
+    <a class="download-btn" href="jupyter/content/notebooks/notes-linearization_odes.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+  </div>
+</nav>
+        <div class="markdown-body">
+<main>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="19-Sep-23---Notes:-Heading-towards-Chaos">19 Sep 23 - Notes: Heading towards Chaos<a class="anchor-link" href="#19-Sep-23---Notes:-Heading-towards-Chaos">¶</a></h1><p>One of the principal motivations for our work thus far has been to get to analyze systems that show suprising and complex behavior. In mechanics, you might have heard of those kinds of behviors as chaotic or exhibiting chaos. It turns out the chaos is a specific kind of behavior that we can find. To motivate us, let's remind ourselves of how cool nature can be.</p>
+<p><a href="https://inv.tux.pizza/watch?v=fDek6cYijxI"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/fDek6cYijxI?width=720&amp;height=405"/></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=fDek6cYijxI">https://inv.tux.pizza/watch?v=fDek6cYijxI</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=fDek6cYijxI">https://youtube.com/watch?v=fDek6cYijxI</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Reminders-of-the-Large-Angle-Pendulum">Reminders of the Large Angle Pendulum<a class="anchor-link" href="#Reminders-of-the-Large-Angle-Pendulum">¶</a></h2><p>Last time we investigated the phase portrait of the large angle pendulum, we we could arrive at by re-writing the differential equation</p>
+<p>$$
+\ddot{\theta} = -\dfrac{g}{L}\sin(\theta)
+$$</p>
+<p>as 2 first-order differential equations:</p>
+<p>$$
+\dot{\theta} = \omega \hspace{0.5in}\text{and}\hspace{0.5in} \dot{\omega} = -\frac{g}{L}\sin(\theta)
+$$</p>
+<p>By setting both of these equations equal to zero simultaneously, we also argued that this system has (<a href="https://faculty.math.illinois.edu/~kapovich/417-16/card.pdf">countably</a>) infinite fixed points at $(n\pi, 0)$ for  $n\in \mathbb{Z}$ in $(\theta,\omega)$ phase space.</p>
+<h3 id="Linearization-and-the-Jacobian">Linearization and the Jacobian<a class="anchor-link" href="#Linearization-and-the-Jacobian">¶</a></h3><p>Now we turn to the challenge of characterizing these fixed points with the linearization of the system (see the end of tuesday's activity for some more notes on this). Recall that we can do this by finding the eigenvalues of the Jacobian Matrix of the system at its fixed point. For the system $\dot{x} = f(x,y)$, $\dot{y} = g(x,y)$ the jacobian matrix looks like this:</p>
+<p>$$
+A = \begin{bmatrix} \frac{\partial f}{\partial x} &amp; \frac{\partial f}{\partial y} \\ \frac{\partial g}{\partial x} &amp; \frac{\partial g}{\partial y}\end{bmatrix}_{(x^*,y^*)}
+$$</p>
+<p><strong>✅ Try this</strong></p>
+<p>Calculate the general Jacobian matrix $A$ for this system, then calculate what it is at the fixed point $(0,0)$.</p>
+<p>We have the Jacobian at $(0,0)$ now but we still need to find its eigenvalues. Let's remind ourselves about eigenvalues and eigenvectors.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Eigenvalues">Eigenvalues<a class="anchor-link" href="#Eigenvalues">¶</a></h2><p>Eigenvalues and the closely related Eigenvectors are indispensible in physics, math, and computational science. These ideas for the basis (pun somewhat intened) for countless problems, from the <a href="https://phys.libretexts.org/Bookshelves/Nuclear_and_Particle_Physics/Introduction_to_Applied_Nuclear_Physics_(Cappellaro">energy eigenvalue equation</a>/02%3A_Introduction_to_Quantum_Mechanics/2.04%3A_Energy_Eigenvalue_Problem) that is the foundation of quantum mechanics, to the stability of complex nonlinear systems, to Normal Modes of oscillators. <em>Eigenproblems</em> show up all over in physics.</p>
+<p>A brief tangent: Once some scientists were using an eigenvalue driven algorithm called principal component analysis to study the genes of people that live in Europe. They found that these eigenvalues/vectors reproduced a map of Europe with surprising accuracy (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2735096/">link</a>). So these tools are extremely, and often unreasonably powerful.</p>
+<p>Eigenvalues are the $\lambda$ in the equation:</p>
+<p>$$
+A\mathbf{v} = \lambda \mathbf{v}
+$$</p>
+<p>Where $A$ is a linear operator of the vector space that $\mathbf{v}$ lives in. In finite-dimensional vector spaces, rhese linear operators are always matrices. There is a bit of physical intuition behind this equation: An eigenvector of $A$ is a vector that only gets stretched or squished by $\lambda$ when $A$ acts on $\mathbf{v}$.</p>
+<h3 id="Video-from-3Blue1Brown">Video from 3Blue1Brown<a class="anchor-link" href="#Video-from-3Blue1Brown">¶</a></h3><p>Grant Sanderson makes a lot of great videos on mathematics and statistics. This one about eigenvalues and eigenvectors is particularly good.</p>
+<p><a href="https://inv.tux.pizza/watch?v=PFDu9oVAE-g"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/PFDu9oVAE-g?width=720&amp;height=405"/></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=PFDu9oVAE-g">https://inv.tux.pizza/watch?v=PFDu9oVAE-g</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=PFDu9oVAE-g">https://youtube.com/watch?v=PFDu9oVAE-g</a></li>
+</ul>
+<h3 id="Finding-Eigenvalues">Finding Eigenvalues<a class="anchor-link" href="#Finding-Eigenvalues">¶</a></h3><p>To actually find the eigenvalues of a matrix, you solve the <strong>characteristic polynomial</strong> of the matrix, which you obtain by solving the equation:</p>
+<p>$$
+|A - \lambda I | = 0 
+$$</p>
+<p>Where the vertical bars means determinant.</p>
+<p>To find Eigenvectors, simply plug in the values you found for $\lambda$ into the original eigenvalue equation $A\mathbf{v} = \lambda \mathbf{v}$, using $\mathbf{v} = \begin{bmatrix}x \\ y\end{bmatrix}$. You'll find some simple relationship between $x$ and $y$. Any scalar multiple of an eigenvector is also an eigenvector so we usually just choose the simplest one. Say if you found that $x = -y$. Then for a nice clean looking eigenvector you could choose $\begin{bmatrix} -1 \\ 1\end{bmatrix}$.</p>
+<p><strong>✅ Try this</strong></p>
+<p>Analytically, find the eigenvalues of the Jacobian matrix you calculated earlier. Use the below bullets to identify these eigenvalues with the type of the fixed point.</p>
+<ul>
+<li>$\mathrm{Re}(\lambda) &gt; 0 $ for both eigenvalues: Repeller/Source (unstable)</li>
+<li>$\mathrm{Re}(\lambda) &lt; 0 $ for both eigenvalues: Attractor/Sink  (stable)</li>
+<li>One eigenvalue positive, one negative: Saddle</li>
+<li>Both eigenvalues pure imaginary: Center</li>
+</ul>
+<p>Note: You can actually learn quite a bit more from this analysis, see Strogatz chapter 6. In fact, these eigenvalues can tell us about the nature of the local trajectories.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Additional-Resources">Additional Resources<a class="anchor-link" href="#Additional-Resources">¶</a></h2><h3 id="Stability-and-Eigenvalues-of-a-linearized-system">Stability and Eigenvalues of a linearized system<a class="anchor-link" href="#Stability-and-Eigenvalues-of-a-linearized-system">¶</a></h3><p>Steve Brunton at UW does dynamical systems research and has a great video that demonstrates how we make meaning of those eigenvalues.</p>
+<p><a href="https://inv.tux.pizza/watch?v=XXjoh8L1HkE"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/XXjoh8L1HkE?width=720&amp;height=405"/></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=XXjoh8L1HkE">https://inv.tux.pizza/watch?v=XXjoh8L1HkE</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=XXjoh8L1HkE">https://youtube.com/watch?v=XXjoh8L1HkE</a></li>
+</ul>
+<h3 id="Eigenvalues,-Computationally">Eigenvalues, Computationally<a class="anchor-link" href="#Eigenvalues,-Computationally">¶</a></h3><p>We can use <code>np.linalg.eig()</code> to find the eigenvalues (and normalized eigenvectors) of a matrix which we represent as numpy array. Below is some doe that does this (note the imaginary unit is represented as $j$ in python):</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">eigvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">eigvecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"eigenvalues:"</span><span class="p">,</span> <span class="n">eigvals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>eigenvalues: [0.+1.j 0.-1.j]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>This can be super handy when you just need to do some quick characterization from the eigenvalues of a matrix. However, be warned - since you only get numerical answers you can lose quite a bit of the nuance that comes from if you had calculated these. We'll see how that can be an issue later in the semester when we tackle normal modes.</p>
+<h3 id="Handwritten-Notes">Handwritten Notes<a class="anchor-link" href="#Handwritten-Notes">¶</a></h3><ul>
+<li><a href="../../assets/notes/Notes-Linearization_ODEs.pdf">Linearization of ODEs</a></li>
+<li><a href="../../assets/notes/Notes-Linearization_Example.pdf">Linearization example</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>&copy; Modern Classical Mechanics. All rights reserved.</p>
+  </footer>
+</body>
+</html>

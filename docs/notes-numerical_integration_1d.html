@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Classical Mechanics</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+</head>
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Classical Mechanics</h1>
+    </div>
+  </header>
+  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
+  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="about.html">content/about.md</a></li><li><a href="activities.html">content/activities.md</a></li><li><a href="announcement.html">content/announcement.md</a></li><li><a href="cards.html">content/cards.md</a></li><li><a href="index.html">content/index.md</a></li><li><a href="resources.html">content/resources.md</a></li><li><a href="intro.html">content/notebooks/intro.md</a></li><li><a href="activity-duffing.html">content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb</a></li><li><a href="activity-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb</a></li><li><a href="activity_vanderpol.html">content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb</a></li><li><a href="notes-linearization_odes.html">content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb</a></li><li><a href="notes-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb</a></li><li><a href="activity-frames.html">content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb</a></li><li><a href="activity-lagrange_1.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb</a></li><li><a href="activity-lagrange_2.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb</a></li><li><a href="notes-lagrangian-dynamics.html">content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb</a></li><li><a href="notes-numerical_integration_1d.html">content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb</a></li><li><a href="notes_frames.html">content/notebooks/1_mechanics/lagrangian/notes_frames.md</a></li><li><a href="activity-what_is_a_model.html">content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb</a></li><li><a href="notes-SHO.html">content/notebooks/1_mechanics/sho/notes-SHO.ipynb</a></li><li><a href="activity-relaxation_2d.html">content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb</a></li><li><a href="notes-relaxation.html">content/notebooks/2_EM/Numerics/notes-relaxation.ipynb</a></li><li><a href="activity-efields.html">content/notebooks/2_EM/Statics/activity-efields.ipynb</a></li><li><a href="activity-sep_var.html">content/notebooks/2_EM/Statics/activity-sep_var.ipynb</a></li><li><a href="activity-sep_var_spherical.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb</a></li><li><a href="activity-sep_var_spherical_examples.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb</a></li><li><a href="activity-superposition.html">content/notebooks/2_EM/Statics/activity-superposition.ipynb</a></li><li><a href="notes-electric_potential.html">content/notebooks/2_EM/Statics/notes-electric_potential.ipynb</a></li><li><a href="notes-em_intro.html">content/notebooks/2_EM/Statics/notes-em_intro.ipynb</a></li><li><a href="notes-static_fields.html">content/notebooks/2_EM/Statics/notes-static_fields.ipynb</a></li><li><a href="activity-CoupledOsc-NormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb</a></li><li><a href="activity-FFT-applications.html">content/notebooks/3_waves/activity-FFT-applications.ipynb</a></li><li><a href="activity-Waves-1D.html">content/notebooks/3_waves/activity-Waves-1D.ipynb</a></li><li><a href="activity-Waves-Applying_the_FFT.html">content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb</a></li><li><a href="activity-Waves-seriesExpand.html">content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb</a></li><li><a href="activity-Waves-Signals.html">content/notebooks/3_waves/activity-Waves-Signals.ipynb</a></li><li><a href="notes-coupled_oscillations.html">content/notebooks/3_waves/notes-coupled_oscillations.ipynb</a></li><li><a href="notes-fft.html">content/notebooks/3_waves/notes-fft.ipynb</a></li><li><a href="notes-solve_the_wave_eq.html">content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb</a></li><li><a href="notes-Using-FFTs.html">content/notebooks/3_waves/notes-Using-FFTs.ipynb</a></li><li><a href="notes-Waves-Fouriers_Trick.html">content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb</a></li><li><a href="notes-waves_intro.html">content/notebooks/3_waves/notes-waves_intro.ipynb</a></li><li><a href="activity-ising_model.html">content/notebooks/4_distributions/activity-ising_model.ipynb</a></li><li><a href="activity-mc_integration.html">content/notebooks/4_distributions/activity-mc_integration.ipynb</a></li><li><a href="activity-metropolis.html">content/notebooks/4_distributions/activity-metropolis.ipynb</a></li><li><a href="activity-monte_carlo.html">content/notebooks/4_distributions/activity-monte_carlo.ipynb</a></li><li><a href="activity-radioactive_decay.html">content/notebooks/4_distributions/activity-radioactive_decay.ipynb</a></li><li><a href="activity-thermal_contact.html">content/notebooks/4_distributions/activity-thermal_contact.ipynb</a></li><li><a href="activity-zombies.html">content/notebooks/4_distributions/activity-zombies.ipynb</a></li><li><a href="notes-counting_and_combinatorics.html">content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb</a></li><li><a href="notes-mcmc.html">content/notebooks/4_distributions/notes-mcmc.ipynb</a></li><li><a href="notes-monte_carlo_simulations.html">content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb</a></li><li><a href="notes-randomness.html">content/notebooks/4_distributions/notes-randomness.ipynb</a></li><li><a href="project-1.html">content/notebooks/9_assignments/project-1.md</a></li><li><a href="project-2.html">content/notebooks/9_assignments/project-2.md</a></li><li><a href="project-3.html">content/notebooks/9_assignments/project-3.md</a></li><li><a href="project-4.html">content/notebooks/9_assignments/project-4.md</a></li><li><a href="updated_rubric.html">content/notebooks/9_assignments/updated_rubric.md</a></li><li><a href="worked-problem-1.html">content/notebooks/9_assignments/worked-problem-1.md</a></li><li><a href="worked-problem-2.html">content/notebooks/9_assignments/worked-problem-2.md</a></li><li><a href="worked-problem-3.html">content/notebooks/9_assignments/worked-problem-3.md</a></li><li><a href="worked-problem-4.html">content/notebooks/9_assignments/worked-problem-4.md</a></li><li><a href="worked-problem-5.html">content/notebooks/9_assignments/worked-problem-5.md</a></li><li><a href="worked-problem-6.html">content/notebooks/9_assignments/worked-problem-6.md</a></li><li><a href="worked-problem-7.html">content/notebooks/9_assignments/worked-problem-7.md</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
+<!-- Hamburger menu and toggle JS commented out -->
+</nav>
+  <div class="container">
+    <main>
+      
+<nav class="chapter-downloads" aria-label="Download chapter sources">
+  <div role="group" aria-label="Download formats">
+    <a class="download-btn" href="sources/notes-numerical_integration_1d/notes-numerical_integration_1d.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+    <a class="download-btn" href="sources/notes-numerical_integration_1d/notes-numerical_integration_1d.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+    <a class="download-btn" href="sources/notes-numerical_integration_1d/notes-numerical_integration_1d.md" download><span aria-hidden="true">✍️</span> MD</a>
+    <a class="download-btn" href="sources/notes-numerical_integration_1d/notes-numerical_integration_1d.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+    <a class="download-btn" href="sources/notes-numerical_integration_1d/notes-numerical_integration_1d.tex" download><span aria-hidden="true">📐</span> TEX</a>
+    <a class="download-btn" href="jupyter/content/notebooks/notes-numerical_integration_1d.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+  </div>
+</nav>
+        <div class="markdown-body">
+<main>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="7-Sept-23---Notes:-Numerical-Integration-in-1D">7 Sept 23 - Notes: Numerical Integration in 1D<a class="anchor-link" href="#7-Sept-23---Notes:-Numerical-Integration-in-1D">¶</a></h1><p>Principal Ideas for this unit will come from <a href="https://github.com/dannycab/phy415msu/blob/main/MMIPbook/assets/pdfs/scans/Newman_Ch8_ODEs.pdf">Newman Chapter 8, Section 1</a>, which is the reading assigned below.</p>
+<p>We have seen how we can quickly exhaust our analytical tools when we investigate systems with interesting and complex behavior. We can see much from the perspective of phase space in terms of the qualitatively different behaviors (e.g., oscillations vs rotations, both clockwise and counter-clockwise, in the large angle pendulum). But what if we want to find the specific trajectory of a given set of initial conditions.</p>
+<p>That is we want to be able to take a more general differential equation:</p>
+<p>$$\ddot{x} = f(x,\dot{x},t)$$</p>
+<p>to a solution for all (or some specified amount)of time, $x(t)$...in (most) cases...because sometimes integrals don't converge. We can use <strong>numerical integration</strong> to find these trajectories.</p>
+<h2 id="Numerical-Integration">Numerical Integration<a class="anchor-link" href="#Numerical-Integration">¶</a></h2><p><a href="https://en.wikipedia.org/wiki/Numerical_integration">Numerical Integration</a> is a vast and wide topic with lots of different approaches, important nuances, and difficult problems. Some of the most high profile numerical integration was done by NASA's <a href="https://education.nationalgeographic.org/resource/women-nasa">human computers</a> -- a now well-known story thanks to the film <a href="https://en.wikipedia.org/wiki/Hidden_Figures">Hidden Figures</a>. Black women formed a core group of these especially talented scientists (including <a href="https://en.wikipedia.org/wiki/Mary_Jackson_(engineer">Mary Jackson</a>), <a href="https://en.wikipedia.org/wiki/Katherine_Johnson">Katherine Johnson</a>, and <a href="https://en.wikipedia.org/wiki/Dorothy_Vaughan">Dorothy Vaughn</a>), without whom, John Glenn would not have orbited the Earth in 1962. This is also a very interesting story about the importance of <a href="https://en.wikipedia.org/wiki/Historically_black_colleges_and_universities">Historically Black Colleges and Universities</a> to American science.</p>
+<p>Below is a video describing 3 coupled ODEs, the <a href="https://en.wikipedia.org/wiki/Lorenz_system">Lorenz equations</a>, that are quite famous. You will be able to model systems like this, but for now think of it as motivation for why we want to learn numerical integration.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><a href="https://inv.tux.pizza/watch?v=aAJkLh76QnM"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/aAJkLh76QnM?width=720&amp;height=405"/>)</a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=aAJkLh76QnM?">https://inv.tux.pizza/watch?v=aAJkLh76QnM?</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=aAJkLh76QnM?">https://youtube.com/watch?v=aAJkLh76QnM?</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Nonlinear-Science">Nonlinear Science<a class="anchor-link" href="#Nonlinear-Science">¶</a></h2><p>Some of the most interesting ODEs to work with are those that lead to chaos, have interesting behaviors in different parts of phase space, are highly sensitive to initial conditions, or that have complex bound orbits (in real or phase space). This area of study in physics overlaps with a broad interdisciplinary field called <a href="https://en.wikipedia.org/wiki/Nonlinear_system">Nonlinear Science</a>, which studies all manner of systems where the results are not simply proportional to the input features. This work includes theory, applied science, and experimental work. As it is difficult to find truly linear systems in the real world, nonlinear science is quite interdisciplinary with physics research in the areas of <a href="https://complex.umd.edu/research/MHD_dynamos/MHD_dynamos.php">magnetohydrodynamics</a>, <a href="">fluid mechanics</a>, <a href="https://meche.mit.edu/people/faculty/PEKO@MIT.EDU">bio-inspired design</a>, <a href="https://curtisresearch.gatech.edu/index.php">biophysics (cellular)</a>, <a href="https://crablab.gatech.edu/">biophysics (animal locomotion)</a>, <a href="https://jila.colorado.edu/lewandowski">atomic and molecular physics</a>, and many more fields.</p>
+<p>We will focus on integrating 1 dimensional ODEs (that is, ODEs of only one variable like the SHO). To that end the reding this week aims to inform you with the simplest of the integrators the <a href="https://en.wikipedia.org/wiki/Semi-implicit_Euler_method">Euler-Cromer integration</a> technique. This approach is intuitive, straight-forward, and forms the basis for better and far more accurate methods like <a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge-Kutta</a>.</p>
+<p>Through this week's activities, we will introduce several integration methods, but you will learn to use the <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html?highlight=odeint">built-in integrator</a> (<code>odeint</code>) from scipy, which are more efficient than what we could write ourselves.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="How-Does-Numerical-Integration-actually-work?">How Does Numerical Integration actually work?<a class="anchor-link" href="#How-Does-Numerical-Integration-actually-work?">¶</a></h2><p>A computer understands things like updating individual variables with a change. It turns out this process of updating things in steps is the basis for numerical integration. We need a set of update equations. Making those update equations is effectively choosing our integrator.</p>
+<h3 id="Update-equations">Update equations<a class="anchor-link" href="#Update-equations">¶</a></h3><p>The critical part of numerical integration is approximating the change to variables you are investigating. Going back to our differential equations, we can rewrite them as approximate equation, which a computer understands because it involves discrete steps. How we choose to approximate this update indicates which integration routine we've chosen and sets the irreducible error we are stuck with (i.e., $O((\Delta t)^2)$, $O((\Delta t)^3)$, etc.).</p>
+<p>My handwritten notes (below) provide derivations for the Euler-Cromer method. Other forms of integration are more complex, but the basic idea is the same: <em>we are trying to approximate the "area under the curve" by sampling the slope of the function at different points.</em></p>
+<p>We will illustrate three approximations to the slope of these functions:</p>
+<ul>
+<li><strong>Euler-Cromer (EC)</strong> - definitely the most intuitive of the approaches, where we approximate the slope with two points separated by $\Delta t$ in time. It is quick to write, slow to solve, and requires small steps for accurate results. Even so, it fails to integrate periodic motion well because it doesn't always conserve energy in periodic motion. Turns out it's the best tool to use when you have random noise added to the model though (e.g., $\eta_n(\sigma(t))$). For a first order eqn, $\dot{x}=f(x,t)$,</li>
+</ul>
+<p>$$x(t+\Delta t) = x(t) + \textrm{change} = x(t) + \Delta t \left(f(x(t+\dfrac{1}{2}\Delta t), t+\dfrac{1}{2}\Delta t\right)$$</p>
+<ul>
+<li><strong>Runge-Kutta 2nd order (RK2)</strong> - just a step above Euler-Cromer; it uses three points to approximate the slope giving two measures of the slope (hence, 2nd order). It's not much more complex than Euler-Cromer, but gives an order of magnitude lower error. It's a good starting point for simple systems. For a first order eqn, $\dot{x}=f(x,t)$,</li>
+</ul>
+<p>$$k_1 = \Delta t\left(f(x,t)\right),$$
+$$k_2 =  \Delta t\left(x+\dfrac{1}{2}k_1, t+\dfrac{1}{2}\Delta t\right),$$
+$$x(t+\Delta t) = x(t) + \textrm{change} = x(t) + k_2$$</p>
+<ul>
+<li><strong>Runge Kutta 4th order (RK4)</strong> - this is the gold standard. Most researchers start with RK4 on most problems. It uses 5 points to build 4 slope profiles and integrates the system in 4 steps. It is highly adaptable and supported -- it can be modified to take smaller or longer steps depending on the specific nature of the problem at the time. I mean that it can change step size in the middle of its work; including within the step it is taking presently. For a first order eqn, $\dot{x}=f(x,t)$,</li>
+</ul>
+<p>$$k_1 = \Delta t\left(f(x,t)\right),$$
+$$k_2 =  \Delta t\left(x+\dfrac{1}{2}k_1, t+\dfrac{1}{2}\Delta t\right),$$
+$$k_3 =  \Delta t\left(x+\dfrac{1}{2}k_2, t+\dfrac{1}{2}\Delta t\right),$$
+$$k_4 =  \Delta t\left(x+k_3, t+\Delta t\right),$$
+$$x(t+\Delta t) = x(t) + \textrm{change} = x(t) + \dfrac{1}{6}\left(k_1 + 2k_2 +2k_3 +k_4\right)$$</p>
+<p><strong>We don't expect you memorize these approaches or to derive them, but to understand how they work and what their limitations are.</strong> We will implement them in class using known tools.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Additional-Resources">Additional Resources<a class="anchor-link" href="#Additional-Resources">¶</a></h2><h3 id="Handwritten-Notes">Handwritten Notes<a class="anchor-link" href="#Handwritten-Notes">¶</a></h3><ul>
+<li><a href="../../assets/notes/Notes-Numerical_Integration_1D_Spatial.pdf">Numerical Integration - 1D Spatial integrals</a></li>
+<li><a href="../../assets/notes/Notes-Numerical_Integration_Euler_Cromer.pdf">Numerical Integration - Euler Cromer for ODEs</a></li>
+</ul>
+<h3 id="Book-Readings">Book Readings<a class="anchor-link" href="#Book-Readings">¶</a></h3><p>These two readings are useful preparation for what we are going to do with numerical integration.</p>
+<h3 id="Newman's-Computational-Physics---Chapter-8">Newman's Computational Physics - Chapter 8<a class="anchor-link" href="#Newman's-Computational-Physics---Chapter-8">¶</a></h3><p>The first one is from <a href="https://github.com/dannycab/phy415msu/blob/main/MMIPbook/assets/pdfs/scans/Newman_Ch8_ODEs.pdf">Chapter 8 of Mark Newman's book, Computational Physics</a>, which is an excellent introduction to most of the computational physics approaches we use in physics. It uses Python and modern libraries, which is rare for a computational physics textbook for undergraduate students.</p>
+<p><strong>Read This</strong> Sections 8.1 and 8.1.1. We will discuss and work with ideas from 8.1.2 and 8.1.3, but I don't expect you to read those in detail. We will discuss how these work and then make use of the <a href="https://docs.scipy.org/doc/scipy/tutorial/integrate.html">built-in integrators from scipy</a>. The core one will be <code>odeint</code> <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html">(Documentation)</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Paper-Readings">Paper Readings<a class="anchor-link" href="#Paper-Readings">¶</a></h2><p>Here's the original paper from Alan Cromer about the correction to the Euler step that makes it more accurate. It's a good read, but not required.</p>
+<ul>
+<li><a href="https://github.com/dannycab/phy415fall23/blob/main/content/assets/papers/euler_cromer_1981.pdf">Cromer, Alan H. "Stable solutions using the Euler approximation." American Journal of Physics 49.5 (1981): 455-459.</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>&copy; Modern Classical Mechanics. All rights reserved.</p>
+  </footer>
+</body>
+</html>

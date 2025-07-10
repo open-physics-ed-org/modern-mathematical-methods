@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Classical Mechanics</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+</head>
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Classical Mechanics</h1>
+    </div>
+  </header>
+  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
+  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="about.html">content/about.md</a></li><li><a href="activities.html">content/activities.md</a></li><li><a href="announcement.html">content/announcement.md</a></li><li><a href="cards.html">content/cards.md</a></li><li><a href="index.html">content/index.md</a></li><li><a href="resources.html">content/resources.md</a></li><li><a href="intro.html">content/notebooks/intro.md</a></li><li><a href="activity-duffing.html">content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb</a></li><li><a href="activity-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb</a></li><li><a href="activity_vanderpol.html">content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb</a></li><li><a href="notes-linearization_odes.html">content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb</a></li><li><a href="notes-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb</a></li><li><a href="activity-frames.html">content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb</a></li><li><a href="activity-lagrange_1.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb</a></li><li><a href="activity-lagrange_2.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb</a></li><li><a href="notes-lagrangian-dynamics.html">content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb</a></li><li><a href="notes-numerical_integration_1d.html">content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb</a></li><li><a href="notes_frames.html">content/notebooks/1_mechanics/lagrangian/notes_frames.md</a></li><li><a href="activity-what_is_a_model.html">content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb</a></li><li><a href="notes-SHO.html">content/notebooks/1_mechanics/sho/notes-SHO.ipynb</a></li><li><a href="activity-relaxation_2d.html">content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb</a></li><li><a href="notes-relaxation.html">content/notebooks/2_EM/Numerics/notes-relaxation.ipynb</a></li><li><a href="activity-efields.html">content/notebooks/2_EM/Statics/activity-efields.ipynb</a></li><li><a href="activity-sep_var.html">content/notebooks/2_EM/Statics/activity-sep_var.ipynb</a></li><li><a href="activity-sep_var_spherical.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb</a></li><li><a href="activity-sep_var_spherical_examples.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb</a></li><li><a href="activity-superposition.html">content/notebooks/2_EM/Statics/activity-superposition.ipynb</a></li><li><a href="notes-electric_potential.html">content/notebooks/2_EM/Statics/notes-electric_potential.ipynb</a></li><li><a href="notes-em_intro.html">content/notebooks/2_EM/Statics/notes-em_intro.ipynb</a></li><li><a href="notes-static_fields.html">content/notebooks/2_EM/Statics/notes-static_fields.ipynb</a></li><li><a href="activity-CoupledOsc-NormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb</a></li><li><a href="activity-FFT-applications.html">content/notebooks/3_waves/activity-FFT-applications.ipynb</a></li><li><a href="activity-Waves-1D.html">content/notebooks/3_waves/activity-Waves-1D.ipynb</a></li><li><a href="activity-Waves-Applying_the_FFT.html">content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb</a></li><li><a href="activity-Waves-seriesExpand.html">content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb</a></li><li><a href="activity-Waves-Signals.html">content/notebooks/3_waves/activity-Waves-Signals.ipynb</a></li><li><a href="notes-coupled_oscillations.html">content/notebooks/3_waves/notes-coupled_oscillations.ipynb</a></li><li><a href="notes-fft.html">content/notebooks/3_waves/notes-fft.ipynb</a></li><li><a href="notes-solve_the_wave_eq.html">content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb</a></li><li><a href="notes-Using-FFTs.html">content/notebooks/3_waves/notes-Using-FFTs.ipynb</a></li><li><a href="notes-Waves-Fouriers_Trick.html">content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb</a></li><li><a href="notes-waves_intro.html">content/notebooks/3_waves/notes-waves_intro.ipynb</a></li><li><a href="activity-ising_model.html">content/notebooks/4_distributions/activity-ising_model.ipynb</a></li><li><a href="activity-mc_integration.html">content/notebooks/4_distributions/activity-mc_integration.ipynb</a></li><li><a href="activity-metropolis.html">content/notebooks/4_distributions/activity-metropolis.ipynb</a></li><li><a href="activity-monte_carlo.html">content/notebooks/4_distributions/activity-monte_carlo.ipynb</a></li><li><a href="activity-radioactive_decay.html">content/notebooks/4_distributions/activity-radioactive_decay.ipynb</a></li><li><a href="activity-thermal_contact.html">content/notebooks/4_distributions/activity-thermal_contact.ipynb</a></li><li><a href="activity-zombies.html">content/notebooks/4_distributions/activity-zombies.ipynb</a></li><li><a href="notes-counting_and_combinatorics.html">content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb</a></li><li><a href="notes-mcmc.html">content/notebooks/4_distributions/notes-mcmc.ipynb</a></li><li><a href="notes-monte_carlo_simulations.html">content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb</a></li><li><a href="notes-randomness.html">content/notebooks/4_distributions/notes-randomness.ipynb</a></li><li><a href="project-1.html">content/notebooks/9_assignments/project-1.md</a></li><li><a href="project-2.html">content/notebooks/9_assignments/project-2.md</a></li><li><a href="project-3.html">content/notebooks/9_assignments/project-3.md</a></li><li><a href="project-4.html">content/notebooks/9_assignments/project-4.md</a></li><li><a href="updated_rubric.html">content/notebooks/9_assignments/updated_rubric.md</a></li><li><a href="worked-problem-1.html">content/notebooks/9_assignments/worked-problem-1.md</a></li><li><a href="worked-problem-2.html">content/notebooks/9_assignments/worked-problem-2.md</a></li><li><a href="worked-problem-3.html">content/notebooks/9_assignments/worked-problem-3.md</a></li><li><a href="worked-problem-4.html">content/notebooks/9_assignments/worked-problem-4.md</a></li><li><a href="worked-problem-5.html">content/notebooks/9_assignments/worked-problem-5.md</a></li><li><a href="worked-problem-6.html">content/notebooks/9_assignments/worked-problem-6.md</a></li><li><a href="worked-problem-7.html">content/notebooks/9_assignments/worked-problem-7.md</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
+<!-- Hamburger menu and toggle JS commented out -->
+</nav>
+  <div class="container">
+    <main>
+      
+<nav class="chapter-downloads" aria-label="Download chapter sources">
+  <div role="group" aria-label="Download formats">
+    <a class="download-btn" href="sources/notes-solve_the_wave_eq/notes-solve_the_wave_eq.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+    <a class="download-btn" href="sources/notes-solve_the_wave_eq/notes-solve_the_wave_eq.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+    <a class="download-btn" href="sources/notes-solve_the_wave_eq/notes-solve_the_wave_eq.md" download><span aria-hidden="true">✍️</span> MD</a>
+    <a class="download-btn" href="sources/notes-solve_the_wave_eq/notes-solve_the_wave_eq.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+    <a class="download-btn" href="sources/notes-solve_the_wave_eq/notes-solve_the_wave_eq.tex" download><span aria-hidden="true">📐</span> TEX</a>
+    <a class="download-btn" href="jupyter/content/notebooks/notes-solve_the_wave_eq.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+  </div>
+</nav>
+        <div class="markdown-body">
+<main>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="25-Oct-23---Notes:-Solutions-to-The-Wave-Equation">25 Oct 23 - Notes: Solutions to The Wave Equation<a class="anchor-link" href="#25-Oct-23---Notes:-Solutions-to-The-Wave-Equation">¶</a></h1><p>The wave equation is a partial differential equation that describes how waves propagate (they are fundamentally a disturbance of a medium) in space and time. The general wave equations is:</p>
+<p>$$\nabla^2 u(\mathbf{r},t) = \frac{1}{v^2} \frac{\partial^2 u(\mathbf{r},t)}{\partial t^2}$$</p>
+<p>where $u(\mathbf{r},t)$ is the displacement of the wave at position $\mathbf{r}$ and time $t$ and $v$ is the speed of the wave in the medium. Now we typically don't solve this problem in general, like most PDEs, we need a context in which to work on the problem. Moreover, that wave equation is 4 dimensional and we really are going to have a hard time with intuition if we focus on that. Let's instead consider the 1D wave equations:</p>
+<p>$$\frac{\partial^2 u(x,t)}{\partial x^2} = \frac{1}{v^2} \frac{\partial^2 u(x,t)}{\partial t^2}$$</p>
+<p>where $u(x,t)$ is the displacement of the wave at position $x$ and time $t$ and $v$ is the speed of the wave in the medium. This is a much more tractable problem.</p>
+<p>It is comment to rewrite this problem using the <a href="https://en.wikipedia.org/wiki/D%27Alembert_operator">D'Alembert operator</a> $\square$:</p>
+<p>$$\square u(x,t) = 0$$</p>
+<p>where $\square$ is defined as:</p>
+<p>$$\square = \frac{\partial^2}{\partial x^2} - \frac{1}{v^2} \frac{\partial^2}{\partial t^2}$$</p>
+<h2 id="Traveling-Waves">Traveling Waves<a class="anchor-link" href="#Traveling-Waves">¶</a></h2><p>Through this operator and proposed change of variables: $\eta = x - vt$ (movement to the right) and $\xi = x + vt$ (movement to the left) <a href="https://inv.tux.pizza/watch?v=Sc21aPg2RyE">we can show that the general solution</a> to the 1D wave equation are just functions of those variables:</p>
+<p>$$u(x,t) = f(\eta) + g(\xi) = f(x-vt) + g(x+vt)$$</p>
+<p>where $f$ and $g$ are arbitrary functions. This is a very powerful result; the solution to the wave equation is a function of a given shape ($f(x)$ or $g(x)$) that travels to the right and/or left; if both, they superpose in space and time. We will use a special case of these solutions <a href="https://en.wikipedia.org/wiki/Sinusoidal_plane_wave">sinusoidal traveling waves</a> as they demonstrate the key features of waves; but also behave nicely (in the mathematical sense) in the context of the wave equation.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Sinusoidal-Traveling-Waves">Sinusoidal Traveling Waves<a class="anchor-link" href="#Sinusoidal-Traveling-Waves">¶</a></h2><p>A sinusoidal traveling wave is a infinite wave that has a sinusoidal shape ($\sin$ or $\cos$). It is a solution to the wave equation (notice it is not a separable solution):</p>
+<p>$$u(x,t) = A \sin(kx - \omega t + \phi)$$</p>
+<p>where $A$ is the amplitude of the wave, $k$ is the wave number, $\omega$ is the angular frequency, and $\phi$ is the phase. This wave exists for all space and time, so it is a model of a real wave. We often use series of these waves to build up <a href="https://en.wikipedia.org/wiki/Wave_packet">shorter wave packets</a>. Like below is a sum of travelling waves with different wave numbers and angular frequencies to produce a packet. It can be analyzed simply because it's a sum of sinusoidal waves.</p>
+<p><img alt="Wave packet" src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Wave_packet_%28dispersion%29.gif"/></p>
+<p>In the traveling wave solution, the wave number and angular frequency are related to the speed of the wave in the medium:</p>
+<p>$$v = \frac{\omega}{k}$$</p>
+<p>Notice that this is a right traveling wave. We can also write a left traveling wave:</p>
+<p>$$u(x,t) = A \sin(kx + \omega t + \phi)$$</p>
+<p>In general the 1D wave is a superposition of these two waves:</p>
+<p>$$u(x,t) = A_1 \sin(kx - \omega t + \phi_1) + A_2 \sin(kx + \omega t + \phi_2)$$</p>
+<p>where the amplitudes and phases are set by the problem. Below we see how this general solution satisfies the wave equation.</p>
+<p>$$\frac{\partial^2 u(x,t)}{\partial x^2} = -k^2 A_1 \sin(kx - \omega t + \phi_1) - k^2 A_2 \sin(kx + \omega t + \phi_2)$$</p>
+<p>$$\frac{\partial^2 u(x,t)}{\partial t^2} = -\omega^2 A_1 \sin(kx - \omega t + \phi_1) - \omega^2 A_2 \sin(kx + \omega t + \phi_2)$$</p>
+<p>Pop into the wave equation:</p>
+<p>$$-k^2 A_1 \sin(kx - \omega t + \phi_1) - k^2 A_2 \sin(kx + \omega t + \phi_2) = \frac{1}{v^2} \left(-\omega^2 A_1 \sin(kx - \omega t + \phi_1) - \omega^2 A_2 \sin(kx + \omega t + \phi_2)\right)$$</p>
+<p>Collect terms and then divide by the common factor:</p>
+<p>$$-k^2\left(A_1 \sin(kx - \omega t + \phi_1) + A_2 \sin(kx + \omega t + \phi_2)\right) = -\frac{\omega^2}{v^2} \left(A_1 \sin(kx - \omega t + \phi_1) + A_2 \sin(kx + \omega t + \phi_2)\right)$$</p>
+<p>For nonzero solutions:</p>
+<p>$$-k^2 = -\frac{\omega^2}{v^2} \rightarrow v = \pm \frac{\omega}{k}$$</p>
+<p>Left or right sinusoidal traveling waves solve the wave equation as long as the speed of the wave is related to the frequency and wave number as indicated.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Diffraction">Diffraction<a class="anchor-link" href="#Diffraction">¶</a></h2><p>A critical result of superposition is the interference of waves. For example two waves in a pool below interfere to produce a wave that travels outward.</p>
+<p><img alt="Interference" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Two_sources_interference.gif"/></p>
+<p>It turns out these kinds of interference patterns are very useful. Because with models of waves, we can predict their pattern and shape. Moreover, they can serve as instruments to investigate systems. For example, <a href="https://en.wikipedia.org/wiki/X-ray_crystallography">x-ray diffraction</a> is a common and widely used tool to determine the shape and structure of matter. A number of folks have <a href="https://en.wikipedia.org/wiki/X-ray_crystallography#Nobel_Prizes_involving_X-ray_crystallography">earned Nobel prizes for their work</a> on X-ray diffraction and its applications. We will develop the mathematics of diffraction later, but Parth G has a nice video on the topic of Diffraction.</p>
+<p><a href="https://inv.tux.pizza/watch?v=TqTWSSBcV_4"><img alt="Diffraction" src="https://markdown-videos-api.jorgenkh.no/youtube/TqTWSSBcV_4?width=720&amp;height=405"/></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=TqTWSSBcV_4">https://inv.tux.pizza/watch?v=TqTWSSBcV_4</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=TqTWSSBcV_4">https://youtube.com/watch?v=TqTWSSBcV_4</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Single-Photo-Diffraction">Single Photo Diffraction<a class="anchor-link" href="#Single-Photo-Diffraction">¶</a></h3><p>One of the most intersting things we have found in recent years is single particle diffraction. In fact, this was observed <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.97.154101">macroscopically in pilot wave hydrodynamics</a> by a French research group. We have found that interference patterns can build up in single photo experiments. The video below shows a set up that demonstrates this.</p>
+<p><a href="https://inv.tux.pizza/watch?v=GzbKb59my3U"><img alt="Single Particle Diffraction" src="https://markdown-videos-api.jorgenkh.no/youtube/GzbKb59my3U?width=720&amp;height=405"/></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=GzbKb59my3U">https://inv.tux.pizza/watch?v=GzbKb59my3U</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=GzbKb59my3U">https://youtube.com/watch?v=GzbKb59my3U</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Resources">Resources<a class="anchor-link" href="#Resources">¶</a></h2><p>Much of what we are discussing about waves appears in the following sets of notes:</p>
+<ul>
+<li><a href="../assets/notes/Notes-Introduction_to_waves.pdf">Introduction to Waves</a></li>
+<li><a href="../assets/notes/Notes-Electromagnetic_waves.pdf">Electromagnetic Waves in Vacuum</a></li>
+<li><a href="../assets/notes/Notes-Wavefunctions.pdf">The Wavefunction</a></li>
+<li><a href="../assets/notes/Notes-Infinite_Square_Well.pdf">The 1D Infinite Square Well</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>&copy; Modern Classical Mechanics. All rights reserved.</p>
+  </footer>
+</body>
+</html>

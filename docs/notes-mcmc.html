@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Classical Mechanics</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+</head>
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Classical Mechanics</h1>
+    </div>
+  </header>
+  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
+  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="about.html">content/about.md</a></li><li><a href="activities.html">content/activities.md</a></li><li><a href="announcement.html">content/announcement.md</a></li><li><a href="cards.html">content/cards.md</a></li><li><a href="index.html">content/index.md</a></li><li><a href="resources.html">content/resources.md</a></li><li><a href="intro.html">content/notebooks/intro.md</a></li><li><a href="activity-duffing.html">content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb</a></li><li><a href="activity-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb</a></li><li><a href="activity_vanderpol.html">content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb</a></li><li><a href="notes-linearization_odes.html">content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb</a></li><li><a href="notes-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb</a></li><li><a href="activity-frames.html">content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb</a></li><li><a href="activity-lagrange_1.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb</a></li><li><a href="activity-lagrange_2.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb</a></li><li><a href="notes-lagrangian-dynamics.html">content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb</a></li><li><a href="notes-numerical_integration_1d.html">content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb</a></li><li><a href="notes_frames.html">content/notebooks/1_mechanics/lagrangian/notes_frames.md</a></li><li><a href="activity-what_is_a_model.html">content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb</a></li><li><a href="notes-SHO.html">content/notebooks/1_mechanics/sho/notes-SHO.ipynb</a></li><li><a href="activity-relaxation_2d.html">content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb</a></li><li><a href="notes-relaxation.html">content/notebooks/2_EM/Numerics/notes-relaxation.ipynb</a></li><li><a href="activity-efields.html">content/notebooks/2_EM/Statics/activity-efields.ipynb</a></li><li><a href="activity-sep_var.html">content/notebooks/2_EM/Statics/activity-sep_var.ipynb</a></li><li><a href="activity-sep_var_spherical.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb</a></li><li><a href="activity-sep_var_spherical_examples.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb</a></li><li><a href="activity-superposition.html">content/notebooks/2_EM/Statics/activity-superposition.ipynb</a></li><li><a href="notes-electric_potential.html">content/notebooks/2_EM/Statics/notes-electric_potential.ipynb</a></li><li><a href="notes-em_intro.html">content/notebooks/2_EM/Statics/notes-em_intro.ipynb</a></li><li><a href="notes-static_fields.html">content/notebooks/2_EM/Statics/notes-static_fields.ipynb</a></li><li><a href="activity-CoupledOsc-NormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb</a></li><li><a href="activity-FFT-applications.html">content/notebooks/3_waves/activity-FFT-applications.ipynb</a></li><li><a href="activity-Waves-1D.html">content/notebooks/3_waves/activity-Waves-1D.ipynb</a></li><li><a href="activity-Waves-Applying_the_FFT.html">content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb</a></li><li><a href="activity-Waves-seriesExpand.html">content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb</a></li><li><a href="activity-Waves-Signals.html">content/notebooks/3_waves/activity-Waves-Signals.ipynb</a></li><li><a href="notes-coupled_oscillations.html">content/notebooks/3_waves/notes-coupled_oscillations.ipynb</a></li><li><a href="notes-fft.html">content/notebooks/3_waves/notes-fft.ipynb</a></li><li><a href="notes-solve_the_wave_eq.html">content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb</a></li><li><a href="notes-Using-FFTs.html">content/notebooks/3_waves/notes-Using-FFTs.ipynb</a></li><li><a href="notes-Waves-Fouriers_Trick.html">content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb</a></li><li><a href="notes-waves_intro.html">content/notebooks/3_waves/notes-waves_intro.ipynb</a></li><li><a href="activity-ising_model.html">content/notebooks/4_distributions/activity-ising_model.ipynb</a></li><li><a href="activity-mc_integration.html">content/notebooks/4_distributions/activity-mc_integration.ipynb</a></li><li><a href="activity-metropolis.html">content/notebooks/4_distributions/activity-metropolis.ipynb</a></li><li><a href="activity-monte_carlo.html">content/notebooks/4_distributions/activity-monte_carlo.ipynb</a></li><li><a href="activity-radioactive_decay.html">content/notebooks/4_distributions/activity-radioactive_decay.ipynb</a></li><li><a href="activity-thermal_contact.html">content/notebooks/4_distributions/activity-thermal_contact.ipynb</a></li><li><a href="activity-zombies.html">content/notebooks/4_distributions/activity-zombies.ipynb</a></li><li><a href="notes-counting_and_combinatorics.html">content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb</a></li><li><a href="notes-mcmc.html">content/notebooks/4_distributions/notes-mcmc.ipynb</a></li><li><a href="notes-monte_carlo_simulations.html">content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb</a></li><li><a href="notes-randomness.html">content/notebooks/4_distributions/notes-randomness.ipynb</a></li><li><a href="project-1.html">content/notebooks/9_assignments/project-1.md</a></li><li><a href="project-2.html">content/notebooks/9_assignments/project-2.md</a></li><li><a href="project-3.html">content/notebooks/9_assignments/project-3.md</a></li><li><a href="project-4.html">content/notebooks/9_assignments/project-4.md</a></li><li><a href="updated_rubric.html">content/notebooks/9_assignments/updated_rubric.md</a></li><li><a href="worked-problem-1.html">content/notebooks/9_assignments/worked-problem-1.md</a></li><li><a href="worked-problem-2.html">content/notebooks/9_assignments/worked-problem-2.md</a></li><li><a href="worked-problem-3.html">content/notebooks/9_assignments/worked-problem-3.md</a></li><li><a href="worked-problem-4.html">content/notebooks/9_assignments/worked-problem-4.md</a></li><li><a href="worked-problem-5.html">content/notebooks/9_assignments/worked-problem-5.md</a></li><li><a href="worked-problem-6.html">content/notebooks/9_assignments/worked-problem-6.md</a></li><li><a href="worked-problem-7.html">content/notebooks/9_assignments/worked-problem-7.md</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
+<!-- Hamburger menu and toggle JS commented out -->
+</nav>
+  <div class="container">
+    <main>
+      
+<nav class="chapter-downloads" aria-label="Download chapter sources">
+  <div role="group" aria-label="Download formats">
+    <a class="download-btn" href="sources/notes-mcmc/notes-mcmc.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+    <a class="download-btn" href="sources/notes-mcmc/notes-mcmc.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+    <a class="download-btn" href="sources/notes-mcmc/notes-mcmc.md" download><span aria-hidden="true">✍️</span> MD</a>
+    <a class="download-btn" href="sources/notes-mcmc/notes-mcmc.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+    <a class="download-btn" href="sources/notes-mcmc/notes-mcmc.tex" download><span aria-hidden="true">📐</span> TEX</a>
+    <a class="download-btn" href="jupyter/content/notebooks/notes-mcmc.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+  </div>
+</nav>
+        <div class="markdown-body">
+<main>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="4-Dec-23---Notes:-Markov-Chain-Monte-Carlo-Modeling">4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling<a class="anchor-link" href="#4-Dec-23---Notes:-Markov-Chain-Monte-Carlo-Modeling">¶</a></h1><p>One of the principal tools we have at our disposal when it comes to systems with randomness is the Monte Carlo simulation. Monte Carlo is a large class of approaches that all rely on probabilistic outcomes to determine results. In physics, we often use Monte Carlo to find integrals or sums that we are unable to compute by hand.</p>
+<h2 id="Markov-Chain-Monte-Carlo">Markov Chain Monte Carlo<a class="anchor-link" href="#Markov-Chain-Monte-Carlo">¶</a></h2><p>We often find ourselves using a type of Monte Carlo simulation that makes use of a Markov Chain. This is called the MCMC model. The mathematical foundations of Markov Chains are well beyond the scope of this course, but the principal issue is that we want to describe is how this simulation works. The video below describes the conceptual backing of MCMC and how it was first used in physics in 1953 to develop a model of an ideal gas. We will make a similar model!</p>
+<p><a href="https://inv.tux.pizza/watch?v=12eZWG0Z5gY"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/12eZWG0Z5gY?width=720&amp;height=405"/></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=12eZWG0Z5gY">https://inv.tux.pizza/watch?v=12eZWG0Z5gY</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=12eZWG0Z5gY">https://youtube.com/watch?v=12eZWG0Z5gY</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Statistical-Mechanics">Statistical Mechanics<a class="anchor-link" href="#Statistical-Mechanics">¶</a></h2><p>MCMC is used in lots of statistical mechanics problems because they are fundamentally probabilistic by nature. Starting with the "chance" of finding our system in a given state (with known energy, $E_i$) at a known temperature (T) given by the Boltzmann factor:</p>
+<p>$$e^{-E_i/{k_b T}}$$</p>
+<p>where $k_b$ is the Boltzmann constant. Through this, we developed a statistical model where we found that the normalized probability of finding your system in a state $s$ with energy $E_s$ (just using the $s$ to indicate a state) is given by:</p>
+<p>$$P(s) = \dfrac{1}{Z} e^{-E_s/{k_b T}}$$</p>
+<p>where $Z$ is the partition function, a constant for a given temperature that normalizes our calculation. It is a sum over all states:</p>
+<p>$$Z = \sum_s e^{-E_s/{k_b T}}$$</p>
+<p>Our analysis relied on the development of a statistical theory of mechanics, and we illustrated it with an ideal gas.</p>
+<p>Because $P(S)$ is a probability we can use it find average values (expectation values) of a thermodynamic system. We did this for energy using the thermodynamic relations in the notes. But we can also use statistical properties to find the same. For example, finding the expected internal energy of a system, $\langle U \rangle$, just involves adding up all the possible energy states multiplied by their probabilities!</p>
+<p>$$\langle U \rangle = \sum_s E_s P(s)$$</p>
+<p>When these sums are really hard to compute because there's lots of states or only a few that contribute substantially (as in the case for large systems), we can use selective sampling, which is the basis for MCMC. We will discuss that conceptually in class before using MCMC.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Additional-Resources">Additional Resources<a class="anchor-link" href="#Additional-Resources">¶</a></h2><h3 id="Handwritten-Notes">Handwritten Notes<a class="anchor-link" href="#Handwritten-Notes">¶</a></h3><ul>
+<li><a href="../assets/notes/Notes-Intro_to_Stat_Mech.pdf">Introduction to Stat. Mech.</a></li>
+<li><a href="../assets/notes/Notes-Markov_Chain.pdf">Markvov Chain Monte Carlo</a></li>
+</ul>
+<h3 id="Lecture-Videos">Lecture Videos<a class="anchor-link" href="#Lecture-Videos">¶</a></h3><p><strong>MCMC for Data Science</strong></p>
+<p><a href="https://inv.tux.pizza/watch?v=yApmR-c_hKU"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/yApmR-c_hKU?width=720&amp;height=405"/></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=yApmR-c_hKU">https://inv.tux.pizza/watch?v=yApmR-c_hKU</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=yApmR-c_hKU">https://youtube.com/watch?v=yApmR-c_hKU</a></li>
+</ul>
+<p><strong>Details on the MCMC Algorithm</strong></p>
+<p><a href="https://inv.tux.pizza/watch?v=rZk2FqX2XnY"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/rZk2FqX2XnY?width=720&amp;height=405"/></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=rZk2FqX2XnY">https://inv.tux.pizza/watch?v=rZk2FqX2XnY</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=rZk2FqX2XnY">https://youtube.com/watch?v=rZk2FqX2XnY</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>&copy; Modern Classical Mechanics. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,150 @@
+# AUTO-GENERATED FILE. DO NOT EDIT.
+# This file was generated from _content.yml by scripts/preprocess_content_yml.py
+# Edit _content.yml instead and re-run the preprocessor.
+menu:
+- title: Home
+  path: index.html
+- title: Chapters
+  path: chapters.html
+  children:
+  - title: content/about.md
+    path: about.html
+  - title: content/activities.md
+    path: activities.html
+  - title: content/announcement.md
+    path: announcement.html
+  - title: content/cards.md
+    path: cards.html
+  - title: content/index.md
+    path: index.html
+  - title: content/resources.md
+    path: resources.html
+  - title: content/notebooks/intro.md
+    path: intro.html
+  - title: content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb
+    path: activity-duffing.html
+  - title: content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb
+    path: activity-phase_space.html
+  - title: content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb
+    path: activity_vanderpol.html
+  - title: content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb
+    path: notes-linearization_odes.html
+  - title: content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb
+    path: notes-phase_space.html
+  - title: content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb
+    path: activity-frames.html
+  - title: content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb
+    path: activity-lagrange_1.html
+  - title: content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb
+    path: activity-lagrange_2.html
+  - title: content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb
+    path: notes-lagrangian-dynamics.html
+  - title: content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb
+    path: notes-numerical_integration_1d.html
+  - title: content/notebooks/1_mechanics/lagrangian/notes_frames.md
+    path: notes_frames.html
+  - title: content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb
+    path: activity-what_is_a_model.html
+  - title: content/notebooks/1_mechanics/sho/notes-SHO.ipynb
+    path: notes-SHO.html
+  - title: content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb
+    path: activity-relaxation_2d.html
+  - title: content/notebooks/2_EM/Numerics/notes-relaxation.ipynb
+    path: notes-relaxation.html
+  - title: content/notebooks/2_EM/Statics/activity-efields.ipynb
+    path: activity-efields.html
+  - title: content/notebooks/2_EM/Statics/activity-sep_var.ipynb
+    path: activity-sep_var.html
+  - title: content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb
+    path: activity-sep_var_spherical.html
+  - title: content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb
+    path: activity-sep_var_spherical_examples.html
+  - title: content/notebooks/2_EM/Statics/activity-superposition.ipynb
+    path: activity-superposition.html
+  - title: content/notebooks/2_EM/Statics/notes-electric_potential.ipynb
+    path: notes-electric_potential.html
+  - title: content/notebooks/2_EM/Statics/notes-em_intro.ipynb
+    path: notes-em_intro.html
+  - title: content/notebooks/2_EM/Statics/notes-static_fields.ipynb
+    path: notes-static_fields.html
+  - title: content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb
+    path: activity-CoupledOsc-NormalModes.html
+  - title: content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb
+    path: activity-CoupledOsc-NumericalNormalModes.html
+  - title: content/notebooks/3_waves/activity-FFT-applications.ipynb
+    path: activity-FFT-applications.html
+  - title: content/notebooks/3_waves/activity-Waves-1D.ipynb
+    path: activity-Waves-1D.html
+  - title: content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb
+    path: activity-Waves-Applying_the_FFT.html
+  - title: content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb
+    path: activity-Waves-Introduction_to_FFT.html
+  - title: content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb
+    path: activity-Waves-seriesExpand.html
+  - title: content/notebooks/3_waves/activity-Waves-Signals.ipynb
+    path: activity-Waves-Signals.html
+  - title: content/notebooks/3_waves/notes-coupled_oscillations.ipynb
+    path: notes-coupled_oscillations.html
+  - title: content/notebooks/3_waves/notes-fft.ipynb
+    path: notes-fft.html
+  - title: content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb
+    path: notes-solve_the_wave_eq.html
+  - title: content/notebooks/3_waves/notes-Using-FFTs.ipynb
+    path: notes-Using-FFTs.html
+  - title: content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb
+    path: notes-Waves-Fouriers_Trick.html
+  - title: content/notebooks/3_waves/notes-waves_intro.ipynb
+    path: notes-waves_intro.html
+  - title: content/notebooks/4_distributions/activity-ising_model.ipynb
+    path: activity-ising_model.html
+  - title: content/notebooks/4_distributions/activity-mc_integration.ipynb
+    path: activity-mc_integration.html
+  - title: content/notebooks/4_distributions/activity-metropolis.ipynb
+    path: activity-metropolis.html
+  - title: content/notebooks/4_distributions/activity-monte_carlo.ipynb
+    path: activity-monte_carlo.html
+  - title: content/notebooks/4_distributions/activity-radioactive_decay.ipynb
+    path: activity-radioactive_decay.html
+  - title: content/notebooks/4_distributions/activity-thermal_contact.ipynb
+    path: activity-thermal_contact.html
+  - title: content/notebooks/4_distributions/activity-zombies.ipynb
+    path: activity-zombies.html
+  - title: content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb
+    path: notes-counting_and_combinatorics.html
+  - title: content/notebooks/4_distributions/notes-mcmc.ipynb
+    path: notes-mcmc.html
+  - title: content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb
+    path: notes-monte_carlo_simulations.html
+  - title: content/notebooks/4_distributions/notes-randomness.ipynb
+    path: notes-randomness.html
+  - title: content/notebooks/9_assignments/project-1.md
+    path: project-1.html
+  - title: content/notebooks/9_assignments/project-2.md
+    path: project-2.html
+  - title: content/notebooks/9_assignments/project-3.md
+    path: project-3.html
+  - title: content/notebooks/9_assignments/project-4.md
+    path: project-4.html
+  - title: content/notebooks/9_assignments/updated_rubric.md
+    path: updated_rubric.html
+  - title: content/notebooks/9_assignments/worked-problem-1.md
+    path: worked-problem-1.html
+  - title: content/notebooks/9_assignments/worked-problem-2.md
+    path: worked-problem-2.html
+  - title: content/notebooks/9_assignments/worked-problem-3.md
+    path: worked-problem-3.html
+  - title: content/notebooks/9_assignments/worked-problem-4.md
+    path: worked-problem-4.html
+  - title: content/notebooks/9_assignments/worked-problem-5.md
+    path: worked-problem-5.html
+  - title: content/notebooks/9_assignments/worked-problem-6.md
+    path: worked-problem-6.html
+  - title: content/notebooks/9_assignments/worked-problem-7.md
+    path: worked-problem-7.html
+- title: Activities
+  path: activities.html
+  children: []
+- title: Resources
+  path: resources.html
+- title: About
+  path: about.html

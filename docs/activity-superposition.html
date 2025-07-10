@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Classical Mechanics</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+</head>
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Classical Mechanics</h1>
+    </div>
+  </header>
+  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
+  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="about.html">content/about.md</a></li><li><a href="activities.html">content/activities.md</a></li><li><a href="announcement.html">content/announcement.md</a></li><li><a href="cards.html">content/cards.md</a></li><li><a href="index.html">content/index.md</a></li><li><a href="resources.html">content/resources.md</a></li><li><a href="intro.html">content/notebooks/intro.md</a></li><li><a href="activity-duffing.html">content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb</a></li><li><a href="activity-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb</a></li><li><a href="activity_vanderpol.html">content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb</a></li><li><a href="notes-linearization_odes.html">content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb</a></li><li><a href="notes-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb</a></li><li><a href="activity-frames.html">content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb</a></li><li><a href="activity-lagrange_1.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb</a></li><li><a href="activity-lagrange_2.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb</a></li><li><a href="notes-lagrangian-dynamics.html">content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb</a></li><li><a href="notes-numerical_integration_1d.html">content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb</a></li><li><a href="notes_frames.html">content/notebooks/1_mechanics/lagrangian/notes_frames.md</a></li><li><a href="activity-what_is_a_model.html">content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb</a></li><li><a href="notes-SHO.html">content/notebooks/1_mechanics/sho/notes-SHO.ipynb</a></li><li><a href="activity-relaxation_2d.html">content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb</a></li><li><a href="notes-relaxation.html">content/notebooks/2_EM/Numerics/notes-relaxation.ipynb</a></li><li><a href="activity-efields.html">content/notebooks/2_EM/Statics/activity-efields.ipynb</a></li><li><a href="activity-sep_var.html">content/notebooks/2_EM/Statics/activity-sep_var.ipynb</a></li><li><a href="activity-sep_var_spherical.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb</a></li><li><a href="activity-sep_var_spherical_examples.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb</a></li><li><a href="activity-superposition.html">content/notebooks/2_EM/Statics/activity-superposition.ipynb</a></li><li><a href="notes-electric_potential.html">content/notebooks/2_EM/Statics/notes-electric_potential.ipynb</a></li><li><a href="notes-em_intro.html">content/notebooks/2_EM/Statics/notes-em_intro.ipynb</a></li><li><a href="notes-static_fields.html">content/notebooks/2_EM/Statics/notes-static_fields.ipynb</a></li><li><a href="activity-CoupledOsc-NormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb</a></li><li><a href="activity-FFT-applications.html">content/notebooks/3_waves/activity-FFT-applications.ipynb</a></li><li><a href="activity-Waves-1D.html">content/notebooks/3_waves/activity-Waves-1D.ipynb</a></li><li><a href="activity-Waves-Applying_the_FFT.html">content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb</a></li><li><a href="activity-Waves-seriesExpand.html">content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb</a></li><li><a href="activity-Waves-Signals.html">content/notebooks/3_waves/activity-Waves-Signals.ipynb</a></li><li><a href="notes-coupled_oscillations.html">content/notebooks/3_waves/notes-coupled_oscillations.ipynb</a></li><li><a href="notes-fft.html">content/notebooks/3_waves/notes-fft.ipynb</a></li><li><a href="notes-solve_the_wave_eq.html">content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb</a></li><li><a href="notes-Using-FFTs.html">content/notebooks/3_waves/notes-Using-FFTs.ipynb</a></li><li><a href="notes-Waves-Fouriers_Trick.html">content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb</a></li><li><a href="notes-waves_intro.html">content/notebooks/3_waves/notes-waves_intro.ipynb</a></li><li><a href="activity-ising_model.html">content/notebooks/4_distributions/activity-ising_model.ipynb</a></li><li><a href="activity-mc_integration.html">content/notebooks/4_distributions/activity-mc_integration.ipynb</a></li><li><a href="activity-metropolis.html">content/notebooks/4_distributions/activity-metropolis.ipynb</a></li><li><a href="activity-monte_carlo.html">content/notebooks/4_distributions/activity-monte_carlo.ipynb</a></li><li><a href="activity-radioactive_decay.html">content/notebooks/4_distributions/activity-radioactive_decay.ipynb</a></li><li><a href="activity-thermal_contact.html">content/notebooks/4_distributions/activity-thermal_contact.ipynb</a></li><li><a href="activity-zombies.html">content/notebooks/4_distributions/activity-zombies.ipynb</a></li><li><a href="notes-counting_and_combinatorics.html">content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb</a></li><li><a href="notes-mcmc.html">content/notebooks/4_distributions/notes-mcmc.ipynb</a></li><li><a href="notes-monte_carlo_simulations.html">content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb</a></li><li><a href="notes-randomness.html">content/notebooks/4_distributions/notes-randomness.ipynb</a></li><li><a href="project-1.html">content/notebooks/9_assignments/project-1.md</a></li><li><a href="project-2.html">content/notebooks/9_assignments/project-2.md</a></li><li><a href="project-3.html">content/notebooks/9_assignments/project-3.md</a></li><li><a href="project-4.html">content/notebooks/9_assignments/project-4.md</a></li><li><a href="updated_rubric.html">content/notebooks/9_assignments/updated_rubric.md</a></li><li><a href="worked-problem-1.html">content/notebooks/9_assignments/worked-problem-1.md</a></li><li><a href="worked-problem-2.html">content/notebooks/9_assignments/worked-problem-2.md</a></li><li><a href="worked-problem-3.html">content/notebooks/9_assignments/worked-problem-3.md</a></li><li><a href="worked-problem-4.html">content/notebooks/9_assignments/worked-problem-4.md</a></li><li><a href="worked-problem-5.html">content/notebooks/9_assignments/worked-problem-5.md</a></li><li><a href="worked-problem-6.html">content/notebooks/9_assignments/worked-problem-6.md</a></li><li><a href="worked-problem-7.html">content/notebooks/9_assignments/worked-problem-7.md</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
+<!-- Hamburger menu and toggle JS commented out -->
+</nav>
+  <div class="container">
+    <main>
+      
+<nav class="chapter-downloads" aria-label="Download chapter sources">
+  <div role="group" aria-label="Download formats">
+    <a class="download-btn" href="sources/activity-superposition/activity-superposition.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+    <a class="download-btn" href="sources/activity-superposition/activity-superposition.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+    <a class="download-btn" href="sources/activity-superposition/activity-superposition.md" download><span aria-hidden="true">✍️</span> MD</a>
+    <a class="download-btn" href="sources/activity-superposition/activity-superposition.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+    <a class="download-btn" href="sources/activity-superposition/activity-superposition.tex" download><span aria-hidden="true">📐</span> TEX</a>
+    <a class="download-btn" href="jupyter/content/notebooks/activity-superposition.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+  </div>
+</nav>
+        <div class="markdown-body">
+<main>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="28-Sep-23---Activity:-Superposition-of-Fields">28 Sep 23 - Activity: Superposition of Fields<a class="anchor-link" href="#28-Sep-23---Activity:-Superposition-of-Fields">¶</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Coulomb's-Law">Coulomb's Law<a class="anchor-link" href="#Coulomb's-Law">¶</a></h2><p>We've seen that the electric field of a set of point charges if given by the vector sum of the contributions from each charge:</p>
+<p>$$\mathbf{E}(\mathbf{r}) = \sum_i \frac{1}{4\pi\epsilon_0} \frac{q_i}{(\mathbf{r}-\mathbf{r}'_i)^3} (\mathbf{r}-\mathbf{r}'_i)$$</p>
+<p>where $\mathbf{r}'_i$ is the location of the charge relative to the origin, and $\mathbf{r}$ is the location of the field point relative to the origin. This <strong>net electric field</strong> is the result of the <strong>superposition</strong> of the electric fields from each charge. But here the charges are discrete, we can identify each charge uniquely in terms of it's charge and location. This concept can be abstracted to a continuous distribution of charge, where we can identify the charge at any point in space by the charge density $\rho(\mathbf{r})$. In this case, the charge is not a point charge, but rather a small chunk of charge that we model as a point charge. That is, we can write the electric field contributed by that chunk $dq$ as:</p>
+<p>$$d\mathbf{E}(\mathbf{r}) = \frac{1}{4\pi\epsilon_0} \frac{dq}{(\mathbf{r}-\mathbf{r}')^3} (\mathbf{r}-\mathbf{r}')$$</p>
+<p>where we have treated the chunk as a point charge. In the generic case, that chunk is given by $dq = \rho(\mathbf{r})dV$ so that,</p>
+<p>$$d\mathbf{E}(\mathbf{r}) = \frac{1}{4\pi\epsilon_0} \frac{\rho(\mathbf{r})dV}{(\mathbf{r}-\mathbf{r}')^3} (\mathbf{r}-\mathbf{r}')$$</p>
+<p>The net electric field is then given by the integral over the entire charge distribution:</p>
+<p>$$\mathbf{E}(\mathbf{r}) = \iiint \frac{1}{4\pi\epsilon_0} \frac{\rho(\mathbf{r}')dV}{(\mathbf{r}-\mathbf{r}')^3} (\mathbf{r}-\mathbf{r}')$$</p>
+<p>This gives a general prescription for finding the electric field in most situations (i.e., where the integral converges). But this appraoch is only analytically tractable in situations where we are able to find anti-derivatives of the integrands that we construct. There are many, many techniques to evaluating tricky integrals. But in the end, we often turn to technologies like Mathematica, <a href="https://www.wolframalpha.com/">Wolfram Alpha</a>, or <a href="https://www.sagemath.org/">SageMath</a> to do the heavy lifting for us. Numerical methods are also very useful, and we already used a solver for 2D problems.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Activity:-Ring-of-Charge">Activity: Ring of Charge<a class="anchor-link" href="#Activity:-Ring-of-Charge">¶</a></h3><p>Consider the ring (radius, $R$) with a uniform linear charge density $\lambda = \frac{Q}{2\pi R}$. that is placed with it's center on the plane as shown below.</p>
+<p><img alt="Ring of charge diagram" src="https://blog.cupcakephysics.com/assets/images/2015-06-21/ring.png"/></p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Write an expression for the contribution of an arbitrary charge element to the electric field at the location shown $\mathbf{r} = \langle 0,0,z \rangle$. What is charge density and what is the charge element?</li>
+<li>Rewrite the expression as an integral over the relevant charge distribution. What are the limits of integration?</li>
+<li>(if you want) Use a symbolic integrator to evaluate the integral. What is the electric field at the location shown? (You can use <a href="https://www.wolframalpha.com/">Wolfram Alpha</a> or try Python's own symbolic toolkit <a href="https://www.sympy.org/en/index.html">SymPy</a>)</li>
+</ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1">## your code to plot the electric field expression</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Magnetostatic-Analogs">Magnetostatic Analogs<a class="anchor-link" href="#Magnetostatic-Analogs">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>As we discussed earlier, a magnetostatic situation is described using the following PDEs:</p>
+<p>$$\nabla \cdot \mathbf{B} = 0$$</p>
+<p>$$\nabla \times \mathbf{B} = \mu_0 \mathbf{J}$$</p>
+<p>where $\mathbf{J}$ is the current density.</p>
+<h3 id="Biot-Savart-Law">Biot-Savart Law<a class="anchor-link" href="#Biot-Savart-Law">¶</a></h3><p>There is a solution to these equations that is analogous to the Coulomb's Law solution for the electric field. This solution is called the <strong><a href="https://en.wikipedia.org/wiki/Biot%E2%80%93Savart_law">Biot-Savart Law</a></strong>. The contribution of a little chunk of current at a location $\mathbf{r}'$ to the magnetic field at a location $\mathbf{r}$ is given by:</p>
+<p>$$d\mathbf{B}(\mathbf{r}) = \frac{\mu_0}{4\pi} \frac{\mathbf{J} dV \times (\mathbf{r}-\mathbf{r}')}{(\mathbf{r}-\mathbf{r}')^3}$$</p>
+<p>where $I$ is the current in the chunk of wire $d\mathbf{l}$ and $\mathbf{r}-\mathbf{r}'$ is the vector from the chunk to the field point. The net magnetic field is then given by the integral over the entire current distribution:</p>
+<p>$$\mathbf{B}(\mathbf{r}) = \frac{\mu_0}{4\pi} \iiint \frac{\mathbf{J} dV \times (\mathbf{r}-\mathbf{r}')}{(\mathbf{r}-\mathbf{r}')^3}$$</p>
+<p>This full form of the Biot-Savart Law suffers from the some of the same challenges that we see with the full form of Coloumb's Law. It can only be computed directly if we can form integrals that we can perform analytically. Otherwise it can form the basis for other approaches. Typically, we use the Biot-Savart Law to compute the magnetic field for a steady current and for geometries that have a high degree of symmetry. The most common case is a thin wire with a steady, constant current $I$. Then the full form simplifies to the line integral:</p>
+<p>$$\mathbf{B}(\mathbf{r}) = \frac{\mu_0 I}{4\pi} \int \frac{d\mathbf{l} \times (\mathbf{r}-\mathbf{r}')}{(\mathbf{r}-\mathbf{r}')^3}$$</p>
+<p>where $d\mathbf{l}$ is the vector element of the wire. This is the form that you are likely to use most often.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Ampere's-Law">Ampere's Law<a class="anchor-link" href="#Ampere's-Law">¶</a></h3><p>Ampere's Law uses the curl equation for $\mathbf{B}$ and Stokes' theorem to produce a line integral that can be used to solve for the magnetic field. We can derive this quickly:</p>
+<p>$$\iint \nabla \times \mathbf{B} \cdot d\mathbf{A} = \mu_0 \iint \mathbf{J} \cdot d\mathbf{A}$$</p>
+<p>$$\oint \mathbf{B} \cdot d\mathbf{l} = \mu_0 \iint \mathbf{J} \cdot d\mathbf{A} = \mu_0 I_{enc}$$</p>
+<p>where $I_{enc}$ is the current enclosed by the path of integration. This integral is always true, but like Gauss''s Law, it is not useful unless there's a high degree of symmetry.</p>
+<h4 id="A-thin-wire">A thin wire<a class="anchor-link" href="#A-thin-wire">¶</a></h4><p>The example of a thin wire is common and forms the basis for more complex forms of Ampere's Law. Consider a thin wire with a steady current $I$. We are a distance $r$ from the wire. We know the magnetic field circulates around the wire, so we choose a circular path a distance $r$ from the wire.</p>
+<p><img alt="Thin wire" src="images/chapters/ampere_loop.jpg"/></p>
+<p>In this case the (as of yet uncomputed) magnetic field is always parallel to out choice of path. Moerover, we have no reason to believe the magnetic field strength is different at different locations along the circle. So the integral simplifies:</p>
+<p>$$\oint \mathbf{B} \cdot d\mathbf{l} = \oint B dl = B \oint dl = B 2\pi r$$</p>
+<p>where $B$ is the magnitude of the magnetic field. The total current is just $I$ so that,</p>
+<p>$$B 2\pi r = \mu_0 I$$</p>
+<p>$$\mathbf{B}({\mathbf{r}}) = \frac{\mu_0 I}{2\pi r}\hat{\phi}$$</p>
+<p>where $\hat{\phi}$ is the unit vector in the azimuthal direction -- around the wire.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="A-thick-wire">A thick wire<a class="anchor-link" href="#A-thick-wire">¶</a></h3><p>Consider a thick wire (radius $a$) that has a steady current density $\mathbf{J}(\mathbf{r}) = J_0 \hat{z}$ where $J_0$ is some constant. See the figure below.</p>
+<p><img alt="Thick wire" src="images/chapters/ampere-thick.png"/></p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Use Ampere's Law to find the magnetic field inside and outside the wire.</li>
+<li>Change the current density to $\mathbf{J}(\mathbf{r}) = J_0 \frac{r^2}{a^2} \hat{z}$ and find the field again. How do the fields outside compare between case $\mathbf{J}(\mathbf{r}) = J_0 \hat{z}$ and this one.</li>
+<li>How could you write the current density so that it only appears on the surface of the thick wire? (Hint: look into <a href="https://en.wikipedia.org/wiki/Dirac_delta_function">Dirac delta functions</a>.)</li>
+<li>Can you use Ampere's Law if the current density in the wire were $\mathbf{J}(\mathbf{r}) = \sigma_0 \delta(r-a) \hat{z} $? Why or why not? What does that current distribution look like?</li>
+<li>Can you use Ampere's Law if the current density in the wire were $\mathbf{J}(\mathbf{r}) = J_0\frac{r}{a} \hat{\phi}$? Why or why not? What does that current distribution look like?</li>
+<li>Can you use Ampere's Law if the current density in the wire were $\mathbf{J}(\mathbf{r}) = \sigma_0 \delta(r-a) \hat{\phi}$? Why or why not? What does that current distribution look like?</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>&copy; Modern Classical Mechanics. All rights reserved.</p>
+  </footer>
+</body>
+</html>

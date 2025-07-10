@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Classical Mechanics</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+</head>
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Classical Mechanics</h1>
+    </div>
+  </header>
+  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
+  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="about.html">content/about.md</a></li><li><a href="activities.html">content/activities.md</a></li><li><a href="announcement.html">content/announcement.md</a></li><li><a href="cards.html">content/cards.md</a></li><li><a href="index.html">content/index.md</a></li><li><a href="resources.html">content/resources.md</a></li><li><a href="intro.html">content/notebooks/intro.md</a></li><li><a href="activity-duffing.html">content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb</a></li><li><a href="activity-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb</a></li><li><a href="activity_vanderpol.html">content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb</a></li><li><a href="notes-linearization_odes.html">content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb</a></li><li><a href="notes-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb</a></li><li><a href="activity-frames.html">content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb</a></li><li><a href="activity-lagrange_1.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb</a></li><li><a href="activity-lagrange_2.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb</a></li><li><a href="notes-lagrangian-dynamics.html">content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb</a></li><li><a href="notes-numerical_integration_1d.html">content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb</a></li><li><a href="notes_frames.html">content/notebooks/1_mechanics/lagrangian/notes_frames.md</a></li><li><a href="activity-what_is_a_model.html">content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb</a></li><li><a href="notes-SHO.html">content/notebooks/1_mechanics/sho/notes-SHO.ipynb</a></li><li><a href="activity-relaxation_2d.html">content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb</a></li><li><a href="notes-relaxation.html">content/notebooks/2_EM/Numerics/notes-relaxation.ipynb</a></li><li><a href="activity-efields.html">content/notebooks/2_EM/Statics/activity-efields.ipynb</a></li><li><a href="activity-sep_var.html">content/notebooks/2_EM/Statics/activity-sep_var.ipynb</a></li><li><a href="activity-sep_var_spherical.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb</a></li><li><a href="activity-sep_var_spherical_examples.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb</a></li><li><a href="activity-superposition.html">content/notebooks/2_EM/Statics/activity-superposition.ipynb</a></li><li><a href="notes-electric_potential.html">content/notebooks/2_EM/Statics/notes-electric_potential.ipynb</a></li><li><a href="notes-em_intro.html">content/notebooks/2_EM/Statics/notes-em_intro.ipynb</a></li><li><a href="notes-static_fields.html">content/notebooks/2_EM/Statics/notes-static_fields.ipynb</a></li><li><a href="activity-CoupledOsc-NormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb</a></li><li><a href="activity-FFT-applications.html">content/notebooks/3_waves/activity-FFT-applications.ipynb</a></li><li><a href="activity-Waves-1D.html">content/notebooks/3_waves/activity-Waves-1D.ipynb</a></li><li><a href="activity-Waves-Applying_the_FFT.html">content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb</a></li><li><a href="activity-Waves-seriesExpand.html">content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb</a></li><li><a href="activity-Waves-Signals.html">content/notebooks/3_waves/activity-Waves-Signals.ipynb</a></li><li><a href="notes-coupled_oscillations.html">content/notebooks/3_waves/notes-coupled_oscillations.ipynb</a></li><li><a href="notes-fft.html">content/notebooks/3_waves/notes-fft.ipynb</a></li><li><a href="notes-solve_the_wave_eq.html">content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb</a></li><li><a href="notes-Using-FFTs.html">content/notebooks/3_waves/notes-Using-FFTs.ipynb</a></li><li><a href="notes-Waves-Fouriers_Trick.html">content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb</a></li><li><a href="notes-waves_intro.html">content/notebooks/3_waves/notes-waves_intro.ipynb</a></li><li><a href="activity-ising_model.html">content/notebooks/4_distributions/activity-ising_model.ipynb</a></li><li><a href="activity-mc_integration.html">content/notebooks/4_distributions/activity-mc_integration.ipynb</a></li><li><a href="activity-metropolis.html">content/notebooks/4_distributions/activity-metropolis.ipynb</a></li><li><a href="activity-monte_carlo.html">content/notebooks/4_distributions/activity-monte_carlo.ipynb</a></li><li><a href="activity-radioactive_decay.html">content/notebooks/4_distributions/activity-radioactive_decay.ipynb</a></li><li><a href="activity-thermal_contact.html">content/notebooks/4_distributions/activity-thermal_contact.ipynb</a></li><li><a href="activity-zombies.html">content/notebooks/4_distributions/activity-zombies.ipynb</a></li><li><a href="notes-counting_and_combinatorics.html">content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb</a></li><li><a href="notes-mcmc.html">content/notebooks/4_distributions/notes-mcmc.ipynb</a></li><li><a href="notes-monte_carlo_simulations.html">content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb</a></li><li><a href="notes-randomness.html">content/notebooks/4_distributions/notes-randomness.ipynb</a></li><li><a href="project-1.html">content/notebooks/9_assignments/project-1.md</a></li><li><a href="project-2.html">content/notebooks/9_assignments/project-2.md</a></li><li><a href="project-3.html">content/notebooks/9_assignments/project-3.md</a></li><li><a href="project-4.html">content/notebooks/9_assignments/project-4.md</a></li><li><a href="updated_rubric.html">content/notebooks/9_assignments/updated_rubric.md</a></li><li><a href="worked-problem-1.html">content/notebooks/9_assignments/worked-problem-1.md</a></li><li><a href="worked-problem-2.html">content/notebooks/9_assignments/worked-problem-2.md</a></li><li><a href="worked-problem-3.html">content/notebooks/9_assignments/worked-problem-3.md</a></li><li><a href="worked-problem-4.html">content/notebooks/9_assignments/worked-problem-4.md</a></li><li><a href="worked-problem-5.html">content/notebooks/9_assignments/worked-problem-5.md</a></li><li><a href="worked-problem-6.html">content/notebooks/9_assignments/worked-problem-6.md</a></li><li><a href="worked-problem-7.html">content/notebooks/9_assignments/worked-problem-7.md</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
+<!-- Hamburger menu and toggle JS commented out -->
+</nav>
+  <div class="container">
+    <main>
+      
+<nav class="chapter-downloads" aria-label="Download chapter sources">
+  <div role="group" aria-label="Download formats">
+    <a class="download-btn" href="sources/activity-Waves-Signals/activity-Waves-Signals.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+    <a class="download-btn" href="sources/activity-Waves-Signals/activity-Waves-Signals.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+    <a class="download-btn" href="sources/activity-Waves-Signals/activity-Waves-Signals.md" download><span aria-hidden="true">✍️</span> MD</a>
+    <a class="download-btn" href="sources/activity-Waves-Signals/activity-Waves-Signals.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+    <a class="download-btn" href="sources/activity-Waves-Signals/activity-Waves-Signals.tex" download><span aria-hidden="true">📐</span> TEX</a>
+    <a class="download-btn" href="jupyter/content/notebooks/activity-Waves-Signals.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+  </div>
+</nav>
+        <div class="markdown-body">
+<main>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="31-Oct-23---Activity:-Signal-Deconstruction">31 Oct 23 - Activity: Signal Deconstruction<a class="anchor-link" href="#31-Oct-23---Activity:-Signal-Deconstruction">¶</a></h1><p>We have started to show that we can take waves of any periodicity and add them together to get new signals. But more common is for us to receive a signal and want to know what waves are in it. This is the process of signal deconstruction. We will be using $V(t)$ to describe this signal because pretty much everything is a voltage. But now we introduce the toolkit that can help us do this.</p>
+<p>We can build up this idea by starting with a given $V(t)$ with some base periodicity ($w_0$ or $T_0$), really the longest period or lowest frequency in the signal. We can use a Fourier Series to decompose those signals in terms of harmonics ($n\;\omega_0$) of the base frequency. The model of this decomposition is given by the <a href="https://en.wikipedia.org/wiki/Fourier_series#Sine-cosine_form">infinite series</a>:</p>
+<p>$f(t) = \dfrac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(n\omega_0t) + b_n \sin(n\omega_0t)$</p>
+<p>Or</p>
+<p>$f(t) = \dfrac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos\left(\dfrac{2n\pi}{T_0}t\right) + b_n \sin\left(\dfrac{2n\pi}{T_0}t\right)$</p>
+<p>By using the <a href="https://en.wikipedia.org/wiki/Orthogonal_functions">orthogonal nature</a> of $\sin$ and $\cos$ over one period, we can find the unknown coefficients for a given signal $V(t)$.</p>
+<h2 id="DC-Offset">DC Offset<a class="anchor-link" href="#DC-Offset">¶</a></h2><p>The first term in the sum is just related to the DC offset, that is the average of the signal over one period. That's because $sin$ and $cos$ don't shift the average (they have a time average of zero, remember?)</p>
+<p>$\dfrac{a_0}{2} = \dfrac{1}{T_0}\int_{T_0} f(t) dt$</p>
+<h2 id="Periodic-Models">Periodic Models<a class="anchor-link" href="#Periodic-Models">¶</a></h2><p>For the periodicity, we use "Fourier's Trick" to determine the value of the coefficients. <em>Note that you need the signal $V(t)$ to complete this work.</em> And this isn't a trick, it's a well-established method.</p>
+<p>$a_n = \dfrac{2}{T_0}\int_{T_0}V(t)\cos(n\omega_0t)\qquad n\neq0$</p>
+<p>$b_n = \dfrac{2}{T_0}\int_{T_0}V(t)\sin(n\omega_0t)\qquad n\neq0$</p>
+<p>Given this, our approximate $V(t)$ is given up to the $N$ term is,</p>
+<p>$V(t) \approx \dfrac{a_0}{2} + \sum_{n=1}^{N} a_n \cos(n\omega_0t) + b_n \sin(n\omega_0t)$</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Example:-The-Duty-Cycle">Example: The Duty Cycle<a class="anchor-link" href="#Example:-The-Duty-Cycle">¶</a></h2><p>There are many signals we could analyze, but one of the common (and more mathematically tractable) ones is the <a href="https://en.wikipedia.org/wiki/Duty_cycle">Duty Cycle</a>. In fact, this signal is in wide use across electrical devices for timed on and off states. Moreover, the behaviors of some neurons and muscle fibers have been shown to approximate duty cycle firing. Synthesizers and electronic music are similar heavy users of <a href="https://en.wikipedia.org/wiki/Pulse-width_modulation">pulse width modulation</a>, which stems from this signal.</p>
+<p>The half-wave (square wave) duty cycle is given by,</p>
+<p>$V(t) = \begin{cases} 0 &amp; 0 \leq t &lt; \dfrac{T_0}{2} \\ V_0 &amp; \dfrac{T_0}{2} \leq t &lt; T_0 \end{cases}$</p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Identify which integrals you have to do (consider the orthogonality of the functions).</li>
+<li>Construct the integrals you need to do (over what cycle are you integrating?).</li>
+<li>Perform the integrals (consider using <code>sympy</code>).</li>
+<li>Determine the coefficients $a_n$'s and $b_n$'s.</li>
+<li>Write the function $V(t)$ in terms of the $a_n$'s and $b_n$'s.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Visualizing-the-Duty-Cycle">Visualizing the Duty Cycle<a class="anchor-link" href="#Visualizing-the-Duty-Cycle">¶</a></h3><p>It's great that we can produce a solution to this problem,</p>
+<p>$$V(t) = \dfrac{V_0}{2} + \sum_{n=1}^{\infty} \dfrac{V_0}{n\pi}\left[\cos(n\pi)-1\right]\sin\left(\dfrac{2n\pi}{T_0}t\right)$$</p>
+<p>but what does it look like?</p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Write the relevant functions to compute the coefficients $a_n$'s and $b_n$'s.</li>
+<li>Write the relevant functions to compute the $V(t)$.</li>
+<li>Plot the $V(t)$ along with the square wave (look into the <code>scipy.signal.square</code> function).</li>
+</ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sig</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Complex-Numbers">Complex Numbers<a class="anchor-link" href="#Complex-Numbers">¶</a></h2><p>One the most useful approaches to representing periodic signals is to use complex numbers. This is because the <a href="https://en.wikipedia.org/wiki/Euler%27s_formula">Euler's Formula</a> allows us to represent the trigonometric functions as complex exponentials. Euler's formula is given by,</p>
+<p>$e^{i\theta} = \cos(\theta) + i\sin(\theta)$</p>
+<p>where $i$ is the imaginary number. But what are the properties of <a href="https://en.wikipedia.org/wiki/Complex_number">complex numbers</a>? There are a larger class of numbers than the reals, and they have interesting properties. The generic form of a complex number is given by,</p>
+<p>$$z = a + ib$$</p>
+<p>where $a$ and $b$ are real numbers and $i$ is the square root of negative one. We can also write this in terms of the magnitude and phase,</p>
+<p>$$z = r e^{i\theta}$$</p>
+<p>where $r$ is the magnitude and $\theta$ is the phase and both are real numbers. These two representations are compatible if we think of a complex number represented in the complex plane where the reals appears on the $x$ and the imaginaries on the $y$.</p>
+<p><img alt="Complex Plane" src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Argandgaussplane.png"/></p>
+<p>The basic properties of complex numbers are below for two numbers $z_1 = a_1 + ib_1$ and $z_2 = a_2 + ib_2$:</p>
+<ul>
+<li>Addition: $z_1 + z_2 = (a_1 + a_2) + i(b_1 + b_2)$</li>
+<li>Subtraction: $z_1 - z_2 = (a_1 - a_2) + i(b_1 - b_2)$</li>
+<li>Multiplication: $z_1 z_2 = (a_1 a_2 - b_1 b_2) + i(a_1 b_2 + a_2 b_1)$</li>
+<li>Division: $\dfrac{z_1}{z_2} = \dfrac{a_1 a_2 + b_1 b_2}{a_2^2 + b_2^2} + i\dfrac{a_2 b_1 - a_1 b_2}{a_2^2 + b_2^2}$</li>
+</ul>
+<p>Some of these operations are simpler in the polar form. For example, multiplication is just the product of the magnitudes and the sum of the phases. Division is the ratio of the magnitudes and the difference of the phases. For two complex numbers $z_1 = r_1 e^{i\theta_1}$ and $z_2 = r_2 e^{i\theta_2}$:</p>
+<ul>
+<li>Multiplication: $z_1 z_2 = r_1 r_2 e^{i(\theta_1 + \theta_2)}$</li>
+<li>Division: $\dfrac{z_1}{z_2} = \dfrac{r_1}{r_2} e^{i(\theta_1 - \theta_2)}$</li>
+</ul>
+<p>Other operations are best represented in the polar form:</p>
+<ul>
+<li>Powers: $z^n = r^n e^{in\theta}$</li>
+<li>Roots: $z^{1/n} = r^{1/n} e^{i\theta/n}$</li>
+</ul>
+<h3 id="Representing-Trigonometric-Functions">Representing Trigonometric Functions<a class="anchor-link" href="#Representing-Trigonometric-Functions">¶</a></h3><p>We can use Euler's formula to represent the trigonometric functions as complex exponentials. For example,</p>
+<p>$$\cos(\theta) = \dfrac{e^{i\theta} + e^{-i\theta}}{2}$$
+$$\sin(\theta) = \dfrac{e^{i\theta} - e^{-i\theta}}{2i}$$</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Take the square wave function from above:</p>
+<p>$$V(t) = \begin{cases} 0 &amp; 0 \leq t &lt; \dfrac{T_0}{2} \\ V_0 &amp; \dfrac{T_0}{2} \leq t &lt; T_0 \end{cases}$$</p>
+<p>and compute the complex coefficients $c_n$'s,</p>
+<p>$$c_n = \dfrac{1}{T_0}\int_{T_0}V(t)e^{-in\omega_0t}dt$$</p>
+<p>where our new model is,</p>
+<p>$$V(t) = a_0 + \sum_{n=-\infty}^{\infty} c_n e^{in\omega_0t}$$</p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Take the signal $V(t)$ and determine which integrals you have to do.</li>
+<li>Construct the integrals you need to do (over what cycle are you integrating?).</li>
+<li>Perform the integrals (consider using <code>sympy</code>) and find the coefficients $c_n$'s.</li>
+<li>Write the function $V(t)$ in terms of the $c_n$'s. (What about the imaginary part?)</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>&copy; Modern Classical Mechanics. All rights reserved.</p>
+  </footer>
+</body>
+</html>

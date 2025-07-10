@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Classical Mechanics</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+</head>
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Classical Mechanics</h1>
+    </div>
+  </header>
+  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
+  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="about.html">content/about.md</a></li><li><a href="activities.html">content/activities.md</a></li><li><a href="announcement.html">content/announcement.md</a></li><li><a href="cards.html">content/cards.md</a></li><li><a href="index.html">content/index.md</a></li><li><a href="resources.html">content/resources.md</a></li><li><a href="intro.html">content/notebooks/intro.md</a></li><li><a href="activity-duffing.html">content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb</a></li><li><a href="activity-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb</a></li><li><a href="activity_vanderpol.html">content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb</a></li><li><a href="notes-linearization_odes.html">content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb</a></li><li><a href="notes-phase_space.html">content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb</a></li><li><a href="activity-frames.html">content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb</a></li><li><a href="activity-lagrange_1.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb</a></li><li><a href="activity-lagrange_2.html">content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb</a></li><li><a href="notes-lagrangian-dynamics.html">content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb</a></li><li><a href="notes-numerical_integration_1d.html">content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb</a></li><li><a href="notes_frames.html">content/notebooks/1_mechanics/lagrangian/notes_frames.md</a></li><li><a href="activity-what_is_a_model.html">content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb</a></li><li><a href="notes-SHO.html">content/notebooks/1_mechanics/sho/notes-SHO.ipynb</a></li><li><a href="activity-relaxation_2d.html">content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb</a></li><li><a href="notes-relaxation.html">content/notebooks/2_EM/Numerics/notes-relaxation.ipynb</a></li><li><a href="activity-efields.html">content/notebooks/2_EM/Statics/activity-efields.ipynb</a></li><li><a href="activity-sep_var.html">content/notebooks/2_EM/Statics/activity-sep_var.ipynb</a></li><li><a href="activity-sep_var_spherical.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb</a></li><li><a href="activity-sep_var_spherical_examples.html">content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb</a></li><li><a href="activity-superposition.html">content/notebooks/2_EM/Statics/activity-superposition.ipynb</a></li><li><a href="notes-electric_potential.html">content/notebooks/2_EM/Statics/notes-electric_potential.ipynb</a></li><li><a href="notes-em_intro.html">content/notebooks/2_EM/Statics/notes-em_intro.ipynb</a></li><li><a href="notes-static_fields.html">content/notebooks/2_EM/Statics/notes-static_fields.ipynb</a></li><li><a href="activity-CoupledOsc-NormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb</a></li><li><a href="activity-FFT-applications.html">content/notebooks/3_waves/activity-FFT-applications.ipynb</a></li><li><a href="activity-Waves-1D.html">content/notebooks/3_waves/activity-Waves-1D.ipynb</a></li><li><a href="activity-Waves-Applying_the_FFT.html">content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb</a></li><li><a href="activity-Waves-seriesExpand.html">content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb</a></li><li><a href="activity-Waves-Signals.html">content/notebooks/3_waves/activity-Waves-Signals.ipynb</a></li><li><a href="notes-coupled_oscillations.html">content/notebooks/3_waves/notes-coupled_oscillations.ipynb</a></li><li><a href="notes-fft.html">content/notebooks/3_waves/notes-fft.ipynb</a></li><li><a href="notes-solve_the_wave_eq.html">content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb</a></li><li><a href="notes-Using-FFTs.html">content/notebooks/3_waves/notes-Using-FFTs.ipynb</a></li><li><a href="notes-Waves-Fouriers_Trick.html">content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb</a></li><li><a href="notes-waves_intro.html">content/notebooks/3_waves/notes-waves_intro.ipynb</a></li><li><a href="activity-ising_model.html">content/notebooks/4_distributions/activity-ising_model.ipynb</a></li><li><a href="activity-mc_integration.html">content/notebooks/4_distributions/activity-mc_integration.ipynb</a></li><li><a href="activity-metropolis.html">content/notebooks/4_distributions/activity-metropolis.ipynb</a></li><li><a href="activity-monte_carlo.html">content/notebooks/4_distributions/activity-monte_carlo.ipynb</a></li><li><a href="activity-radioactive_decay.html">content/notebooks/4_distributions/activity-radioactive_decay.ipynb</a></li><li><a href="activity-thermal_contact.html">content/notebooks/4_distributions/activity-thermal_contact.ipynb</a></li><li><a href="activity-zombies.html">content/notebooks/4_distributions/activity-zombies.ipynb</a></li><li><a href="notes-counting_and_combinatorics.html">content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb</a></li><li><a href="notes-mcmc.html">content/notebooks/4_distributions/notes-mcmc.ipynb</a></li><li><a href="notes-monte_carlo_simulations.html">content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb</a></li><li><a href="notes-randomness.html">content/notebooks/4_distributions/notes-randomness.ipynb</a></li><li><a href="project-1.html">content/notebooks/9_assignments/project-1.md</a></li><li><a href="project-2.html">content/notebooks/9_assignments/project-2.md</a></li><li><a href="project-3.html">content/notebooks/9_assignments/project-3.md</a></li><li><a href="project-4.html">content/notebooks/9_assignments/project-4.md</a></li><li><a href="updated_rubric.html">content/notebooks/9_assignments/updated_rubric.md</a></li><li><a href="worked-problem-1.html">content/notebooks/9_assignments/worked-problem-1.md</a></li><li><a href="worked-problem-2.html">content/notebooks/9_assignments/worked-problem-2.md</a></li><li><a href="worked-problem-3.html">content/notebooks/9_assignments/worked-problem-3.md</a></li><li><a href="worked-problem-4.html">content/notebooks/9_assignments/worked-problem-4.md</a></li><li><a href="worked-problem-5.html">content/notebooks/9_assignments/worked-problem-5.md</a></li><li><a href="worked-problem-6.html">content/notebooks/9_assignments/worked-problem-6.md</a></li><li><a href="worked-problem-7.html">content/notebooks/9_assignments/worked-problem-7.md</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
+<!-- Hamburger menu and toggle JS commented out -->
+</nav>
+  <div class="container">
+    <main>
+      <div class="markdown-body"><h1 id="about">About</h1>
+<p>This site is maintained by <a href="https://dannycab.github.io/">Danny Caballero</a> and is intended to be a resource for teaching and learning modern classical mechanics. It is dedicated to providing accessible, interactive, and high-quality materials for students and educators. If not for the students I've been privileged to teach and learn from over the years and my colleagues who inspire my teaching this would not have been started.</p>
+<h2 id="pull-requests-welcome">Pull Requests Welcome!</h2>
+<p>We welcome contributions from anyone including students who want to help improve the site and its resources. Whether you're a student, educator, or developer, your input is valuable. </p>
+<ul>
+<li><a href="https://github.com/dannycab/modern-classical-mechanics/issues/new">Create an issue</a></li>
+<li><a href="https://github.com/dannycab/modern-classical-mechanics/pulls">Issue a pull request</a></li>
+</ul>
+<p>You don't need a GitHub account to create an issue, but you do need one to issue a pull request.</p>
+<h1 id="philosophy">Philosophy</h1>
+<h2 id="why-accessible-open-educational-resources">Why Accessible, Open Educational Resources?</h2>
+<p>Our work is motivated by a deep need to challenge the corporate control of educational resources and to make high-quality, accessible materials available to everyone.</p>
+<p>When corporations control access to textbooks, software, and other learning tools, only those who can afford them benefit. This creates unnecessary barriers for students and educators everywhere.</p>
+<p>The <a href="https://educationdata.org/average-cost-of-college-textbooks">rising costs of textbooks</a>, <a href="https://educationdata.org/college-tuition-inflation-rate">increasing tuition</a>, and <a href="https://www.brookings.edu/articles/increasing-the-impact-of-corporate-engagement-in-education-landscape-and-challenges/">corporate influence over educational resources</a> have made it harder than ever for people to get the materials they need. By making resources open and accessible, we hope to lower these barriers and support a more equitable learning environment for all.</p>
+<h2 id="why-is-the-site-so-plain-why-is-it-so-poorly-designed-why-is-it-so-simple">Why is the site so plain? Why is it so poorly designed? Why is it so simple?</h2>
+<p>The challenge of accessible materials is that they must be available to everyone in a format that is easy to use, modify, and distribute. This includes considerations for those with disabilities, different needs, and varying levels of access to technology.</p>
+<p>So, we have attempted to create a site and a build that are open, simple, and accessible. This also means that the format of the materials is available in many different forms automatically, including HTML, PDF, and Markdown, DOCX, LaTeX, and Jupyter Notebook formats.</p>
+<p>Indeed, even the build process itself is open and accessible, allowing anyone to generate the site and its resources in the format they prefer. The entire site is available in a <a href="https://github.com/dannycab/modern-classical-mechanics">public GitHub repository</a>. It's also hosted there.</p>
+<p><em>A note here:</em> Danny is not a Python developer; he has a full time job as a <a href="https://dannycab.github.io/">physics and computational science professor</a>). The code is gonna be crap. </p>
+<h2 id="design-principles">Design Principles</h2>
+<p>We abide the following design principles:</p>
+<ol>
+<li>Everything is open source and free to use, modify, and distribute.</li>
+<li>All materials will follow best guidelines for accessibility, ensuring that they are usable by everyone especially those with disabilities.</li>
+<li>Anyone can contribute to the project, whether by suggesting changes, adding new content, or improving existing materials. Pull requests are welcome!</li>
+</ol>
+<h1 id="accessibility-timeline">Accessibility Timeline</h1>
+<h2 id="accessibility">Accessibility</h2>
+<p>We intend these resources to be accessible to everyone and available in a variety of formats. This work involves ongoing efforts to ensure that all materials meet accessibility standards and are usable by people with disabilities. That is a work in progress, and we will continue to improve the site and its resources over time. Below is the todo list of our accessibility efforts:</p>
+<h2 id="building-accessible-resources">Building Accessible Resources</h2>
+<ul>
+<li>[X] Build with open source tools that are readily accessible</li>
+<li>[ ] Provide documentation and resources for others to contribute</li>
+</ul>
+<h2 id="web-accessibility-standards">Web Accessibility Standards</h2>
+<ul>
+<li>[ ] Ensure all images have appropriate alt text</li>
+<li>[ ] Implement ARIA roles and properties correctly</li>
+<li>[ ] Use semantic HTML to improve screen reader compatibility</li>
+<li>[ ] Ensure all links have descriptive text</li>
+<li>[ ] Provide transcripts for all audio and video content</li>
+<li>[ ] Build keyboard navigation for all interactive elements</li>
+</ul>
+<h2 id="accessibility-testing">Accessibility Testing</h2>
+<ul>
+<li>[ ] Ensure color contrast meets WCAG standards</li>
+<li>[ ] Test site with screen readers and other assistive technologies</li>
+<li>[ ] Ensure all interactive elements are keyboard accessible</li>
+</ul>
+<h1 id="contributions">Contributions</h1>
+<p>We welcome contributions from anyone including students who want to help improve the site and its resources. Whether you're a student, educator, or developer, your input is valuable. You can help by:
+- Suggesting new content or improvements to existing materials
+- Reporting issues or bugs
+- Reviewing pull requests from others
+- Adding new activities or simulations
+- Improving the site's design or functionality</p>
+<p>You can contribute by creating an issue or issuing a pull request on the <a href="https://github.com/dannycab/modern-classical-mechanics">GitHub repository</a>.</p>
+<h2 id="contributors">Contributors</h2>
+<p>Over the years, the following people have contributed to this project and its resources:</p>
+<ul>
+<li>Morten Hjorth-Jensen (MSU/UiO)</li>
+<li>Rachel Henderson (MSU)</li>
+<li>Vashti Sawtelle (MSU)</li>
+<li>Steve Pollock (CU-Boulder)</li>
+<li>Alia Valentine (MSU)</li>
+</ul></div>
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>&copy; Modern Classical Mechanics. All rights reserved.</p>
+  </footer>
+</body>
+</html>
