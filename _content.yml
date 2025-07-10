@@ -3,9 +3,9 @@
 # It is intended to be the single source of truth for generating _toc.yml, _menu.yml, _notebooks.yaml, and _config.yml.
 
 site:
-  title: "Modern Classical Mechanics"
+  title: "Modern Mathematical Methods"
   author: "Danny Caballero"
-  description: "A modern, open-source course in classical mechanics."
+  description: "A modern, open-source course in mathematical methods for physics and astrophysics."
   logo: "static/images/logo.png"
   favicon: "static/images/favicon.ico"
   theme:
@@ -13,28 +13,28 @@ site:
     light: light
     dark: dark
   language: "en"
-  github_url: "https://github.com/dannycab/modern-classical-mechanics"
+  github_url: "https://github.com/dannycab/modern-mathematical-methods"
   # Add more site-wide settings as needed
 
 navigation:
   - title: "Home"
     file: content/index.md
     icon: home
-  - title: "About"
-    file: content/about.md
-    icon: info
   - title: "Activities"
     file: content/activities.md
     icon: bolt
   - title: "Resources"
     file: content/resources.md
     icon: book
-  - title: "Announcements"
-    file: content/announcement.md
-    icon: megaphone
-  - title: "Cards"
-    file: content/cards.md
-    icon: cards
+  - title: "About"
+    file: content/about.md
+    icon: info
+  # - title: "Announcements"
+  #   file: content/announcement.md
+  #   icon: megaphone
+  # - title: "Cards"
+  #   file: content/cards.md
+  #   icon: cards
 
 chapters:
   # All notebooks and markdown files in content/ and subfolders
@@ -70,63 +70,109 @@ chapters:
   - id: mechanics
     title: "Mechanics"
     files:
-      - file: content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb
-      - file: content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb
-      - file: content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb
-      - file: content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb
-      - file: content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb
-      - file: content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb
-      - file: content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb
-      - file: content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb
-      - file: content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb
-      - file: content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb
-      # - file: content/notebooks/1_mechanics/lagrangian/notes_frames.md
       - file: content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb
+        title: "Activity: What is a Model?"
       - file: content/notebooks/1_mechanics/sho/notes-SHO.ipynb
+        title: "Notes: Simple Harmonic Oscillator"
+      - file: content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb
+        title: "Activity: Frames and Coordinates"
+      - file: content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb
+        title: "Activity: Calculus of Variations and Lagrangian Dynamics"
+      - file: content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb
+        title: "Activity: Numerical Integration and More Lagrangians"
+      - file: content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb
+        title: "Notes: Numerical Integration in 1D"
+      - file: content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb
+        title: "Activity: The Dynamical Systems Approach and Phase Portraits"
+      - file: content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb
+        title: "Notes: Dynamical Systems and Phase Space"
+      - file: content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb
+        title: "The Duffing Oscillator"
+      - file: content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb
+        title: "Notes: Heading towards Chaos"
+      - file: content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb
+        title: "Conducting a complete analysis of an ODE"
+      - file: content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb
+        title: "Book Reading: "
   - id: em
     title: "Electromagnetism"
     files:
-      - file: content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb
-      - file: content/notebooks/2_EM/Numerics/notes-relaxation.ipynb
       - file: content/notebooks/2_EM/Statics/activity-efields.ipynb
+        title: "Activity: Electric Fields"
       - file: content/notebooks/2_EM/Statics/activity-sep_var.ipynb
+        title: "Activity: Separation of Variables"
       - file: content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb
+        title: "Activity: Separation of Variables (Spherical)"
       - file: content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb
+        title: "Activity: Separation of Variables (Spherical Examples)"
       - file: content/notebooks/2_EM/Statics/activity-superposition.ipynb
+        title: "Activity: Superposition"
       - file: content/notebooks/2_EM/Statics/notes-electric_potential.ipynb
+        title: "Notes: Electric Potential"
       - file: content/notebooks/2_EM/Statics/notes-em_intro.ipynb
+        title: "Notes: Electromagnetism Introduction"
       - file: content/notebooks/2_EM/Statics/notes-static_fields.ipynb
+        title: "Notes: Static Fields"
+      - file: content/notebooks/2_EM/Numerics/notes-relaxation.ipynb
+        title: "Notes: Method of Relaxation"
+      - file: content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb
+        title: "Activity: Method of Relaxation"
   - id: waves
     title: "Waves"
     files:
-      - file: content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb
-      - file: content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb
-      - file: content/notebooks/3_waves/activity-FFT-applications.ipynb
-      - file: content/notebooks/3_waves/activity-Waves-1D.ipynb
-      - file: content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb
-      - file: content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb
-      - file: content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb
-      - file: content/notebooks/3_waves/activity-Waves-Signals.ipynb
-      - file: content/notebooks/3_waves/notes-coupled_oscillations.ipynb
       - file: content/notebooks/3_waves/notes-fft.ipynb
-      - file: content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb
-      - file: content/notebooks/3_waves/notes-Using-FFTs.ipynb
-      - file: content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb
+        title: "Notes: Fast Fourier Transform"
+      - file: content/notebooks/3_waves/notes-coupled_oscillations.ipynb
+        title: "Notes: Coupled Oscillations"
       - file: content/notebooks/3_waves/notes-waves_intro.ipynb
+        title: "Notes: Introduction to Waves"
+      - file: content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb
+        title: "Activity: Normal Modes"
+      - file: content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb
+        title: "Activity: Normal Modes of N Coupled Oscillators"
+      - file: content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb
+        title: "Notes: Solutions to The Wave Equation"
+      - file: content/notebooks/3_waves/activity-Waves-1D.ipynb
+        title: "Activity: 1-Dimensional Travelling Waves"
+      - file: content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb
+        title: "Notes: Deconstructing Waves"
+      - file: content/notebooks/3_waves/activity-Waves-Signals.ipynb
+        title: "Activity: Signal Deconstruction"
+      - file: content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb
+        title: "Activity: Automated Signal Deconstruction & Reconstruction"
+      - file: content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb
+        title: "Activity: The Fast Fourier Transform"
+      - file: content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb
+        title: "Activity: Applying The Fast Fourier Transform"
+      - file: content/notebooks/3_waves/notes-Using-FFTs.ipynb
+        title: "Notes: Applications of FFTs"
+      - file: content/notebooks/3_waves/activity-FFT-applications.ipynb
+        title: "Using the FFT with Real Data"
   - id: distributions
     title: "Distributions"
     files:
-      - file: content/notebooks/4_distributions/activity-ising_model.ipynb
-      - file: content/notebooks/4_distributions/activity-mc_integration.ipynb
-      - file: content/notebooks/4_distributions/activity-metropolis.ipynb
-      - file: content/notebooks/4_distributions/activity-monte_carlo.ipynb
-      - file: content/notebooks/4_distributions/activity-radioactive_decay.ipynb
-      - file: content/notebooks/4_distributions/activity-thermal_contact.ipynb
-      - file: content/notebooks/4_distributions/activity-zombies.ipynb
-      - file: content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb
-      - file: content/notebooks/4_distributions/notes-mcmc.ipynb
-      - file: content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb
       - file: content/notebooks/4_distributions/notes-randomness.ipynb
+        title: "Notes: Random Processes"
+      - file: content/notebooks/4_distributions/activity-radioactive_decay.ipynb
+        title: "Activity: Introduction to Random Processes"
+      - file: content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb
+        title: "Notes: Counting and Combinatorics"
+      - file: content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb
+        title: "Notes: Monte Carlo Simulations"
+      - file: content/notebooks/4_distributions/activity-thermal_contact.ipynb
+        title: "Activity: Model of Two Bodies in Thermal Contact"
+      - file: content/notebooks/4_distributions/activity-mc_integration.ipynb
+        title: "Activity: Monte Carlo Integration"
+      - file: content/notebooks/4_distributions/notes-mcmc.ipynb
+        title: "Notes: Markov Chain Monte Carlo Modeling"
+      - file: content/notebooks/4_distributions/activity-metropolis.ipynb
+        title: "Activity: Modeling the Ideal Gas"
+      - file: content/notebooks/4_distributions/activity-ising_model.ipynb
+        title: "Activity: The Ising Model"
+      - file: content/notebooks/4_distributions/activity-monte_carlo.ipynb
+        title: "Activity: Modeling"
+      - file: content/notebooks/4_distributions/activity-zombies.ipynb
+        title: "Activity: Modeling"
   # - id: assignments
   #   title: "Assignments"
   #   files:
