@@ -86,7 +86,6 @@ This refactor modularizes and automates the generation of navigation, head, and 
 
 ---
 
-
 ## July 2025: CLI Build Integration & HTML Output Testing
 
 - Implemented `build-html.py --html --files ...` to build single or multiple HTML pages using modular, importable functions for YAML validation, menu/footer/title HTML, and Markdown conversion.
@@ -116,6 +115,32 @@ This refactor modularizes and automates the generation of navigation, head, and 
 2. Add robust unit/integration tests for the build process.
 3. Integrate the build process into CI and document usage.
 4. Optionally, expand YAML/templates for more complex footers or per-page metadata.
+
+---
+
+## July 2025: Notebook Build Logic Debugging and Refactor
+
+### Key Findings
+- The original `build_html_all` only discovered `.md` files, not `.ipynb` files, so running the script without `--files` would never build notebooks.
+- Minimal test scripts proved:
+  - Notebooks are readable and convertible to HTML.
+  - The main build function works for both single files and lists of files.
+  - The correct glob pattern finds all `.md` and `.ipynb` files.
+  - A minimal entrypoint script confirmed you can build all content or a single file by passing the right file list to `build_html_for_files`.
+
+### Solution
+- Update `build_html_all` to include both Markdown and Jupyter Notebook files:
+  - Use `glob('content/**/*.md', recursive=True)` and `glob('content/**/*.ipynb', recursive=True)` and combine the results.
+- The script already supports building a single file via the `--files` argument.
+- This change will make both 'build all' and 'build one' robust and consistent.
+
+### Next Steps
+- Refactor the main script to update file discovery logic.
+- Remove duplicate function definitions for maintainability.
+- Optionally, add more test automation and error handling.
+
+**Summary:**
+The main logic bug was in file discovery for notebooks. All other pipeline steps (reading, converting, writing) are working. The fix is simple and proven by minimal scripts.
 
 ---
 

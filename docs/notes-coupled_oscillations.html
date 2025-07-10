@@ -51,103 +51,79 @@
   <!-- MathJax for LaTeX rendering -->
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
 </head>
+
 <body>
-  
+
   <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
       <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
-      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+        <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+        <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+      </div>
     </div>
   </header>
-  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
-  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="activity-what_is_a_model.html">Activity: What is a Model?</a></li><li><a href="notes-SHO.html">Notes: Simple Harmonic Oscillator</a></li><li><a href="activity-frames.html">Activity: Frames and Coordinates</a></li><li><a href="activity-lagrange_1.html">Activity: Calculus of Variations and Lagrangian Dynamics</a></li><li><a href="activity-lagrange_2.html">Activity: Numerical Integration and More Lagrangians</a></li><li><a href="notes-numerical_integration_1d.html">Notes: Numerical Integration in 1D</a></li><li><a href="activity-phase_space.html">Activity: The Dynamical Systems Approach and Phase Portraits</a></li><li><a href="notes-phase_space.html">Notes: Dynamical Systems and Phase Space</a></li><li><a href="activity-duffing.html">The Duffing Oscillator</a></li><li><a href="notes-linearization_odes.html">Notes: Heading towards Chaos</a></li><li><a href="activity_vanderpol.html">Conducting a complete analysis of an ODE</a></li><li><a href="notes-lagrangian-dynamics.html">Book Reading: </a></li><li><a href="activity-efields.html">Activity: Electric Fields</a></li><li><a href="activity-sep_var.html">Activity: Separation of Variables</a></li><li><a href="activity-sep_var_spherical.html">Activity: Separation of Variables (Spherical)</a></li><li><a href="activity-sep_var_spherical_examples.html">Activity: Separation of Variables (Spherical Examples)</a></li><li><a href="activity-superposition.html">Activity: Superposition</a></li><li><a href="notes-electric_potential.html">Notes: Electric Potential</a></li><li><a href="notes-em_intro.html">Notes: Electromagnetism Introduction</a></li><li><a href="notes-static_fields.html">Notes: Static Fields</a></li><li><a href="notes-relaxation.html">Notes: Method of Relaxation</a></li><li><a href="activity-relaxation_2d.html">Activity: Method of Relaxation</a></li><li><a href="notes-fft.html">Notes: Fast Fourier Transform</a></li><li><a href="notes-coupled_oscillations.html">Notes: Coupled Oscillations</a></li><li><a href="notes-waves_intro.html">Notes: Introduction to Waves</a></li><li><a href="activity-CoupledOsc-NormalModes.html">Activity: Normal Modes</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">Activity: Normal Modes of N Coupled Oscillators</a></li><li><a href="notes-solve_the_wave_eq.html">Notes: Solutions to The Wave Equation</a></li><li><a href="activity-Waves-1D.html">Activity: 1-Dimensional Travelling Waves</a></li><li><a href="notes-Waves-Fouriers_Trick.html">Notes: Deconstructing Waves</a></li><li><a href="activity-Waves-Signals.html">Activity: Signal Deconstruction</a></li><li><a href="activity-Waves-seriesExpand.html">Activity: Automated Signal Deconstruction & Reconstruction</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">Activity: The Fast Fourier Transform</a></li><li><a href="activity-Waves-Applying_the_FFT.html">Activity: Applying The Fast Fourier Transform</a></li><li><a href="notes-Using-FFTs.html">Notes: Applications of FFTs</a></li><li><a href="activity-FFT-applications.html">Using the FFT with Real Data</a></li><li><a href="notes-randomness.html">Notes: Random Processes</a></li><li><a href="activity-radioactive_decay.html">Activity: Introduction to Random Processes</a></li><li><a href="notes-counting_and_combinatorics.html">Notes: Counting and Combinatorics</a></li><li><a href="notes-monte_carlo_simulations.html">Notes: Monte Carlo Simulations</a></li><li><a href="activity-thermal_contact.html">Activity: Model of Two Bodies in Thermal Contact</a></li><li><a href="activity-mc_integration.html">Activity: Monte Carlo Integration</a></li><li><a href="notes-mcmc.html">Notes: Markov Chain Monte Carlo Modeling</a></li><li><a href="activity-metropolis.html">Activity: Modeling the Ideal Gas</a></li><li><a href="activity-ising_model.html">Activity: The Ising Model</a></li><li><a href="activity-monte_carlo.html">Activity: Modeling</a></li><li><a href="activity-zombies.html">Activity: Modeling</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
-<!-- Hamburger menu and toggle JS commented out -->
-</nav>
-  <div class="container">
-    <main>
-      
-<nav class="chapter-downloads" aria-label="Download chapter sources">
-  <div role="group" aria-label="Download formats">
-    <a class="download-btn" href="sources/notes-coupled_oscillations/notes-coupled_oscillations.pdf" download><span aria-hidden="true">📄</span> PDF</a>
-    <a class="download-btn" href="sources/notes-coupled_oscillations/notes-coupled_oscillations.docx" download><span aria-hidden="true">📝</span> DOCX</a>
-    <a class="download-btn" href="sources/notes-coupled_oscillations/notes-coupled_oscillations.md" download><span aria-hidden="true">✍️</span> MD</a>
-    <a class="download-btn" href="sources/notes-coupled_oscillations/notes-coupled_oscillations.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
-    <a class="download-btn" href="sources/notes-coupled_oscillations/notes-coupled_oscillations.tex" download><span aria-hidden="true">📐</span> TEX</a>
-    <a class="download-btn" href="jupyter/content/notebooks/notes-coupled_oscillations.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+    
+
+  <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
+      <span id="theme-toggle-icon" aria-hidden="true">🌙</span> <span id="theme-toggle-label">Dark</span>
+    </button>
   </div>
-</nav>
-        <div class="markdown-body">
-<main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="16-Oct-23---Notes:-Coupled-Oscillations">16 Oct 23 - Notes: Coupled Oscillations<a class="anchor-link" href="#16-Oct-23---Notes:-Coupled-Oscillations">¶</a></h1><p>Single particle dynamics like the SHO and other singular point particle motion (e.g., basic kinematics, charges in fields modeled without interactions) are helpful in building our intuition of how physics <em>should</em> work. We can track the position, velocity, and other dynamical quantities for these singular particles. We can determine how the act on and interact with their surroundings. We can find points of stasis (stable and unstable points); we can find different families of solutions (orbits vs runaway behavior); we can predict the motion of those particles with numerical routines.</p>
+  <script>
+    // Simple theme toggle script
+    const btn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-toggle-icon');
+    const label = document.getElementById('theme-toggle-label');
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+      localStorage.setItem('theme', theme);
+    }
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    // On load, set theme from localStorage
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  </script>
+    
+<nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+<main class="site-main">
+<div class="notebook-markdown-cell"><h1 id="16-oct-23-notes-coupled-oscillations">16 Oct 23 - Notes: Coupled Oscillations</h1>
+<p>Single particle dynamics like the SHO and other singular point particle motion (e.g., basic kinematics, charges in fields modeled without interactions) are helpful in building our intuition of how physics <em>should</em> work. We can track the position, velocity, and other dynamical quantities for these singular particles. We can determine how the act on and interact with their surroundings. We can find points of stasis (stable and unstable points); we can find different families of solutions (orbits vs runaway behavior); we can predict the motion of those particles with numerical routines.</p>
 <p>But what happens when we introduce a second particle? And we let it interact with the first particle. We have substantially opened the degrees of freedom (a way to characterize the complexity of our system) that our system has. We will see how these systems become expanded and how their dynamics becomes richer and more interesting.</p>
 <p>The canonical complication is the coupled oscillators, which will form the basis of our initial study, much like the SHO formed our initial work for dynamical models using ODEs. The setup appears below:</p>
-<img alt="Coupled Oscillator set up. Two oscillators connected by three springs in a horizontal line." src="images/chapters/two-coupled-gliders-diagram.png" width="800px/"/>
+<p><img src='https://www.entropy.energy/static/resources/coupled-oscillators/two-coupled-gliders-diagram.png' alt='Coupled Oscillator set up. Two oscillators connected by three springs in a horizontal line.' width=800px/></p>
 <p>We will set up this problem below, but our analysis will proceed in class. To motivate our study of coupled oscillations, watch this excellent video (20 minutes) on the phenomenon on <a href="https://physicstoday.scitation.org/doi/10.1063/1.1554136">synchronization</a>.</p>
-<p><a href="https://inv.tux.pizza/watch?v=t-_VPRCtiUg"><img alt="Synchronization" src="https://markdown-videos-api.jorgenkh.no/youtube/t-_VPRCtiUg?width=720&amp;height=405"/></a></p>
+<p><a href="https://inv.tux.pizza/watch?v=t-_VPRCtiUg"><img alt="Synchronization" src="https://markdown-videos-api.jorgenkh.no/youtube/t-_VPRCtiUg?width=720&amp;height=405" /></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=t-_VPRCtiUg">https://inv.tux.pizza/watch?v=t-_VPRCtiUg</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=t-_VPRCtiUg">https://youtube.com/watch?v=t-_VPRCtiUg</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Synchronization">Synchronization<a class="anchor-link" href="#Synchronization">¶</a></h2><p>Nature exhibits many different kinds of behaviors that we have organized into different concepts (i.e., random, chaotic, deterministic, synchronized). THese behaviors have interesting properties and allow us to bring different and new forms of mathematics and computing to the work; this includes new areas like <a href="https://inv.tux.pizza/watch?v=2Bw5f4vYL98">machine-learning based physics models</a>. As we move from a single object models to multiple objects models, we begin to explore these different conceptual behaviors. <a href="https://www.quantamagazine.org/physicists-discover-exotic-patterns-of-synchronization-20190404/">Synchronization</a> is one that is common and natural to consider in the context of oscillations as you saw from the above video. <a href="https://inv.tux.pizza/watch?v=ZGvtnE1Wy6U">Fireflies</a>, <a href="https://inv.tux.pizza/watch?v=2LPboySOSvo">patterns in the operation of a heart</a>, and <a href="https://inv.tux.pizza/watch?v=5v5eBf2KwF8">coupled metronomes</a> all exhibit this synchronized behavior. But, how is that possible? What physics is going on here? And how can it lead in and out of synchronization like this pendulum setup below?</p>
-<p><a href="https://inv.tux.pizza/watch?v=yVkdfJ9PkRQ"><img alt="Synchronized pendulum" src="https://markdown-videos-api.jorgenkh.no/youtube/yVkdfJ9PkRQ?width=720&amp;height=405"/></a></p>
+</ul></div>
+<div class="notebook-markdown-cell"><h2 id="synchronization">Synchronization</h2>
+<p>Nature exhibits many different kinds of behaviors that we have organized into different concepts (i.e., random, chaotic, deterministic, synchronized). THese behaviors have interesting properties and allow us to bring different and new forms of mathematics and computing to the work; this includes new areas like <a href="https://inv.tux.pizza/watch?v=2Bw5f4vYL98">machine-learning based physics models</a>. As we move from a single object models to multiple objects models, we begin to explore these different conceptual behaviors. <a href="https://www.quantamagazine.org/physicists-discover-exotic-patterns-of-synchronization-20190404/">Synchronization</a> is one that is common and natural to consider in the context of oscillations as you saw from the above video. <a href="https://inv.tux.pizza/watch?v=ZGvtnE1Wy6U">Fireflies</a>, <a href="https://inv.tux.pizza/watch?v=2LPboySOSvo">patterns in the operation of a heart</a>, and <a href="https://inv.tux.pizza/watch?v=5v5eBf2KwF8">coupled metronomes</a> all exhibit this synchronized behavior. But, how is that possible? What physics is going on here? And how can it lead in and out of synchronization like this pendulum setup below?</p>
+<p><a href="https://inv.tux.pizza/watch?v=yVkdfJ9PkRQ"><img alt="Synchronized pendulum" src="https://markdown-videos-api.jorgenkh.no/youtube/yVkdfJ9PkRQ?width=720&amp;height=405" /></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=yVkdfJ9PkRQ">https://inv.tux.pizza/watch?v=yVkdfJ9PkRQ</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=yVkdfJ9PkRQ">https://youtube.com/watch?v=yVkdfJ9PkRQ</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div class="admonition huygens-clocks"><p class="admonition-title">Huygen's Clocks</p>
-Much of this early understanding of synchronization we owe to the Dutch mathematician, [Christiann Huygens](https://en.wikipedia.org/wiki/Christiaan_Huygens), who spent much of his work trying to understand periodic motion. In this work, he observed the oscillation of two pendulum clocks that would eventually oscillate in precisely opposite swings. A great writeup of this history and its implications is [here](https://www.quantamagazine.org/physicists-discover-exotic-patterns-of-synchronization-20190404/). This phenomenon was explored experimentally and theoretically by three physicists at Georgia Tech, Matt Bennet, Mike Schatz (my Phd Advisor!), and Kurt Wiesenfeld. Their paper was written in collaboration with, history and language professor emerita, Heidi Rockwood. It's a [fun read](http://engineering.nyu.edu/mechatronics/Control_Lab/bck/VKapila/Chaotic%20Ref/Hujgens.pdf).
-
-<p>We know use this phenomenon to <a href="https://en.wikipedia.org/wiki/Injection_locking#Entrainment">entrain oscillators</a>; this kind of mode locking is really important to science -- especially ultra-fast science. Physicists like <a href="https://www.ogilviegroup.org/">Dr. Jennifer Ogilive at the University of Michigan</a> use this phenomenon to image biological materials that undergo very fast transitions.</p></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Coupled-Oscillations">Coupled Oscillations<a class="anchor-link" href="#Coupled-Oscillations">¶</a></h2><p>The key to why these phenomena are possible is the increase in the number of <strong>Degrees of Freedom</strong>. You can think of this as the <a href="https://en.wikipedia.org/wiki/Degrees_of_freedom_(mechanics">ways in which the system can move</a>) -- really we should try to think of it as the <a href="https://en.wikipedia.org/wiki/Degrees_of_freedom_(physics_and_chemistry">additional variables in phase space</a>) that become available by adding more particles and interactions. We will start with the canonical longitudinal oscillations of two coupled spring oscillators.</p>
-<img alt="Coupled Oscillator set up. Two oscillators connected by three springs in a horizontal line." src="images/chapters/two-coupled-gliders-diagram.png" width="800px/"/>
-<p>Our analysis will proceed with an investigation of <a href="https://en.wikipedia.org/wiki/Normal_mode">normal modes</a>, which is a powerful tool that lets us not only analyze systems with many degrees of freedom; it can help us conceptually think about building up solutions for continuous systems that have infinite degrees of freedom (i.e., a rope or a water wave).</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>We start by writing the differential equations that describe the motion of the system, noting that the length measures are critical for establishing the right differential equation:</p>
+</ul></div>
+<div class="notebook-markdown-cell"><p>```{admonition} Huygen's Clocks
+Much of this early understanding of synchronization we owe to the Dutch mathematician, <a href="https://en.wikipedia.org/wiki/Christiaan_Huygens">Christiann Huygens</a>, who spent much of his work trying to understand periodic motion. In this work, he observed the oscillation of two pendulum clocks that would eventually oscillate in precisely opposite swings. A great writeup of this history and its implications is <a href="https://www.quantamagazine.org/physicists-discover-exotic-patterns-of-synchronization-20190404/">here</a>. This phenomenon was explored experimentally and theoretically by three physicists at Georgia Tech, Matt Bennet, Mike Schatz (my Phd Advisor!), and Kurt Wiesenfeld. Their paper was written in collaboration with, history and language professor emerita, Heidi Rockwood. It's a <a href="http://engineering.nyu.edu/mechatronics/Control_Lab/bck/VKapila/Chaotic%20Ref/Hujgens.pdf">fun read</a>.</p>
+<p>We know use this phenomenon to <a href="https://en.wikipedia.org/wiki/Injection_locking#Entrainment">entrain oscillators</a>; this kind of mode locking is really important to science -- especially ultra-fast science. Physicists like <a href="https://www.ogilviegroup.org/">Dr. Jennifer Ogilive at the University of Michigan</a> use this phenomenon to image biological materials that undergo very fast transitions.
+```</p></div>
+<div class="notebook-markdown-cell"><h2 id="coupled-oscillations">Coupled Oscillations</h2>
+<p>The key to why these phenomena are possible is the increase in the number of <strong>Degrees of Freedom</strong>. You can think of this as the <a href="https://en.wikipedia.org/wiki/Degrees_of_freedom_(mechanics)">ways in which the system can move</a> -- really we should try to think of it as the <a href="https://en.wikipedia.org/wiki/Degrees_of_freedom_(physics_and_chemistry)">additional variables in phase space</a> that become available by adding more particles and interactions. We will start with the canonical longitudinal oscillations of two coupled spring oscillators.</p>
+<p><img src='https://www.entropy.energy/static/resources/coupled-oscillators/two-coupled-gliders-diagram.png' alt='Coupled Oscillator set up. Two oscillators connected by three springs in a horizontal line.' width=800px/></p>
+<p>Our analysis will proceed with an investigation of <a href="https://en.wikipedia.org/wiki/Normal_mode">normal modes</a>, which is a powerful tool that lets us not only analyze systems with many degrees of freedom; it can help us conceptually think about building up solutions for continuous systems that have infinite degrees of freedom (i.e., a rope or a water wave).</p></div>
+<div class="notebook-markdown-cell"><p>We start by writing the differential equations that describe the motion of the system, noting that the length measures are critical for establishing the right differential equation:</p>
 <p>Left mass:</p>
 <p>$$m \ddot{x}_{1} = -k x_1 + k'(x_2-x_1)$$</p>
 <p>Right mass:</p>
@@ -162,68 +138,45 @@ Much of this early understanding of synchronization we owe to the Dutch mathemat
 <p>$$\ddot{\mathbf{x}} = \pmb{A} \mathbf{x}$$</p>
 <p>where $\pmb{A}$ will represent the different coefficients in our differential equation. Below we write the matrix representation of the same equation above:</p>
 <p>$$\begin{bmatrix}
-\ddot{x}_1\\
+\ddot{x}_1\
 \ddot{x}_2
 \end{bmatrix} = \begin{bmatrix}
--\left(\dfrac{k}{m}+\dfrac{k'}{m}\right) &amp; +\dfrac{k'}{m}\\
+-\left(\dfrac{k}{m}+\dfrac{k'}{m}\right) &amp; +\dfrac{k'}{m}\
 +\dfrac{k'}{m} &amp; -\left(\dfrac{k}{m}+\dfrac{k'}{m}\right)
 \end{bmatrix}
 \begin{bmatrix}
-{x}_1\\
+{x}_1\
 {x}_2
 \end{bmatrix}
 $$</p>
 <p>When all the springs are the same $k$, you will show in class this leads to two normal modes with frequencies:</p>
 <p>$$\omega_1^2 = \dfrac{k}{m}$$
-$$\omega_2^2 = \dfrac{3k}{m}$$</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Additional-Resources">Additional Resources<a class="anchor-link" href="#Additional-Resources">¶</a></h2><p>This reading is useful preparation for our normal modes discussion.</p>
-<h3 id="Crawford's-Waves-book---Secs.-1.1-1.5">Crawford's Waves book - Secs. 1.1-1.5<a class="anchor-link" href="#Crawford's-Waves-book---Secs.-1.1-1.5">¶</a></h3><p>This book is a great resource for learning about oscillations and waves. Unfortunately, it is out of print. We will discuss a lot of these examples in class.</p>
-<ul>
-<li><a href="../assets/scans/Crawford-Waves-Secs_1.1-1.3.pdf">Ch 1.1-1.3 - A nice intro to waves, with examples and terminology defined</a></li>
-<li><a href="../assets/scans/Crawford-Waves-Secs_1.4-1.5.pdf">Ch 1.4-1.5 - Normal modes and beats</a></li>
-</ul>
-<p>These readings will introduce the concept of normal modes, which we will discuss with a short lecture and example that you will work. And it will show a phenomenon that we can explore: <a href="https://en.wikipedia.org/wiki/Beat_(acoustics">Beats</a>)</p>
-<h3 id="Handwritten-Notes">Handwritten Notes<a class="anchor-link" href="#Handwritten-Notes">¶</a></h3><p>Here are my handwritten notes on coupled oscillations and normal modes.</p>
+$$\omega_2^2 = \dfrac{3k}{m}$$</p></div>
+<div class="notebook-markdown-cell"><h2 id="additional-resources">Additional Resources</h2>
+<p>This reading is useful preparation for our normal modes discussion.</p>
+<h3 id="crawfords-waves-book-secs-11-15">Crawford's Waves book - Secs. 1.1-1.5</h3>
+<p>This book is a great resource for learning about oscillations and waves. Unfortunately, it is out of print. We will discuss a lot of these examples in class.
+- <a href="../assets/scans/Crawford-Waves-Secs_1.1-1.3.pdf">Ch 1.1-1.3 - A nice intro to waves, with examples and terminology defined</a>
+- <a href="../assets/scans/Crawford-Waves-Secs_1.4-1.5.pdf">Ch 1.4-1.5 - Normal modes and beats</a></p>
+<p>These readings will introduce the concept of normal modes, which we will discuss with a short lecture and example that you will work. And it will show a phenomenon that we can explore: <a href="https://en.wikipedia.org/wiki/Beat_(acoustics)">Beats</a></p>
+<h3 id="handwritten-notes">Handwritten Notes</h3>
+<p>Here are my handwritten notes on coupled oscillations and normal modes.</p>
 <ul>
 <li><a href="../assets/notes/Notes-Coupled_Oscillations.pdf">Coupled Oscillations</a></li>
 <li><a href="../assets/notes/Notes-Three_Coupled_Oscillators.pdf">Three coupled oscillator example</a></li>
 </ul>
-<h3 id="Video-Resources">Video Resources<a class="anchor-link" href="#Video-Resources">¶</a></h3><p>If you are a feeling that you would like a little more on oscillations, beats, and matrices before we have class. Check out this video.</p>
-<p><a href="https://inv.tux.pizza/watch?v=I0YACDaY-ww"><img alt="Coupled Oscillator Lecture" src="https://markdown-videos-api.jorgenkh.no/youtube/I0YACDaY-ww?width=720&amp;height=405"/></a></p>
+<h3 id="video-resources">Video Resources</h3>
+<p>If you are a feeling that you would like a little more on oscillations, beats, and matrices before we have class. Check out this video.</p>
+<p><a href="https://inv.tux.pizza/watch?v=I0YACDaY-ww"><img alt="Coupled Oscillator Lecture" src="https://markdown-videos-api.jorgenkh.no/youtube/I0YACDaY-ww?width=720&amp;height=405" /></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=I0YACDaY-ww">https://inv.tux.pizza/watch?v=I0YACDaY-ww</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=I0YACDaY-ww">https://youtube.com/watch?v=I0YACDaY-ww</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-</div>
-</div>
-</div>
-</div>
+</ul></div>
+<div class="notebook-markdown-cell"></div>
 </main>
-</div>
-    </main>
-  </div>
-  <footer class="site-footer">
-    <p>&copy; Modern Mathematical Methods. All rights reserved.</p>
-  </footer>
+<footer class="site-footer">
+  <p><p>&copy; Modern Mathematical Methods. All rights reserved.</p></p>
+</footer>
+
 </body>
 </html>

@@ -51,73 +51,69 @@
   <!-- MathJax for LaTeX rendering -->
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
 </head>
+
 <body>
-  
+
   <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
       <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
-      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+        <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+        <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+      </div>
     </div>
   </header>
-  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
-  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="activity-what_is_a_model.html">Activity: What is a Model?</a></li><li><a href="notes-SHO.html">Notes: Simple Harmonic Oscillator</a></li><li><a href="activity-frames.html">Activity: Frames and Coordinates</a></li><li><a href="activity-lagrange_1.html">Activity: Calculus of Variations and Lagrangian Dynamics</a></li><li><a href="activity-lagrange_2.html">Activity: Numerical Integration and More Lagrangians</a></li><li><a href="notes-numerical_integration_1d.html">Notes: Numerical Integration in 1D</a></li><li><a href="activity-phase_space.html">Activity: The Dynamical Systems Approach and Phase Portraits</a></li><li><a href="notes-phase_space.html">Notes: Dynamical Systems and Phase Space</a></li><li><a href="activity-duffing.html">The Duffing Oscillator</a></li><li><a href="notes-linearization_odes.html">Notes: Heading towards Chaos</a></li><li><a href="activity_vanderpol.html">Conducting a complete analysis of an ODE</a></li><li><a href="notes-lagrangian-dynamics.html">Book Reading: </a></li><li><a href="activity-efields.html">Activity: Electric Fields</a></li><li><a href="activity-sep_var.html">Activity: Separation of Variables</a></li><li><a href="activity-sep_var_spherical.html">Activity: Separation of Variables (Spherical)</a></li><li><a href="activity-sep_var_spherical_examples.html">Activity: Separation of Variables (Spherical Examples)</a></li><li><a href="activity-superposition.html">Activity: Superposition</a></li><li><a href="notes-electric_potential.html">Notes: Electric Potential</a></li><li><a href="notes-em_intro.html">Notes: Electromagnetism Introduction</a></li><li><a href="notes-static_fields.html">Notes: Static Fields</a></li><li><a href="notes-relaxation.html">Notes: Method of Relaxation</a></li><li><a href="activity-relaxation_2d.html">Activity: Method of Relaxation</a></li><li><a href="notes-fft.html">Notes: Fast Fourier Transform</a></li><li><a href="notes-coupled_oscillations.html">Notes: Coupled Oscillations</a></li><li><a href="notes-waves_intro.html">Notes: Introduction to Waves</a></li><li><a href="activity-CoupledOsc-NormalModes.html">Activity: Normal Modes</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">Activity: Normal Modes of N Coupled Oscillators</a></li><li><a href="notes-solve_the_wave_eq.html">Notes: Solutions to The Wave Equation</a></li><li><a href="activity-Waves-1D.html">Activity: 1-Dimensional Travelling Waves</a></li><li><a href="notes-Waves-Fouriers_Trick.html">Notes: Deconstructing Waves</a></li><li><a href="activity-Waves-Signals.html">Activity: Signal Deconstruction</a></li><li><a href="activity-Waves-seriesExpand.html">Activity: Automated Signal Deconstruction & Reconstruction</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">Activity: The Fast Fourier Transform</a></li><li><a href="activity-Waves-Applying_the_FFT.html">Activity: Applying The Fast Fourier Transform</a></li><li><a href="notes-Using-FFTs.html">Notes: Applications of FFTs</a></li><li><a href="activity-FFT-applications.html">Using the FFT with Real Data</a></li><li><a href="notes-randomness.html">Notes: Random Processes</a></li><li><a href="activity-radioactive_decay.html">Activity: Introduction to Random Processes</a></li><li><a href="notes-counting_and_combinatorics.html">Notes: Counting and Combinatorics</a></li><li><a href="notes-monte_carlo_simulations.html">Notes: Monte Carlo Simulations</a></li><li><a href="activity-thermal_contact.html">Activity: Model of Two Bodies in Thermal Contact</a></li><li><a href="activity-mc_integration.html">Activity: Monte Carlo Integration</a></li><li><a href="notes-mcmc.html">Notes: Markov Chain Monte Carlo Modeling</a></li><li><a href="activity-metropolis.html">Activity: Modeling the Ideal Gas</a></li><li><a href="activity-ising_model.html">Activity: The Ising Model</a></li><li><a href="activity-monte_carlo.html">Activity: Modeling</a></li><li><a href="activity-zombies.html">Activity: Modeling</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
-<!-- Hamburger menu and toggle JS commented out -->
-</nav>
-  <div class="container">
-    <main>
-      
-<nav class="chapter-downloads" aria-label="Download chapter sources">
-  <div role="group" aria-label="Download formats">
-    <a class="download-btn" href="sources/notes-static_fields/notes-static_fields.pdf" download><span aria-hidden="true">📄</span> PDF</a>
-    <a class="download-btn" href="sources/notes-static_fields/notes-static_fields.docx" download><span aria-hidden="true">📝</span> DOCX</a>
-    <a class="download-btn" href="sources/notes-static_fields/notes-static_fields.md" download><span aria-hidden="true">✍️</span> MD</a>
-    <a class="download-btn" href="sources/notes-static_fields/notes-static_fields.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
-    <a class="download-btn" href="sources/notes-static_fields/notes-static_fields.tex" download><span aria-hidden="true">📐</span> TEX</a>
-    <a class="download-btn" href="jupyter/content/notebooks/notes-static_fields.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+    
+
+  <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
+      <span id="theme-toggle-icon" aria-hidden="true">🌙</span> <span id="theme-toggle-label">Dark</span>
+    </button>
   </div>
-</nav>
-        <div class="markdown-body">
-<main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="26-Sept-23---Notes:-Static-Fields">26 Sept 23 - Notes: Static Fields<a class="anchor-link" href="#26-Sept-23---Notes:-Static-Fields">¶</a></h1>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Vector-Calculus">Vector Calculus<a class="anchor-link" href="#Vector-Calculus">¶</a></h2><p><a href="https://en.wikipedia.org/wiki/Maxwell%27s_equations">Maxwell's Equations</a>, even in their static form (i.e., static charges or steady currents), are a set of coupled partial differential equations. In order to develop solutions and models to approximate the behavior of electromagnetic fields, we need to be able to use vector calculus.</p>
+  <script>
+    // Simple theme toggle script
+    const btn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-toggle-icon');
+    const label = document.getElementById('theme-toggle-label');
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+      localStorage.setItem('theme', theme);
+    }
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    // On load, set theme from localStorage
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  </script>
+    
+<nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+<main class="site-main">
+<div class="notebook-markdown-cell"><h1 id="26-sept-23-notes-static-fields">26 Sept 23 - Notes: Static Fields</h1></div>
+<div class="notebook-markdown-cell"><h2 id="vector-calculus">Vector Calculus</h2>
+<p><a href="https://en.wikipedia.org/wiki/Maxwell%27s_equations">Maxwell's Equations</a>, even in their static form (i.e., static charges or steady currents), are a set of coupled partial differential equations. In order to develop solutions and models to approximate the behavior of electromagnetic fields, we need to be able to use vector calculus. </p>
 <p>The video below from <a href="https://www.3blue1brown.com/">3Blue1Brown</a> provides a conceptual introduction to the vector calculus that we are going to need for this.</p>
-<p><a href="https://inv.tux.pizza/watch?v=rB83DpBJQsE"><img alt="Vector Calculus" src="https://markdown-videos-api.jorgenkh.no/youtube/rB83DpBJQsE?width=720&amp;height=405"/></a></p>
+<p><a href="https://inv.tux.pizza/watch?v=rB83DpBJQsE"><img alt="Vector Calculus" src="https://markdown-videos-api.jorgenkh.no/youtube/rB83DpBJQsE?width=720&amp;height=405" /></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=rB83DpBJQsE">https://inv.tux.pizza/watch?v=rB83DpBJQsE</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=rB83DpBJQsE">https://youtube.com/watch?v=rB83DpBJQsE</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Electrostatic-fields">Electrostatic fields<a class="anchor-link" href="#Electrostatic-fields">¶</a></h2><p>The electrostatic field is one that is created by static (stationary) charges. This is often the first type of field that we encounter, where $\rho(\mathbf{r},t)) = \rho(\mathbf{r})$. Because the charges are stationary, the current density is zero, $\mathbf{J}(\mathbf{r},t) = \mathbf{0}$.</p>
-<h3 id="The-electric-field">The electric field<a class="anchor-link" href="#The-electric-field">¶</a></h3><p>The relevant Maxwell equations for $\mathbf{E}$ that govern an electrostatic situation are the following:</p>
+</ul></div>
+<div class="notebook-markdown-cell"><h2 id="electrostatic-fields">Electrostatic fields</h2>
+<p>The electrostatic field is one that is created by static (stationary) charges. This is often the first type of field that we encounter, where $\rho(\mathbf{r},t)) = \rho(\mathbf{r})$. Because the charges are stationary, the current density is zero, $\mathbf{J}(\mathbf{r},t) = \mathbf{0}$. </p>
+<h3 id="the-electric-field">The electric field</h3>
+<p>The relevant Maxwell equations for $\mathbf{E}$ that govern an electrostatic situation are the following:</p>
 <p>$$\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$$</p>
 <p>$$\nabla \times \mathbf{E} = 0$$</p>
 <p>You might recognize the first equation as the differential form of <a href="https://en.wikipedia.org/wiki/Gauss%27s_law">Gauss's Law</a>.</p>
-<p><img alt="Gauss's Law" src="https://subratachak.files.wordpress.com/2017/12/gauss-law-diagram-03.jpg?w=782"/></p>
+<p><img alt="Gauss's Law" src="https://subratachak.files.wordpress.com/2017/12/gauss-law-diagram-03.jpg?w=782" /></p>
 <p>As you can see from the figure above, Gauss's Law is always true, but almost never useful in solving problem outside specific geometries. The integral form of that equation is:</p>
 <p>$$\oint \mathbf{E} \cdot d\mathbf{A} = \frac{Q_{enc}}{\varepsilon_0}$$</p>
 <p>It is from considering the integral form of Gauss' Law that we can obtain the electric field produced by a single point charge, $Q$, at a location $\mathbf{r}'$:</p>
@@ -127,22 +123,15 @@
 <p>$$d\mathbf{E} = \frac{1}{4\pi\varepsilon_0} \frac{dq}{|\mathbf{r} - \mathbf{r}'|^3} (\mathbf{r} - \mathbf{r}')$$</p>
 <p>$$\mathbf{E}(\mathbf{r}) = \frac{1}{4\pi\varepsilon_0} \int \frac{dq}{|\mathbf{r} - \mathbf{r}'|^3} (\mathbf{r} - \mathbf{r}')$$</p>
 <p>We will find later that the <a href="https://en.wikipedia.org/wiki/Electric_potential">electric potential</a> ($V$) is a better choice if we can use it. It simplifies our vector problem to a scalar problem.</p>
-<h3 id="The-magnetic-field">The magnetic field<a class="anchor-link" href="#The-magnetic-field">¶</a></h3><p>The relevant Maxwell equations for $\mathbf{B}$ that govern an electrostatic situation are the following:</p>
+<h3 id="the-magnetic-field">The magnetic field</h3>
+<p>The relevant Maxwell equations for $\mathbf{B}$ that govern an electrostatic situation are the following:</p>
 <p>$$\nabla \cdot \mathbf{B} = 0$$</p>
 <p>$$\nabla \times \mathbf{B} = 0$$</p>
-<p>Notice that these equations are solved when $\mathbf{B}$ = 0. This is because there are no magnetic monopoles, so if the divergence and curl of the field are zero everywhere, then the field must be zero everywhere. There's simply no sources of magnetic field. So in an electrostatic situation, the magnetic field is zero and we are purely focused on the electric field.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Magnetostatic-fields">Magnetostatic fields<a class="anchor-link" href="#Magnetostatic-fields">¶</a></h2><p>In a magnetostatic situation, there have to be currents; that is, moving charges. That is the only make to generate magnetic field from particles. So you are going to have a non-zero current density. But we argue that the currents are steady, so $\mathbf{J}(\mathbf{r},t) = \mathbf{J}(\mathbf{r})$. Now, of course, there will be electric field, but we will discuss how we consider that in a moment.</p>
-<h3 id="The-magnetic-field">The magnetic field<a class="anchor-link" href="#The-magnetic-field">¶</a></h3><p>The relevant Maxwell equations for $\mathbf{B}$ that govern a magnetostatic situation are the following:</p>
+<p>Notice that these equations are solved when $\mathbf{B}$ = 0. This is because there are no magnetic monopoles, so if the divergence and curl of the field are zero everywhere, then the field must be zero everywhere. There's simply no sources of magnetic field. So in an electrostatic situation, the magnetic field is zero and we are purely focused on the electric field.</p></div>
+<div class="notebook-markdown-cell"><h2 id="magnetostatic-fields">Magnetostatic fields</h2>
+<p>In a magnetostatic situation, there have to be currents; that is, moving charges. That is the only make to generate magnetic field from particles. So you are going to have a non-zero current density. But we argue that the currents are steady, so $\mathbf{J}(\mathbf{r},t) = \mathbf{J}(\mathbf{r})$. Now, of course, there will be electric field, but we will discuss how we consider that in a moment.</p>
+<h3 id="the-magnetic-field">The magnetic field</h3>
+<p>The relevant Maxwell equations for $\mathbf{B}$ that govern a magnetostatic situation are the following:</p>
 <p>$$\nabla \cdot \mathbf{B} = 0$$</p>
 <p>$$\nabla \times \mathbf{B} = \mu_0 \mathbf{J}$$</p>
 <p>The first equation always holds; there are no <a href="https://en.wikipedia.org/wiki/Magnetic_monopole">magnetic monopoles</a>, despite much research into the area <a href="https://en.wikipedia.org/wiki/Magnetic_monopole#Searches_for_magnetic_monopoles">including searches</a> and a <a href="https://en.wikipedia.org/wiki/Magnetic_monopole#In_SI_units">theory of electromagnetism</a> that posits them. Here's a nice article summarizing the state of the magnetic monopole research from 2016, <a href="https://phys.org/news/2016-08-mysterious-magnetic-monopole.html">The mysterious missing magnetic monopole</a>, and an <a href="https://icecube.wisc.edu/news/research/2022/01/icecube-and-the-mystery-of-the-missing-magnetic-monopoles/">article from the IceCube experiment</a>, which a number of our <a href="https://pa.msu.edu/high-energy-physics/icecube-neutrino-observatory.aspx">faculty, grad students, and undergrads are involved in</a>.</p>
@@ -156,50 +145,28 @@
 <p>In practice, we rarely use this form of the qeuation directly because it requires integrable solutions. Instead, we use the integral form of Ampere's Law to solve problems with symmetry, we use the differential forms to solve problems numerically, and we develop other theoretical approaches. Because the divergence of the magnetic field is zero, we can write the magnetic field as the curl of a <a href="https://en.wikipedia.org/wiki/Magnetic_vector_potential">vector potential</a>, $\mathbf{B} = \nabla \times \mathbf{A}$. This has a integral form that is similar to the Biot-Savart Law, but directly proportional to the current density, which is much nicer:</p>
 <p>$$\mathbf{A} = \frac{\mu_0}{4\pi} \int_V \frac{\mathbf{J}(\mathbf{r}')}{|\mathbf{r} - \mathbf{r}'|} d\tau'$$</p>
 <p>It turns out this is a better method for solving problems, especially computationally. That is beyond the scope of this course.</p>
-<h3 id="The-electric-field">The electric field<a class="anchor-link" href="#The-electric-field">¶</a></h3><p>Because there is a magnetic field, the relevant Maxwell equations for $\mathbf{E}$ that govern a magnetostatic situation are the following:</p>
+<h3 id="the-electric-field">The electric field</h3>
+<p>Because there is a magnetic field, the relevant Maxwell equations for $\mathbf{E}$ that govern a magnetostatic situation are the following:</p>
 <p>$$\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$$</p>
 <p>$$\nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}$$</p>
 <p>Notice now we have to consider a changing magnetic field. In the magnetostatic situation, we argue the current densities are setup such that the magnetic field is static (i.e., $\frac{\partial \mathbf{B}}{\partial t} = 0$).  This means the relevant equations for the electric field remain those in the electrostatic situation:</p>
 <p>$$\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$$</p>
 <p>$$\nabla \times \mathbf{E} = 0$$</p>
-<p>And all the relevant tools we will develop for the electrostatic situation for $\mathbf{E}$ apply here as well.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Additional-Resources">Additional Resources<a class="anchor-link" href="#Additional-Resources">¶</a></h2><h3 id="Handwritten-Notes">Handwritten Notes<a class="anchor-link" href="#Handwritten-Notes">¶</a></h3><ul>
+<p>And all the relevant tools we will develop for the electrostatic situation for $\mathbf{E}$ apply here as well.</p></div>
+<div class="notebook-markdown-cell"><h2 id="additional-resources">Additional Resources</h2>
+<h3 id="handwritten-notes">Handwritten Notes</h3>
+<ul>
 <li><a href="../../assets/notes/Notes-Vector_Calculus.pdf">Vector Calculus</a></li>
 <li><a href="../../assets/notes/Notes-Electrostatics_and_Superposition.pdf">Electrostatics and Superposition</a></li>
 <li><a href="../../assets/notes/Notes-Gauss_Law.pdf">Gauss's Law</a></li>
 <li><a href="../../assets/notes/Notes-Magnetostatics.pdf">Magnetostatics</a></li>
 <li><a href="../../assets/notes/Notes-Amperes_Law.pdf">Ampere's Law</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-</div>
-</div>
-</div>
-</div>
+</ul></div>
+<div class="notebook-markdown-cell"></div>
 </main>
-</div>
-    </main>
-  </div>
-  <footer class="site-footer">
-    <p>&copy; Modern Mathematical Methods. All rights reserved.</p>
-  </footer>
+<footer class="site-footer">
+  <p><p>&copy; Modern Mathematical Methods. All rights reserved.</p></p>
+</footer>
+
 </body>
 </html>

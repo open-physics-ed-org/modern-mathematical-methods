@@ -51,55 +51,72 @@
   <!-- MathJax for LaTeX rendering -->
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
 </head>
+
 <body>
-  
+
   <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
       <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
-      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+        <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+        <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+      </div>
     </div>
   </header>
-  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
-  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="activity-what_is_a_model.html">Activity: What is a Model?</a></li><li><a href="notes-SHO.html">Notes: Simple Harmonic Oscillator</a></li><li><a href="activity-frames.html">Activity: Frames and Coordinates</a></li><li><a href="activity-lagrange_1.html">Activity: Calculus of Variations and Lagrangian Dynamics</a></li><li><a href="activity-lagrange_2.html">Activity: Numerical Integration and More Lagrangians</a></li><li><a href="notes-numerical_integration_1d.html">Notes: Numerical Integration in 1D</a></li><li><a href="activity-phase_space.html">Activity: The Dynamical Systems Approach and Phase Portraits</a></li><li><a href="notes-phase_space.html">Notes: Dynamical Systems and Phase Space</a></li><li><a href="activity-duffing.html">The Duffing Oscillator</a></li><li><a href="notes-linearization_odes.html">Notes: Heading towards Chaos</a></li><li><a href="activity_vanderpol.html">Conducting a complete analysis of an ODE</a></li><li><a href="notes-lagrangian-dynamics.html">Book Reading: </a></li><li><a href="activity-efields.html">Activity: Electric Fields</a></li><li><a href="activity-sep_var.html">Activity: Separation of Variables</a></li><li><a href="activity-sep_var_spherical.html">Activity: Separation of Variables (Spherical)</a></li><li><a href="activity-sep_var_spherical_examples.html">Activity: Separation of Variables (Spherical Examples)</a></li><li><a href="activity-superposition.html">Activity: Superposition</a></li><li><a href="notes-electric_potential.html">Notes: Electric Potential</a></li><li><a href="notes-em_intro.html">Notes: Electromagnetism Introduction</a></li><li><a href="notes-static_fields.html">Notes: Static Fields</a></li><li><a href="notes-relaxation.html">Notes: Method of Relaxation</a></li><li><a href="activity-relaxation_2d.html">Activity: Method of Relaxation</a></li><li><a href="notes-fft.html">Notes: Fast Fourier Transform</a></li><li><a href="notes-coupled_oscillations.html">Notes: Coupled Oscillations</a></li><li><a href="notes-waves_intro.html">Notes: Introduction to Waves</a></li><li><a href="activity-CoupledOsc-NormalModes.html">Activity: Normal Modes</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">Activity: Normal Modes of N Coupled Oscillators</a></li><li><a href="notes-solve_the_wave_eq.html">Notes: Solutions to The Wave Equation</a></li><li><a href="activity-Waves-1D.html">Activity: 1-Dimensional Travelling Waves</a></li><li><a href="notes-Waves-Fouriers_Trick.html">Notes: Deconstructing Waves</a></li><li><a href="activity-Waves-Signals.html">Activity: Signal Deconstruction</a></li><li><a href="activity-Waves-seriesExpand.html">Activity: Automated Signal Deconstruction & Reconstruction</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">Activity: The Fast Fourier Transform</a></li><li><a href="activity-Waves-Applying_the_FFT.html">Activity: Applying The Fast Fourier Transform</a></li><li><a href="notes-Using-FFTs.html">Notes: Applications of FFTs</a></li><li><a href="activity-FFT-applications.html">Using the FFT with Real Data</a></li><li><a href="notes-randomness.html">Notes: Random Processes</a></li><li><a href="activity-radioactive_decay.html">Activity: Introduction to Random Processes</a></li><li><a href="notes-counting_and_combinatorics.html">Notes: Counting and Combinatorics</a></li><li><a href="notes-monte_carlo_simulations.html">Notes: Monte Carlo Simulations</a></li><li><a href="activity-thermal_contact.html">Activity: Model of Two Bodies in Thermal Contact</a></li><li><a href="activity-mc_integration.html">Activity: Monte Carlo Integration</a></li><li><a href="notes-mcmc.html">Notes: Markov Chain Monte Carlo Modeling</a></li><li><a href="activity-metropolis.html">Activity: Modeling the Ideal Gas</a></li><li><a href="activity-ising_model.html">Activity: The Ising Model</a></li><li><a href="activity-monte_carlo.html">Activity: Modeling</a></li><li><a href="activity-zombies.html">Activity: Modeling</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
-<!-- Hamburger menu and toggle JS commented out -->
-</nav>
-  <div class="container">
-    <main>
-      
-<nav class="chapter-downloads" aria-label="Download chapter sources">
-  <div role="group" aria-label="Download formats">
-    <a class="download-btn" href="sources/activity-duffing/activity-duffing.pdf" download><span aria-hidden="true">📄</span> PDF</a>
-    <a class="download-btn" href="sources/activity-duffing/activity-duffing.docx" download><span aria-hidden="true">📝</span> DOCX</a>
-    <a class="download-btn" href="sources/activity-duffing/activity-duffing.md" download><span aria-hidden="true">✍️</span> MD</a>
-    <a class="download-btn" href="sources/activity-duffing/activity-duffing.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
-    <a class="download-btn" href="sources/activity-duffing/activity-duffing.tex" download><span aria-hidden="true">📐</span> TEX</a>
-    <a class="download-btn" href="jupyter/content/notebooks/activity-duffing.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+    
+
+  <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
+      <span id="theme-toggle-icon" aria-hidden="true">🌙</span> <span id="theme-toggle-label">Dark</span>
+    </button>
   </div>
-</nav>
-        <div class="markdown-body">
-<main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="19-Sep-23---The-Duffing-Oscillator">19 Sep 23 - The Duffing Oscillator<a class="anchor-link" href="#19-Sep-23---The-Duffing-Oscillator">¶</a></h1><p>We have developed a set of tools to investigate differential equations. You will now apply those skills to the <a href="https://en.wikipedia.org/wiki/Duffing_equation">Duffing Oscillator</a>. The Duffing Oscillator is a second order differential equation that is used to model a forced nonlinear spring. The equation is given by:</p>
+  <script>
+    // Simple theme toggle script
+    const btn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-toggle-icon');
+    const label = document.getElementById('theme-toggle-label');
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+      localStorage.setItem('theme', theme);
+    }
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    // On load, set theme from localStorage
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  </script>
+    
+<nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+<main class="site-main">
+<div class="notebook-markdown-cell"><h1 id="19-sep-23-the-duffing-oscillator">19 Sep 23 - The Duffing Oscillator</h1>
+<p>We have developed a set of tools to investigate differential equations. You will now apply those skills to the <a href="https://en.wikipedia.org/wiki/Duffing_equation">Duffing Oscillator</a>. The Duffing Oscillator is a second order differential equation that is used to model a forced nonlinear spring. The equation is given by:</p>
 <p>$$\frac{d^2x}{dt^2} + \delta \frac{dx}{dt} + \alpha x + \beta x^3 = \gamma \cos(\omega t)$$</p>
 <p>And written in the form $\ddot{x} = f(x, \dot{x}, t)$, it is:</p>
 <p>$$\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3 + \gamma \cos(\omega t)$$</p>
 <p>where $x$ is the position of the oscillator, $\delta$ is a damping term, $\alpha$ is the stiffness of the spring, $\beta$ is the strength of the non-linear term, $\gamma$ is the amplitude of the driving force, and $\omega$ is the frequency of the driving force.</p>
-<p><img alt="Duffing Oscillator" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Duffing_oscillator_strange_attractor_with_color.gif"/></p>
+<p><img alt="Duffing Oscillator" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Duffing_oscillator_strange_attractor_with_color.gif" /></p>
 <p><em>From <a href="https://commons.wikimedia.org/wiki/File:Duffing_oscillator_strange_attractor_with_color.gif">Wikipedia</a></em></p>
-<h2 id="Activity">Activity<a class="anchor-link" href="#Activity">¶</a></h2><p>This is a complicated oscillator with damping, forcing, and non-linearity. We will investigate the behavior of the oscillator for different values of the parameters, and you will need to bring all the tools we have used so far to bear on this problem. We will perform this work systematically, as way of helping you recognize the steps you can take to investigate any differential equation. <em>You are welcome to use any of the code that we developed or presented in class.</em></p>
-<h3 id="Organizing-your-analysis">Organizing your analysis<a class="anchor-link" href="#Organizing-your-analysis">¶</a></h3><p>The Duffing Oscillator has a lot of different elements and can become complicated very quickly. To help start our analysis let's consider three models with increasing complexity:</p>
+<h2 id="activity">Activity</h2>
+<p>This is a complicated oscillator with damping, forcing, and non-linearity. We will investigate the behavior of the oscillator for different values of the parameters, and you will need to bring all the tools we have used so far to bear on this problem. We will perform this work systematically, as way of helping you recognize the steps you can take to investigate any differential equation. <em>You are welcome to use any of the code that we developed or presented in class.</em></p>
+<h3 id="organizing-your-analysis">Organizing your analysis</h3>
+<p>The Duffing Oscillator has a lot of different elements and can become complicated very quickly. To help start our analysis let's consider three models with increasing complexity:</p>
 <ol>
 <li><strong>Model 1</strong> (no damping and no forcing) $\ddot{x} = - \alpha x - \beta x^3$</li>
 <li><strong>Model 2</strong> (no forcing) $\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3$</li>
 <li><strong>Model 3</strong> (full model) $\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3 + \gamma \cos(\omega t)$</li>
 </ol>
-<p><strong>✅ Do this</strong></p>
-<h3 id="Tasks-to-complete">Tasks to complete<a class="anchor-link" href="#Tasks-to-complete">¶</a></h3><p>For each of these models, you should produce the following:</p>
+<p><strong>&#9989; Do this</strong> </p>
+<h3 id="tasks-to-complete">Tasks to complete</h3>
+<p>For each of these models, you should produce the following:</p>
 <ol>
 <li>The fixed points (if they can be found and their linear stability)</li>
 <li>A phase portrait of the system</li>
@@ -107,56 +124,22 @@
 <li>A graph of a trajectory in the phase portrait</li>
 <li>An approximate solution to the differential equation for a limiting case</li>
 </ol>
-<h3 id="Exploring-your-models">Exploring your models<a class="anchor-link" href="#Exploring-your-models">¶</a></h3><p>As you are developing your models, you should consider the following questions:</p>
+<h3 id="exploring-your-models">Exploring your models</h3>
+<p>As you are developing your models, you should consider the following questions:</p>
 <ol>
 <li>What kinds of motion seems possible for each model?</li>
 <li>What are the limiting cases for each model? What solutions do they represent? Think about the physical meaning of the parameters.</li>
 <li>What relationships exist between the parameters and the motion of the system? That is, what happens when you change the parameters?</li>
-</ol>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Imports to get started</span>
+</ol></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## Imports to get started
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## YOUR CODE HERE</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Routes-to-Chaos">Routes to Chaos<a class="anchor-link" href="#Routes-to-Chaos">¶</a></h2><p>One important route to chaotic behavior is through <a href="https://en.wikipedia.org/wiki/Period-doubling_bifurcation">period doubling</a>. It is not the only way for a system to become chaotic, but it is a characteristic way that a system will tend towards chaos.</p>
-<p><strong>✅ Do this</strong></p>
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.integrate import solve_ivp</code></pre></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## YOUR CODE HERE</code></pre></div>
+<div class="notebook-markdown-cell"><h2 id="routes-to-chaos">Routes to Chaos</h2>
+<p>One important route to chaotic behavior is through <a href="https://en.wikipedia.org/wiki/Period-doubling_bifurcation">period doubling</a>. It is not the only way for a system to become chaotic, but it is a characteristic way that a system will tend towards chaos. </p>
+<p><strong>&#9989; Do this</strong> </p>
 <p>If your code is fully working, you can use known values of the parameters to investigate this behavior. For this part of the activity, you should use the full model and the following parameters:</p>
 <table>
 <thead>
@@ -188,27 +171,12 @@
 </tr>
 </tbody>
 </table>
-<p>Here $\gamma$ is the only parameter that we will change. Produce phase plots of $x(t)$ and $x(\dot{x})$ for several choices of $\gamma$ with $x(0) = 1$ and $\dot{x}(0) = 0$.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-</div>
-</div>
-</div>
-</div>
+<p>Here $\gamma$ is the only parameter that we will change. Produce phase plots of $x(t)$ and $x(\dot{x})$ for several choices of $\gamma$ with $x(0) = 1$ and $\dot{x}(0) = 0$.</p></div>
+<div class="notebook-markdown-cell"></div>
 </main>
-</div>
-    </main>
-  </div>
-  <footer class="site-footer">
-    <p>&copy; Modern Mathematical Methods. All rights reserved.</p>
-  </footer>
+<footer class="site-footer">
+  <p><p>&copy; Modern Mathematical Methods. All rights reserved.</p></p>
+</footer>
+
 </body>
 </html>

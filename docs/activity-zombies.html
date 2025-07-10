@@ -51,65 +51,72 @@
   <!-- MathJax for LaTeX rendering -->
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
 </head>
+
 <body>
-  
+
   <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
       <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
-      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+        <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+        <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+      </div>
     </div>
   </header>
-  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
-  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="activity-what_is_a_model.html">Activity: What is a Model?</a></li><li><a href="notes-SHO.html">Notes: Simple Harmonic Oscillator</a></li><li><a href="activity-frames.html">Activity: Frames and Coordinates</a></li><li><a href="activity-lagrange_1.html">Activity: Calculus of Variations and Lagrangian Dynamics</a></li><li><a href="activity-lagrange_2.html">Activity: Numerical Integration and More Lagrangians</a></li><li><a href="notes-numerical_integration_1d.html">Notes: Numerical Integration in 1D</a></li><li><a href="activity-phase_space.html">Activity: The Dynamical Systems Approach and Phase Portraits</a></li><li><a href="notes-phase_space.html">Notes: Dynamical Systems and Phase Space</a></li><li><a href="activity-duffing.html">The Duffing Oscillator</a></li><li><a href="notes-linearization_odes.html">Notes: Heading towards Chaos</a></li><li><a href="activity_vanderpol.html">Conducting a complete analysis of an ODE</a></li><li><a href="notes-lagrangian-dynamics.html">Book Reading: </a></li><li><a href="activity-efields.html">Activity: Electric Fields</a></li><li><a href="activity-sep_var.html">Activity: Separation of Variables</a></li><li><a href="activity-sep_var_spherical.html">Activity: Separation of Variables (Spherical)</a></li><li><a href="activity-sep_var_spherical_examples.html">Activity: Separation of Variables (Spherical Examples)</a></li><li><a href="activity-superposition.html">Activity: Superposition</a></li><li><a href="notes-electric_potential.html">Notes: Electric Potential</a></li><li><a href="notes-em_intro.html">Notes: Electromagnetism Introduction</a></li><li><a href="notes-static_fields.html">Notes: Static Fields</a></li><li><a href="notes-relaxation.html">Notes: Method of Relaxation</a></li><li><a href="activity-relaxation_2d.html">Activity: Method of Relaxation</a></li><li><a href="notes-fft.html">Notes: Fast Fourier Transform</a></li><li><a href="notes-coupled_oscillations.html">Notes: Coupled Oscillations</a></li><li><a href="notes-waves_intro.html">Notes: Introduction to Waves</a></li><li><a href="activity-CoupledOsc-NormalModes.html">Activity: Normal Modes</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">Activity: Normal Modes of N Coupled Oscillators</a></li><li><a href="notes-solve_the_wave_eq.html">Notes: Solutions to The Wave Equation</a></li><li><a href="activity-Waves-1D.html">Activity: 1-Dimensional Travelling Waves</a></li><li><a href="notes-Waves-Fouriers_Trick.html">Notes: Deconstructing Waves</a></li><li><a href="activity-Waves-Signals.html">Activity: Signal Deconstruction</a></li><li><a href="activity-Waves-seriesExpand.html">Activity: Automated Signal Deconstruction & Reconstruction</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">Activity: The Fast Fourier Transform</a></li><li><a href="activity-Waves-Applying_the_FFT.html">Activity: Applying The Fast Fourier Transform</a></li><li><a href="notes-Using-FFTs.html">Notes: Applications of FFTs</a></li><li><a href="activity-FFT-applications.html">Using the FFT with Real Data</a></li><li><a href="notes-randomness.html">Notes: Random Processes</a></li><li><a href="activity-radioactive_decay.html">Activity: Introduction to Random Processes</a></li><li><a href="notes-counting_and_combinatorics.html">Notes: Counting and Combinatorics</a></li><li><a href="notes-monte_carlo_simulations.html">Notes: Monte Carlo Simulations</a></li><li><a href="activity-thermal_contact.html">Activity: Model of Two Bodies in Thermal Contact</a></li><li><a href="activity-mc_integration.html">Activity: Monte Carlo Integration</a></li><li><a href="notes-mcmc.html">Notes: Markov Chain Monte Carlo Modeling</a></li><li><a href="activity-metropolis.html">Activity: Modeling the Ideal Gas</a></li><li><a href="activity-ising_model.html">Activity: The Ising Model</a></li><li><a href="activity-monte_carlo.html">Activity: Modeling</a></li><li><a href="activity-zombies.html">Activity: Modeling</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
-<!-- Hamburger menu and toggle JS commented out -->
-</nav>
-  <div class="container">
-    <main>
-      
-<nav class="chapter-downloads" aria-label="Download chapter sources">
-  <div role="group" aria-label="Download formats">
-    <a class="download-btn" href="sources/activity-zombies/activity-zombies.pdf" download><span aria-hidden="true">📄</span> PDF</a>
-    <a class="download-btn" href="sources/activity-zombies/activity-zombies.docx" download><span aria-hidden="true">📝</span> DOCX</a>
-    <a class="download-btn" href="sources/activity-zombies/activity-zombies.md" download><span aria-hidden="true">✍️</span> MD</a>
-    <a class="download-btn" href="sources/activity-zombies/activity-zombies.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
-    <a class="download-btn" href="sources/activity-zombies/activity-zombies.tex" download><span aria-hidden="true">📐</span> TEX</a>
-    <a class="download-btn" href="jupyter/content/notebooks/activity-zombies.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+    
+
+  <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
+      <span id="theme-toggle-icon" aria-hidden="true">🌙</span> <span id="theme-toggle-label">Dark</span>
+    </button>
   </div>
-</nav>
-        <div class="markdown-body">
-<main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="7-Dec-23---Activity:-Modeling">7 Dec 23 - Activity: Modeling<a class="anchor-link" href="#7-Dec-23---Activity:-Modeling">¶</a></h1><p>While this course has focused on physics and physical systems, the same techniques and approaches that you have developed, can be used to investigate systems in other fields. In this activity, we will demonstrate an initial model, and then ask you to complicate it with the ideas you have developed. Consider the critical issue of a potential <strong>zombie apocalypse</strong>.</p>
+  <script>
+    // Simple theme toggle script
+    const btn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-toggle-icon');
+    const label = document.getElementById('theme-toggle-label');
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+      localStorage.setItem('theme', theme);
+    }
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    // On load, set theme from localStorage
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  </script>
+    
+<nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+<main class="site-main">
+<div class="notebook-markdown-cell"><h1 id="7-dec-23-activity-modeling">7 Dec 23 - Activity: Modeling</h1>
+<p>While this course has focused on physics and physical systems, the same techniques and approaches that you have developed, can be used to investigate systems in other fields. In this activity, we will demonstrate an initial model, and then ask you to complicate it with the ideas you have developed. Consider the critical issue of a potential <strong>zombie apocalypse</strong>.</p>
 <p>While this might seem a little silly, the models and dynamics of a zombie apocalypse can be adapted from the models of disease spread. In fact, the <a href="https://www.usatoday.com/story/news/nation/2021/03/05/zombie-apocalypse-cdc-useful-advice-any-emergency-pandemic/6920614002/">CDC had a page dedicated</a> to this topic. For those who might be really interested, the behavior fo zombie hoards can be modeled like flocking birds or schools of fish.</p>
-<h2 id="What-are-we-doing?">What are we doing?<a class="anchor-link" href="#What-are-we-doing?">¶</a></h2><p>Saving the world, obviously.</p>
-<p><a href="https://inv.tux.pizza/watch?v=MQ8ZKw7YIfQ"><img alt="Night of the Living Dead" src="https://markdown-videos-api.jorgenkh.no/youtube/MQ8ZKw7YIfQ?width=720&amp;height=405"/></a></p>
+<h2 id="what-are-we-doing">What are we doing?</h2>
+<p>Saving the world, obviously.</p>
+<p><a href="https://inv.tux.pizza/watch?v=MQ8ZKw7YIfQ"><img alt="Night of the Living Dead" src="https://markdown-videos-api.jorgenkh.no/youtube/MQ8ZKw7YIfQ?width=720&amp;height=405" /></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=MQ8ZKw7YIfQ">https://inv.tux.pizza/watch?v=MQ8ZKw7YIfQ</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=MQ8ZKw7YIfQ">https://youtube.com/watch?v=MQ8ZKw7YIfQ</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Where-do-we-start?-Compartmental-models">Where do we start? Compartmental models<a class="anchor-link" href="#Where-do-we-start?-Compartmental-models">¶</a></h2><p>The modeling of epidemics follows from a few simple considerations:</p>
+</ul></div>
+<div class="notebook-markdown-cell"><h2 id="where-do-we-start-compartmental-models">Where do we start? Compartmental models</h2>
+<p>The modeling of epidemics follows from a few simple considerations:</p>
 <ul>
 <li>the population under consideration ca be sufficiently compartmentalized into distinct groups, and</li>
 <li>there is a rate (fixed or variable) at which individuals can move between compartments.</li>
 </ul>
 <p>The <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology">compartmental model</a> is a simple way to model the spread of a disease and where we will start.</p>
-<h3 id="The-SIS-model">The SIS model<a class="anchor-link" href="#The-SIS-model">¶</a></h3><p>The Susceptible-Infected-Susceptible (SIS) model describes an epidemic in which healthy individuals (Susceptibles) can become infected with the disease in question (Infected). The infected individuals can be cured but retain no natural immunity to the disease (i.e., become susceptible again). The figure below illustrates the compartments and flux of individuals in the SIS model. Such models are suitable for bacterial infections.</p>
-<p><img alt="The SIS model" src="images/chapters/sis.png"/></p>
+<h3 id="the-sis-model">The SIS model</h3>
+<p>The Susceptible-Infected-Susceptible (SIS) model describes an epidemic in which healthy individuals (Susceptibles) can become infected with the disease in question (Infected). The infected individuals can be cured but retain no natural immunity to the disease (i.e., become susceptible again). The figure below illustrates the compartments and flux of individuals in the SIS model. Such models are suitable for bacterial infections.</p>
+<p><img alt="The SIS model" src="../assets/images/sis.png" /></p>
 <p>The dynamics are given by,</p>
 <p>$$\dfrac{dS}{dt} = -\beta S I + \gamma I$$
 $$\dfrac{dI}{dt} = \beta S I - \gamma I$$</p>
@@ -117,104 +124,43 @@ $$\dfrac{dI}{dt} = \beta S I - \gamma I$$</p>
 <p>$$\dfrac{dS}{dt} = -\beta S I + \gamma (N - S)$$
 $$I(t) = N - S(t)$$</p>
 <p>For given values of $\beta$ and $\gamma$, we can solve these equations numerically.</p>
-<h3 id="The-SIR-model">The SIR model<a class="anchor-link" href="#The-SIR-model">¶</a></h3><p>The Susceptible-Infected-Recovered (SIR) model describes an epidemic in which healthy individuals (Susceptibles) can become infected with the disease in question (Infected). The infected individuals can be cured and retain a natural immunity to the disease (Recovered). The figure below illustrates the compartments and flux of individuals in the SIR model. Such models are suitable for viral infections. We can modify this model for the zombies.</p>
-<p><img alt="The SIR model" src="images/chapters/sir.png"/></p>
+<h3 id="the-sir-model">The SIR model</h3>
+<p>The Susceptible-Infected-Recovered (SIR) model describes an epidemic in which healthy individuals (Susceptibles) can become infected with the disease in question (Infected). The infected individuals can be cured and retain a natural immunity to the disease (Recovered). The figure below illustrates the compartments and flux of individuals in the SIR model. Such models are suitable for viral infections. We can modify this model for the zombies.</p>
+<p><img alt="The SIR model" src="../assets/images/sir.png" /></p>
 <p>The transfer rates can be defined for the SIR model as was for the SIS model. The rate equations that govern this model are three ordinary non-linear differential equations. Again, we have neglected the birth and death rates of the populations by making the approximation the epidemic occurs very quickly.</p>
 <p>$$\dfrac{dS}{dt} = -\beta S I$$
 $$\dfrac{dI}{dt} = \beta S I - \gamma I$$
 $$\dfrac{dR}{dt} = \gamma I$$</p>
 <p>Again, for given values of $\beta$ and $\gamma$, we can solve these equations numerically.</p>
-<h3 id="The-SZR-model">The SZR model<a class="anchor-link" href="#The-SZR-model">¶</a></h3><p>This SZR model treats the population as compartmentalized into the 3 groups: Susceptible (S), Zombie (Z), and Removed (R). Movement between these groups is illustrated below.</p>
-<p><img alt="The SZR model" src="images/chapters/szr.png"/></p>
+<h3 id="the-szr-model">The SZR model</h3>
+<p>This SZR model treats the population as compartmentalized into the 3 groups: Susceptible (S), Zombie (Z), and Removed (R). Movement between these groups is illustrated below.</p>
+<p><img alt="The SZR model" src="../assets/images/szr.png" /></p>
 <p>Susceptibles can become zombies through an encounter with a zombie. Zombies can move to the removed compartment by being destroyed in classic manners (e.g., Dawn of the Dead). Susceptibles can move to the removed compartment through death by a non-zombie encounter. Finally, removed individuals can become zombies through typical resurrection techniques (e.g., Live and Let Die).</p>
 <p>The deterministic model includes transfer rates we have seen before, but we include the rates of transfer from susceptible to removed ($\delta$) and removed to zombie ($\xi$).</p>
 <p>$$\dfrac{dS}{dt} = - \beta S Z - \delta S$$
 $$\dfrac{dZ}{dt} = \beta S Z + \xi R - \gamma S Z$$
 $$\dfrac{dR}{dt} = \delta S +\gamma SZ - \xi R$$</p>
-<p>For given values of values of $\beta$, $\gamma$, $\delta$, and $\xi$, we can solve these equations numerically.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Tasks-for-today">Tasks for today<a class="anchor-link" href="#Tasks-for-today">¶</a></h3><p><strong>✅ Do this</strong></p>
+<p>For given values of values of $\beta$, $\gamma$, $\delta$, and $\xi$, we can solve these equations numerically.</p></div>
+<div class="notebook-markdown-cell"><h3 id="tasks-for-today">Tasks for today</h3>
+<p><strong>&#9989; Do this</strong> </p>
 <ol>
 <li>Work with your group to model the SIS and SIR systems. Choose values or non-dimensionalize the equations to reduce the number of parameters.</li>
 <li>Consider the many tools we have used to investigate ODEs. What more information can you extract from these models? What are the limitations of these models?</li>
 <li>Do the same for the SZR model. What are the limitations of this model? What are the advantages of this model?</li>
-</ol>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## your code here</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Challenges">Challenges<a class="anchor-link" href="#Challenges">¶</a></h3><p><strong>✅ Do this</strong></p>
-<ol start="4">
+</ol></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## your code here</code></pre></div>
+<div class="notebook-markdown-cell"><h3 id="challenges">Challenges</h3>
+<p><strong>&#9989; Do this</strong> </p>
+<ol>
 <li><strong>Challenge</strong>: Build an SZQR model where the CDC quarantines some number of susecptibles and zombies (at different rates). How does this change the dynamics of the system?</li>
 <li><strong>Challenge</strong>: Introduce stochasticity into the model. What happened if instead there were a probability of infection or death? How does this change the dynamics of the system? If you are interested in this, look at <a href="../assets/papers/z-epidemic.pdf">this paper</a>.</li>
-</ol>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## your code here</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
+</ol></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## your code here</code></pre></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code></code></pre></div>
 </main>
-</div>
-    </main>
-  </div>
-  <footer class="site-footer">
-    <p>&copy; Modern Mathematical Methods. All rights reserved.</p>
-  </footer>
+<footer class="site-footer">
+  <p><p>&copy; Modern Mathematical Methods. All rights reserved.</p></p>
+</footer>
+
 </body>
 </html>

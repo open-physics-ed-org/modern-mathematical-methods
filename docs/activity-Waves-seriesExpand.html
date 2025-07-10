@@ -51,87 +51,83 @@
   <!-- MathJax for LaTeX rendering -->
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
 </head>
+
 <body>
-  
+
   <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
     <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
       <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
-      <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+        <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+        <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+      </div>
     </div>
   </header>
-  <button id="theme-toggle" class="toggle-dark" aria-label="Toggle dark/light mode">🌗</button>
-  <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a><ul class="dropdown-menu menu-level-1"><li><a href="activity-what_is_a_model.html">Activity: What is a Model?</a></li><li><a href="notes-SHO.html">Notes: Simple Harmonic Oscillator</a></li><li><a href="activity-frames.html">Activity: Frames and Coordinates</a></li><li><a href="activity-lagrange_1.html">Activity: Calculus of Variations and Lagrangian Dynamics</a></li><li><a href="activity-lagrange_2.html">Activity: Numerical Integration and More Lagrangians</a></li><li><a href="notes-numerical_integration_1d.html">Notes: Numerical Integration in 1D</a></li><li><a href="activity-phase_space.html">Activity: The Dynamical Systems Approach and Phase Portraits</a></li><li><a href="notes-phase_space.html">Notes: Dynamical Systems and Phase Space</a></li><li><a href="activity-duffing.html">The Duffing Oscillator</a></li><li><a href="notes-linearization_odes.html">Notes: Heading towards Chaos</a></li><li><a href="activity_vanderpol.html">Conducting a complete analysis of an ODE</a></li><li><a href="notes-lagrangian-dynamics.html">Book Reading: </a></li><li><a href="activity-efields.html">Activity: Electric Fields</a></li><li><a href="activity-sep_var.html">Activity: Separation of Variables</a></li><li><a href="activity-sep_var_spherical.html">Activity: Separation of Variables (Spherical)</a></li><li><a href="activity-sep_var_spherical_examples.html">Activity: Separation of Variables (Spherical Examples)</a></li><li><a href="activity-superposition.html">Activity: Superposition</a></li><li><a href="notes-electric_potential.html">Notes: Electric Potential</a></li><li><a href="notes-em_intro.html">Notes: Electromagnetism Introduction</a></li><li><a href="notes-static_fields.html">Notes: Static Fields</a></li><li><a href="notes-relaxation.html">Notes: Method of Relaxation</a></li><li><a href="activity-relaxation_2d.html">Activity: Method of Relaxation</a></li><li><a href="notes-fft.html">Notes: Fast Fourier Transform</a></li><li><a href="notes-coupled_oscillations.html">Notes: Coupled Oscillations</a></li><li><a href="notes-waves_intro.html">Notes: Introduction to Waves</a></li><li><a href="activity-CoupledOsc-NormalModes.html">Activity: Normal Modes</a></li><li><a href="activity-CoupledOsc-NumericalNormalModes.html">Activity: Normal Modes of N Coupled Oscillators</a></li><li><a href="notes-solve_the_wave_eq.html">Notes: Solutions to The Wave Equation</a></li><li><a href="activity-Waves-1D.html">Activity: 1-Dimensional Travelling Waves</a></li><li><a href="notes-Waves-Fouriers_Trick.html">Notes: Deconstructing Waves</a></li><li><a href="activity-Waves-Signals.html">Activity: Signal Deconstruction</a></li><li><a href="activity-Waves-seriesExpand.html">Activity: Automated Signal Deconstruction & Reconstruction</a></li><li><a href="activity-Waves-Introduction_to_FFT.html">Activity: The Fast Fourier Transform</a></li><li><a href="activity-Waves-Applying_the_FFT.html">Activity: Applying The Fast Fourier Transform</a></li><li><a href="notes-Using-FFTs.html">Notes: Applications of FFTs</a></li><li><a href="activity-FFT-applications.html">Using the FFT with Real Data</a></li><li><a href="notes-randomness.html">Notes: Random Processes</a></li><li><a href="activity-radioactive_decay.html">Activity: Introduction to Random Processes</a></li><li><a href="notes-counting_and_combinatorics.html">Notes: Counting and Combinatorics</a></li><li><a href="notes-monte_carlo_simulations.html">Notes: Monte Carlo Simulations</a></li><li><a href="activity-thermal_contact.html">Activity: Model of Two Bodies in Thermal Contact</a></li><li><a href="activity-mc_integration.html">Activity: Monte Carlo Integration</a></li><li><a href="notes-mcmc.html">Notes: Markov Chain Monte Carlo Modeling</a></li><li><a href="activity-metropolis.html">Activity: Modeling the Ideal Gas</a></li><li><a href="activity-ising_model.html">Activity: The Ising Model</a></li><li><a href="activity-monte_carlo.html">Activity: Modeling</a></li><li><a href="activity-zombies.html">Activity: Modeling</a></li></ul></li><li><a href="activities.html">Activities</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul>
-<!-- Hamburger menu and toggle JS commented out -->
-</nav>
-  <div class="container">
-    <main>
-      
-<nav class="chapter-downloads" aria-label="Download chapter sources">
-  <div role="group" aria-label="Download formats">
-    <a class="download-btn" href="sources/activity-Waves-seriesExpand/activity-Waves-seriesExpand.pdf" download><span aria-hidden="true">📄</span> PDF</a>
-    <a class="download-btn" href="sources/activity-Waves-seriesExpand/activity-Waves-seriesExpand.docx" download><span aria-hidden="true">📝</span> DOCX</a>
-    <a class="download-btn" href="sources/activity-Waves-seriesExpand/activity-Waves-seriesExpand.md" download><span aria-hidden="true">✍️</span> MD</a>
-    <a class="download-btn" href="sources/activity-Waves-seriesExpand/activity-Waves-seriesExpand.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
-    <a class="download-btn" href="sources/activity-Waves-seriesExpand/activity-Waves-seriesExpand.tex" download><span aria-hidden="true">📐</span> TEX</a>
-    <a class="download-btn" href="jupyter/content/notebooks/activity-Waves-seriesExpand.html" target="_blank"><span aria-hidden="true">🔗</span> Jupyter</a>
+    
+
+  <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
+      <span id="theme-toggle-icon" aria-hidden="true">🌙</span> <span id="theme-toggle-label">Dark</span>
+    </button>
   </div>
-</nav>
-        <div class="markdown-body">
-<main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="2-Nov-23---Activity:-Automated-Signal-Deconstruction-&amp;-Reconstruction">2 Nov 23 - Activity: Automated Signal Deconstruction &amp; Reconstruction<a class="anchor-link" href="#2-Nov-23---Activity:-Automated-Signal-Deconstruction-&amp;-Reconstruction">¶</a></h1><p>We found that it was possible to use the Fourier transform to decompose the signal into its constituent frequencies. Later we will use this idea to build up the <a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform">Fast Fourier Transform</a> (FFT) algorithm. For now, we will write everything out in full to mirror our analytical work.</p>
+  <script>
+    // Simple theme toggle script
+    const btn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-toggle-icon');
+    const label = document.getElementById('theme-toggle-label');
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+      localStorage.setItem('theme', theme);
+    }
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    // On load, set theme from localStorage
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  </script>
+    
+<nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+<main class="site-main">
+<div class="notebook-markdown-cell"><h1 id="2-nov-23-activity-automated-signal-deconstruction-reconstruction">2 Nov 23 - Activity: Automated Signal Deconstruction &amp; Reconstruction</h1>
+<p>We found that it was possible to use the Fourier transform to decompose the signal into its constituent frequencies. Later we will use this idea to build up the <a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform">Fast Fourier Transform</a> (FFT) algorithm. For now, we will write everything out in full to mirror our analytical work.</p>
 <p>We will start with the same signal as before, but then you will work with other signals to achieve a particular signal decomposition.</p>
 <p>Recall that the sign was given by the square wave function:</p>
-<p>$$V(t) = \begin{cases} 0 &amp; \text{if } 0 \leq t \leq \frac{T}{2} \\ V_0 &amp; \text{if } \frac{T}{2} &lt; t \leq T \end{cases}$$</p>
+<p>$$V(t) = \begin{cases} 0 &amp; \text{if } 0 \leq t \leq \frac{T}{2} \ V_0 &amp; \text{if } \frac{T}{2} &lt; t \leq T \end{cases}$$</p>
 <p>We define the approximate form of the signal using the complex form of the Fourier series:</p>
 <p>$$V(t) = \sum_{-\infty}^{+\infty} c_n e^{i n \omega_0 t}$$</p>
 <p>where $\omega_0 = \frac{2 \pi}{T_0}$ and $c_n$ is the Fourier coefficient given by:</p>
 <p>$$c_n = \frac{1}{T_0} \int_{0}^{T_0} V(t) e^{-i n \omega_0 t} dt$$</p>
 <p>Remember that we use the real $V(t)$ to compute the complex $c_n$. And once we have found the $c_n$ we can reconstruct the signal using the series expansion.</p>
 <p>$$V(t) \approx V_{approx}(t) = \sum_{-N}^{+N} c_n e^{i n \omega_0 t}$$</p>
-<p>where $N$ is the number of terms we use in the series expansion.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Analytical-Calculation">Analytical Calculation<a class="anchor-link" href="#Analytical-Calculation">¶</a></h2><p><strong>✅ Do this</strong></p>
+<p>where $N$ is the number of terms we use in the series expansion.</p></div>
+<div class="notebook-markdown-cell"><h2 id="analytical-calculation">Analytical Calculation</h2>
+<p><strong>&#9989; Do this</strong></p>
 <ol>
 <li>Take the signal $V(t)$ and determine which integrals you have to do.</li>
 <li>Construct the integrals you need to do (over what cycle are you integrating?).</li>
 <li>Perform the integrals (consider using <code>sympy</code>) and find the coefficients $c_n$'s.</li>
 <li>Write the function $V(t)$ in terms of the $c_n$'s. (What about the imaginary part?)</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Automating-the-Calculation">Automating the Calculation<a class="anchor-link" href="#Automating-the-Calculation">¶</a></h2><p>This is a lot of work to do by hand, and we have to perform new integrals every time we want to find this decomposition. We can automate this process using a little code. We have to break the process up into a few steps.</p>
+</ol></div>
+<div class="notebook-markdown-cell"><h2 id="automating-the-calculation">Automating the Calculation</h2>
+<p>This is a lot of work to do by hand, and we have to perform new integrals every time we want to find this decomposition. We can automate this process using a little code. We have to break the process up into a few steps.</p>
 <ol>
-<li>Define the signal $V(t)$.<ul>
-<li>Here you need to make sure you have a function that can be evaluated for any $t$.</li>
+<li>Define the signal $V(t)$. <ul>
+<li>Here you need to make sure you have a function that can be evaluated for any $t$. </li>
 <li>You should also be able to change that function easily for different signals.</li>
 </ul>
 </li>
-<li>Compute the Fourier coefficient $c_n$ for a given $n$.<ul>
+<li>Compute the Fourier coefficient $c_n$ for a given $n$. <ul>
 <li>Here you need to perform an integral of $V(t)e^{-i n \omega_0 t}$ over the period $T_0$. \</li>
-<li>It would be good to use a builtin integrator like <code>numpy.trapz</code> or <code>scipy.integrate.quad</code> to do this.</li>
+<li>It would be good to use a builtin integrator like <code>numpy.trapz</code> or <code>scipy.integrate.quad</code> to do this. </li>
 <li>The documentation for numpy.trapz can be found <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.trapz.html">here</a> and the documentation for scipy.integrate.quad can be found <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html">here</a>.</li>
 </ul>
 </li>
@@ -142,100 +138,59 @@
 </ul>
 </li>
 </ol>
-<p><strong>✅ Do this</strong></p>
+<p><strong>&#9989; Do this</strong></p>
 <ol>
 <li>Review the code scaffold below and make sure you understand what is happening.</li>
 <li>Complete the code below to compute the Fourier coefficients $c_n$ for a given $n$.</li>
 <li>Complete the code below to compute the approximation $V_{approx}(t)$ up to a given $N$.</li>
 <li>Test your code with the provided signal and plot the approximation for different values of $N$.</li>
-<li>Write function that plots your real and approximate signal on the same plot.</li>
+<li>Write function that plots your real and approximate signal on the same plot. </li>
 <li>Write a function that plots the magnitude of Fourier coefficients $c_n$ as a function of $n\omega_0$.</li>
-</ol>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">square</span>
+</ol></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>import numpy as np
+import matplotlib.pyplot as plt
+from scipy.signal import square
 
-<span class="c1"># Compute the Fourier coefficient</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_cn</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">f0</span><span class="p">):</span>
+# Compute the Fourier coefficient
+def compute_cn(v, n, T, f0):
     
-    <span class="c1">## CODE HERE ##</span>
+    ## CODE HERE ##
     
-    <span class="k">return</span> <span class="n">cn</span>
+    return cn
 
-<span class="c1"># Fourier series expansion using complex form</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">complex_fourier_series_expansion</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="n">f0</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">T</span>
-    <span class="n">series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+# Fourier series expansion using complex form
+def complex_fourier_series_expansion(v, t, T, N):
+    f0 = 1 / T
+    series = np.zeros_like(t, dtype=complex)
 
-    <span class="c1">## CODE HERE ##</span>
+    ## CODE HERE ##
         
-    <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">real</span>
+    return series.real
 
-<span class="c1"># Define the square wave signal</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>  <span class="c1"># Period</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">v</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">square</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Physics-Relationship">Physics Relationship<a class="anchor-link" href="#Physics-Relationship">¶</a></h2><p>You might be wondering why we do this kind of deconstruction and what it is used for. It turns out that for many systems this kind of analysis tells you how energy, momentum, and other quantities might be distributed in the system. For example, the analogy to a complex quantum mechanical system might be the various occupied energy states of the system. The known frequencies could correspond to the energy levels of the system. The Fourier coefficients tell you how much of the system is in each energy state. There are many such analogies in physics; and many such transformations in multiple dimensions to extract this information. Fourier is just one of the most common.</p>
-<h2 id="Decomposition-Matching">Decomposition Matching<a class="anchor-link" href="#Decomposition-Matching">¶</a></h2><p>We want to develop your intuition for this kind of analysis now that you have started to develop the tools to do it. So we will ask you to use your code to perform a few tasks. But these will start from the expected coefficients and ask you to find the signal. This is the reverse of what we have done so far. With your code you should be able to play and adjust the signal to match the coefficients qualitatively.</p>
-<p><strong>✅ Do this</strong></p>
-<p>Use your code to find the signal that matches the following coefficients:</p>
-<ol>
-<li>No odd coefficients.</li>
-<li>No even coefficients.</li>
-<li>Only the $n=1$ coefficient.</li>
-<li>Only the $n=2$ coefficient.</li>
-<li>High values for low $n$ and low values for high $n$ (not too high).</li>
-<li>Low values for low $n$ and high values for high $n$ (not too high).</li>
-<li>Roughly equal values for all $n$.</li>
-</ol>
-<p>In doing this, take note of the signals you are making. What are you doing to construct them to produce this kind of output. What kind of device or physical system might produce those signals?</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### your code here</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
+# Define the square wave signal
+T = 2 * np.pi  # Period
+def v(t):
+    return square(t)
+</code></pre></div>
+<div class="notebook-markdown-cell"><h2 id="physics-relationship">Physics Relationship</h2>
+<p>You might be wondering why we do this kind of deconstruction and what it is used for. It turns out that for many systems this kind of analysis tells you how energy, momentum, and other quantities might be distributed in the system. For example, the analogy to a complex quantum mechanical system might be the various occupied energy states of the system. The known frequencies could correspond to the energy levels of the system. The Fourier coefficients tell you how much of the system is in each energy state. There are many such analogies in physics; and many such transformations in multiple dimensions to extract this information. Fourier is just one of the most common.</p>
+<h2 id="decomposition-matching">Decomposition Matching</h2>
+<p>We want to develop your intuition for this kind of analysis now that you have started to develop the tools to do it. So we will ask you to use your code to perform a few tasks. But these will start from the expected coefficients and ask you to find the signal. This is the reverse of what we have done so far. With your code you should be able to play and adjust the signal to match the coefficients qualitatively.</p>
+<p><strong>&#9989; Do this</strong></p>
+<p>Use your code to find the signal that matches the following coefficients:
+1. No odd coefficients.
+2. No even coefficients.
+3. Only the $n=1$ coefficient.
+4. Only the $n=2$ coefficient.
+5. High values for low $n$ and low values for high $n$ (not too high).
+6. Low values for low $n$ and high values for high $n$ (not too high).
+7. Roughly equal values for all $n$.</p>
+<p>In doing this, take note of the signals you are making. What are you doing to construct them to produce this kind of output. What kind of device or physical system might produce those signals?</p></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>### your code here</code></pre></div>
 </main>
-</div>
-    </main>
-  </div>
-  <footer class="site-footer">
-    <p>&copy; Modern Mathematical Methods. All rights reserved.</p>
-  </footer>
+<footer class="site-footer">
+  <p><p>&copy; Modern Mathematical Methods. All rights reserved.</p></p>
+</footer>
+
 </body>
 </html>
