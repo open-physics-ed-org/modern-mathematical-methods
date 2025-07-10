@@ -1,265 +1,140 @@
-# Unified content manifest for Modern Classical Mechanics
-# This file centralizes all site structure, navigation, and content metadata.
-# It is intended to be the single source of truth for generating _toc.yml, _menu.yml, _notebooks.yaml, and _config.yml.
-
-site:
-  title: "Modern Mathematical Methods"
-  author: "Danny Caballero"
-  description: "A modern, open-source course in mathematical methods for physics and astrophysics."
-  logo: "static/images/logo.png"
-  favicon: "static/images/favicon.ico"
-  theme:
-    default: dark
-    light: light
-    dark: dark
-  language: "en"
-  github_url: "https://github.com/dannycab/modern-mathematical-methods"
-  # Add more site-wide settings as needed
-
-navigation:
+toc:
   - title: "Home"
+    menu: true
     file: content/index.md
-    icon: home
-  - title: "Activities"
-    file: content/activities.md
-    icon: bolt
+
+  - title: "Chapters"
+    menu: true
+    file: content/chapters.md
+    children:
+      - title: "Mechanics"
+        file: content/1_mechanics/overview.md
+        children:
+          - title: "Activity: What is a Model?"
+            file: content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb
+          - title: "Notes: Simple Harmonic Oscillator"
+            file: content/notebooks/1_mechanics/sho/notes-SHO.ipynb
+          - title: "Activity: Frames and Coordinates"
+            file: content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb
+          - title: "Activity: Calculus of Variations and Lagrangian Dynamics"
+            file: content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb
+          - title: "Activity: Numerical Integration and More Lagrangians"
+            file: content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb
+          - title: "Notes: Numerical Integration in 1D"
+            file: content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb
+          - title: "Activity: The Dynamical Systems Approach and Phase Portraits"
+            file: content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb
+          - title: "Notes: Dynamical Systems and Phase Space"
+            file: content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb
+          - title: "The Duffing Oscillator"
+            file: content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb
+          - title: "Notes: Heading towards Chaos"
+            file: content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb
+          - title: "Conducting a complete analysis of an ODE"
+            file: content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb
+          - title: "Book Reading: "
+            file: content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb
+      - title: "Electromagnetism"
+        children:
+          - title: "Activity: Electric Fields"
+            file: content/notebooks/2_EM/Statics/activity-efields.ipynb
+          - title: "Activity: Separation of Variables"
+            file: content/notebooks/2_EM/Statics/activity-sep_var.ipynb
+          - title: "Activity: Separation of Variables (Spherical)"
+            file: content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb
+          - title: "Activity: Separation of Variables (Spherical Examples)"
+            file: content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb
+          - title: "Activity: Superposition"
+            file: content/notebooks/2_EM/Statics/activity-superposition.ipynb
+          - title: "Notes: Electric Potential"
+            file: content/notebooks/2_EM/Statics/notes-electric_potential.ipynb
+          - title: "Notes: Electromagnetism Introduction"
+            file: content/notebooks/2_EM/Statics/notes-em_intro.ipynb
+          - title: "Notes: Static Fields"
+            file: content/notebooks/2_EM/Statics/notes-static_fields.ipynb
+          - title: "Notes: Method of Relaxation"
+            file: content/notebooks/2_EM/Numerics/notes-relaxation.ipynb
+          - title: "Activity: Method of Relaxation"
+            file: content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb
+      - title: "Waves"
+        children:
+          - title: "Notes: Fast Fourier Transform"
+            file: content/notebooks/3_waves/notes-fft.ipynb
+          - title: "Notes: Coupled Oscillations"
+            file: content/notebooks/3_waves/notes-coupled_oscillations.ipynb
+          - title: "Notes: Introduction to Waves"
+            file: content/notebooks/3_waves/notes-waves_intro.ipynb
+          - title: "Activity: Normal Modes"
+            file: content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb
+          - title: "Activity: Normal Modes of N Coupled Oscillators"
+            file: content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb
+          - title: "Notes: Solutions to The Wave Equation"
+            file: content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb
+          - title: "Activity: 1-Dimensional Travelling Waves"
+            file: content/notebooks/3_waves/activity-Waves-1D.ipynb
+          - title: "Notes: Deconstructing Waves"
+            file: content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb
+          - title: "Activity: Signal Deconstruction"
+            file: content/notebooks/3_waves/activity-Waves-Signals.ipynb
+          - title: "Activity: Automated Signal Deconstruction & Reconstruction"
+            file: content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb
+          - title: "Activity: The Fast Fourier Transform"
+            file: content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb
+          - title: "Activity: Applying The Fast Fourier Transform"
+            file: content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb
+          - title: "Notes: Applications of FFTs"
+            file: content/notebooks/3_waves/notes-Using-FFTs.ipynb
+          - title: "Using the FFT with Real Data"
+            file: content/notebooks/3_waves/activity-FFT-applications.ipynb
+      - title: "Distributions"
+        children:
+          - title: "Notes: Random Processes"
+            file: content/notebooks/4_distributions/notes-randomness.ipynb
+          - title: "Activity: Introduction to Random Processes"
+            file: content/notebooks/4_distributions/activity-radioactive_decay.ipynb
+          - title: "Notes: Counting and Combinatorics"
+            file: content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb
+          - title: "Notes: Monte Carlo Simulations"
+            file: content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb
+          - title: "Activity: Model of Two Bodies in Thermal Contact"
+            file: content/notebooks/4_distributions/activity-thermal_contact.ipynb
+          - title: "Activity: Monte Carlo Integration"
+            file: content/notebooks/4_distributions/activity-mc_integration.ipynb
+          - title: "Notes: Markov Chain Monte Carlo Modeling"
+            file: content/notebooks/4_distributions/notes-mcmc.ipynb
+          - title: "Activity: Modeling the Ideal Gas"
+            file: content/notebooks/4_distributions/activity-metropolis.ipynb
+          - title: "Activity: The Ising Model"
+            file: content/notebooks/4_distributions/activity-ising_model.ipynb
+          - title: "Activity: Modeling"
+            file: content/notebooks/4_distributions/activity-monte_carlo.ipynb
+          - title: "Activity: Modeling"
+            file: content/notebooks/4_distributions/activity-zombies.ipynb
+
+  - title: "Assignments"
+    menu: true
+    children:
+      # Uncomment and add files as needed
+      # - title: "Homework 1"
+      #   file: content/notebooks/hw1.ipynb
+      # - title: "Homework 2"
+      #   file: content/notebooks/hw2.ipynb
+      # ...
+
   - title: "Resources"
-    file: content/resources.md
-    icon: book
+    menu: true
+    children:
+      - title: "Resources"
+        file: content/resources.md
+      - title: "Activities"
+        file: content/activities.md
+      - title: "Cards"
+        file: content/cards.md
+
   - title: "About"
-    file: content/about.md
-    icon: info
-  # - title: "Announcements"
-  #   file: content/announcement.md
-  #   icon: megaphone
-  # - title: "Cards"
-  #   file: content/cards.md
-  #   icon: cards
-
-chapters:
-  # All notebooks and markdown files in content/ and subfolders
-  # - id: about
-  #   title: "About"
-  #   files:
-  #     - file: content/about.md
-  # - id: activities
-  #   title: "Activities"
-  #   files:
-  #     - file: content/activities.md
-  # - id: announcement
-  #   title: "Announcements"
-  #   files:
-  #     - file: content/announcement.md
-  # - id: cards
-  #   title: "Cards"
-  #   files:
-  #     - file: content/cards.md
-  # - id: index
-  #   title: "Home"
-  #   files:
-  #     - file: content/index.md
-  # - id: resources
-  #   title: "Resources"
-  #   files:
-  #     - file: content/resources.md
-  # Markdown files commented out to avoid build errors. Only .ipynb files are included below.
-  # - id: notebooks_intro
-  #   title: "Notebooks Introduction"
-  #   files:
-  #     - file: content/notebooks/intro.md
-  - id: mechanics
-    title: "Mechanics"
-    files:
-      - file: content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb
-        title: "Activity: What is a Model?"
-      - file: content/notebooks/1_mechanics/sho/notes-SHO.ipynb
-        title: "Notes: Simple Harmonic Oscillator"
-      - file: content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb
-        title: "Activity: Frames and Coordinates"
-      - file: content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb
-        title: "Activity: Calculus of Variations and Lagrangian Dynamics"
-      - file: content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb
-        title: "Activity: Numerical Integration and More Lagrangians"
-      - file: content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb
-        title: "Notes: Numerical Integration in 1D"
-      - file: content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb
-        title: "Activity: The Dynamical Systems Approach and Phase Portraits"
-      - file: content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb
-        title: "Notes: Dynamical Systems and Phase Space"
-      - file: content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb
-        title: "The Duffing Oscillator"
-      - file: content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb
-        title: "Notes: Heading towards Chaos"
-      - file: content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb
-        title: "Conducting a complete analysis of an ODE"
-      - file: content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb
-        title: "Book Reading: "
-  - id: em
-    title: "Electromagnetism"
-    files:
-      - file: content/notebooks/2_EM/Statics/activity-efields.ipynb
-        title: "Activity: Electric Fields"
-      - file: content/notebooks/2_EM/Statics/activity-sep_var.ipynb
-        title: "Activity: Separation of Variables"
-      - file: content/notebooks/2_EM/Statics/activity-sep_var_spherical.ipynb
-        title: "Activity: Separation of Variables (Spherical)"
-      - file: content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.ipynb
-        title: "Activity: Separation of Variables (Spherical Examples)"
-      - file: content/notebooks/2_EM/Statics/activity-superposition.ipynb
-        title: "Activity: Superposition"
-      - file: content/notebooks/2_EM/Statics/notes-electric_potential.ipynb
-        title: "Notes: Electric Potential"
-      - file: content/notebooks/2_EM/Statics/notes-em_intro.ipynb
-        title: "Notes: Electromagnetism Introduction"
-      - file: content/notebooks/2_EM/Statics/notes-static_fields.ipynb
-        title: "Notes: Static Fields"
-      - file: content/notebooks/2_EM/Numerics/notes-relaxation.ipynb
-        title: "Notes: Method of Relaxation"
-      - file: content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb
-        title: "Activity: Method of Relaxation"
-  - id: waves
-    title: "Waves"
-    files:
-      - file: content/notebooks/3_waves/notes-fft.ipynb
-        title: "Notes: Fast Fourier Transform"
-      - file: content/notebooks/3_waves/notes-coupled_oscillations.ipynb
-        title: "Notes: Coupled Oscillations"
-      - file: content/notebooks/3_waves/notes-waves_intro.ipynb
-        title: "Notes: Introduction to Waves"
-      - file: content/notebooks/3_waves/activity-CoupledOsc-NormalModes.ipynb
-        title: "Activity: Normal Modes"
-      - file: content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.ipynb
-        title: "Activity: Normal Modes of N Coupled Oscillators"
-      - file: content/notebooks/3_waves/notes-solve_the_wave_eq.ipynb
-        title: "Notes: Solutions to The Wave Equation"
-      - file: content/notebooks/3_waves/activity-Waves-1D.ipynb
-        title: "Activity: 1-Dimensional Travelling Waves"
-      - file: content/notebooks/3_waves/notes-Waves-Fouriers_Trick.ipynb
-        title: "Notes: Deconstructing Waves"
-      - file: content/notebooks/3_waves/activity-Waves-Signals.ipynb
-        title: "Activity: Signal Deconstruction"
-      - file: content/notebooks/3_waves/activity-Waves-seriesExpand.ipynb
-        title: "Activity: Automated Signal Deconstruction & Reconstruction"
-      - file: content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.ipynb
-        title: "Activity: The Fast Fourier Transform"
-      - file: content/notebooks/3_waves/activity-Waves-Applying_the_FFT.ipynb
-        title: "Activity: Applying The Fast Fourier Transform"
-      - file: content/notebooks/3_waves/notes-Using-FFTs.ipynb
-        title: "Notes: Applications of FFTs"
-      - file: content/notebooks/3_waves/activity-FFT-applications.ipynb
-        title: "Using the FFT with Real Data"
-  - id: distributions
-    title: "Distributions"
-    files:
-      - file: content/notebooks/4_distributions/notes-randomness.ipynb
-        title: "Notes: Random Processes"
-      - file: content/notebooks/4_distributions/activity-radioactive_decay.ipynb
-        title: "Activity: Introduction to Random Processes"
-      - file: content/notebooks/4_distributions/notes-counting_and_combinatorics.ipynb
-        title: "Notes: Counting and Combinatorics"
-      - file: content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb
-        title: "Notes: Monte Carlo Simulations"
-      - file: content/notebooks/4_distributions/activity-thermal_contact.ipynb
-        title: "Activity: Model of Two Bodies in Thermal Contact"
-      - file: content/notebooks/4_distributions/activity-mc_integration.ipynb
-        title: "Activity: Monte Carlo Integration"
-      - file: content/notebooks/4_distributions/notes-mcmc.ipynb
-        title: "Notes: Markov Chain Monte Carlo Modeling"
-      - file: content/notebooks/4_distributions/activity-metropolis.ipynb
-        title: "Activity: Modeling the Ideal Gas"
-      - file: content/notebooks/4_distributions/activity-ising_model.ipynb
-        title: "Activity: The Ising Model"
-      - file: content/notebooks/4_distributions/activity-monte_carlo.ipynb
-        title: "Activity: Modeling"
-      - file: content/notebooks/4_distributions/activity-zombies.ipynb
-        title: "Activity: Modeling"
-  # - id: assignments
-  #   title: "Assignments"
-  #   files:
-      # - file: content/notebooks/9_assignments/project-1.md
-      # - file: content/notebooks/9_assignments/project-2.md
-      # - file: content/notebooks/9_assignments/project-3.md
-      # - file: content/notebooks/9_assignments/project-4.md
-      # - file: content/notebooks/9_assignments/updated_rubric.md
-      # - file: content/notebooks/9_assignments/worked-problem-1.md
-      # - file: content/notebooks/9_assignments/worked-problem-2.md
-      # - file: content/notebooks/9_assignments/worked-problem-3.md
-      # - file: content/notebooks/9_assignments/worked-problem-4.md
-      # - file: content/notebooks/9_assignments/worked-problem-5.md
-      # - file: content/notebooks/9_assignments/worked-problem-6.md
-      # - file: content/notebooks/9_assignments/worked-problem-7.md
-
-# homework:
-#   - file: content/notebooks/hw1.ipynb
-#     title: "Homework 1"
-#     due: "2025-01-20"
-#   - file: content/notebooks/hw2.ipynb
-#     title: "Homework 2"
-#     due: "2025-01-27"
-#   - file: content/notebooks/hw3.ipynb
-#     title: "Homework 3"
-#     due: "2025-02-03"
-#   - file: content/notebooks/hw4.ipynb
-#     title: "Homework 4"
-#     due: "2025-02-10"
-#   - file: content/notebooks/hw5.ipynb
-#     title: "Homework 5"
-#     due: "2025-02-17"
-#   - file: content/notebooks/hw6.ipynb
-#     title: "Homework 6"
-#     due: "2025-02-24"
-#   - file: content/notebooks/hw7.ipynb
-#     title: "Homework 7"
-#     due: "2025-03-03"
-#   - file: content/notebooks/hw8.ipynb
-#     title: "Homework 8"
-#     due: "2025-03-10"
-
-static:
-  images:
-    - path: static/images/
-      description: "Site-wide images and figures"
-  css:
-    - path: static/css/
-      description: "Custom CSS files"
-  js:
-    - path: static/js/
-      description: "Custom JavaScript files"
-  templates:
-    - path: static/templates/
-      description: "HTML templates"
-  themes:
-    - path: static/themes/
-      description: "Theme files"
-
-resources:
-  - file: content/resources.md
-    title: "Resources"
-  - file: content/activities.md
-    title: "Activities"
-  - file: content/cards.md
-    title: "Cards"
-  - file: content/about.md
-    title: "About"
-  - file: content/announcement.md
-    title: "Announcements"
-
-# Add more sections as needed (e.g., appendices, projects, etc.)
-
-# Metadata for automated build and export
-build:
-  outputs:
-    - html
-    - pdf
-    - docx
-    - md
-    - tex
-  output_dir: _build/
-  docs_dir: docs/
-  sources_dir: docs/sources/
-  notebooks_dir: content/notebooks/
-  static_dir: static/
-  images_dir: static/images/
-  # Add more build settings as needed
-
-# End of unified content manifest
+    menu: true
+    children:
+      - title: "About"
+        file: content/about.md
+      - title: "Announcements"
+        file: content/announcement.md
