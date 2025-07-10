@@ -1,0 +1,119 @@
+format: jb-book
+root: content/index
+chapters:
+- part: Mechanics
+  chapters:
+  - file: content/notebooks/1_mechanics/modeling/activity-what_is_a_model
+    title: 'Activity: What is a Model?'
+  - file: content/notebooks/1_mechanics/sho/notes-SHO
+    title: 'Notes: Simple Harmonic Oscillator'
+  - file: content/notebooks/1_mechanics/lagrangian/activity-frames
+    title: 'Activity: Frames and Coordinates'
+  - file: content/notebooks/1_mechanics/lagrangian/activity-lagrange_1
+    title: 'Activity: Calculus of Variations and Lagrangian Dynamics'
+  - file: content/notebooks/1_mechanics/lagrangian/activity-lagrange_2
+    title: 'Activity: Numerical Integration and More Lagrangians'
+  - file: content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d
+    title: 'Notes: Numerical Integration in 1D'
+  - file: content/notebooks/1_mechanics/dynamical_systems/activity-phase_space
+    title: 'Activity: The Dynamical Systems Approach and Phase Portraits'
+  - file: content/notebooks/1_mechanics/dynamical_systems/notes-phase_space
+    title: 'Notes: Dynamical Systems and Phase Space'
+  - file: content/notebooks/1_mechanics/dynamical_systems/activity-duffing
+    title: The Duffing Oscillator
+  - file: content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes
+    title: 'Notes: Heading towards Chaos'
+  - file: content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol
+    title: Conducting a complete analysis of an ODE
+  - file: content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics
+    title: 'Book Reading: '
+- part: Electromagnetism
+  chapters:
+  - file: content/notebooks/2_EM/Statics/activity-efields
+    title: 'Activity: Electric Fields'
+  - file: content/notebooks/2_EM/Statics/activity-sep_var
+    title: 'Activity: Separation of Variables'
+  - file: content/notebooks/2_EM/Statics/activity-sep_var_spherical
+    title: 'Activity: Separation of Variables (Spherical)'
+  - file: content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples
+    title: 'Activity: Separation of Variables (Spherical Examples)'
+  - file: content/notebooks/2_EM/Statics/activity-superposition
+    title: 'Activity: Superposition'
+  - file: content/notebooks/2_EM/Statics/notes-electric_potential
+    title: 'Notes: Electric Potential'
+  - file: content/notebooks/2_EM/Statics/notes-em_intro
+    title: 'Notes: Electromagnetism Introduction'
+  - file: content/notebooks/2_EM/Statics/notes-static_fields
+    title: 'Notes: Static Fields'
+  - file: content/notebooks/2_EM/Numerics/notes-relaxation
+    title: 'Notes: Method of Relaxation'
+  - file: content/notebooks/2_EM/Numerics/activity-relaxation_2d
+    title: 'Activity: Method of Relaxation'
+- part: Waves
+  chapters:
+  - file: content/notebooks/3_waves/notes-fft
+    title: 'Notes: Fast Fourier Transform'
+  - file: content/notebooks/3_waves/notes-coupled_oscillations
+    title: 'Notes: Coupled Oscillations'
+  - file: content/notebooks/3_waves/notes-waves_intro
+    title: 'Notes: Introduction to Waves'
+  - file: content/notebooks/3_waves/activity-CoupledOsc-NormalModes
+    title: 'Activity: Normal Modes'
+  - file: content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes
+    title: 'Activity: Normal Modes of N Coupled Oscillators'
+  - file: content/notebooks/3_waves/notes-solve_the_wave_eq
+    title: 'Notes: Solutions to The Wave Equation'
+  - file: content/notebooks/3_waves/activity-Waves-1D
+    title: 'Activity: 1-Dimensional Travelling Waves'
+  - file: content/notebooks/3_waves/notes-Waves-Fouriers_Trick
+    title: 'Notes: Deconstructing Waves'
+  - file: content/notebooks/3_waves/activity-Waves-Signals
+    title: 'Activity: Signal Deconstruction'
+  - file: content/notebooks/3_waves/activity-Waves-seriesExpand
+    title: 'Activity: Automated Signal Deconstruction & Reconstruction'
+  - file: content/notebooks/3_waves/activity-Waves-Introduction_to_FFT
+    title: 'Activity: The Fast Fourier Transform'
+  - file: content/notebooks/3_waves/activity-Waves-Applying_the_FFT
+    title: 'Activity: Applying The Fast Fourier Transform'
+  - file: content/notebooks/3_waves/notes-Using-FFTs
+    title: 'Notes: Applications of FFTs'
+  - file: content/notebooks/3_waves/activity-FFT-applications
+    title: Using the FFT with Real Data
+- part: Distributions
+  chapters:
+  - file: content/notebooks/4_distributions/notes-randomness
+    title: 'Notes: Random Processes'
+  - file: content/notebooks/4_distributions/activity-radioactive_decay
+    title: 'Activity: Introduction to Random Processes'
+  - file: content/notebooks/4_distributions/notes-counting_and_combinatorics
+    title: 'Notes: Counting and Combinatorics'
+  - file: content/notebooks/4_distributions/notes-monte_carlo_simulations
+    title: 'Notes: Monte Carlo Simulations'
+  - file: content/notebooks/4_distributions/activity-thermal_contact
+    title: 'Activity: Model of Two Bodies in Thermal Contact'
+  - file: content/notebooks/4_distributions/activity-mc_integration
+    title: 'Activity: Monte Carlo Integration'
+  - file: content/notebooks/4_distributions/notes-mcmc
+    title: 'Notes: Markov Chain Monte Carlo Modeling'
+  - file: content/notebooks/4_distributions/activity-metropolis
+    title: 'Activity: Modeling the Ideal Gas'
+  - file: content/notebooks/4_distributions/activity-ising_model
+    title: 'Activity: The Ising Model'
+  - file: content/notebooks/4_distributions/activity-monte_carlo
+    title: 'Activity: Modeling'
+  - file: content/notebooks/4_distributions/activity-zombies
+    title: 'Activity: Modeling'
+- part: Resources
+  chapters:
+  - file: content/resources
+    title: Resources
+  - file: content/activities
+    title: Activities
+  - file: content/cards
+    title: Cards
+- part: About
+  chapters:
+  - file: content/about
+    title: About
+  - file: content/announcement
+    title: Announcements
