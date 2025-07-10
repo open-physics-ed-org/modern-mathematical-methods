@@ -20,7 +20,6 @@ toc:
     menu: true
     children:
       - title: "Mechanics"
-        file: content/1_mechanics/overview.md
         children:
           - title: "Activity: What is a Model?"
             file: content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb

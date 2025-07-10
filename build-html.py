@@ -91,8 +91,20 @@ def build_html_for_files(files, debug=False):
         print(f"[ERROR] Could not load menu: {e}")
         menu = []
 
-    def file_to_html_link(file_path, title):
-        base, ext = os.path.splitext(os.path.basename(file_path))
+
+    import re
+    def slugify(title):
+        # Lowercase, replace spaces with hyphens, remove non-alphanum except hyphens
+        slug = title.lower().strip()
+        slug = re.sub(r'\s+', '-', slug)
+        slug = re.sub(r'[^a-z0-9\-]', '', slug)
+        return slug
+
+    def file_to_html_link(file_path, title, is_auto_index=False):
+        if is_auto_index:
+            base = slugify(title)
+        else:
+            base, ext = os.path.splitext(os.path.basename(file_path))
         return f'<a href="{base}.html">{title}</a>'
 
     def first_child_file(node):
@@ -114,18 +126,24 @@ def build_html_for_files(files, debug=False):
                     continue
                 title = node.get('title')
                 file = node.get('file')
-                if not file:
-                    file = first_child_file(node)
+                is_auto_index = False
+                if not file and node.get('children'):
+                    # This is an auto-generated index
+                    is_auto_index = True
+                    file = slugify(title) + '.html'
+                elif file:
+                    # Use the file as normal
+                    pass
                 if title and (file or node.get('children')):
-                    items.append((file, title, node))
+                    items.append((file, title, node, is_auto_index))
         return items
 
     top_menu = top_level_menu_items(menu)
 
     menu_html = ['<ul class="site-nav-menu" id="site-nav-menu">']
-    for file, title, _ in top_menu:
+    for file, title, _, is_auto_index in top_menu:
         menu_html.append('<li>')
-        menu_html.append(file_to_html_link(file, title))
+        menu_html.append(file_to_html_link(file, title, is_auto_index=is_auto_index))
         menu_html.append('</li>')
     menu_html.append('</ul>')
     menu_html = ''.join(menu_html)
@@ -207,27 +225,39 @@ def build_html_for_files(files, debug=False):
     missing_files = []
 
     # --- Auto-generate index pages for top-level menus with no file ---
-    for file, title, node in top_menu:
-        if not node.get('file') and node.get('children'):
-            # Generate an index page for this menu
-            slug = title.lower().replace(' ', '_')
+    for file, title, node, is_auto_index in top_menu:
+        if is_auto_index:
+            # Always generate at slugified-title.html for auto-indexes
+            slug = slugify(title)
             out_path = Path('docs') / f"{slug}.html"
             # Build a list of children (and grandchildren)
             def render_children(children, level=1):
-                html = ['<ul class="menu-section">']
+                html = []
                 for child in children:
                     if not isinstance(child, dict):
                         continue
                     child_title = child.get('title', '(untitled)')
                     child_file = child.get('file')
-                    if child_file:
+                    child_children = child.get('children')
+                    # Use h2/h3/h4 for subgroups, and always list grandchildren if present
+                    if child_file and child_children:
+                        # Submenu/group with a file: link and heading, then list grandchildren
+                        heading_tag = f'h{min(level+1, 4)}'
+                        html.append(f'<{heading_tag}>{file_to_html_link(child_file, child_title)}</{heading_tag}>')
+                        html.append(render_children(child_children, level+1))
+                    elif child_file:
+                        # Just a file
                         html.append(f'<li>{file_to_html_link(child_file, child_title)}</li>')
-                    elif child.get('children'):
-                        html.append(f'<li><b>{child_title}</b>')
-                        html.append(render_children(child['children'], level+1))
-                        html.append('</li>')
-                html.append('</ul>')
-                return ''.join(html)
+                    elif child_children:
+                        # Submenu/group with no file: heading, then list grandchildren
+                        heading_tag = f'h{min(level+1, 4)}'
+                        html.append(f'<{heading_tag}>{child_title}</{heading_tag}>')
+                        html.append(render_children(child_children, level+1))
+                # Only wrap in <ul> if there are <li> children at this level
+                if any(x.startswith('<li>') for x in html):
+                    return '<ul class="menu-section">' + ''.join(html) + '</ul>'
+                else:
+                    return ''.join(html)
             section_html = f'<h2>{title}</h2>'
             if node.get('description'):
                 section_html += f'<div class="menu-description">{node["description"]}</div>'
