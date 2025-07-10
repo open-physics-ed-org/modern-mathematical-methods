@@ -1,0 +1,632 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5 Sept 23 - Notes: Lagrangian Dynamics &#8212; Modern Mathematical Methods</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/tex/notes-lagrangian-dynamics';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../content/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Modern Mathematical Methods - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Modern Mathematical Methods - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../content/index.html">
+                    Welcome to Mathematical Modeling in Physics
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/modeling/activity-what_is_a_model.html">29 Aug 23 - Activity: What is a Model?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/sho/notes-SHO.html">29 Aug 23 - Notes: Simple Harmonic Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-frames.html">31 Aug 23 - Activity: Frames and Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.html">5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.html">7 Sep 23 - Activity: Numerical Integration and More Lagrangians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.html">7 Sept 23 - Notes: Numerical Integration in 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.html">12 Sep 23 - Activity: The Dynamical Systems Approach and Phase Portraits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.html">12 Sept 23 - Notes: Dynamical Systems and Phase Space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity-duffing.html">19 Sep 23 - The Duffing Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.html">19 Sep 23 - Notes: Heading towards Chaos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.html">14 Sept 23 - Conducting a complete analysis of an ODE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.html">5 Sept 23 - Notes: Lagrangian Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-efields.html">26 Sep 23 - Activity: Electrostatic Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var.html">3 Oct 23 - Activity: PDEs and Separation of Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var_spherical.html">5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.html">10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-superposition.html">28 Sep 23 - Activity: Superposition of Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-electric_potential.html">3 Oct 23 - Notes: Electric Potential - a scalar field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-em_intro.html">26 Sept 23 - Notes: Maxwell’s Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-static_fields.html">26 Sept 23 - Notes: Static Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Numerics/notes-relaxation.html">9 Oct 23 - Notes: Method of Relaxation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Numerics/activity-relaxation_2d.html">12 Oct 23 - Activity: Method of Relaxation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-fft.html">6 Oct 23 - Notes: Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-coupled_oscillations.html">16 Oct 23 - Notes: Coupled Oscillations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-waves_intro.html">16 Oct 23 - Notes: Introduction to Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-CoupledOsc-NormalModes.html">17 Oct 23 - Activity: Normal Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.html">19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-solve_the_wave_eq.html">25 Oct 23 - Notes: Solutions to The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-1D.html">26 Oct 2023 - Activity: 1-Dimensional Travelling Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-Waves-Fouriers_Trick.html">30 Oct 2023 - Notes: Deconstructing Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Signals.html">31 Oct 23 - Activity: Signal Deconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-seriesExpand.html">2 Nov 23 - Activity: Automated Signal Deconstruction &amp; Reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.html">7 Nov 23 - Activity: The Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Applying_the_FFT.html">9 Nov 23 - Activity: Applying The Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-Using-FFTs.html">13 Nov 23 - Notes: Applications of FFTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-FFT-applications.html">14 &amp; 16 Nov 23 - Using the FFT with Real Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-randomness.html">20 Nov 23 - Notes: Random Processes</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-radioactive_decay.html">21 Nov 23 - Activity: Introduction to Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-counting_and_combinatorics.html">27 Nov 23 - Notes: Counting and Combinatorics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-monte_carlo_simulations.html">27 Nov 23 - Notes: Monte Carlo Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-thermal_contact.html">28 Nov 23 - Activity: Model of Two Bodies in Thermal Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-mc_integration.html">30 Nov 23 - Activity: Monte Carlo Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-mcmc.html">4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-metropolis.html">5 Dec 23 - Activity: Modeling the Ideal Gas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-ising_model.html">7 Dec 23 - Activity: The Ising Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-monte_carlo.html">7 Dec 23 - Activity: Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-zombies.html">7 Dec 23 - Activity: Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/activities.html">Activities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/cards.html">Chapters</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/about.html">About</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/announcement.html">🚀 Release v0.9.2 “Unified Urubu” Highlights</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/tex/notes-lagrangian-dynamics.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5 Sept 23 - Notes: Lagrangian Dynamics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-analysis">Variational Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-to-classical-mechanics">Applications to Classical Mechanics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-on-lagrangian-dynamics">Video on Lagrangian Dynamics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handwritten-notes">Handwritten Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#book-readings">Book Readings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#video-resources">Video Resources</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>Book Reading:</p>
+<ul class="simple">
+<li><p>Any Classical Mechanics Book Section on Lagrangian Dynamics</p></li>
+<li><p><a class="reference external" href="https://www.physics.rutgers.edu/~shapiro/507/book.pdf">[Section 2.1 and 2.2 of Shapiro’s Book is online]</a></p></li>
+</ul>
+<section class="tex2jax_ignore mathjax_ignore" id="sept-23-notes-lagrangian-dynamics">
+<h1>5 Sept 23 - Notes: Lagrangian Dynamics<a class="headerlink" href="#sept-23-notes-lagrangian-dynamics" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion">Newtonian Mechanics</a> is an incredibly useful model of the natural world. In fact, it wasn’t until the mid 1970s that we were able to truly <a class="reference external" href="https://en.wikipedia.org/wiki/Tests_of_general_relativity">test Einstein’s gravity as a true replacement</a> for Newton. That being said, for most terrestrial situations (macroscopic objects moving at low speeds), Newton’s mechanics is very good. However, the problem with Newton is that it requires a few things:</p>
+<ol class="arabic simple">
+<li><p>We must be able identify each interaction on the object or model an average behavior from many littler interactions (e.g., models of friction vs. detailed E&amp;M forces)</p></li>
+<li><p>We must be able to mathematically describe the size and direction of the interaction at all times we want to model</p></li>
+<li><p>We must be able to vectorially add the interactions to produce the net force <span class="math notranslate nohighlight">\(\sum_i \vec{F}_i = \vec{F}_{net}\)</span>.</p></li>
+</ol>
+<p>In many cases, we can do this. But consider the picture below of a bead sliding inside a cone. How would you write down the contact force between the cone and the bead for all space and time?</p>
+<p><img alt="Cone" src="docs/images/notes-lagrangian-dynamics_cylindrical_cone_mass.jpg" /></p>
+<p>Enter the <a class="reference external" href="https://en.wikipedia.org/wiki/Lagrangian_mechanics">Lagrangian Mechanics</a>, an equivalent description of Newton’s mechanics developed through several advances in physics and mathematics in the 17th and 18th centuries. Some of the major contributors included Newton, Gottfried Wilhelm Leibniz, Pierre Louis Moreau de Maupertuis, Guillaume de l’Hôpital, Jacques Bernoulli, Jean Bernoulli, and Jean D’Alembert. This period of the development of mechanics was foundational to the development of concepts like the <a class="reference external" href="https://en.wikipedia.org/wiki/Action_(physics)">action</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Phase_space">phase space</a> as well as approaches like <a class="reference external" href="https://en.wikipedia.org/wiki/Calculus_of_variations">variational analysis</a>, which formed the basis for <a class="reference external" href="https://en.wikipedia.org/wiki/Dynamical_system">dynamical systems</a> (phase space describes real motion), <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_mechanics">quantum mechanics</a> (quantize the action), and <a class="reference external" href="https://en.wikipedia.org/wiki/Perturbation_theory">perturbation theory</a> (approximate answers can be iteratively sought).</p>
+<p>This analysis is grounded in optimization or rather extremization. The idea is as follows:</p>
+<ol class="arabic simple">
+<li><p>Consider all potential paths a system can take through phase space</p></li>
+<li><p>Time each of them between the same two points in phase space</p></li>
+<li><p>The one that minimizes the action integral over that time/space is the one the system takes</p></li>
+</ol>
+<p>This might seem magical! But it’s truly a deep connection to the energetics of the system, which limit the the relevant equations of motion by both the number of degrees of freedom (ways the system can move) and the constraints equation (things that influence the motion).</p>
+<section id="variational-analysis">
+<h2>Variational Analysis<a class="headerlink" href="#variational-analysis" title="Link to this heading">#</a></h2>
+<p>The name of the game in calculus of variations is finding extrema (minima, maxima, or stationary points) of integrals that have the form:</p>
+<div class="math notranslate nohighlight">
+\[
+S = \int_{x_1}^{x_2} f[y(x),\dot{y}(x),x] dx
+\]</div>
+<p>While at first this might seem like a strange thing to do, it turns out that this is a very powerful way to solve problems. In fact, we are able to characterize the path of a system through phase space by finding the path that minimizes the <a class="reference external" href="https://en.wikipedia.org/wiki/Action_(physics)">action integral</a> . This is called the <a class="reference external" href="https://en.wikipedia.org/wiki/Stationary-action_principle">principle of least action</a>. This kind of analysis also tells us that a <a class="reference external" href="https://en.wikipedia.org/wiki/Great_circle">Great Circle</a> is the shortest path between two points on a sphere and that <a class="reference external" href="https://en.wikipedia.org/wiki/Snell%27s_law">Snell’s Law</a> is the shortest path (in time) light takes between two points in different media.</p>
+<p>While you are trying to find the minimize <span class="math notranslate nohighlight">\(S\)</span>, what you end up finding is the <strong>function</strong> <span class="math notranslate nohighlight">\(y(x)\)</span> that satisfies this minimization. It turns out that for <span class="math notranslate nohighlight">\(S\)</span> to have extrema, the Euler-Lagrange equation (below) must be satisfied. The handwritten notes below show how to derive this equation for a 1D system, but it can be generalized to <span class="math notranslate nohighlight">\(N\)</span> dimensions.</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial f}{\partial y} - \frac{d}{dx}\left(\frac{\partial f}{\partial \dot{y}} \right) = 0
+\]</div>
+<section id="applications-to-classical-mechanics">
+<h3>Applications to Classical Mechanics<a class="headerlink" href="#applications-to-classical-mechanics" title="Link to this heading">#</a></h3>
+<p>In practice, when approaching a variational problem, the typical workflow if something like this:</p>
+<ol class="arabic simple">
+<li><p>Write your problem down in the form of an integral like <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Use the Euler-Lagrange equation to get a differential equation for the unknown function <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p>Solve the differential equation.</p></li>
+</ol>
+<p>We can extend this framework for use in classical mechanics by defining the lagrangian of a system with independent, generalized coordinates <span class="math notranslate nohighlight">\((q_1,\dot{q}_1... q_n,\dot{q}_n)\)</span> as the kinetic energy minus potential energy of a system:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L(q_1,\dot{q}_1... q_n,\dot{q}_n)} = T(q_1,\dot{q}_1... q_n,\dot{q}_n) - V(q_1,\dot{q}_1... q_n,\dot{q}_n)
+\]</div>
+<p>Here, the function <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is called the Lagrangian of the system and takes the place of <span class="math notranslate nohighlight">\(f\)</span> in the Euler-Lagrange equation. The coordinates <span class="math notranslate nohighlight">\(q_i\)</span> are called the generalized coordinates of the system and they take the place of <span class="math notranslate nohighlight">\(y\)</span> in the 1D Euler-Lagrange equation.</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Action_(physics)">action</a> is a scalar quantity that “tracks” how the energy changes in a physical system over time. It is the integral of the Lagrangian over a time interval, which we write as the action integral:</p>
+<div class="math notranslate nohighlight">
+\[
+S = \int_{t_1}^{t_2} \mathcal{L(q_1,\dot{q}_1... q_n,\dot{q}_n)} dt
+\]</div>
+<p>Several mathematicians contributed to this work including Leibniz, BErnoulli, Maupertuis, and Euler. Through their collective work, it turns out we can think of the path that a system takes through an abstract space of all the measurements that uniquely characterize it (a phase space). That trajectory through phase space is just as useful as a real physical trajectory in <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(z\)</span> space if we understand what it is doing. And we can abstract that concept to new systems that might not have mechanical analogs (e.g., quantum mechanics).</p>
+<p>Their work showed that the path a system takes between points <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span> in these generalized coordinates is the path such that <span class="math notranslate nohighlight">\(S\)</span> is stationary (you can think of this as minimizing the action integral). This is called the principle of least action. This lets us leverage the Euler-Lagrange equation for the generalized coordinates of our system <span class="math notranslate nohighlight">\(q_n\)</span>. We can derive that result, but it is not necessary for you to do so to see the connection between the equation below and the 1D Euler-Lagrange equation.</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial \mathcal{L}}{\partial q_i} - \frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{q}_i} \right) = 0
+\]</div>
+<p>Once we perform these derivatives on this function, we will obtain <span class="math notranslate nohighlight">\(n\)</span> equations of motion (EOM) for our system; one for each generalized coordinate (<span class="math notranslate nohighlight">\(q_i\)</span>). Note how we didn’t have to know anything about the forces acting on our system to arrive at equations of motion, but rather the energy.</p>
+</section>
+</section>
+<section id="video-on-lagrangian-dynamics">
+<h2>Video on Lagrangian Dynamics<a class="headerlink" href="#video-on-lagrangian-dynamics" title="Link to this heading">#</a></h2>
+<p>Parth G. has a lovely video below about the basics of Lagrangian Dynamics.</p>
+<p><a class="reference external" href="https://inv.tux.pizza/watch?v=KpLno70oYHE"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/KpLno70oYHE?width=720&amp;height=405" /></a></p>
+<ul class="simple">
+<li><p>Non-Commercial Link: <a class="reference external" href="https://inv.tux.pizza/watch?v=KpLno70oYHE">https://inv.tux.pizza/watch?v=KpLno70oYHE</a></p></li>
+<li><p>Commercial Link: <a class="reference external" href="https://youtube.com/watch?v=KpLno70oYHE">https://youtube.com/watch?v=KpLno70oYHE</a></p></li>
+</ul>
+</section>
+<section id="additional-resources">
+<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading">#</a></h2>
+<p>My notes go into detail on the development of the Lagrangian problem. But practice is the best approach.</p>
+<section id="handwritten-notes">
+<h3>Handwritten Notes<a class="headerlink" href="#handwritten-notes" title="Link to this heading">#</a></h3>
+<p>Here are my handwritten notes on the Calculus of Variations and Lagrangian Mechanics.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#../../assets/notes/Notes-Calculus_of_Variations.pdf"><span class="xref myst">Calculus of Variations</span></a></p></li>
+<li><p><a class="reference internal" href="#../../assets/notes/Notes-Lagrangian_Dynamics.pdf"><span class="xref myst">Lagrangian Dynamics</span></a></p></li>
+<li><p><a class="reference internal" href="#../../assets/notes/Notes-Lagrangian_Example.pdf"><span class="xref myst">Lagrangian Example</span></a></p></li>
+<li><p><a class="reference internal" href="#../../assets/notes/Notes-Lagrangian_Example_Gen_Force.pdf"><span class="xref myst">Lagrangian Example with Generalized Forces and Lagrange Multipliers</span></a></p></li>
+</ul>
+</section>
+<section id="book-readings">
+<h3>Book Readings<a class="headerlink" href="#book-readings" title="Link to this heading">#</a></h3>
+<p>This reading is useful preparation for reminding yourself of Lagrangian Dynamics.</p>
+<ul class="simple">
+<li><p>Any classical mechanics book you like! Taylor is a good one.</p></li>
+<li><p><a class="reference external" href="https://www.physics.rutgers.edu/~shapiro/507/book.pdf">Section 2.1 and 2.2 of Shapiro’s Book</a></p></li>
+<li><p><a class="reference external" href="https://www.google.com/books/edition/A_Student_s_Guide_to_Lagrangians_and_Ham/ebTCAQAAQBAJ?hl=en&amp;amp;gbpv=1&amp;amp;dq=lagrangian+dynamics+book&amp;amp;printsec=frontcover">A Google Book you can review</a></p></li>
+</ul>
+</section>
+<section id="video-resources">
+<h3>Video Resources<a class="headerlink" href="#video-resources" title="Link to this heading">#</a></h3>
+<p>If you are a feeling that you would like a little direct instruction on this, this lecture is great. Lots of examples!</p>
+<p><a class="reference external" href="https://inv.tux.pizza/watch?v=zhk9xLjrmi4"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/zhk9xLjrmi4?width=720&amp;height=405" /></a></p>
+<ul class="simple">
+<li><p>Non-Commercial Link: <a class="reference external" href="https://inv.tux.pizza/watch?v=zhk9xLjrmi4">https://inv.tux.pizza/watch?v=zhk9xLjrmi4</a></p></li>
+<li><p>Commercial Link: <a class="reference external" href="https://youtube.com/watch?v=zhk9xLjrmi4">https://youtube.com/watch?v=zhk9xLjrmi4</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/tex"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-analysis">Variational Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-to-classical-mechanics">Applications to Classical Mechanics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-on-lagrangian-dynamics">Video on Lagrangian Dynamics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handwritten-notes">Handwritten Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#book-readings">Book Readings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#video-resources">Video Resources</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,589 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential &#8212; Modern Mathematical Methods</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/tex/activity-sep_var_spherical_examples';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../content/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Modern Mathematical Methods - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Modern Mathematical Methods - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../content/index.html">
+                    Welcome to Mathematical Modeling in Physics
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/modeling/activity-what_is_a_model.html">29 Aug 23 - Activity: What is a Model?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/sho/notes-SHO.html">29 Aug 23 - Notes: Simple Harmonic Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-frames.html">31 Aug 23 - Activity: Frames and Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.html">5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.html">7 Sep 23 - Activity: Numerical Integration and More Lagrangians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.html">7 Sept 23 - Notes: Numerical Integration in 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.html">12 Sep 23 - Activity: The Dynamical Systems Approach and Phase Portraits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.html">12 Sept 23 - Notes: Dynamical Systems and Phase Space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity-duffing.html">19 Sep 23 - The Duffing Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.html">19 Sep 23 - Notes: Heading towards Chaos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.html">14 Sept 23 - Conducting a complete analysis of an ODE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.html">5 Sept 23 - Notes: Lagrangian Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-efields.html">26 Sep 23 - Activity: Electrostatic Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var.html">3 Oct 23 - Activity: PDEs and Separation of Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var_spherical.html">5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.html">10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-superposition.html">28 Sep 23 - Activity: Superposition of Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-electric_potential.html">3 Oct 23 - Notes: Electric Potential - a scalar field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-em_intro.html">26 Sept 23 - Notes: Maxwell’s Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-static_fields.html">26 Sept 23 - Notes: Static Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Numerics/notes-relaxation.html">9 Oct 23 - Notes: Method of Relaxation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Numerics/activity-relaxation_2d.html">12 Oct 23 - Activity: Method of Relaxation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-fft.html">6 Oct 23 - Notes: Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-coupled_oscillations.html">16 Oct 23 - Notes: Coupled Oscillations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-waves_intro.html">16 Oct 23 - Notes: Introduction to Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-CoupledOsc-NormalModes.html">17 Oct 23 - Activity: Normal Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.html">19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-solve_the_wave_eq.html">25 Oct 23 - Notes: Solutions to The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-1D.html">26 Oct 2023 - Activity: 1-Dimensional Travelling Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-Waves-Fouriers_Trick.html">30 Oct 2023 - Notes: Deconstructing Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Signals.html">31 Oct 23 - Activity: Signal Deconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-seriesExpand.html">2 Nov 23 - Activity: Automated Signal Deconstruction &amp; Reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.html">7 Nov 23 - Activity: The Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Applying_the_FFT.html">9 Nov 23 - Activity: Applying The Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-Using-FFTs.html">13 Nov 23 - Notes: Applications of FFTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-FFT-applications.html">14 &amp; 16 Nov 23 - Using the FFT with Real Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-randomness.html">20 Nov 23 - Notes: Random Processes</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-radioactive_decay.html">21 Nov 23 - Activity: Introduction to Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-counting_and_combinatorics.html">27 Nov 23 - Notes: Counting and Combinatorics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-monte_carlo_simulations.html">27 Nov 23 - Notes: Monte Carlo Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-thermal_contact.html">28 Nov 23 - Activity: Model of Two Bodies in Thermal Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-mc_integration.html">30 Nov 23 - Activity: Monte Carlo Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-mcmc.html">4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-metropolis.html">5 Dec 23 - Activity: Modeling the Ideal Gas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-ising_model.html">7 Dec 23 - Activity: The Ising Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-monte_carlo.html">7 Dec 23 - Activity: Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-zombies.html">7 Dec 23 - Activity: Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/activities.html">Activities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/cards.html">Chapters</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/about.html">About</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/announcement.html">🚀 Release v0.9.2 “Unified Urubu” Highlights</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/tex/activity-sep_var_spherical_examples.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#azimuthally-symmetric-solutions">Azimuthally Symmetric Solutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sphere-of-constant-surface-potential">Sphere of constant surface potential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sphere-of-variable-potential">Sphere of variable potential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-thick-spherical-shell">A thick spherical shell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-polarization">Example of Polarization</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="oct-23-activity-matching-boundary-conditions-and-plotting-the-potential">
+<h1>10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential<a class="headerlink" href="#oct-23-activity-matching-boundary-conditions-and-plotting-the-potential" title="Link to this heading">#</a></h1>
+<section id="azimuthally-symmetric-solutions">
+<h2>Azimuthally Symmetric Solutions<a class="headerlink" href="#azimuthally-symmetric-solutions" title="Link to this heading">#</a></h2>
+<p>As we saw, azimuthally symmetric solutions, the electric potential is independent of <span class="math notranslate nohighlight">\(\phi\)</span> and the solutions are of the form:</p>
+<div class="math notranslate nohighlight">
+\[V(r,\theta) = \sum_{n=0}^\infty \sum_{l=0}^\infty \left(A_{nl} r^n + \frac{B_{nl}}{r^{n+1}}\right) P_l(\cos\theta)\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_l(\cos\theta)\)</span> are the <a class="reference external" href="https://en.wikipedia.org/wiki/Legendre_polynomials">Legendre polynomials</a>. The coefficients <span class="math notranslate nohighlight">\(A_{nl}\)</span> and <span class="math notranslate nohighlight">\(B_{nl}\)</span> are determined by the boundary conditions. We will practice solving for these coefficients in this activity.</p>
+<p><strong>✅ Do this</strong></p>
+<section id="sphere-of-constant-surface-potential">
+<h3>Sphere of constant surface potential<a class="headerlink" href="#sphere-of-constant-surface-potential" title="Link to this heading">#</a></h3>
+<p>Consider a sphere of with a radius <span class="math notranslate nohighlight">\(a\)</span>. If the potential on the surface is <span class="math notranslate nohighlight">\(V_0\)</span>, what is the potential inside and outside the sphere?</p>
+<ol class="arabic simple">
+<li><p>Consider the radial solutions (what doesn’t blow up?)</p></li>
+<li><p>Consider the polar angle solutions, what has to be true? What does that say about terms with <span class="math notranslate nohighlight">\(l&gt;0\)</span>?</p></li>
+<li><p>Write down the solution inside and outside the sphere.</p></li>
+<li><p>Make a heat map plot (in <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>) of the potential inside and outside the sphere. You can set <span class="math notranslate nohighlight">\(a=1\)</span> and <span class="math notranslate nohighlight">\(V_0=1\)</span> if that helps.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## your code here</span>
+</pre></div>
+</div>
+<p><strong>✅ Do this</strong></p>
+</section>
+<section id="sphere-of-variable-potential">
+<h3>Sphere of variable potential<a class="headerlink" href="#sphere-of-variable-potential" title="Link to this heading">#</a></h3>
+<p>Consider a sphere of with a radius <span class="math notranslate nohighlight">\(a\)</span>. If the potential on the surface is <span class="math notranslate nohighlight">\(V(\theta)\)</span>, what is the potential inside and outside the sphere?</p>
+<ol class="arabic simple">
+<li><p>Consider the radial solutions (what doesn’t blow up?)</p></li>
+<li><p>Consider the polar angle solutions, what has to be true? Can you say anything about them?</p></li>
+<li><p>What if <span class="math notranslate nohighlight">\(V(\theta) = V_0 \cos(\theta)\)</span>? What is the potential inside and outside the sphere?</p></li>
+</ol>
+</section>
+<section id="a-thick-spherical-shell">
+<h3>A thick spherical shell<a class="headerlink" href="#a-thick-spherical-shell" title="Link to this heading">#</a></h3>
+<p>Suppose you have a spherical shell of inner radius <span class="math notranslate nohighlight">\(a\)</span> and outer radius <span class="math notranslate nohighlight">\(b\)</span>, and you know the electric potential on the inner (<span class="math notranslate nohighlight">\(V(a,\theta) = V_a(\theta)\)</span>) and outer (<span class="math notranslate nohighlight">\(V(b,\theta) = V_b(\theta)\)</span>) surfaces. You want to find the electric potential <span class="math notranslate nohighlight">\(V(r,\theta)\)</span> inside the hole (<span class="math notranslate nohighlight">\(r&lt;a\)</span>) and outside the shell (<span class="math notranslate nohighlight">\(r&gt;b\)</span>).</p>
+<p>Let’s allow:</p>
+<div class="math notranslate nohighlight">
+\[V_a(\theta) = V_{a0} + V_{a1} \cos(\theta)\]</div>
+<div class="math notranslate nohighlight">
+\[V_b(\theta) = V_{b0} + V_{b1} \cos(\theta)\]</div>
+<ol class="arabic simple">
+<li><p>What is the general solution? (all three regions)</p></li>
+<li><p>What are the boundary conditions for <span class="math notranslate nohighlight">\(r\)</span>?</p></li>
+<li><p>What terms are left in the general solutions?</p></li>
+<li><p>Find the unique solution for <span class="math notranslate nohighlight">\(V(r,\theta)\)</span> inside the hole (<span class="math notranslate nohighlight">\(r&lt;a\)</span>) and outside the shell (<span class="math notranslate nohighlight">\(r&gt;b\)</span>).</p></li>
+</ol>
+<p>What do you do in the case of <span class="math notranslate nohighlight">\(V_a(\theta) = f(\theta)\)</span> and <span class="math notranslate nohighlight">\(V_b(\theta) = g(\theta)\)</span> - generic functions?</p>
+</section>
+<section id="example-of-polarization">
+<h3>Example of Polarization<a class="headerlink" href="#example-of-polarization" title="Link to this heading">#</a></h3>
+<p><strong>✅ Do this</strong></p>
+<p>Put a metal sphere of radius <span class="math notranslate nohighlight">\(a\)</span> in a uniform electric field <span class="math notranslate nohighlight">\(\vec{E} = E_0 \hat{z}\)</span>.</p>
+<p><img alt="Sphere in a uniform electric field" src="https://d2vlcm61l7u1fs.cloudfront.net/media%2F2f6%2F2f6e4bc3-0070-470f-9451-6376a4eceddc%2Fphpl2HMKa.png" /></p>
+<p>What is the potential inside and outside the sphere?</p>
+<ol class="arabic simple">
+<li><p>Draw the picture and write down the boundary conditions. What is the potential everywhere on a metal?</p></li>
+<li><p>What general solution do you need to use? How do you know?</p></li>
+<li><p>What are the boundary conditions for the radial solutions? The polar angle solutions?</p></li>
+<li><p>Match your boundary conditions to your general solution. What is the potential inside and outside the sphere?</p></li>
+<li><p>Make a heat map plot (in <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>) of the potential inside and outside the sphere. You can set <span class="math notranslate nohighlight">\(a=1\)</span> and <span class="math notranslate nohighlight">\(E_0=1\)</span> if that helps.</p></li>
+<li><p>(challenge) Find the polarization charge density on the surface of the sphere. What is the total charge on the sphere?</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## your code here</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/tex"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#azimuthally-symmetric-solutions">Azimuthally Symmetric Solutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sphere-of-constant-surface-potential">Sphere of constant surface potential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sphere-of-variable-potential">Sphere of variable potential</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-thick-spherical-shell">A thick spherical shell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-polarization">Example of Polarization</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

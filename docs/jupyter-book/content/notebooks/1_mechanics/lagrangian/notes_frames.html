@@ -1,0 +1,659 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>31 Aug 23 - Notes: Frames and Coordinates &#8212; Modern Mathematical Methods</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/notebooks/1_mechanics/lagrangian/notes_frames';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/logo.png" class="logo__image only-light" alt="Modern Mathematical Methods - Home"/>
+    <script>document.write(`<img src="../../../../_static/logo.png" class="logo__image only-dark" alt="Modern Mathematical Methods - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    Welcome to Mathematical Modeling in Physics
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../modeling/activity-what_is_a_model.html">29 Aug 23 - Activity: What is a Model?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sho/notes-SHO.html">29 Aug 23 - Notes: Simple Harmonic Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity-frames.html">31 Aug 23 - Activity: Frames and Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity-lagrange_1.html">5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity-lagrange_2.html">7 Sep 23 - Activity: Numerical Integration and More Lagrangians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes-numerical_integration_1d.html">7 Sept 23 - Notes: Numerical Integration in 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamical_systems/activity-phase_space.html">12 Sep 23 - Activity: The Dynamical Systems Approach and Phase Portraits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamical_systems/notes-phase_space.html">12 Sept 23 - Notes: Dynamical Systems and Phase Space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamical_systems/activity-duffing.html">19 Sep 23 - The Duffing Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamical_systems/notes-linearization_odes.html">19 Sep 23 - Notes: Heading towards Chaos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamical_systems/activity_vanderpol.html">14 Sept 23 - Conducting a complete analysis of an ODE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes-lagrangian-dynamics.html">5 Sept 23 - Notes: Lagrangian Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_EM/Statics/activity-efields.html">26 Sep 23 - Activity: Electrostatic Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_EM/Statics/activity-sep_var.html">3 Oct 23 - Activity: PDEs and Separation of Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_EM/Statics/activity-sep_var_spherical.html">5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_EM/Statics/activity-sep_var_spherical_examples.html">10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_EM/Statics/activity-superposition.html">28 Sep 23 - Activity: Superposition of Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_EM/Statics/notes-electric_potential.html">3 Oct 23 - Notes: Electric Potential - a scalar field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_EM/Statics/notes-em_intro.html">26 Sept 23 - Notes: Maxwell’s Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_EM/Statics/notes-static_fields.html">26 Sept 23 - Notes: Static Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_EM/Numerics/notes-relaxation.html">9 Oct 23 - Notes: Method of Relaxation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_EM/Numerics/activity-relaxation_2d.html">12 Oct 23 - Activity: Method of Relaxation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/notes-fft.html">6 Oct 23 - Notes: Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/notes-coupled_oscillations.html">16 Oct 23 - Notes: Coupled Oscillations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/notes-waves_intro.html">16 Oct 23 - Notes: Introduction to Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/activity-CoupledOsc-NormalModes.html">17 Oct 23 - Activity: Normal Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/activity-CoupledOsc-NumericalNormalModes.html">19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/notes-solve_the_wave_eq.html">25 Oct 23 - Notes: Solutions to The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/activity-Waves-1D.html">26 Oct 2023 - Activity: 1-Dimensional Travelling Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/notes-Waves-Fouriers_Trick.html">30 Oct 2023 - Notes: Deconstructing Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/activity-Waves-Signals.html">31 Oct 23 - Activity: Signal Deconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/activity-Waves-seriesExpand.html">2 Nov 23 - Activity: Automated Signal Deconstruction &amp; Reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/activity-Waves-Introduction_to_FFT.html">7 Nov 23 - Activity: The Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/activity-Waves-Applying_the_FFT.html">9 Nov 23 - Activity: Applying The Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/notes-Using-FFTs.html">13 Nov 23 - Notes: Applications of FFTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3_waves/activity-FFT-applications.html">14 &amp; 16 Nov 23 - Using the FFT with Real Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_distributions/notes-randomness.html">20 Nov 23 - Notes: Random Processes</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../4_distributions/activity-radioactive_decay.html">21 Nov 23 - Activity: Introduction to Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_distributions/notes-counting_and_combinatorics.html">27 Nov 23 - Notes: Counting and Combinatorics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_distributions/notes-monte_carlo_simulations.html">27 Nov 23 - Notes: Monte Carlo Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_distributions/activity-thermal_contact.html">28 Nov 23 - Activity: Model of Two Bodies in Thermal Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_distributions/activity-mc_integration.html">30 Nov 23 - Activity: Monte Carlo Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_distributions/notes-mcmc.html">4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_distributions/activity-metropolis.html">5 Dec 23 - Activity: Modeling the Ideal Gas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_distributions/activity-ising_model.html">7 Dec 23 - Activity: The Ising Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_distributions/activity-monte_carlo.html">7 Dec 23 - Activity: Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_distributions/activity-zombies.html">7 Dec 23 - Activity: Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../activities.html">Activities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cards.html">Chapters</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../../announcement.html">🚀 Release v0.9.2 “Unified Urubu” Highlights</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/notebooks/1_mechanics/lagrangian/notes_frames.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>31 Aug 23 - Notes: Frames and Coordinates</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-reminder-about-inertial-frames">Video Reminder about Inertial Frames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-velocities-in-cartesian-coordinates">Relative Velocities in Cartesian Coordinates</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reminders-about-frames-and-linear-frame-changes">Reminders about frames and linear frame changes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-relationship-between-mathbf-v-b-a-and-mathbf-v-a-b">Is there a relationship between <span class="math notranslate nohighlight">\(\mathbf{v}_{B/A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}_{A/B}\)</span>?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-the-velocities">What about the velocities?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-galilean-transformation">The Galilean Transformation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="aug-23-notes-frames-and-coordinates">
+<h1>31 Aug 23 - Notes: Frames and Coordinates<a class="headerlink" href="#aug-23-notes-frames-and-coordinates" title="Link to this heading">#</a></h1>
+<p>A <strong>Frame of Reference</strong>, <strong>Reference Frame</strong>, or simply <strong>Frame</strong> is a set of coordinates. These coordinates describe where things are. Sometimes it makes sense to choose different coordinates to describe the same situation. It is also important to recognize when to change coordinates to make a problem easier to work with. This will lead us to the concept of <a class="reference external" href="https://en.wikipedia.org/wiki/Generalized_coordinates">generalized coordinates</a>, which are quite powerful in working with mechanical systems.</p>
+<p>In physics, we often seek to work with a problem in the simplest way possible. That means we are typically looking to work with a problem in an <strong>inertial frame</strong>. Now, this is not always possible, consider systems that can flow and deform like in fluid mechanics or continuum mechanics. But, regardless, we should always know what frame we are working in.</p>
+<p>An <strong>inertial frame</strong> is a reference frame where Newton’s First Law holds, which means that in this frame a net force of zero means an acceleration of zero. In practice, this means that if you have two frames that are moving at a constant velocity relative to each other (without rotation), these are inertial frames.</p>
+<section id="video-reminder-about-inertial-frames">
+<h2>Video Reminder about Inertial Frames<a class="headerlink" href="#video-reminder-about-inertial-frames" title="Link to this heading">#</a></h2>
+<p>From Physics Professor <a class="reference external" href="https://www.youtube.com/user/yoprofmatt">Matt Anderson</a> (6min 33s)</p>
+<p><a class="reference external" href="https://inv.tux.pizza/watch?v=WqWWM0673bk"><img alt="" src="https://markdown-videos-api.jorgenkh.no/youtube/WqWWM0673bk?width=720&amp;height=405" /></a></p>
+<ul class="simple">
+<li><p>Non-Commercial Link: <a class="reference external" href="https://inv.tux.pizza/watch?v=WqWWM0673bk">https://inv.tux.pizza/watch?v=WqWWM0673bk</a></p></li>
+<li><p>Commercial Link: <a class="reference external" href="https://youtube.com/watch?v=WqWWM0673bk">https://youtube.com/watch?v=WqWWM0673bk</a></p></li>
+</ul>
+</section>
+<section id="relative-velocities-in-cartesian-coordinates">
+<h2>Relative Velocities in Cartesian Coordinates<a class="headerlink" href="#relative-velocities-in-cartesian-coordinates" title="Link to this heading">#</a></h2>
+<p>Suppose you’re walking down Shaw Lane eager to get to BPS for your favorite physics class at constant velocity <span class="math notranslate nohighlight">\(v_A\)</span> when you notice a <a class="reference external" href="https://www.instagram.com/qualitysquirrelsofmsu/">squirrel</a> sitting stationary on the sidewalk <span class="math notranslate nohighlight">\(d\)</span> meters in front of you. Like an reasonable person, you naturally feel the urge to unnecessarily and mathematically analyze this situation using reference frames.</p>
+<p>Let’s call your reference frame <span class="math notranslate nohighlight">\(A\)</span> and the squirrel’s <span class="math notranslate nohighlight">\(B\)</span>. We’ll ignore height differences between you and the squirrel, which we assume are negligible given the amount of food our squirrels are consuming lately.</p>
+<p>A note on notation: <span class="math notranslate nohighlight">\(r_{A/B}\)</span> means “the position of <strong>object</strong> <span class="math notranslate nohighlight">\(A\)</span> in <strong>frame</strong> <span class="math notranslate nohighlight">\(B\)</span>,” or simply “the position of <span class="math notranslate nohighlight">\(A\)</span> relative to <span class="math notranslate nohighlight">\(B\)</span>.”</p>
+<img src="../../assets/squirrel1.png" alt="squirrel1" width=500px/>
+<section id="reminders-about-frames-and-linear-frame-changes">
+<h3>Reminders about frames and linear frame changes<a class="headerlink" href="#reminders-about-frames-and-linear-frame-changes" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>What is the squirrel’s position in your frame, <span class="math notranslate nohighlight">\(\mathbf{r}_{B/A}\)</span>?</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Answer</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We have to select an origin, let’s choose ourselves. Then <span class="math notranslate nohighlight">\(\mathbf{r}_{B/A} = d\;\hat{x}\)</span>.</p>
+</div>
+</details><ol class="arabic simple" start="2">
+<li><p>What is your position in the squirrel’s frame, <span class="math notranslate nohighlight">\(\mathbf{r}_{A/B}\)</span>?</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Answer</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The squirrel is free to select itself as the origin. Then <span class="math notranslate nohighlight">\(\mathbf{r}_{A/B} = -d\;\hat{x}\)</span>.</p>
+</div>
+</details><ol class="arabic simple" start="3">
+<li><p>What is your velocity in your frame, <span class="math notranslate nohighlight">\(\dot{\mathbf{r}}_{A/A} = \mathbf{v}_{A/A}\)</span>?</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Answer</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The notation is a bit awkward to use, so we will often just drop the additional letter if we assume the velocity is in some obvious inertial frame. In this case we are comparing frames, so we won’t. Note in your own frame, you are not moving: <span class="math notranslate nohighlight">\(\dot{\mathbf{r}}_{A/A} = \mathbf{v}_{A/A} = \mathbf{0}\)</span>.</p>
+</div>
+</details><ol class="arabic simple" start="4">
+<li><p>What is the squirrel’s velocity in your frame, <span class="math notranslate nohighlight">\(\mathbf{v}_{B/A}\)</span>?</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Answer</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The squirrel in your frame is moving towards you. Again, we drop the additional letter if we understand the frame to be some obvious inertial frame: <span class="math notranslate nohighlight">\(\mathbf{v}_{B/A} = -v_A\;\hat{x}\)</span>.</p>
+</div>
+</details><ol class="arabic simple" start="5">
+<li><p>What is your velocity in the squirrel’s frame, <span class="math notranslate nohighlight">\(\mathbf{v}_{B/A}\)</span>?</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Answer</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In the squirrel’s frame, you are moving towards the squirrel. <span class="math notranslate nohighlight">\(\mathbf{v}_{A/B} = v_A\;\hat{x}\)</span>.</p>
+</div>
+</details><ol class="arabic simple" start="6">
+<li><p>Suppose that the squirrel starts walking to the right at the same velocity that you are walking at. What is <span class="math notranslate nohighlight">\(\mathbf{v}_{B/A}\)</span> now?</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Answer</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In the squirrel’s frame, you are now stationary, the distance between you and the squirrel remains constant. Thus, <span class="math notranslate nohighlight">\(\mathbf{v}_{B/A} = \mathbf{0}\)</span>.</p>
+</div>
+</details><p>Hopefully these are intuitive from what you’ve learned back in introductory physics, but there are subtleties to the mathematics that you just did. These issues are incredibly important for working in other coordinate systems and do analysis between frames.</p>
+</section>
+</section>
+<section id="is-there-a-relationship-between-mathbf-v-b-a-and-mathbf-v-a-b">
+<h2>Is there a relationship between <span class="math notranslate nohighlight">\(\mathbf{v}_{B/A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}_{A/B}\)</span>?<a class="headerlink" href="#is-there-a-relationship-between-mathbf-v-b-a-and-mathbf-v-a-b" title="Link to this heading">#</a></h2>
+<p>This is relatively simple to understand if we consider the position of one object (C) in two different frames (A and B). The location of object C in frame A is <span class="math notranslate nohighlight">\(\mathbf{r}_{C/A}\)</span> and in frame B is <span class="math notranslate nohighlight">\(\mathbf{r}_{C/B}\)</span>. Note that these vectors point from the origin of the frame (A or B) to the position of the object (C). See below.</p>
+<img src="../../assets/frame_vectors.png" alt="Diagram showing relative position vectors for three different points to illustrate the mathematical relationship between the position vectors." width=500px/>
+<p>From this diagram it is clear that we can write the following relationship between the position vectors:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{r}_{C/A} = \mathbf{r}_{B/A} + \mathbf{r}_{C/B}\]</div>
+<p>In words this states, if we measure the distance vector from A to C, then that is the same as adding the distance vectors that measure from A to B and then B to C. This distance concept holds in any coordinate system and even where the concept of coordinates is more abstract. We can define relationships between locations in real (and imagined) spaces using vectors.</p>
+<section id="what-about-the-velocities">
+<h3>What about the velocities?<a class="headerlink" href="#what-about-the-velocities" title="Link to this heading">#</a></h3>
+<p>Here we have to be a bit more careful. Normally, you would think we can simply take derivatives like this:</p>
+<div class="math notranslate nohighlight">
+\[\dot{\mathbf{r}}_{C/A} = \dot{\mathbf{r}}_{B/A} + \dot{\mathbf{r}}_{C/B}\]</div>
+<div class="warning admonition">
+<p class="admonition-title">Careful!</p>
+<p><strong>You can only do this sometimes!</strong></p>
+<p>This derivative works out so simply only because the <strong>unit vectors are fixed in Cartesian Coordinates</strong>. That is the <a class="reference external" href="https://en.wikipedia.org/wiki/Chain_rule">Chain rule</a> works out nicely. This is not true in other coordinate systems.</p>
+</div>
+<p>If we write a generic vector in one of these frames as:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{r} = x\mathbf{\hat x} + y\mathbf{\hat y} + z \mathbf{\hat z}.\]</div>
+<p>Then take a time derivative, we simply get</p>
+<div class="math notranslate nohighlight">
+\[\dot{\mathbf{r}} = \frac{d}{dt} \mathbf{r} = \frac{dx}{dt}\mathbf{\hat x} + \frac{d\mathbf{\hat x}}{dt} x + \frac{dy}{dt}\mathbf{\hat y} + \frac{d\mathbf{\hat y}}{dt} y + \frac{dz}{dt}\mathbf{\hat z} + \frac{d\mathbf{\hat z}}{dt} z = \dot{x}\mathbf{\hat x} + \dot{y}\mathbf{\hat y} + \dot{z} \mathbf{\hat z}.\]</div>
+<p>because the derivatives of the unit vectors vanish. Later, we’ll figure out what happens when you have non-constant unit vectors.</p>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<p>Let’s use these transformations in a problem.</p>
+<p>A second squirrel appears, which we’ll call squirrel <span class="math notranslate nohighlight">\(C\)</span>. This scares the first squirrel into running toward you (<span class="math notranslate nohighlight">\(\mathbf{v}_{B/A}\)</span>), while the new squirrel runs away (<span class="math notranslate nohighlight">\(\mathbf{v}_{C/A}\)</span>).</p>
+<img src="../../assets/squirrel2.png" alt="Picutre of person and two squirrels, show the first squirrel running towards the person and the second running away." width=650px/>
+<p>Consider the following question:</p>
+<p>What is the velocity of squirrel <span class="math notranslate nohighlight">\(B\)</span> relative to squirrel <span class="math notranslate nohighlight">\(C\)</span>?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Answer</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We can draw the a diagram to help us to show that the relative positions will be:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{r}_{B/A} = \mathbf{r}_{C/A} + \mathbf{r}_{B/C}\]</div>
+<p class="sd-card-text">and thus,</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{r}_{B/C} = \mathbf{r}_{B/A} - \mathbf{r}_{C/A}\]</div>
+<p class="sd-card-text">Because all the measurements are in Cartesian coordinates, we can take the time derivative of both sides to get:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{v}_{B/C} = \mathbf{v}_{B/A} - \mathbf{v}_{C/A}\]</div>
+</div>
+</details></section>
+</section>
+<section id="the-galilean-transformation">
+<h2>The Galilean Transformation<a class="headerlink" href="#the-galilean-transformation" title="Link to this heading">#</a></h2>
+<p>We just did an example of a <a class="reference external" href="https://https://en.wikipedia.org/wiki/Galilean_transformation"><strong>Galilean Transformation</strong></a>. Traditionally, if we have a frame <span class="math notranslate nohighlight">\(B\)</span> that with moves with constant velocity <span class="math notranslate nohighlight">\(v_{B/A}\)</span> with respect to frame <span class="math notranslate nohighlight">\(A\)</span>, we re-write the above equations as the following:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{v}_B = \mathbf{v}_A - \textbf{v}_{B/A}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{r}_B = \mathbf{r}_A - \mathbf{v}_{B/A} t\]</div>
+<p>Where we have taken <span class="math notranslate nohighlight">\(_A\)</span> to mean <span class="math notranslate nohighlight">\(_{C/A}\)</span> and <span class="math notranslate nohighlight">\(_B\)</span> to mean <span class="math notranslate nohighlight">\(_{C/B}\)</span>. Also note that since we are ignoring relativistic effects, we also have that:</p>
+<div class="math notranslate nohighlight">
+\[t_B = t_A\]</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/notebooks/1_mechanics/lagrangian"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-reminder-about-inertial-frames">Video Reminder about Inertial Frames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-velocities-in-cartesian-coordinates">Relative Velocities in Cartesian Coordinates</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reminders-about-frames-and-linear-frame-changes">Reminders about frames and linear frame changes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-relationship-between-mathbf-v-b-a-and-mathbf-v-a-b">Is there a relationship between <span class="math notranslate nohighlight">\(\mathbf{v}_{B/A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}_{A/B}\)</span>?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-the-velocities">What about the velocities?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-galilean-transformation">The Galilean Transformation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

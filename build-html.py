@@ -570,6 +570,16 @@ def build_jupyter_for_files(debug=False):
     proc.wait()
     if proc.returncode != 0:
         raise RuntimeError('Step failed: Jupyter Book build (jupyter-book build .)')
+        # Copy Jupyter Book HTML output to docs/jupyter-book/
+    src = '_build/html'
+    dest = 'docs/jupyter-book'
+    if os.path.exists(src):
+        if os.path.exists(dest):
+            shutil.rmtree(dest)
+        shutil.copytree(src, dest)
+        print(f'[JUPYTER BUILD] Copied Jupyter Book HTML from {src} to {dest}')
+    else:
+        print(f'[JUPYTER BUILD] WARNING: Source directory {src} does not exist. No files copied.')
 
 def main():
     parser = argparse.ArgumentParser(description="Build site outputs from content.")

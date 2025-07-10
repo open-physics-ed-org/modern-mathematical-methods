@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators &#8212; Modern Mathematical Methods</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/md/activity-CoupledOsc-NumericalNormalModes';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../content/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Modern Mathematical Methods - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Modern Mathematical Methods - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../content/index.html">
+                    Welcome to Mathematical Modeling in Physics
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/modeling/activity-what_is_a_model.html">29 Aug 23 - Activity: What is a Model?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/sho/notes-SHO.html">29 Aug 23 - Notes: Simple Harmonic Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-frames.html">31 Aug 23 - Activity: Frames and Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.html">5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.html">7 Sep 23 - Activity: Numerical Integration and More Lagrangians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.html">7 Sept 23 - Notes: Numerical Integration in 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.html">12 Sep 23 - Activity: The Dynamical Systems Approach and Phase Portraits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.html">12 Sept 23 - Notes: Dynamical Systems and Phase Space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity-duffing.html">19 Sep 23 - The Duffing Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.html">19 Sep 23 - Notes: Heading towards Chaos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.html">14 Sept 23 - Conducting a complete analysis of an ODE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.html">5 Sept 23 - Notes: Lagrangian Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-efields.html">26 Sep 23 - Activity: Electrostatic Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var.html">3 Oct 23 - Activity: PDEs and Separation of Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var_spherical.html">5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.html">10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-superposition.html">28 Sep 23 - Activity: Superposition of Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-electric_potential.html">3 Oct 23 - Notes: Electric Potential - a scalar field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-em_intro.html">26 Sept 23 - Notes: Maxwell’s Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-static_fields.html">26 Sept 23 - Notes: Static Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Numerics/notes-relaxation.html">9 Oct 23 - Notes: Method of Relaxation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Numerics/activity-relaxation_2d.html">12 Oct 23 - Activity: Method of Relaxation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-fft.html">6 Oct 23 - Notes: Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-coupled_oscillations.html">16 Oct 23 - Notes: Coupled Oscillations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-waves_intro.html">16 Oct 23 - Notes: Introduction to Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-CoupledOsc-NormalModes.html">17 Oct 23 - Activity: Normal Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.html">19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-solve_the_wave_eq.html">25 Oct 23 - Notes: Solutions to The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-1D.html">26 Oct 2023 - Activity: 1-Dimensional Travelling Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-Waves-Fouriers_Trick.html">30 Oct 2023 - Notes: Deconstructing Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Signals.html">31 Oct 23 - Activity: Signal Deconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-seriesExpand.html">2 Nov 23 - Activity: Automated Signal Deconstruction &amp; Reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.html">7 Nov 23 - Activity: The Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Applying_the_FFT.html">9 Nov 23 - Activity: Applying The Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-Using-FFTs.html">13 Nov 23 - Notes: Applications of FFTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-FFT-applications.html">14 &amp; 16 Nov 23 - Using the FFT with Real Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-randomness.html">20 Nov 23 - Notes: Random Processes</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-radioactive_decay.html">21 Nov 23 - Activity: Introduction to Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-counting_and_combinatorics.html">27 Nov 23 - Notes: Counting and Combinatorics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-monte_carlo_simulations.html">27 Nov 23 - Notes: Monte Carlo Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-thermal_contact.html">28 Nov 23 - Activity: Model of Two Bodies in Thermal Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-mc_integration.html">30 Nov 23 - Activity: Monte Carlo Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-mcmc.html">4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-metropolis.html">5 Dec 23 - Activity: Modeling the Ideal Gas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-ising_model.html">7 Dec 23 - Activity: The Ising Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-monte_carlo.html">7 Dec 23 - Activity: Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-zombies.html">7 Dec 23 - Activity: Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/activities.html">Activities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/cards.html">Chapters</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/about.html">About</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/announcement.html">🚀 Release v0.9.2 “Unified Urubu” Highlights</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/md/activity-CoupledOsc-NumericalNormalModes.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-coupled-oscillators">Three Coupled Oscillators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-normal-mode-frequencies">Finding the Normal Mode Frequencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-normal-modes-amplitudes">Finding the Normal Modes Amplitudes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-eigenvalues-and-eigenvectors-using-numerical-approaches">Finding the Eigenvalues and Eigenvectors using Numerical Approaches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-modes">Plotting the modes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-your-work">Extending your work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#even-further">Even further</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="oct-23-activity-normal-modes-of-n-coupled-oscillators">
+<h1>19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators<a class="headerlink" href="#oct-23-activity-normal-modes-of-n-coupled-oscillators" title="Link to this heading">#</a></h1>
+<p>Now that we have discussed and built some facility with Lagrangian dynamics, let’s see how using it makes our study of normal modes much simpler than Newtonian mechanics. We will couple this analysis to solving an eigenvalue problem by guessing the form of the solutions. This technique is very common in theoretical physics with different guesses for the solution forms giving rise to different eigenvalue problems (e.g., <a class="reference external" href="https://en.wikipedia.org/wiki/Bessel_function">Bessel functions for 2D surface problems</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Hermite_polynomials">Hermite polynomials for the Quantum Harmonic Oscillator</a>.</p>
+<section id="three-coupled-oscillators">
+<h2>Three Coupled Oscillators<a class="headerlink" href="#three-coupled-oscillators" title="Link to this heading">#</a></h2>
+<p>Consider the setup below consisting of three masses connected by springs to each other. We intend to find the normal modes of the system by denoting each mass’s displacement (<span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, and <span class="math notranslate nohighlight">\(x_3\)</span>).</p>
+<p><img alt="3 Coupled Oscillators" src="docs/images/activity-CoupledOsc-NumericalNormalModes_3_coupled_osc.png" /></p>
+</section>
+<section id="finding-the-normal-mode-frequencies">
+<h2>Finding the Normal Mode Frequencies<a class="headerlink" href="#finding-the-normal-mode-frequencies" title="Link to this heading">#</a></h2>
+<p><strong>✅ Do this</strong></p>
+<p>This is not magic as we will see, it follows from our choices of solution. Here’s the steps and what you might notice about them:</p>
+<ol class="arabic simple">
+<li><p>Guess what the normal modes might look like? Write your guesses down; how should the masses move? (It’s ok if you are not sure about all of them, try to determine one of them)</p></li>
+<li><p>Write down the energy for the whole system, <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(U\)</span> (We have done this before, but not for this many particles)</p></li>
+<li><p>Use the Euler-Lagrange Equation to find the equations of motion for <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, and <span class="math notranslate nohighlight">\(x_3\)</span>. (We have done this lots, so make sure it feels solid)</p></li>
+<li><p>Reformulate the equations of motion as a matrix equation <span class="math notranslate nohighlight">\(\ddot{\mathbf{x}} = \mathbf{A} \mathbf{x}\)</span>. What is <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>? (We have done this, but only quickly, so take your time)</p></li>
+<li><p>Consider solutions of the form <span class="math notranslate nohighlight">\(Ce^{i{\omega}t}\)</span>, plug that into <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, and <span class="math notranslate nohighlight">\(x_3\)</span> to show you get <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x} = -\omega^2 \mathbf{x}\)</span>. (We have not done this, we just assumed it works! It’s ok if this is annoying, we only have to show it once.)</p></li>
+<li><p>Find the normal mode frequencies by taking the determinant of <span class="math notranslate nohighlight">\(\mathbf{A} - \mathbf{I}\lambda\)</span>. Note that this produces the following definition: <span class="math notranslate nohighlight">\(\lambda = -\omega^2\)</span> (We have not done this together and we can if it’s confusing.)</p></li>
+</ol>
+</section>
+<section id="finding-the-normal-modes-amplitudes">
+<h2>Finding the Normal Modes Amplitudes<a class="headerlink" href="#finding-the-normal-modes-amplitudes" title="Link to this heading">#</a></h2>
+<p>Ok, now we need to find the normal mode amplitudes. That is we assumed sinusoidal oscillations, but at what amplitudes? We will show how to do this with one frequency (<span class="math notranslate nohighlight">\(\omega_1\)</span>), and then break up the work of the the other two. These frequencies are:</p>
+<div class="math notranslate nohighlight">
+\[\omega^2_A = 2\dfrac{k}{m}; \qquad \omega^2_B = \left(2-\sqrt{2}\right)\dfrac{k}{m}; \qquad \omega^2_C = \left(2+\sqrt{2}\right)\dfrac{k}{m}\qquad\]</div>
+<p><strong>✅ Do this</strong></p>
+<p>After we do the first one, pick another frequencies and repeat. Answer the follow questions:</p>
+<ol class="arabic simple">
+<li><p>What does this motion physically look like? What are the masses doing?</p></li>
+<li><p>How does the frequency of oscillation make sense? Why is it higher or lower than <span class="math notranslate nohighlight">\(\omega_A\)</span>?</p></li>
+</ol>
+</section>
+<section id="finding-the-eigenvalues-and-eigenvectors-using-numerical-approaches">
+<h2>Finding the Eigenvalues and Eigenvectors using Numerical Approaches<a class="headerlink" href="#finding-the-eigenvalues-and-eigenvectors-using-numerical-approaches" title="Link to this heading">#</a></h2>
+<p>Now that we have developed solutions for the 3 coupled oscillators, let’s try to reproduce that work numerically and plots the modes to make sense of what they are doing for us.</p>
+<p>We can then apply these tools to <span class="math notranslate nohighlight">\(N\)</span> identically coupled 1D oscillators.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">la</span> <span class="c1">## For the numerical eigenvalue methods</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span> <span class="c1">## For symbolic eigenvalue methods</span>
+<span class="n">init_printing</span><span class="p">(</span><span class="n">use_unicode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1">## display nice math</span>
+</pre></div>
+</div>
+<p>We reduced our normal mode problem to the following:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}\mathbf{x} = -\omega^2\mathbf{x}\]</div>
+<p>And earlier we found these eigenvalues and eigenvectors for the 3 Oscillator model:</p>
+<div class="math notranslate nohighlight">
+\[\omega_A = 2\dfrac{k}{m}; \qquad \omega_B = \left(2-\sqrt{2}\right)\dfrac{k}{m}; \qquad \omega_C = \left(2+\sqrt{2}\right)\dfrac{k}{m}\qquad\]</div>
+<p>Python has two main libraries for helping us find these numerically. One is <code class="docutils literal notranslate"><span class="pre">numpy.linalg</span></code>, which is a powerful set of linear algebra tools that are used widely. The other is <code class="docutils literal notranslate"><span class="pre">sympy</span></code>, which is a symbolic calculator like Mathematica. Both will help you find eigenvalues and eigenvectors, but do so in entirely different ways.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.linalg</span></code> will use the common numerical tools that decompose matrices. For example, <a class="reference external" href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a> is one of the most common techniques to use for symmetric and Hermitian matrices, which are the most common in physics.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sympy</span></code> is a symbolic calculator, that attempts to determine a closed form solution for the eigenvalues. These methods are often proprietary (e.g., Mathematica and Matlab), but the source code for <a class="reference external" href="https://github.com/sympy/sympy">sympy is available to review</a>.</p></li>
+</ul>
+<p>At issue is that each of these methods requires a slight different input. The first method will take a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> matrix, but the second requires a <code class="docutils literal notranslate"><span class="pre">sympy</span></code> matrix, which can we easily constructed from our <code class="docutils literal notranslate"><span class="pre">numpy</span></code> matrix.</p>
+<p>Below, we form both matrices.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span> <span class="c1">## numpy matrix</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="c1">## Take numpy matrix and make it a sympy one</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[-2  1  0]
+ [ 1 -2  1]
+ [ 0  1 -2]]
+Matrix([[-2, 1, 0], [1, -2, 1], [0, 1, -2]])
+</pre></div>
+</div>
+<p>Finding eigenvalues with numpy.lingalg is quite simple. We just call <code class="docutils literal notranslate"><span class="pre">eigenvals,</span> <span class="pre">eigenvecs</span> <span class="pre">=</span> <span class="pre">la.eig(M)</span></code>. Note they are numericaly values. Also, these eigenvectors are normalized. Do you notice anything strange?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eigenvals</span><span class="p">,</span> <span class="n">eigenvecs</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eigenvals</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eigenvecs</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[-3.41421356 -2.         -0.58578644]
+[[ 5.00000000e-01  7.07106781e-01  5.00000000e-01]
+ [-7.07106781e-01 -4.05925293e-16  7.07106781e-01]
+ [ 5.00000000e-01 -7.07106781e-01  5.00000000e-01]]
+</pre></div>
+</div>
+<p>Finding the eigenvectors and eigenvalues with <code class="docutils literal notranslate"><span class="pre">sympy</span></code> is just as simple. Notice that these are symbolic and the eigenvectors are NOT normalized.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M2</span><span class="o">.</span><span class="n">eigenvects</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\displaystyle \left[ \left( -2, \  1, \  \left[ \left[\begin{matrix}-1\\0\\1\end{matrix}\right]\right]\right), \  \left( -2 - \sqrt{2}, \  1, \  \left[ \left[\begin{matrix}1\\- \sqrt{2}\\1\end{matrix}\right]\right]\right), \  \left( -2 + \sqrt{2}, \  1, \  \left[ \left[\begin{matrix}1\\\sqrt{2}\\1\end{matrix}\right]\right]\right)\right]\)</span></p>
+</section>
+<section id="plotting-the-modes">
+<h2>Plotting the modes<a class="headerlink" href="#plotting-the-modes" title="Link to this heading">#</a></h2>
+<p>Awesome. Now we have our modes, but what do they mean? Remember, in a given mode every object oscillates at the mode frequency, just with different amplitudes. That means everyone has the following form:</p>
+<div class="math notranslate nohighlight">
+\[A\cos(\omega t)\]</div>
+<p>just with different <span class="math notranslate nohighlight">\(A\)</span>’s. So plot the motion of each mass in each mode. Make sure you have the right frequencies with the right modes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## Analysis and Plotting code here</span>
+</pre></div>
+</div>
+</section>
+<section id="extending-your-work">
+<h2>Extending your work<a class="headerlink" href="#extending-your-work" title="Link to this heading">#</a></h2>
+<p>Given what we have done thus far, you can see that we could easily construct the matrix for a <span class="math notranslate nohighlight">\(N\)</span> dimensional chain of 1D oscillators. So let’s do that.</p>
+<p>Repeat this analysis for a set of <span class="math notranslate nohighlight">\(N\)</span> oscillators. Your code should be able to:</p>
+<ol class="arabic simple">
+<li><p>Take a value of <span class="math notranslate nohighlight">\(N\)</span> and construct the right matrix representation</p></li>
+<li><p>Find the eigenvalues and eigenvectors for this matrix.</p></li>
+<li><p>(BONUS) plots the modes automatically</p></li>
+<li><p>(CHALLENGE) time the execution of the analysis</p></li>
+</ol>
+<p>Be careful not to pick to large of an <span class="math notranslate nohighlight">\(N\)</span> value to work with because you could melt your CPU easily. Make sure your code can do something like <span class="math notranslate nohighlight">\(N=10\)</span>. If you get the timing working, plot time vs number of objects to see how the problem scales with more oscillators.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## Your code here</span>
+</pre></div>
+</div>
+</section>
+<section id="even-further">
+<h2>Even further<a class="headerlink" href="#even-further" title="Link to this heading">#</a></h2>
+<p>These models can be used with lattices (solid objects). Draw a sketch of 4 oscillators in a plane connected together in a square shape. Write down the energy equations for this system (assume the springs do not move laterally much). What do the EOMs look like?</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/md"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-coupled-oscillators">Three Coupled Oscillators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-normal-mode-frequencies">Finding the Normal Mode Frequencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-normal-modes-amplitudes">Finding the Normal Modes Amplitudes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-eigenvalues-and-eigenvectors-using-numerical-approaches">Finding the Eigenvalues and Eigenvectors using Numerical Approaches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-modes">Plotting the modes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-your-work">Extending your work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#even-further">Even further</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

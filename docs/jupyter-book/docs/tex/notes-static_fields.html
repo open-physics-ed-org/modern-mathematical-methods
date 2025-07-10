@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>26 Sept 23 - Notes: Static Fields &#8212; Modern Mathematical Methods</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/tex/notes-static_fields';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../content/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Modern Mathematical Methods - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Modern Mathematical Methods - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../content/index.html">
+                    Welcome to Mathematical Modeling in Physics
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/modeling/activity-what_is_a_model.html">29 Aug 23 - Activity: What is a Model?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/sho/notes-SHO.html">29 Aug 23 - Notes: Simple Harmonic Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-frames.html">31 Aug 23 - Activity: Frames and Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.html">5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.html">7 Sep 23 - Activity: Numerical Integration and More Lagrangians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.html">7 Sept 23 - Notes: Numerical Integration in 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.html">12 Sep 23 - Activity: The Dynamical Systems Approach and Phase Portraits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.html">12 Sept 23 - Notes: Dynamical Systems and Phase Space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity-duffing.html">19 Sep 23 - The Duffing Oscillator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.html">19 Sep 23 - Notes: Heading towards Chaos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.html">14 Sept 23 - Conducting a complete analysis of an ODE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.html">5 Sept 23 - Notes: Lagrangian Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-efields.html">26 Sep 23 - Activity: Electrostatic Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var.html">3 Oct 23 - Activity: PDEs and Separation of Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var_spherical.html">5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-sep_var_spherical_examples.html">10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/activity-superposition.html">28 Sep 23 - Activity: Superposition of Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-electric_potential.html">3 Oct 23 - Notes: Electric Potential - a scalar field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-em_intro.html">26 Sept 23 - Notes: Maxwell’s Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Statics/notes-static_fields.html">26 Sept 23 - Notes: Static Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Numerics/notes-relaxation.html">9 Oct 23 - Notes: Method of Relaxation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/2_EM/Numerics/activity-relaxation_2d.html">12 Oct 23 - Activity: Method of Relaxation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-fft.html">6 Oct 23 - Notes: Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-coupled_oscillations.html">16 Oct 23 - Notes: Coupled Oscillations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-waves_intro.html">16 Oct 23 - Notes: Introduction to Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-CoupledOsc-NormalModes.html">17 Oct 23 - Activity: Normal Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-CoupledOsc-NumericalNormalModes.html">19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-solve_the_wave_eq.html">25 Oct 23 - Notes: Solutions to The Wave Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-1D.html">26 Oct 2023 - Activity: 1-Dimensional Travelling Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-Waves-Fouriers_Trick.html">30 Oct 2023 - Notes: Deconstructing Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Signals.html">31 Oct 23 - Activity: Signal Deconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-seriesExpand.html">2 Nov 23 - Activity: Automated Signal Deconstruction &amp; Reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Introduction_to_FFT.html">7 Nov 23 - Activity: The Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-Waves-Applying_the_FFT.html">9 Nov 23 - Activity: Applying The Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/notes-Using-FFTs.html">13 Nov 23 - Notes: Applications of FFTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/3_waves/activity-FFT-applications.html">14 &amp; 16 Nov 23 - Using the FFT with Real Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-randomness.html">20 Nov 23 - Notes: Random Processes</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-radioactive_decay.html">21 Nov 23 - Activity: Introduction to Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-counting_and_combinatorics.html">27 Nov 23 - Notes: Counting and Combinatorics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-monte_carlo_simulations.html">27 Nov 23 - Notes: Monte Carlo Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-thermal_contact.html">28 Nov 23 - Activity: Model of Two Bodies in Thermal Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-mc_integration.html">30 Nov 23 - Activity: Monte Carlo Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/notes-mcmc.html">4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-metropolis.html">5 Dec 23 - Activity: Modeling the Ideal Gas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-ising_model.html">7 Dec 23 - Activity: The Ising Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-monte_carlo.html">7 Dec 23 - Activity: Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/notebooks/4_distributions/activity-zombies.html">7 Dec 23 - Activity: Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/activities.html">Activities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../content/cards.html">Chapters</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/about.html">About</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../content/announcement.html">🚀 Release v0.9.2 “Unified Urubu” Highlights</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/tex/notes-static_fields.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>26 Sept 23 - Notes: Static Fields</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-calculus">Vector Calculus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electrostatic-fields">Electrostatic fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-electric-field">The electric field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-magnetic-field">The magnetic field</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetostatic-fields">Magnetostatic fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">The magnetic field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">The electric field</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handwritten-notes">Handwritten Notes</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sept-23-notes-static-fields">
+<h1>26 Sept 23 - Notes: Static Fields<a class="headerlink" href="#sept-23-notes-static-fields" title="Link to this heading">#</a></h1>
+<section id="vector-calculus">
+<h2>Vector Calculus<a class="headerlink" href="#vector-calculus" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Maxwell%27s_equations">Maxwell’s Equations</a>, even in their static form (i.e., static charges or steady currents), are a set of coupled partial differential equations. In order to develop solutions and models to approximate the behavior of electromagnetic fields, we need to be able to use vector calculus.</p>
+<p>The video below from <a class="reference external" href="https://www.3blue1brown.com/">3Blue1Brown</a> provides a conceptual introduction to the vector calculus that we are going to need for this.</p>
+<p><a class="reference external" href="https://inv.tux.pizza/watch?v=rB83DpBJQsE"><img alt="Vector Calculus" src="https://markdown-videos-api.jorgenkh.no/youtube/rB83DpBJQsE?width=720&amp;height=405" /></a></p>
+<ul class="simple">
+<li><p>Non-Commercial Link: <a class="reference external" href="https://inv.tux.pizza/watch?v=rB83DpBJQsE">https://inv.tux.pizza/watch?v=rB83DpBJQsE</a></p></li>
+<li><p>Commercial Link: <a class="reference external" href="https://youtube.com/watch?v=rB83DpBJQsE">https://youtube.com/watch?v=rB83DpBJQsE</a></p></li>
+</ul>
+</section>
+<section id="electrostatic-fields">
+<h2>Electrostatic fields<a class="headerlink" href="#electrostatic-fields" title="Link to this heading">#</a></h2>
+<p>The electrostatic field is one that is created by static (stationary) charges. This is often the first type of field that we encounter, where <span class="math notranslate nohighlight">\(\rho(\mathbf{r},t)) = \rho(\mathbf{r})\)</span>. Because the charges are stationary, the current density is zero, <span class="math notranslate nohighlight">\(\mathbf{J}(\mathbf{r},t) = \mathbf{0}\)</span>.</p>
+<section id="the-electric-field">
+<h3>The electric field<a class="headerlink" href="#the-electric-field" title="Link to this heading">#</a></h3>
+<p>The relevant Maxwell equations for <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> that govern an electrostatic situation are the following:</p>
+<div class="math notranslate nohighlight">
+\[\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}\]</div>
+<div class="math notranslate nohighlight">
+\[\nabla \times \mathbf{E} = 0\]</div>
+<p>You might recognize the first equation as the differential form of <a class="reference external" href="https://en.wikipedia.org/wiki/Gauss%27s_law">Gauss’s Law</a>.</p>
+<p><img alt="Gauss's Law" src="https://subratachak.files.wordpress.com/2017/12/gauss-law-diagram-03.jpg?w=782" /></p>
+<p>As you can see from the figure above, Gauss’s Law is always true, but almost never useful in solving problem outside specific geometries. The integral form of that equation is:</p>
+<div class="math notranslate nohighlight">
+\[\oint \mathbf{E} \cdot d\mathbf{A} = \frac{Q_{enc}}{\varepsilon_0}\]</div>
+<p>It is from considering the integral form of Gauss’ Law that we can obtain the electric field produced by a single point charge, <span class="math notranslate nohighlight">\(Q\)</span>, at a location <span class="math notranslate nohighlight">\(\mathbf{r}'\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}(\mathbf{r}) = \frac{Q}{4\pi\varepsilon_0} \frac{\mathbf{r} - \mathbf{r}'}{|\mathbf{r} - \mathbf{r}'|^3}\]</div>
+<p>The second relevant equation is a statement that the curl of the electrostatic field is zero. This indicates that an electrostatic field is a <a class="reference external" href="https://en.wikipedia.org/wiki/Conservative_vector_field">conservative field</a>. This means that the electrostatic field can be written as the gradient of a scalar potential, <span class="math notranslate nohighlight">\(\mathbf{E} = -\nabla V\)</span>, as we will see later.</p>
+<p>There is a general integral solution the electrostatic problem, which is built up from the concept of a point charge. That solution, which can be used in certain integrable situations and adapted to numerical methods is:</p>
+<div class="math notranslate nohighlight">
+\[d\mathbf{E} = \frac{1}{4\pi\varepsilon_0} \frac{dq}{|\mathbf{r} - \mathbf{r}'|^3} (\mathbf{r} - \mathbf{r}')\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}(\mathbf{r}) = \frac{1}{4\pi\varepsilon_0} \int \frac{dq}{|\mathbf{r} - \mathbf{r}'|^3} (\mathbf{r} - \mathbf{r}')\]</div>
+<p>We will find later that the <a class="reference external" href="https://en.wikipedia.org/wiki/Electric_potential">electric potential</a> (<span class="math notranslate nohighlight">\(V\)</span>) is a better choice if we can use it. It simplifies our vector problem to a scalar problem.</p>
+</section>
+<section id="the-magnetic-field">
+<h3>The magnetic field<a class="headerlink" href="#the-magnetic-field" title="Link to this heading">#</a></h3>
+<p>The relevant Maxwell equations for <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> that govern an electrostatic situation are the following:</p>
+<div class="math notranslate nohighlight">
+\[\nabla \cdot \mathbf{B} = 0\]</div>
+<div class="math notranslate nohighlight">
+\[\nabla \times \mathbf{B} = 0\]</div>
+<p>Notice that these equations are solved when <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> = 0. This is because there are no magnetic monopoles, so if the divergence and curl of the field are zero everywhere, then the field must be zero everywhere. There’s simply no sources of magnetic field. So in an electrostatic situation, the magnetic field is zero and we are purely focused on the electric field.</p>
+</section>
+</section>
+<section id="magnetostatic-fields">
+<h2>Magnetostatic fields<a class="headerlink" href="#magnetostatic-fields" title="Link to this heading">#</a></h2>
+<p>In a magnetostatic situation, there have to be currents; that is, moving charges. That is the only make to generate magnetic field from particles. So you are going to have a non-zero current density. But we argue that the currents are steady, so <span class="math notranslate nohighlight">\(\mathbf{J}(\mathbf{r},t) = \mathbf{J}(\mathbf{r})\)</span>. Now, of course, there will be electric field, but we will discuss how we consider that in a moment.</p>
+<section id="id1">
+<h3>The magnetic field<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>The relevant Maxwell equations for <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> that govern a magnetostatic situation are the following:</p>
+<div class="math notranslate nohighlight">
+\[\nabla \cdot \mathbf{B} = 0\]</div>
+<div class="math notranslate nohighlight">
+\[\nabla \times \mathbf{B} = \mu_0 \mathbf{J}\]</div>
+<p>The first equation always holds; there are no <a class="reference external" href="https://en.wikipedia.org/wiki/Magnetic_monopole">magnetic monopoles</a>, despite much research into the area <a class="reference external" href="https://en.wikipedia.org/wiki/Magnetic_monopole#Searches_for_magnetic_monopoles">including searches</a> and a <a class="reference external" href="https://en.wikipedia.org/wiki/Magnetic_monopole#In_SI_units">theory of electromagnetism</a> that posits them. Here’s a nice article summarizing the state of the magnetic monopole research from 2016, <a class="reference external" href="https://phys.org/news/2016-08-mysterious-magnetic-monopole.html">The mysterious missing magnetic monopole</a>, and an <a class="reference external" href="https://icecube.wisc.edu/news/research/2022/01/icecube-and-the-mystery-of-the-missing-magnetic-monopoles/">article from the IceCube experiment</a>, which a number of our <a class="reference external" href="https://pa.msu.edu/high-energy-physics/icecube-neutrino-observatory.aspx">faculty, grad students, and undergrads are involved in</a>.</p>
+<p>The second equation is <a class="reference external" href="https://en.wikipedia.org/wiki/Amp%C3%A8re%27s_circuital_law">Ampere’s Law</a> in it’s differential form. Much like Gauss’s law, it is always true, but rarely useful outside of specific geometries. Note that for the magnetostatic situation that current density can vary with space only. The integral form of Ampere’s Law is can be used to solve problems with symmetry:</p>
+<div class="math notranslate nohighlight">
+\[\oint \mathbf{B} \cdot d\mathbf{l} = \mu_0 I_{enc}\]</div>
+<p>And it is from considering this form for a single current carrying wire that we can determine the magnetic field produced by a single current carrying wire, <span class="math notranslate nohighlight">\(I\)</span>, at a location <span class="math notranslate nohighlight">\(\mathbf{r}'\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{B}(\mathbf{r}) = \frac{\mu_0 I}{4\pi} \frac{\hat{\mathbf{\phi}}}{|\mathbf{r} - \mathbf{r}'|^2}\]</div>
+<p>Because of the curly nature of magnetic field, we find that the general solution to the magnetostatic problem is given by the <a class="reference external" href="https://en.wikipedia.org/wiki/Biot%E2%80%93Savart_law">Biot-Savart Law</a>:</p>
+<div class="math notranslate nohighlight">
+\[d\mathbf{B} = \frac{\mu_0}{4\pi} \frac{I d\mathbf{l} \times (\mathbf{r} - \mathbf{r}')}{|\mathbf{r} - \mathbf{r}'|^3}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{B}(\mathbf{r}) = \frac{\mu_0}{4\pi} \int \frac{I d\mathbf{l} \times (\mathbf{r} - \mathbf{r}')}{|\mathbf{r} - \mathbf{r}'|^3}\]</div>
+<p>In practice, we rarely use this form of the qeuation directly because it requires integrable solutions. Instead, we use the integral form of Ampere’s Law to solve problems with symmetry, we use the differential forms to solve problems numerically, and we develop other theoretical approaches. Because the divergence of the magnetic field is zero, we can write the magnetic field as the curl of a <a class="reference external" href="https://en.wikipedia.org/wiki/Magnetic_vector_potential">vector potential</a>, <span class="math notranslate nohighlight">\(\mathbf{B} = \nabla \times \mathbf{A}\)</span>. This has a integral form that is similar to the Biot-Savart Law, but directly proportional to the current density, which is much nicer:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} = \frac{\mu_0}{4\pi} \int_V \frac{\mathbf{J}(\mathbf{r}')}{|\mathbf{r} - \mathbf{r}'|} d\tau'\]</div>
+<p>It turns out this is a better method for solving problems, especially computationally. That is beyond the scope of this course.</p>
+</section>
+<section id="id2">
+<h3>The electric field<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Because there is a magnetic field, the relevant Maxwell equations for <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> that govern a magnetostatic situation are the following:</p>
+<div class="math notranslate nohighlight">
+\[\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}\]</div>
+<div class="math notranslate nohighlight">
+\[\nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}\]</div>
+<p>Notice now we have to consider a changing magnetic field. In the magnetostatic situation, we argue the current densities are setup such that the magnetic field is static (i.e., <span class="math notranslate nohighlight">\(\frac{\partial \mathbf{B}}{\partial t} = 0\)</span>).  This means the relevant equations for the electric field remain those in the electrostatic situation:</p>
+<div class="math notranslate nohighlight">
+\[\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}\]</div>
+<div class="math notranslate nohighlight">
+\[\nabla \times \mathbf{E} = 0\]</div>
+<p>And all the relevant tools we will develop for the electrostatic situation for <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> apply here as well.</p>
+</section>
+</section>
+<section id="additional-resources">
+<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading">#</a></h2>
+<section id="handwritten-notes">
+<h3>Handwritten Notes<a class="headerlink" href="#handwritten-notes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="#../../assets/notes/Notes-Vector_Calculus.pdf"><span class="xref myst">Vector Calculus</span></a></p></li>
+<li><p><a class="reference internal" href="#../../assets/notes/Notes-Electrostatics_and_Superposition.pdf"><span class="xref myst">Electrostatics and Superposition</span></a></p></li>
+<li><p><a class="reference internal" href="#../../assets/notes/Notes-Gauss_Law.pdf"><span class="xref myst">Gauss’s Law</span></a></p></li>
+<li><p><a class="reference internal" href="#../../assets/notes/Notes-Magnetostatics.pdf"><span class="xref myst">Magnetostatics</span></a></p></li>
+<li><p><a class="reference internal" href="#../../assets/notes/Notes-Amperes_Law.pdf"><span class="xref myst">Ampere’s Law</span></a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/tex"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-calculus">Vector Calculus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electrostatic-fields">Electrostatic fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-electric-field">The electric field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-magnetic-field">The magnetic field</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetostatic-fields">Magnetostatic fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">The magnetic field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">The electric field</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handwritten-notes">Handwritten Notes</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
