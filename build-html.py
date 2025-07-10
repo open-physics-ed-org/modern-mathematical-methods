@@ -181,106 +181,26 @@ def build_html_for_files(files, debug=False):
     menu_html = ''.join(menu_html)
 
     footer_text = content.get('footer', {}).get('text', '')
-    footer_html = render_footer(footer_text)
+    # Load footer from template and fill variable
+    with open('static/templates/footer.html', 'r', encoding='utf-8') as f:
+        footer_html = f.read().replace('{{ footer_text }}', footer_text)
 
+    # Load header HTML from template and fill variables
     logo = site['logo']
     title = site['title']
     description = site.get('description', '')
     logo_web = './' + logo[len('static/'):] if logo.startswith('static/') else logo
-    header_html = f'''
-  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
-    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
-      <img src="{logo_web}" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
-      <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
-        <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">{title}</h1>
-        <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">{description}</div>
-      </div>
-    </div>
-  </header>
-    '''
+    with open('static/templates/header.html', 'r', encoding='utf-8') as f:
+        header_html = f.read()
+    header_html = (header_html
+        .replace('{{ logo_web }}', logo_web)
+        .replace('{{ title }}', title)
+        .replace('{{ description }}', description)
+    )
 
-    # Theme toggle: floating emoji button, left side, WCAG compliant
-    theme_toggle_html = '''
-  <button id="theme-toggle" class="theme-toggle-floating" aria-label="Toggle dark/light mode" tabindex="0" title="Toggle dark/light mode">
-    <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
-  </button>
-  <script>
-    function getPreferredTheme() {
-      const saved = localStorage.getItem('theme');
-      if (saved) return saved;
-      return 'dark';
-    }
-    function setTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      const icon = document.getElementById('theme-toggle-icon');
-      if (theme === 'dark') {
-        icon.textContent = '☀️';
-      } else {
-        icon.textContent = '🌙';
-      }
-      localStorage.setItem('theme', theme);
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-      const btn = document.getElementById('theme-toggle');
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
-        setTheme(current === 'dark' ? 'light' : 'dark');
-      });
-      btn.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          btn.click();
-        }
-      });
-      btn.addEventListener('focus', function() {
-        btn.style.boxShadow = '0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12)';
-        btn.style.borderColor = '#ff0';
-      });
-      btn.addEventListener('blur', function() {
-        btn.style.boxShadow = '';
-        btn.style.borderColor = '';
-      });
-      setTheme(getPreferredTheme());
-    });
-  </script>
-  <style>
-    .theme-toggle-floating {
-      position: fixed;
-      left: 0.7em;
-      top: 5.5em;
-      z-index: 1000;
-      background: var(--button-bg, #222);
-      color: var(--button-fg, #fff);
-      border: 2px solid var(--button-border, #bbb);
-      border-radius: 50%;
-      width: 2.2em;
-      height: 2.2em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3em;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-      cursor: pointer;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
-    }
-    .theme-toggle-floating:focus {
-      outline: 3px solid #ff0 !important;
-      border-color: #ff0 !important;
-      box-shadow: 0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12) !important;
-    }
-    @media (max-width: 700px) {
-      .theme-toggle-floating {
-        left: 0.3em;
-        top: 0.3em;
-        width: 1.7em;
-        height: 1.7em;
-        font-size: 1em;
-      }
-    }
-  </style>
-    '''
+    # Load theme toggle HTML from template
+    with open('static/templates/theme-toggle.html', 'r', encoding='utf-8') as f:
+        theme_toggle_html = f.read()
 
     head_path = os.path.join('static', 'templates', 'head.html')
     with open(head_path, 'r') as f:
@@ -442,8 +362,18 @@ def build_html_for_files(files, debug=False):
                 continue
             page_title = title
             head_html = head_template.replace('{{ title }}', page_title).replace('{{ css_light }}', css_light).replace('{{ css_dark }}', css_dark)
-            # Insert download buttons before main content
-            full_html = f'''<!DOCTYPE html>\n<html lang="{site.get('language', 'en')}">\n{head_html}\n<body>\n  {header_html}\n  <nav class="site-nav" id="site-nav" aria-label="Main navigation">{menu_html}</nav>\n  <main class="site-main container">\n    {theme_toggle_html}\n    {download_html}\n    {body_html}\n  </main>\n  <footer>\n    {footer_html}\n  </footer>\n</body>\n</html>\n'''
+            # Use page skeleton template
+            with open('static/templates/page.html', 'r', encoding='utf-8') as f:
+                page_template = f.read()
+            full_html = page_template \
+                .replace('{{ language }}', site.get('language', 'en')) \
+                .replace('{{ head_html }}', head_html) \
+                .replace('{{ header_html }}', header_html) \
+                .replace('{{ menu_html }}', menu_html) \
+                .replace('{{ theme_toggle_html }}', theme_toggle_html) \
+                .replace('{{ download_html }}', download_html) \
+                .replace('{{ body_html }}', body_html) \
+                .replace('{{ footer_html }}', footer_html)
             out_dir = Path('docs')
             out_dir.mkdir(exist_ok=True)
             out_name = file_path.stem + '.html'
