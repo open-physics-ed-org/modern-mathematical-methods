@@ -18,7 +18,9 @@ to a solution for all (or some specified amount)of time, $x(t)$...in (most) case
 
 Below is a video describing 3 coupled ODEs, the [Lorenz equations](https://en.wikipedia.org/wiki/Lorenz_system), that are quite famous. You will be able to model systems like this, but for now think of it as motivation for why we want to learn numerical integration.
 
-[![](https://markdown-videos-api.jorgenkh.no/youtube/aAJkLh76QnM?width=720&height=405))](https://inv.tux.pizza/watch?v=aAJkLh76QnM)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/aAJkLh76QnM?width=720&height=405))](https://inv.tux.pizza/watch?v=aAJkLh76QnM)
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=aAJkLh76QnM?](https://inv.tux.pizza/watch?v=aAJkLh76QnM?)
 - Commercial Link: [https://youtube.com/watch?v=aAJkLh76QnM?](https://youtube.com/watch?v=aAJkLh76QnM?)
 

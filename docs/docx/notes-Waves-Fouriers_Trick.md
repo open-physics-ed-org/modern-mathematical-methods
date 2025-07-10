@@ -13,7 +13,9 @@ The point is that you will almost always be dealing with signals that are proxie
 
 The [Cosmic Microwave Background](https://en.wikipedia.org/wiki/Cosmic_microwave_background) is the oldest light in the universe. It's the light that was emitted when the universe cooled enough for electrons to bind to protons and form neutral hydrogen. This happened about 380,000 years after the Big Bang. This signal came in the form of a noise that was found in every observation we seemed to make. The kind of work we are starting (signal deconstruction) underlies much of the analysis used to unpack the CMB, and to continue understanding it. There's a great video from Fermilab about the CMB.
 
-[![CMB](https://markdown-videos-api.jorgenkh.no/youtube/AYFDN2DSVgc?width=720&height=405)](https://inv.tux.pizza/watch?v=AYFDN2DSVgc)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/AYFDN2DSVgc?width=720&height=405)](https://inv.tux.pizza/watch?v=AYFDN2DSVgc)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=AYFDN2DSVgc](https://inv.tux.pizza/watch?v=AYFDN2DSVgc)
 - Commercial Link: [https://youtube.com/watch?v=AYFDN2DSVgc](https://youtube.com/watch?v=AYFDN2DSVgc)
@@ -93,7 +95,9 @@ Think about the answers to the following questions:
 
 Ok, but can we find these frequencies given a signal? Or rather, how might we find the signal we need? We can use a little mathematics from Fourier. The [Fourier transform](https://en.wikipedia.org/wiki/Fourier_transform) is a mathematical tool that allows us to deconstruct a signal into its constituent frequencies. There's an excellent introduction to it from 3Blue1Brown.
 
-[![Fourier Transform](https://markdown-videos-api.jorgenkh.no/youtube/spUNpyF58BY?width=720&height=405)](https://inv.tux.pizza/watch?v=spUNpyF58BY)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/spUNpyF58BY?width=720&height=405)](https://inv.tux.pizza/watch?v=spUNpyF58BY)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=spUNpyF58BY](https://inv.tux.pizza/watch?v=spUNpyF58BY)
 - Commercial Link: [https://youtube.com/watch?v=spUNpyF58BY](https://youtube.com/watch?v=spUNpyF58BY)
@@ -183,7 +187,9 @@ Can we do the integrals and get the same results? Sure. But it's a lot more work
 
 That function is a classic "square wave", or [half duty cycle](https://en.wikipedia.org/wiki/Duty_cycle). It's a function that is 1 for half the period and 0 for the other half. It's a function that is used in digital electronics to encode information. That function we have to solve by integrating. The handwritten notes show how. The more general duty cycle function is shown below.
 
-![Duty cycle gif](https://upload.wikimedia.org/wikipedia/commons/0/02/PWM_duty_cycle_with_label.gif)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://upload.wikimedia.org/wikipedia/commons/0/02/PWM_duty_cycle_with_label.gif)
 
 
 
@@ -195,7 +201,9 @@ That function is a classic "square wave", or [half duty cycle](https://en.wikipe
 
 ### Additional Videos
 
-[![Fourier Series](https://markdown-videos-api.jorgenkh.no/youtube/mgXSevZmjPc?width=720&height=405)](https://inv.tux.pizza/watch?v=mgXSevZmjPc)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/mgXSevZmjPc?width=720&height=405)](https://inv.tux.pizza/watch?v=mgXSevZmjPc)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=mgXSevZmjPc](https://inv.tux.pizza/watch?v=mgXSevZmjPc)
 - Commercial Link: [https://youtube.com/watch?v=mgXSevZmjPc](https://youtube.com/watch?v=mgXSevZmjPc)

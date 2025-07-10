@@ -16,7 +16,9 @@ $$S = k \ln(\Omega)$$
 
 where $k$ is the [Boltzmann constant](https://en.wikipedia.org/wiki/Boltzmann_constant) and $\Omega$ is the ["multiplicity"](https://en.wikipedia.org/wiki/Multiplicity_(statistical_mechanics)) of the system. The video below from [Veritasium](https://www.youtube.com/channel/UCHnyfMqiRRG1u-2MsSQLbXA) provides a nice introduction to the concept of entropy.
 
-[![Entropy](https://markdown-videos-api.jorgenkh.no/youtube/DxL2HoqLbyA?width=720&height=405)](https://inv.tux.pizza/watch?v=DxL2HoqLbyA)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/DxL2HoqLbyA?width=720&height=405)](https://inv.tux.pizza/watch?v=DxL2HoqLbyA)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=DxL2HoqLbyA](https://inv.tux.pizza/watch?v=DxL2HoqLbyA)
 - Commercial Link: [https://youtube.com/watch?v=DxL2HoqLbyA](https://youtube.com/watch?v=DxL2HoqLbyA)
@@ -39,7 +41,9 @@ To begin, we will start with the concepts of [microstates and macrostates](https
 
 In this needs to be a bit more concrete, here's a short example with 3 coins, which we will simulate for N coins below.
 
-[![Microstates and Macrostates](https://markdown-videos-api.jorgenkh.no/youtube/9rYvq6kbUUA?width=720&height=405)](https://inv.tux.pizza/watch?v=9rYvq6kbUUA)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/9rYvq6kbUUA?width=720&height=405)](https://inv.tux.pizza/watch?v=9rYvq6kbUUA)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=9rYvq6kbUUA](https://inv.tux.pizza/watch?v=9rYvq6kbUUA)
 - Commercial Link: [https://youtube.com/watch?v=9rYvq6kbUUA](https://youtube.com/watch?v=9rYvq6kbUUA)
@@ -272,7 +276,9 @@ It's quite easy to see form here that more trials leads to more stable and concr
 
 Here's an interesting application of the models of Poisson process and Queueing
 
-[![Queuing theory and Poisson process](https://markdown-videos-api.jorgenkh.no/youtube/rBIQmwaoZfs?width=720&height=405)](https://inv.tux.pizza/watch?v=rBIQmwaoZfs)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/rBIQmwaoZfs?width=720&height=405)](https://inv.tux.pizza/watch?v=rBIQmwaoZfs)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=rBIQmwaoZfs](https://inv.tux.pizza/watch?v=rBIQmwaoZfs)
 - Commercial Link: [https://youtube.com/watch?v=rBIQmwaoZfs](https://youtube.com/watch?v=rBIQmwaoZfs)

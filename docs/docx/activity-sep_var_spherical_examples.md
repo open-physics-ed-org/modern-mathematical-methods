@@ -56,7 +56,9 @@ What do you do in the case of $V_a(\theta) = f(\theta)$ and $V_b(\theta) = g(\th
 
 Put a metal sphere of radius $a$ in a uniform electric field $\vec{E} = E_0 \hat{z}$. 
 
-![Sphere in a uniform electric field](https://d2vlcm61l7u1fs.cloudfront.net/media%2F2f6%2F2f6e4bc3-0070-470f-9451-6376a4eceddc%2Fphpl2HMKa.png)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://d2vlcm61l7u1fs.cloudfront.net/media%2F2f6%2F2f6e4bc3-0070-470f-9451-6376a4eceddc%2Fphpl2HMKa.png)
 
 What is the potential inside and outside the sphere?
 

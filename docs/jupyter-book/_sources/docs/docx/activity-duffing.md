@@ -10,7 +10,9 @@ $$\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3 + \gamma \cos(\omega t)$$
 
 where $x$ is the position of the oscillator, $\delta$ is a damping term, $\alpha$ is the stiffness of the spring, $\beta$ is the strength of the non-linear term, $\gamma$ is the amplitude of the driving force, and $\omega$ is the frequency of the driving force.
 
-![Duffing Oscillator](https://upload.wikimedia.org/wikipedia/commons/f/fc/Duffing_oscillator_strange_attractor_with_color.gif)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://upload.wikimedia.org/wikipedia/commons/f/fc/Duffing_oscillator_strange_attractor_with_color.gif)
 
 *From [Wikipedia](https://commons.wikimedia.org/wiki/File:Duffing_oscillator_strange_attractor_with_color.gif)*
 

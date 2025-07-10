@@ -2,7 +2,9 @@
 
 One of the principal motivations for our work thus far has been to get to analyze systems that show suprising and complex behavior. In mechanics, you might have heard of those kinds of behviors as chaotic or exhibiting chaos. It turns out the chaos is a specific kind of behavior that we can find. To motivate us, let's remind ourselves of how cool nature can be.
 
-[![](https://markdown-videos-api.jorgenkh.no/youtube/fDek6cYijxI?width=720&height=405)](https://inv.tux.pizza/watch?v=fDek6cYijxI)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/fDek6cYijxI?width=720&height=405)](https://inv.tux.pizza/watch?v=fDek6cYijxI)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=fDek6cYijxI](https://inv.tux.pizza/watch?v=fDek6cYijxI)
 - Commercial Link: [https://youtube.com/watch?v=fDek6cYijxI](https://youtube.com/watch?v=fDek6cYijxI)
@@ -57,7 +59,9 @@ Where $A$ is a linear operator of the vector space that $\mathbf{v}$ lives in. I
 
 Grant Sanderson makes a lot of great videos on mathematics and statistics. This one about eigenvalues and eigenvectors is particularly good.
 
-[![](https://markdown-videos-api.jorgenkh.no/youtube/PFDu9oVAE-g?width=720&height=405)](https://inv.tux.pizza/watch?v=PFDu9oVAE-g)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/PFDu9oVAE-g?width=720&height=405)](https://inv.tux.pizza/watch?v=PFDu9oVAE-g)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=PFDu9oVAE-g](https://inv.tux.pizza/watch?v=PFDu9oVAE-g)
 - Commercial Link: [https://youtube.com/watch?v=PFDu9oVAE-g](https://youtube.com/watch?v=PFDu9oVAE-g)
@@ -93,7 +97,9 @@ Note: You can actually learn quite a bit more from this analysis, see Strogatz c
 
 Steve Brunton at UW does dynamical systems research and has a great video that demonstrates how we make meaning of those eigenvalues.
 
-[![](https://markdown-videos-api.jorgenkh.no/youtube/XXjoh8L1HkE?width=720&height=405)](https://inv.tux.pizza/watch?v=XXjoh8L1HkE)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/XXjoh8L1HkE?width=720&height=405)](https://inv.tux.pizza/watch?v=XXjoh8L1HkE)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=XXjoh8L1HkE](https://inv.tux.pizza/watch?v=XXjoh8L1HkE)
 - Commercial Link: [https://youtube.com/watch?v=XXjoh8L1HkE](https://youtube.com/watch?v=XXjoh8L1HkE)

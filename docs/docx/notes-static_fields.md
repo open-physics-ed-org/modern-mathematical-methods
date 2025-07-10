@@ -6,7 +6,9 @@
 
 The video below from [3Blue1Brown](https://www.3blue1brown.com/) provides a conceptual introduction to the vector calculus that we are going to need for this.
 
-[![Vector Calculus](https://markdown-videos-api.jorgenkh.no/youtube/rB83DpBJQsE?width=720&height=405)](https://inv.tux.pizza/watch?v=rB83DpBJQsE)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/rB83DpBJQsE?width=720&height=405)](https://inv.tux.pizza/watch?v=rB83DpBJQsE)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=rB83DpBJQsE](https://inv.tux.pizza/watch?v=rB83DpBJQsE)
 - Commercial Link: [https://youtube.com/watch?v=rB83DpBJQsE](https://youtube.com/watch?v=rB83DpBJQsE)
@@ -27,7 +29,9 @@ $$\nabla \times \mathbf{E} = 0$$
 
 You might recognize the first equation as the differential form of [Gauss's Law](https://en.wikipedia.org/wiki/Gauss%27s_law).
 
-![Gauss's Law](https://subratachak.files.wordpress.com/2017/12/gauss-law-diagram-03.jpg?w=782)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://subratachak.files.wordpress.com/2017/12/gauss-law-diagram-03.jpg?w=782)
 
 As you can see from the figure above, Gauss's Law is always true, but almost never useful in solving problem outside specific geometries. The integral form of that equation is:
 

@@ -19,7 +19,9 @@ There are plenty of ideas on the internet, I can even [provide you a link](https
 ## What is a model?
 We are going to start with this short video made by Geoscientist John Aiken when he was a graduate student at Georgia Tech.
 
-[![](https://markdown-videos-api.jorgenkh.no/youtube/dkTncoPqo5Y?width=720&height=405)](https://inv.tux.pizza/watch?v=dkTncoPqo5Y)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/dkTncoPqo5Y?width=720&height=405)](https://inv.tux.pizza/watch?v=dkTncoPqo5Y)
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=dkTncoPqo5Y](https://inv.tux.pizza/watch?v=dkTncoPqo5Y)
 - Commercial Link: [https://youtube.com/watch?v=dkTncoPqo5Y](https://youtube.com/watch?v=dkTncoPqo5Y)
 

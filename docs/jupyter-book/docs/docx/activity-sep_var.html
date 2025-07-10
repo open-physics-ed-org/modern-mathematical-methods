@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -514,8 +514,11 @@ document.write(`
 </section>
 <section id="laplace-s-equation">
 <h2>Laplace’s Equation<a class="headerlink" href="#laplace-s-equation" title="Link to this heading">#</a></h2>
-<p><em>Numerical solution to Laplace’s equation on an annulus</em>
-<img alt="Laplace's Equation" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Laplace%27s_equation_on_an_annulus.svg/800px-Laplace%27s_equation_on_an_annulus.svg.png" /></p>
+<p><em>Numerical solution to Laplace’s equation on an annulus</em></p>
+<blockquote>
+<div><p><strong>[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]</strong>
+<img alt="Image not embedded: remote image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Laplace%27s_equation_on_an_annulus.svg/800px-Laplace%27s_equation_on_an_annulus.svg.png" /></p>
+</div></blockquote>
 <p>While Poisson’s equation describes how the value of the local Laplacian of the electric potential is directly related to the local electric potential, there are many places where there are no charges. For example, it’s common to solve problems where the <strong>boundary conditions</strong> are set to a given potential or with a certain amount of charge, and the remaining space is empty (or free space). This doesn’t mean that an electric field is not present in that empty space, but rather that there are no charges. In this case, the problem that are solving is called <strong>Laplace’s equation</strong> - a special case of Poisson’s equation where <span class="math notranslate nohighlight">\(\rho = 0\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\nabla^2 \Phi = 0\]</div>
@@ -533,7 +536,10 @@ document.write(`
 </section>
 <section id="activity-the-infinite-gutter">
 <h2>Activity: The Infinite Gutter<a class="headerlink" href="#activity-the-infinite-gutter" title="Link to this heading">#</a></h2>
-<p><img alt="Infinite Gutter" src="https://i.stack.imgur.com/nHF7a.jpg" /></p>
+<blockquote>
+<div><p><strong>[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]</strong>
+<img alt="Image not embedded: remote image" src="https://i.stack.imgur.com/nHF7a.jpg" /></p>
+</div></blockquote>
 <p>Consider a metal gutter that extends into infinitely in the <span class="math notranslate nohighlight">\(z\)</span> direction. The gutter width in the <span class="math notranslate nohighlight">\(y\)</span> direction is <span class="math notranslate nohighlight">\(a\)</span>. It is placed in the <span class="math notranslate nohighlight">\(y-z\)</span> plane and the <span class="math notranslate nohighlight">\(+x\)</span> direction is not constrained and extends to infinity (both the wall at <span class="math notranslate nohighlight">\(y=0\)</span> and <span class="math notranslate nohighlight">\(y=a\)</span>). So that Laplace’s equation applies in the region:</p>
 <ol class="arabic simple">
 <li><p>any <span class="math notranslate nohighlight">\(z\)</span> value</p></li>

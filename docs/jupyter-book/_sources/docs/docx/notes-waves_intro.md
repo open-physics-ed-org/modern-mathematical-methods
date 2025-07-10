@@ -2,7 +2,9 @@
 
 Coupled oscillations are quite common in nature; collections of objects and larger systems exhibit oscillatory behavior frequently. At times, the number of objects in a system that are oscillating are so many that we begin to zoom out and look at the behavior not of individual elements but of larger collections. This is moving to a continuum view of this oscillatory behavior. Consider going from 1 SHO, to two coupled SHO, to N coupled SHOs where N is very large, and, finally to a rope. It seems like there is a connection between a rope and a set of SHOs. Indeed, we can develop the wave equation for a rope using this kind of modeling. That is a well-known result, so we will instead use it. We start with motivating ourselves with how important waves are to our understanding of nature.
 
-[![Graviational Waves](https://markdown-videos-api.jorgenkh.no/youtube/hebGhsNsjG0?width=720&height=405)](https://inv.tux.pizza/watch?v=hebGhsNsjG0)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/hebGhsNsjG0?width=720&height=405)](https://inv.tux.pizza/watch?v=hebGhsNsjG0)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=hebGhsNsjG0](https://inv.tux.pizza/watch?v=hebGhsNsjG0)
 - Commercial Link: [https://youtube.com/watch?v=hebGhsNsjG0](https://youtube.com/watch?v=hebGhsNsjG0)
@@ -27,7 +29,9 @@ The function $h(x,t)$ represent the height of the string relative to some zero l
 
 Solving this equation in general can be done using a standing wave solution - the continuous analog to our normal modes approach for coupled oscillators. We can guess the mode will be oscillatory and derive the resulting general solution. This is done in the principal reading below, which comes from Crawford's Waves book.
 
-[![Introduction to the Wave](https://markdown-videos-api.jorgenkh.no/youtube/ub7lok-JQJE?width=720&height=405)](https://inv.tux.pizza/watch?v=ub7lok-JQJE)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/ub7lok-JQJE?width=720&height=405)](https://inv.tux.pizza/watch?v=ub7lok-JQJE)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=ub7lok-JQJE](https://inv.tux.pizza/watch?v=ub7lok-JQJE)
 - Commercial Link: [https://youtube.com/watch?v=ub7lok-JQJE](https://youtube.com/watch?v=ub7lok-JQJE)
@@ -44,7 +48,9 @@ Crawford's book is excellent here, but derives the equation from first principle
 
 The video below covers the Crawford's book in the first 30 minutes. The instructor speaks quickly, but the content is solid and follows what you'll read fairly well. If you want more of the mathematical background, watch this video for sure. We will cover some of it in class, but you are not expected you to derive it.
 
-[![Waves Lecture](https://markdown-videos-api.jorgenkh.no/youtube/1JeBWHzrRD4?width=720&height=405)](https://inv.tux.pizza/watch?v=1JeBWHzrRD4)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/1JeBWHzrRD4?width=720&height=405)](https://inv.tux.pizza/watch?v=1JeBWHzrRD4)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=1JeBWHzrRD4](https://inv.tux.pizza/watch?v=1JeBWHzrRD4)
 - Commercial Link: [https://youtube.com/watch?v=1JeBWHzrRD4](https://youtube.com/watch?v=1JeBWHzrRD4)

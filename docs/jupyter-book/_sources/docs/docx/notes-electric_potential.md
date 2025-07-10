@@ -20,7 +20,9 @@ We might prefer to work with this scalar field, $V$, rather than the vector fiel
 
 Parth G has a really nice video on the conceptual elements of electric potential, we will concern ourselves with more mathematical aspects as we move forward.
 
-[![Electric Potential](https://markdown-videos-api.jorgenkh.no/youtube/7rjAtuwxrEA?width=720&height=405)](https://inv.tux.pizza/watch?v=7rjAtuwxrEA)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/7rjAtuwxrEA?width=720&height=405)](https://inv.tux.pizza/watch?v=7rjAtuwxrEA)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=7rjAtuwxrEA](https://inv.tux.pizza/watch?v=7rjAtuwxrEA)
 - Commercial Link: [https://youtube.com/watch?v=7rjAtuwxrEA](https://youtube.com/watch?v=7rjAtuwxrEA)
@@ -64,12 +66,16 @@ $$\nabla^2 V = \frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial 
 
 It turns out there's lots of functions that will satisfy that differential equation. And it's mostly a matter of if the function fits the boundary conditions. Let's look at a typical problem.
 
-![Typical Laplace's Equation Problem](https://www.physics.uoguelph.ca/sites/default/files/uploads/fig10_1-parallel-plates.jpg)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://www.physics.uoguelph.ca/sites/default/files/uploads/fig10_1-parallel-plates.jpg)
 *Image from [University of Guelph](https://www.physics.uoguelph.ca/chapter-10-laplaces-equation)*
 
 Here is a "gutter" where the electric potential for different sides of the gutter are set. Laplace's equation applies inside the gutter. So the idea is to find a solution that satisfies Laplace's equation and the boundary conditions. We will develop this solution in class, but the representative results look like this:
 
-![Typical Laplace's Equation Solution](https://www.physics.uoguelph.ca/sites/default/files/uploads/fig10_2_potential-plates.jpg)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://www.physics.uoguelph.ca/sites/default/files/uploads/fig10_2_potential-plates.jpg)
 *Image from [University of Guelph](https://www.physics.uoguelph.ca/chapter-10-laplaces-equation)*
 
 ## Separation of Variables
@@ -121,7 +127,9 @@ It turns out both of these are separable in their respective coordinate systems.
 
 This idea of funding general solutions to Laplace's equation in known orthogonal coordinate systems remains incredible common. Experimental setups and theoretical models often have situations where Laplace's equation is relevant and there is a symmetry that can be exploited to find solutions. Laplace's equation is separable in 13 coordinate systems. You can find some of the more [exotic equations and coordinate systems here](https://en.wikipedia.org/wiki/Orthogonal_coordinates#Table_of_three-dimensional_orthogonal_coordinates). Check out the [Prolate Spheroidal coordinates](https://en.wikipedia.org/wiki/Prolate_spheroidal_coordinates), which are used in nuclear physics when the nucleus is deformed.
 
-![Prolate Spheroidal Coordinates](https://upload.wikimedia.org/wikipedia/commons/b/be/Prolate_spheroidal_coordinates.png)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://upload.wikimedia.org/wikipedia/commons/b/be/Prolate_spheroidal_coordinates.png)
 
 
 ## Additional Resources
@@ -136,14 +144,18 @@ Steve Brunton at Washington has some really great videos on the derivations asso
 
 #### Possion's and Laplace's Equation
 
-[![Possion's and Laplace's Equation](https://markdown-videos-api.jorgenkh.no/youtube/nmvs0vrBT18?width=720&height=405)](https://inv.tux.pizza/watch?v=nmvs0vrBT18)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/nmvs0vrBT18?width=720&height=405)](https://inv.tux.pizza/watch?v=nmvs0vrBT18)
 
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=nmvs0vrBT18?](https://inv.tux.pizza/watch?v=nmvs0vrBT18?)
 - Commercial Link: [https://youtube.com/watch?v=nmvs0vrBT18?](https://youtube.com/watch?v=nmvs0vrBT18?)
 
 #### Separation of Variables
-[![Separation of Variables](https://markdown-videos-api.jorgenkh.no/youtube/VjWtMl6vQ3Q?width=720&height=405)](https://inv.tux.pizza/watch?v=VjWtMl6vQ3Q)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/VjWtMl6vQ3Q?width=720&height=405)](https://inv.tux.pizza/watch?v=VjWtMl6vQ3Q)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=VjWtMl6vQ3Q](https://inv.tux.pizza/watch?v=VjWtMl6vQ3Q)
 - Commercial Link: [https://youtube.com/watch?v=VjWtMl6vQ3Q](https://youtube.com/watch?v=VjWtMl6vQ3Q)

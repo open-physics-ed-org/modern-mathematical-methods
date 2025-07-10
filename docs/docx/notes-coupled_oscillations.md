@@ -11,7 +11,9 @@ The canonical complication is the coupled oscillators, which will form the basis
 We will set up this problem below, but our analysis will proceed in class. To motivate our study of coupled oscillations, watch this excellent video (20 minutes) on the phenomenon on [synchronization](https://physicstoday.scitation.org/doi/10.1063/1.1554136).
 
 
-[![Synchronization](https://markdown-videos-api.jorgenkh.no/youtube/t-_VPRCtiUg?width=720&height=405)](https://inv.tux.pizza/watch?v=t-_VPRCtiUg)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/t-_VPRCtiUg?width=720&height=405)](https://inv.tux.pizza/watch?v=t-_VPRCtiUg)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=t-_VPRCtiUg](https://inv.tux.pizza/watch?v=t-_VPRCtiUg)
 - Commercial Link: [https://youtube.com/watch?v=t-_VPRCtiUg](https://youtube.com/watch?v=t-_VPRCtiUg)
@@ -21,7 +23,9 @@ We will set up this problem below, but our analysis will proceed in class. To mo
 Nature exhibits many different kinds of behaviors that we have organized into different concepts (i.e., random, chaotic, deterministic, synchronized). THese behaviors have interesting properties and allow us to bring different and new forms of mathematics and computing to the work; this includes new areas like [machine-learning based physics models](https://inv.tux.pizza/watch?v=2Bw5f4vYL98). As we move from a single object models to multiple objects models, we begin to explore these different conceptual behaviors. [Synchronization](https://www.quantamagazine.org/physicists-discover-exotic-patterns-of-synchronization-20190404/) is one that is common and natural to consider in the context of oscillations as you saw from the above video. [Fireflies](https://inv.tux.pizza/watch?v=ZGvtnE1Wy6U), [patterns in the operation of a heart](https://inv.tux.pizza/watch?v=2LPboySOSvo), and [coupled metronomes](https://inv.tux.pizza/watch?v=5v5eBf2KwF8) all exhibit this synchronized behavior. But, how is that possible? What physics is going on here? And how can it lead in and out of synchronization like this pendulum setup below?
 
 
-[![Synchronized pendulum](https://markdown-videos-api.jorgenkh.no/youtube/yVkdfJ9PkRQ?width=720&height=405)](https://inv.tux.pizza/watch?v=yVkdfJ9PkRQ)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/yVkdfJ9PkRQ?width=720&height=405)](https://inv.tux.pizza/watch?v=yVkdfJ9PkRQ)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=yVkdfJ9PkRQ](https://inv.tux.pizza/watch?v=yVkdfJ9PkRQ)
 - Commercial Link: [https://youtube.com/watch?v=yVkdfJ9PkRQ](https://youtube.com/watch?v=yVkdfJ9PkRQ)
@@ -109,7 +113,9 @@ Here are my handwritten notes on coupled oscillations and normal modes.
 
 If you are a feeling that you would like a little more on oscillations, beats, and matrices before we have class. Check out this video.
 
-[![Coupled Oscillator Lecture](https://markdown-videos-api.jorgenkh.no/youtube/I0YACDaY-ww?width=720&height=405)](https://inv.tux.pizza/watch?v=I0YACDaY-ww)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/I0YACDaY-ww?width=720&height=405)](https://inv.tux.pizza/watch?v=I0YACDaY-ww)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=I0YACDaY-ww](https://inv.tux.pizza/watch?v=I0YACDaY-ww)
 - Commercial Link: [https://youtube.com/watch?v=I0YACDaY-ww](https://youtube.com/watch?v=I0YACDaY-ww)

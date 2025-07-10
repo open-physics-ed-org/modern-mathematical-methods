@@ -6,7 +6,9 @@ It might not have been obvious to you, but our work so far has expected that our
 
 This video from Veritasium really explains the importance of this algorithm. It's a great watch.
 
-[![History of the FFT](https://markdown-videos-api.jorgenkh.no/youtube/nmgFG7PUHfo?width=720&height=405)](https://inv.tux.pizza/watch?v=nmgFG7PUHfo)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/nmgFG7PUHfo?width=720&height=405)](https://inv.tux.pizza/watch?v=nmgFG7PUHfo)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=nmgFG7PUHfo](https://inv.tux.pizza/watch?v=nmgFG7PUHfo)
 - Commercial Link: [https://youtube.com/watch?v=nmgFG7PUHfo](https://youtube.com/watch?v=nmgFG7PUHfo)
@@ -42,14 +44,18 @@ We do not expect you to understand the details of an FFT, how it is derived and 
 
 This is an excellent discussion of the underlying mathematics and the setup of the algorithm.
 
-[![Mathematics of the FFT](https://markdown-videos-api.jorgenkh.no/youtube/h7apO7q16V0?width=720&height=405)](https://inv.tux.pizza/watch?v=h7apO7q16V0)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/h7apO7q16V0?width=720&height=405)](https://inv.tux.pizza/watch?v=h7apO7q16V0)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=h7apO7q16V0](https://inv.tux.pizza/watch?v=h7apO7q16V0)
 - Commercial Link: [https://youtube.com/watch?v=h7apO7q16V0](https://youtube.com/watch?v=h7apO7q16V0)
 
 This is a presentation of how to implement the FFT using Python code.
 
-[![Implementing FFT](https://markdown-videos-api.jorgenkh.no/youtube/Ty0JcR6Dvis?width=720&height=405)](https://inv.tux.pizza/watch?v=Ty0JcR6Dvis)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/Ty0JcR6Dvis?width=720&height=405)](https://inv.tux.pizza/watch?v=Ty0JcR6Dvis)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=Ty0JcR6Dvis](https://inv.tux.pizza/watch?v=Ty0JcR6Dvis)
 - Commercial Link: [https://youtube.com/watch?v=Ty0JcR6Dvis](https://youtube.com/watch?v=Ty0JcR6Dvis)

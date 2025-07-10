@@ -8,7 +8,9 @@ While this might seem a little silly, the models and dynamics of a zombie apocal
 
 Saving the world, obviously.
 
-[![Night of the Living Dead](https://markdown-videos-api.jorgenkh.no/youtube/MQ8ZKw7YIfQ?width=720&height=405)](https://inv.tux.pizza/watch?v=MQ8ZKw7YIfQ)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/MQ8ZKw7YIfQ?width=720&height=405)](https://inv.tux.pizza/watch?v=MQ8ZKw7YIfQ)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=MQ8ZKw7YIfQ](https://inv.tux.pizza/watch?v=MQ8ZKw7YIfQ)
 - Commercial Link: [https://youtube.com/watch?v=MQ8ZKw7YIfQ](https://youtube.com/watch?v=MQ8ZKw7YIfQ)

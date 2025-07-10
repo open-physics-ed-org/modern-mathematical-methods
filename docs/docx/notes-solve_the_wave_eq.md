@@ -34,7 +34,9 @@ $$u(x,t) = A \sin(kx - \omega t + \phi)$$
 
 where $A$ is the amplitude of the wave, $k$ is the wave number, $\omega$ is the angular frequency, and $\phi$ is the phase. This wave exists for all space and time, so it is a model of a real wave. We often use series of these waves to build up [shorter wave packets](https://en.wikipedia.org/wiki/Wave_packet). Like below is a sum of travelling waves with different wave numbers and angular frequencies to produce a packet. It can be analyzed simply because it's a sum of sinusoidal waves.
 
-![Wave packet](https://upload.wikimedia.org/wikipedia/commons/b/b0/Wave_packet_%28dispersion%29.gif)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://upload.wikimedia.org/wikipedia/commons/b/b0/Wave_packet_%28dispersion%29.gif)
 
 In the traveling wave solution, the wave number and angular frequency are related to the speed of the wave in the medium:
 
@@ -74,11 +76,15 @@ Left or right sinusoidal traveling waves solve the wave equation as long as the 
 
 A critical result of superposition is the interference of waves. For example two waves in a pool below interfere to produce a wave that travels outward.
 
-![Interference](https://upload.wikimedia.org/wikipedia/commons/2/2c/Two_sources_interference.gif)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://upload.wikimedia.org/wikipedia/commons/2/2c/Two_sources_interference.gif)
 
 It turns out these kinds of interference patterns are very useful. Because with models of waves, we can predict their pattern and shape. Moreover, they can serve as instruments to investigate systems. For example, [x-ray diffraction](https://en.wikipedia.org/wiki/X-ray_crystallography) is a common and widely used tool to determine the shape and structure of matter. A number of folks have [earned Nobel prizes for their work](https://en.wikipedia.org/wiki/X-ray_crystallography#Nobel_Prizes_involving_X-ray_crystallography) on X-ray diffraction and its applications. We will develop the mathematics of diffraction later, but Parth G has a nice video on the topic of Diffraction. 
 
-[![Diffraction](https://markdown-videos-api.jorgenkh.no/youtube/TqTWSSBcV_4?width=720&height=405)](https://inv.tux.pizza/watch?v=TqTWSSBcV_4)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/TqTWSSBcV_4?width=720&height=405)](https://inv.tux.pizza/watch?v=TqTWSSBcV_4)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=TqTWSSBcV_4](https://inv.tux.pizza/watch?v=TqTWSSBcV_4)
 - Commercial Link: [https://youtube.com/watch?v=TqTWSSBcV_4](https://youtube.com/watch?v=TqTWSSBcV_4)
@@ -87,7 +93,9 @@ It turns out these kinds of interference patterns are very useful. Because with 
 
 One of the most intersting things we have found in recent years is single particle diffraction. In fact, this was observed [macroscopically in pilot wave hydrodynamics](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.97.154101) by a French research group. We have found that interference patterns can build up in single photo experiments. The video below shows a set up that demonstrates this.
 
-[![Single Particle Diffraction](https://markdown-videos-api.jorgenkh.no/youtube/GzbKb59my3U?width=720&height=405)](https://inv.tux.pizza/watch?v=GzbKb59my3U)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/GzbKb59my3U?width=720&height=405)](https://inv.tux.pizza/watch?v=GzbKb59my3U)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=GzbKb59my3U](https://inv.tux.pizza/watch?v=GzbKb59my3U)
 - Commercial Link: [https://youtube.com/watch?v=GzbKb59my3U](https://youtube.com/watch?v=GzbKb59my3U)

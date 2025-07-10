@@ -484,7 +484,9 @@ $$\Phi_E = \int \int \int \dfrac{\rho}{\epsilon_0}\;dV = \dfrac{Q_{enc}}{\epsilo
 
 However, using that measure of the total electric flux to find the field is only possible in highly symmetric situations. For example, if we have a spherical charge distribution $\rho(r)$, we can use Gauss's Law to find the electric field at any point outside the sphere. Below, is a figure of a cylindrical charge distribution. We can use Gauss's Law to find the electric field at any point outside the cylinder because the charge per unit length is constant.
 
-![Gaussian Cylinder](http://hyperphysics.phy-astr.gsu.edu/hbase/electric/imgele/gaucyl2.png)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](http://hyperphysics.phy-astr.gsu.edu/hbase/electric/imgele/gaucyl2.png)
 
 ### A charged cylinder
 

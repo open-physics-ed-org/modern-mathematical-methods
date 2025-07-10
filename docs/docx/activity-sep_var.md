@@ -132,7 +132,9 @@ Instead, we will use the differential form of the electric potential where there
 ## Laplace's Equation
 
 *Numerical solution to Laplace's equation on an annulus*
-![Laplace's Equation](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Laplace%27s_equation_on_an_annulus.svg/800px-Laplace%27s_equation_on_an_annulus.svg.png)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Laplace%27s_equation_on_an_annulus.svg/800px-Laplace%27s_equation_on_an_annulus.svg.png)
 
 
 While Poisson's equation describes how the value of the local Laplacian of the electric potential is directly related to the local electric potential, there are many places where there are no charges. For example, it's common to solve problems where the **boundary conditions** are set to a given potential or with a certain amount of charge, and the remaining space is empty (or free space). This doesn't mean that an electric field is not present in that empty space, but rather that there are no charges. In this case, the problem that are solving is called **Laplace's equation** - a special case of Poisson's equation where $\rho = 0$.
@@ -151,7 +153,9 @@ There are two important ways to go about solving these problems. The first is us
 
 ## Activity: The Infinite Gutter
 
-![Infinite Gutter](https://i.stack.imgur.com/nHF7a.jpg)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://i.stack.imgur.com/nHF7a.jpg)
 
 Consider a metal gutter that extends into infinitely in the $z$ direction. The gutter width in the $y$ direction is $a$. It is placed in the $y-z$ plane and the $+x$ direction is not constrained and extends to infinity (both the wall at $y=0$ and $y=a$). So that Laplace's equation applies in the region:
 

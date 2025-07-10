@@ -353,12 +353,16 @@ $$\Phi_{k+1}(x,y,z) = \frac{1}{6}\left[\Phi_{k}(x+h,y,z) + \Phi_{k}(x-h,y,z) + \
 
 These videos from 3Blue1Brown about Partial Differential Equations are really great. But not necessary to grasp what we are doing.
 
-[![What is a PDE](https://markdown-videos-api.jorgenkh.no/youtube/ly4S0oi3Yz8?width=720&height=405)](https://inv.tux.pizza/watch?v=ly4S0oi3Yz8)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/ly4S0oi3Yz8?width=720&height=405)](https://inv.tux.pizza/watch?v=ly4S0oi3Yz8)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=ly4S0oi3Yz8](https://inv.tux.pizza/watch?v=ly4S0oi3Yz8)
 - Commercial Link: [https://youtube.com/watch?v=ly4S0oi3Yz8](https://youtube.com/watch?v=ly4S0oi3Yz8)
 
-[![Solving the Heat Equation](https://markdown-videos-api.jorgenkh.no/youtube/ToIXSwZ1pJU?width=720&height=405)](https://inv.tux.pizza/watch?v=ToIXSwZ1pJU)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/ToIXSwZ1pJU?width=720&height=405)](https://inv.tux.pizza/watch?v=ToIXSwZ1pJU)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=ToIXSwZ1pJU](https://inv.tux.pizza/watch?v=ToIXSwZ1pJU)
 - Commercial Link: [https://youtube.com/watch?v=ToIXSwZ1pJU](https://youtube.com/watch?v=ToIXSwZ1pJU)

@@ -87,7 +87,9 @@ $$z = r e^{i\theta}$$
 
 where $r$ is the magnitude and $\theta$ is the phase and both are real numbers. These two representations are compatible if we think of a complex number represented in the complex plane where the reals appears on the $x$ and the imaginaries on the $y$.
 
-![Complex Plane](https://upload.wikimedia.org/wikipedia/commons/d/d6/Argandgaussplane.png)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://upload.wikimedia.org/wikipedia/commons/d/d6/Argandgaussplane.png)
 
 The basic properties of complex numbers are below for two numbers $z_1 = a_1 + ib_1$ and $z_2 = a_2 + ib_2$:
 

@@ -12,7 +12,9 @@ One of the first things we will use to investigate systems from a dynamical syst
 
 We will go into the details of how to construct and develop phase portraits in class. This video from [Steve Brunton](https://www.me.washington.edu/facultyfinder/steve-brunton) is a good overview of the process. It's quite detailed and takes a mathematical perspective, so don't worry if you don't understand everything in the video. We have plenty of time to investigate how this works in practice.
 
-[![](https://markdown-videos-api.jorgenkh.no/youtube/vBwyD4JJlSs?width=720&height=405)](https://inv.tux.pizza/watch?v=vBwyD4JJlSs)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/vBwyD4JJlSs?width=720&height=405)](https://inv.tux.pizza/watch?v=vBwyD4JJlSs)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=vBwyD4JJlSs](https://inv.tux.pizza/watch?v=vBwyD4JJlSs)
 - Commercial Link: [https://youtube.com/watch?v=vBwyD4JJlSs](https://youtube.com/watch?v=vBwyD4JJlSs)

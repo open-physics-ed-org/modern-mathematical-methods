@@ -28,7 +28,9 @@ where $E$ is the energy state, $k$ is the Boltzmann constant, $T$ is the tempera
 
 This introduction aims to provide a foundational understanding of Monte Carlo methods; we will delve deeper into the workings, applications, and mathematical aspects of these simulations.
 
-[![Monte Carlo Simulations](https://markdown-videos-api.jorgenkh.no/youtube/7ESK5SaP-bc?width=720&height=405)](https://inv.tux.pizza/watch?v=7ESK5SaP-bc)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/7ESK5SaP-bc?width=720&height=405)](https://inv.tux.pizza/watch?v=7ESK5SaP-bc)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=7ESK5SaP-bc](https://inv.tux.pizza/watch?v=7ESK5SaP-bc)
 - Commercial Link: [https://youtube.com/watch?v=7ESK5SaP-bc](https://youtube.com/watch?v=7ESK5SaP-bc)
@@ -145,7 +147,9 @@ widgets.interactive(monte_carlo_pi_plot, num_samples=slider)
 
 If you want to see more about how Monte Carlo simulations can work, in particular, with respect to data science, check out this video.
 
-[![Monte Carlo Simulations in Data Science](https://markdown-videos-api.jorgenkh.no/youtube/EaR3C4e600k?width=720&height=405)](https://inv.tux.pizza/watch?v=EaR3C4e600k)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/EaR3C4e600k?width=720&height=405)](https://inv.tux.pizza/watch?v=EaR3C4e600k)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=EaR3C4e600k](https://inv.tux.pizza/watch?v=EaR3C4e600k)
 - Commercial Link: [https://youtube.com/watch?v=EaR3C4e600k](https://youtube.com/watch?v=EaR3C4e600k)

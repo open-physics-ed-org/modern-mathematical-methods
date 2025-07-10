@@ -50,7 +50,9 @@ Let's see that this works for our choices. We can make a table for all the poten
 
 [Johnathan Gardner](https://inv.tux.pizza/channel/UC5KbWmC93TBhinPLqh5j2kg) has a nice set of videos on Thermodynamics and Statistical Mechanics. Below is short one on counting and combinatorics.
 
-[![Permutations and Combinations](https://markdown-videos-api.jorgenkh.no/youtube/tEQFftB1Pao?width=720&height=405)](https://inv.tux.pizza/watch?v=tEQFftB1Pao)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/tEQFftB1Pao?width=720&height=405)](https://inv.tux.pizza/watch?v=tEQFftB1Pao)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=tEQFftB1Pao](https://inv.tux.pizza/watch?v=tEQFftB1Pao)
 - Commercial Link: [https://youtube.com/watch?v=tEQFftB1Pao](https://youtube.com/watch?v=tEQFftB1Pao)
@@ -75,7 +77,9 @@ The problem we set up is a classic one in statistical physics. It was originally
 
 The first assumption is a good one. The second one is not. But it's a good approximation for many solids. If we model the quanta as stars and the oscillators as lines. Where the lines separate the stars into bins.  This is the so called [Stars and bars model](https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)). We avoid that language because in the US because it associated with a Southern hate group. In any event, here's an image to make sense of the model:
 
-![Cookies given to friends](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Colored_circle_starsbars_1.svg/566px-Colored_circle_starsbars_1.svg.png)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Colored_circle_starsbars_1.svg/566px-Colored_circle_starsbars_1.svg.png)
 
 We can show that the total number of symbols we have is $q+N-1$, we get the $N-1$ because we need one less line to make a two bins. We can then write down the number of ways to arrange the symbols as,
 
@@ -87,7 +91,9 @@ where the denominator is the number of ways to arrange the $q$ quanta (stars) an
 
 The video below does precisely that.
 
-[![The Einstein Model of a Solid](https://markdown-videos-api.jorgenkh.no/youtube/71fk3n88t48?width=720&height=405)](https://inv.tux.pizza/watch?v=71fk3n88t48)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/71fk3n88t48?width=720&height=405)](https://inv.tux.pizza/watch?v=71fk3n88t48)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=71fk3n88t48](https://inv.tux.pizza/watch?v=71fk3n88t48)
 - Commercial Link: [https://youtube.com/watch?v=71fk3n88t48](https://youtube.com/watch?v=71fk3n88t48)
@@ -184,7 +190,9 @@ plt.tight_layout()
 
 If you want more details on combinatorics, please review this longer lecture.
 
-[![Counting and Combinatorics Lecture](https://markdown-videos-api.jorgenkh.no/youtube/6oV3pKLgW2I?width=720&height=405)](https://inv.tux.pizza/watch?v=6oV3pKLgW2I)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/6oV3pKLgW2I?width=720&height=405)](https://inv.tux.pizza/watch?v=6oV3pKLgW2I)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=6oV3pKLgW2I](https://inv.tux.pizza/watch?v=6oV3pKLgW2I)
 - Commercial Link: [https://youtube.com/watch?v=6oV3pKLgW2I](https://youtube.com/watch?v=6oV3pKLgW2I)

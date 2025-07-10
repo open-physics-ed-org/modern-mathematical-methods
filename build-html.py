@@ -599,6 +599,7 @@ def build_jupyter_for_files(debug=False):
 
 def main():
     parser = argparse.ArgumentParser(description="Build site outputs from content.")
+    parser.add_argument('--all', action='store_true', help='Build all outputs in sequence (md, docx, tex, pdf, jupyter, ipynb, html)')
     parser.add_argument('--html', action='store_true', help='Build HTML output')
     parser.add_argument('--ipynb', action='store_true', help='Copy Jupyter notebooks to flat _build/ipynb and docs/ipynb')
     parser.add_argument('--md', action='store_true', help='Build Markdown output')
@@ -611,6 +612,27 @@ def main():
     parser.add_argument('--debug', action='store_true', help='Print debug information about menu extraction')
     args = parser.parse_args()
 
+
+    # All build
+    if args.all:
+        if args.debug:
+            print("[INFO] Full build (--all) selected.")
+        build_md_all(debug=args.debug)
+        build_docx_all(debug=args.debug)
+        build_tex_all(debug=args.debug)
+        build_pdf_all(debug=args.debug)
+        build_jupyter_for_files(debug=args.debug)
+        # IPYNB flat copy build
+        cmd = [sys.executable, 'copy_ipynb_flat.py']
+        if args.debug:
+            cmd.append('--debug')
+        print(f"[INFO] Running: {' '.join(cmd)}")
+        result = subprocess.run(cmd, capture_output=False)
+        if result.returncode != 0:
+            print(f"[ERROR] copy_ipynb_flat.py failed with exit code {result.returncode}")
+            sys.exit(result.returncode)
+        build_html_all(debug=args.debug)
+        return
     # LaTeX build
     if args.tex:
         if args.debug:

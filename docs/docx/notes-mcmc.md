@@ -6,7 +6,9 @@ One of the principal tools we have at our disposal when it comes to systems with
 
 We often find ourselves using a type of Monte Carlo simulation that makes use of a Markov Chain. This is called the MCMC model. The mathematical foundations of Markov Chains are well beyond the scope of this course, but the principal issue is that we want to describe is how this simulation works. The video below describes the conceptual backing of MCMC and how it was first used in physics in 1953 to develop a model of an ideal gas. We will make a similar model!
 
-[![](https://markdown-videos-api.jorgenkh.no/youtube/12eZWG0Z5gY?width=720&height=405)](https://inv.tux.pizza/watch?v=12eZWG0Z5gY)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/12eZWG0Z5gY?width=720&height=405)](https://inv.tux.pizza/watch?v=12eZWG0Z5gY)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=12eZWG0Z5gY](https://inv.tux.pizza/watch?v=12eZWG0Z5gY)
 - Commercial Link: [https://youtube.com/watch?v=12eZWG0Z5gY](https://youtube.com/watch?v=12eZWG0Z5gY)
@@ -44,14 +46,18 @@ When these sums are really hard to compute because there's lots of states or onl
 
 **MCMC for Data Science**
 
-[![](https://markdown-videos-api.jorgenkh.no/youtube/yApmR-c_hKU?width=720&height=405)](https://inv.tux.pizza/watch?v=yApmR-c_hKU)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/yApmR-c_hKU?width=720&height=405)](https://inv.tux.pizza/watch?v=yApmR-c_hKU)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=yApmR-c_hKU](https://inv.tux.pizza/watch?v=yApmR-c_hKU)
 - Commercial Link: [https://youtube.com/watch?v=yApmR-c_hKU](https://youtube.com/watch?v=yApmR-c_hKU)
 
 **Details on the MCMC Algorithm**
 
-[![](https://markdown-videos-api.jorgenkh.no/youtube/rZk2FqX2XnY?width=720&height=405)](https://inv.tux.pizza/watch?v=rZk2FqX2XnY)
+[
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://markdown-videos-api.jorgenkh.no/youtube/rZk2FqX2XnY?width=720&height=405)](https://inv.tux.pizza/watch?v=rZk2FqX2XnY)
 
 - Non-Commercial Link: [https://inv.tux.pizza/watch?v=rZk2FqX2XnY](https://inv.tux.pizza/watch?v=rZk2FqX2XnY)
 - Commercial Link: [https://youtube.com/watch?v=rZk2FqX2XnY](https://youtube.com/watch?v=rZk2FqX2XnY)

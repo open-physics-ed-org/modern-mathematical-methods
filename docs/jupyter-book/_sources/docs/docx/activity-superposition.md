@@ -25,7 +25,9 @@ This gives a general prescription for finding the electric field in most situati
 
 Consider the ring (radius, $R$) with a uniform linear charge density $\lambda = \frac{Q}{2\pi R}$. that is placed with it's center on the plane as shown below.
 
-![Ring of charge diagram](https://blog.cupcakephysics.com/assets/images/2015-06-21/ring.png)
+
+> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**
+![Image not embedded: remote image](https://blog.cupcakephysics.com/assets/images/2015-06-21/ring.png)
 
 **&#9989; Do this** 
 
