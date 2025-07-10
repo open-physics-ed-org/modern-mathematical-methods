@@ -124,15 +124,15 @@ toc:
           - title: "Activity: Modeling"
             file: content/notebooks/4_distributions/activity-zombies.ipynb
 
-  - title: "Assignments"
-    menu: true
-    children:
-      # Uncomment and add files as needed
-      # - title: "Homework 1"
-      #   file: content/notebooks/hw1.ipynb
-      # - title: "Homework 2"
-      #   file: content/notebooks/hw2.ipynb
-      # ...
+  # - title: "Assignments"
+  #   menu: true
+  #   children:
+  #     # Uncomment and add files as needed
+  #     # - title: "Homework 1"
+  #     #   file: content/notebooks/hw1.ipynb
+  #     # - title: "Homework 2"
+  #     #   file: content/notebooks/hw2.ipynb
+  #     # ...
 
   - title: "Resources"
     menu: true

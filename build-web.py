@@ -64,43 +64,25 @@ def get_site_title():
     return title
 
 def get_navigation_menu():
-    nav = content_manifest.get('navigation', [])
-    chapters = content_manifest.get('chapters', [])
-    menu = []
-    # Top-level nav items
-    nav_items = []
-    for item in nav:
-        if not item.get('title'):
-            raise ValueError(f"[ERROR] Navigation item missing title: {item}")
-        nav_items.append({
-            'title': item['title'],
-            'path': Path(item['file']).with_suffix('.html').name if 'file' in item else None
-        })
-
-    # Chapters as a dropdown
-    chapters_menu = {'title': 'Chapters', 'path': 'chapters.html', 'children': []}
-    for chapter in chapters:
-        chap_title = chapter.get('title')
-        if not chap_title:
-            raise ValueError(f"[ERROR] Chapter missing title: {chapter}")
-        if 'files' in chapter:
-            for f in chapter['files']:
-                file_title = f.get('title')
-                if not file_title:
-                    raise ValueError(f"[ERROR] File in chapter '{chap_title}' missing title: {f}")
-                file_path = Path(f['file']).with_suffix('.html').name if 'file' in f else None
-                chapters_menu['children'].append({'title': file_title, 'path': file_path})
-
-    # Insert chapters menu as the second item
-    if chapters_menu['children']:
-        if len(nav_items) >= 1:
-            menu.append(nav_items[0])
-            menu.append(chapters_menu)
-            menu.extend(nav_items[1:])
-        else:
-            menu.append(chapters_menu)
-    else:
-        menu = nav_items
+    """
+    Returns the navigation menu structure using menu_parser.get_menu_tree.
+    This replaces the old navigation/chapters logic and uses the validated _content.yml toc.
+    """
+    from menu_parser import get_menu_tree
+    # Use the main _content.yml in the repo root
+    menu = get_menu_tree(str(content_yml))
+    # Optionally, convert 'file' to 'path' with .html extension for top-level items
+    def convert_file_to_path(item):
+        if 'file' in item:
+            # Replace .md or .ipynb with .html for navigation links
+            import os
+            base, ext = os.path.splitext(item['file'])
+            item['path'] = base + '.html'
+        if 'children' in item:
+            for child in item['children']:
+                convert_file_to_path(child)
+        return item
+    menu = [convert_file_to_path(dict(m)) for m in menu]
     return menu
 
 def flatten_image_name(rel_path):

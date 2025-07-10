@@ -1,0 +1,36 @@
+site:
+  title: "Modern Mathematical Methods"
+  author: "Danny Caballero"
+  description: "desc"
+  logo: "logo.png"
+  favicon: "favicon.ico"
+  theme:
+    default: "dark"
+    light: "light"
+    dark: "dark"
+  language: "en"
+  github_url: "url"
+toc:
+  - title: "Home"
+    menu: true
+    file: content/index.md
+    children:
+      - title: "Level 2"
+        file: content/level2.md
+        children:
+          - title: "Level 3"
+            file: content/level3.md
+static:
+  images: []
+  css: []
+  js: []
+  templates: []
+  themes: []
+build:
+  outputs: ["html"]
+  output_dir: "_build/"
+  docs_dir: "docs/"
+  sources_dir: "docs/sources/"
+  notebooks_dir: "content/notebooks/"
+  static_dir: "static/"
+  images_dir: "static/images/"
