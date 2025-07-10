@@ -1,157 +1,177 @@
-# Build System
+# Build System and Script Reference
 
-## Overview
-This document describes the updated build system for the Modern Classical Mechanics project, including the new behavior of `build.py` and `build-web.py`. The build system is designed to generate all course materials (PDF, DOCX, Markdown, TeX, WCAG-compliant HTML, and Jupyter Book site) in a consistent, reproducible, and organized way.
-
-The build system is meant to be more general-purpose, allowing for easy addition of new notebooks and formats. It supports both a unified build process and selective builds for individual formats or notebooks.
-
+This document provides a detailed overview of the build system and all scripts in the Modern Mathematical Methods repository. It is intended for developers and maintainers who need to understand or extend the build process.
 
 ---
 
-## Project Structure (Key Directories)
+## Main Build Script: build.py
 
-- **_build/**: All build outputs (not organized for direct publishing)
-    - `docx/`   — DOCX files (one per notebook, if `build.py` used with `build --docx`)
-    - `html/`   — Jupyter Book HTML site (a full unified build from the generated .autogen/_toc.yml, if `build.py` used with `build --jupyter`)
-    - `images/` — All images referenced in notebooks/markdown (stored flat and with consistent paths, automatic,  `build.py --img`)
-    - `md/`     — Markdown files (one per notebook, `build.py --md`)
-    - `pdf/`    — PDF files (one per notebook, `build.py --pdf`)
-    - `tex/`    — TeX files (one per notebook, `build.py --tex`)
-    - `wcag-html/` — (`build.py --html`) WCAG-compliant HTML output
-- **content/**: Source markdown, notebooks (**put materials here**)
-- **docs/**: All published outputs for the website
-    - WCAG-compliant HTML files for each page (dark and light mode).
-    - `css/` - Styles for HTML
-    - `images/` - Local flat image library for HTML
-    - `sources/` — Contains a subfolder for each notebook stem, with all output formats for that notebook:
-        - `<notebook_stem>/<notebook_stem>.md`
-        - `<notebook_stem>/<notebook_stem>.docx`
-        - `<notebook_stem>/<notebook_stem>.pdf`
-        - `<notebook_stem>/<notebook_stem>.tex`
-        - ...
-    - `sources/jupyter/` — The full Jupyter Book HTML site
-- **images/**: Source images for markdown and notebooks; used in automated builds (**put images here**)
-- **log/**: Logs for build, can be reviewed
-- **releases/:** Release information
-- **scripts/:** Helper scripts for `build.py` and `build-web.py`
-  - `debuggers` - Debugging scripts; not needed for production
-- **static/**: HTML templates, CSS, JS, and themes
-- **build.py**: Main build script for website and document converstion
-- **build-web.py**: Web build script (subroutine for build.py, but can be called alone)
+- **Purpose:** Central entry point for building all site outputs (HTML, LaTeX, PDF, DOCX, Markdown, Jupyter Book, etc.)
+- **Usage:**
+  - `python build.py --all` — Build all outputs in sequence
+  - `python build.py --html` — Build HTML output
+  - `python build.py --tex` — Build LaTeX output
+  - `python build.py --pdf` — Build PDF output
+  - `python build.py --docx` — Build DOCX output
+  - `python build.py --md` — Build Markdown output
+  - `python build.py --jupyter` — Build Jupyter Book output
+  - `python build.py --ipynb` — Copy flat notebooks
+  - `python build.py --files file1.md file2.ipynb` — Build only specified files
+  - Add `--debug` to any command for verbose output
+- **Key Functions:**
+  - `build_tex_all(debug=False)`: Build LaTeX for all files in the content tree
+  - `build_tex_for_files(files, debug=False)`: Build LaTeX for specified files
+  - `build_html_all(debug=False)`: Build HTML for all files
+  - `build_html_for_files(files, debug=False)`: Build HTML for specified files
+  - `build_jupyter_for_files(debug=False)`: Orchestrate Jupyter Book build, kernel fixes, and validation
+  - `copy_static_assets(debug=False)`: Copy CSS and images to output locations
+  - `render_download_buttons(file_path)`: Generate HTML for download buttons for each file
+  - `debug_print(msg, debug)`: Print debug messages if enabled
 
 ---
 
-## Build Workflow
+## Content and Menu Scripts
 
-### 1. Building Everything: `python build.py --all`
-This is the recommended way to build all outputs. It will:
+- **content_parser.py**
+  - Loads and validates _content.yml (the main content tree)
+  - Provides utilities to extract all referenced files
+  - Used by build.py for content discovery
 
-1. **Build DOCX** (and Markdown): `python build.py --docx`
-    - Converts each notebook to Markdown and DOCX.
-    - Copies both `.md` and `.docx` to `docs/sources/<notebook_stem>/`.
-    - **Build MD**: Converts each notebook to Markdown. Run by default. `build.py --md`
-    - Copies `.md` to `docs/sources/<notebook_stem>/`.
-2. **Build PDF**: `python build.py --pdf`
-    - Converts each notebook to TeX and PDF.
-    - Copies both `.tex` and `.pdf` to `docs/sources/<notebook_stem>/`.
-    - **Build TeX**: Converts each notebook to TeX. Run by default. `build.py --tex`
-    - Copies `.tex` to `docs/sources/<notebook_stem>/`.
-3. **Build Jupyter Book HTML**: `python build.py --jupyter`
-    - Builds the full Jupyter Book HTML site into `_build/html`.
-    - Copies the site to `docs/jupyter/` and to `docs/sources/jupyterbook_html/`.
-4. **Build WCAG-compliant HTML Web Output**: `python build.py --html`
-    - Runs `build-web.py` to generate the custom website in `docs/`.
+- **menu_parser.py**
+  - Parses menu YAML files for navigation structure
+  - Used for building navigation menus in HTML outputs
 
-All steps are run in the correct order to ensure dependencies are satisfied (e.g., Markdown is always built before DOCX).
+- **build_menu_html.py**
+  - Generates HTML for the site navigation menu
+  - Used by build.py to inject navigation into HTML pages
 
-### 2. Building Individual Formats
-- `python build.py --docx` — Only build DOCX (and Markdown) for all notebooks.
-- `python build.py --pdf` — Only build PDF (and TeX) for all notebooks.
-- `python build.py --jupyter` — Only build the unified Jupyter Book HTML site.
-- `python build.py --html` — Only build the custom HTML web output (calls `build-web.py`).
-- `python build.py --md` — Only build Markdown for all notebooks.
-- `python build.py --tex` — Only build TeX for all notebooks.
-- `python build.py --img` — Collect all referenced images into `_build/images/`.
+- **build_footer_html.py**
+  - Renders the site footer from a template and config
+  - Used by build.py for consistent footers
 
-### 3. Selective Builds
-- Use `--files <notebook1> <notebook2> ...` to build only specific notebooks.
+- **build_site_title_html.py**
+  - (If present) Generates or manages the site title HTML
+
+- **build_top_menu_html.py**
+  - (If present) Generates the top-level menu HTML
 
 ---
 
-## Output Directory Details
+## Notebook and Kernel Utilities
 
-### _build/
-```
-docx/        # All .docx files (one per notebook)
-html/        # Jupyter Book HTML site (temporary, unified build)
-images/      # All images referenced in `content/`
-md/          # All .md files (one per notebook)
-pdf/         # All .pdf files (one per notebook)
-tex/         # All .tex files (one per notebook)
-wcag-html/   # WCAG-compliant HTML (published web output)
-```
+- **notebook_kernel_utils.py**
+  - Functions for fixing and validating Jupyter notebook kernels
+  - Used to ensure all notebooks have correct kernel metadata before building
 
-### docs/
-```
-01_notes.html   01_start.html   ...   index.html   ...
-css/           images/         sources/
-  sources/
-    <notebook_stem>/
-      <notebook_stem>.md
-      <notebook_stem>.docx
-      <notebook_stem>.pdf
-      <notebook_stem>.tex
-    jupyterbook_html/
-      (full Jupyter Book HTML site)
-```
+- **fix_notebook_kernels.py**
+  - Script to batch-fix kernels in all notebooks
+  - Called by `build_jupyter_for_files` and can be run standalone
 
-### Project Root
-```
-_config.yml   _menu.yml   _notebooks.yaml   _toc.yml
-basic_yaml2json.py   build-web.py   build.py   ...
-content/   docs/   static/   _build/   ...
-```
+- **check_notebook_kernels.py**
+  - Checks all notebooks for valid kernel metadata
+  - Used for validation before Jupyter Book builds
 
 ---
 
-## Notable Features & Updates
+## Content Conversion and Validation
 
-- **--all** now runs: DOCX (and Markdown) → PDF → Jupyter Book HTML → Custom HTML web output, in that order.
-- All output formats are copied to `docs/sources/<notebook_stem>/` for each notebook.
-- Markdown is always built before DOCX (DOCX is generated from Markdown).
-- Jupyter Book HTML is built into a temp directory, then copied to `docs/jupyter/`.
-- `build-web.py` is always called last in the `--all` workflow.
-- All referenced images are collected into `_build/images/`.
-- No automatic cleanup of `_build/` or `docs/` directories—manual cleanup is recommended if needed.
+- **convert_content_to_jb_flat.py**
+  - Converts _content.yml to a flat _toc.yml for Jupyter Book
+  - Ensures compatibility with Jupyter Book's requirements
 
----
+- **validate_yaml.py**
+  - Validates YAML files for syntax errors
+  - Used to check _toc.yml and other YAML configs
 
-## Example Usage
+- **validate_jb_toc.py**
+  - Checks _toc.yml for duplicate entries and structure issues
 
-- Build everything:
-  ```sh
-  python build.py --all
-  ```
-- Build only PDFs:
-  ```sh
-  python build.py --pdf
-  ```
-- Build only DOCX for a specific notebook:
-  ```sh
-  python build.py --docx --files content/notebooks/01_notes.ipynb
-  ```
+- **check_toc_no_empty_chapters.py**
+  - Ensures no empty chapters in the content tree
+
+- **check_toc_parts_after_root.py**
+  - Validates that all parts in the TOC come after the root
+
+- **check_toc_root_file.py**
+  - Ensures the TOC has a valid root file
 
 ---
 
-## Troubleshooting
-- If you see missing images in outputs, try running with `--img` or ensure all image paths are correct.
-- If you add new notebooks, update `_notebooks.yaml` and re-run the build.
-- For custom web output, edit `build-web.py` and re-run with `--html` or `--all`.
+## Notebook and Markdown Copy/Conversion
+
+- **copy_ipynb_flat.py**
+  - Copies all notebooks to a flat directory for easy access and conversion
+  - Used for building flat IPYNB and DOCX outputs
+
+- **convert_content_to_jupyterbook.py**
+  - Converts content to Jupyter Book-compatible format (if needed)
 
 ---
 
-## See Also
-- `README.md` for project overview
-- `requirements.txt` for dependencies
-- `build-web.py` for custom web build logic
-- Jupyter Book documentation: https://jupyterbook.org/
+## Asset and Utility Scripts
+
+- **sanitize_unicode.py**
+  - Cleans up unicode characters in content files
+
+- **remove_remote_images.py**
+  - Removes or replaces remote image links in markdown files
+
+- **all_python_code.txt**
+  - (Reference) May contain all code snippets for review or export
+
+---
+
+## Scripts Directory (scripts)
+
+- **`basic_yaml2json.py`**
+  - Converts YAML files to JSON for debugging or external use
+
+- **`md2html.py`**
+  - Converts markdown files to HTML (standalone)
+
+- **`preprocess_content_yml.py`**
+  - Preprocesses _content.yml for custom needs
+
+- **`test_end_to_end_titles.py`**
+  - End-to-end test for title extraction and build
+
+- **`test_menu_titles.py`**
+  - Tests menu title extraction
+
+- **`test_preprocess_content_yml.py`**
+  - Tests preprocessing of content YAML
+
+- **`theme_to_css.py`**
+  - Converts theme YAML files to CSS
+
+- **`fetch_youtube.py`**
+  - (If present) Fetches YouTube metadata or content for embedding
+
+- **`debuggers/compare_yaml.py`**
+  - Compares YAML files for differences
+
+- **`debuggers/test_parse_content_yml.py`**
+  - Tests parsing of content YAML files
+
+---
+
+## Templates and Static Assets
+
+- **templates**
+  - Contains HTML templates for page, header, footer, theme toggle, etc.
+- **css**
+  - CSS files for site styling
+- **images**
+  - Images used in site outputs
+
+---
+
+## Adding or Modifying Scripts
+
+- Place new helper scripts in the scripts directory or root as appropriate.
+- Document the purpose and usage of each script at the top of the file.
+- Update this BUILD.md if you add new build-related scripts.
+
+---
+
+*For a high-level overview, see README.md. For implementation details, see comments in each script.*
