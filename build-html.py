@@ -113,14 +113,14 @@ def render_download_buttons(file_path):
     ext = os.path.splitext(file_path)[1].lower()
     # Always show these
     buttons = [
-        (f'docs/pdf/{stem}.pdf', 'PDF', '📄', True),
-        (f'docs/md/{stem}.md', 'MD', '✍️', True),
-        (f'docs/docx/{stem}.docx', 'DOCX', '📝', True),
-        (f'docs/tex/{stem}.tex', 'TEX', '📐', True),
+        (f'pdf/{stem}.pdf', 'PDF', '📄', True),
+        (f'md/{stem}.md', 'MD', '✍️', True),
+        (f'docx/{stem}.docx', 'DOCX', '📝', True),
+        (f'tex/{stem}.tex', 'TEX', '📐', True),
     ]
     # Add ipynb and jupyter for notebooks
     if ext == '.ipynb':
-        buttons.append((f'docs/ipynb/{stem}.ipynb', 'IPYNB', '📓', True))
+        buttons.append((f'ipynb/{stem}.ipynb', 'IPYNB', '📓', True))
         # Jupyter HTML link (open in new tab)
         buttons.append((f'jupyter/content/notebooks/{stem}.html', 'Jupyter', '🔗', False))
     html = ['<nav class="chapter-downloads" aria-label="Download chapter sources">']
