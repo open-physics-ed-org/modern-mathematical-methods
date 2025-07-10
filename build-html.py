@@ -199,15 +199,12 @@ def build_html_for_files(files, debug=False):
   </header>
     '''
 
-    # Theme toggle button (inserted after header)
+    # Theme toggle: floating emoji button, left side, WCAG compliant
     theme_toggle_html = '''
-  <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
-      <span id="theme-toggle-icon" aria-hidden="true">☀️</span> <span id="theme-toggle-label">Light</span>
-    </button>
-  </div>
+  <button id="theme-toggle" class="theme-toggle-floating" aria-label="Toggle dark/light mode" tabindex="0" title="Toggle dark/light mode">
+    <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
+  </button>
   <script>
-    // Default to dark mode unless user has set a preference
     function getPreferredTheme() {
       const saved = localStorage.getItem('theme');
       if (saved) return saved;
@@ -216,25 +213,73 @@ def build_html_for_files(files, debug=False):
     function setTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
       const icon = document.getElementById('theme-toggle-icon');
-      const label = document.getElementById('theme-toggle-label');
       if (theme === 'dark') {
         icon.textContent = '☀️';
-        label.textContent = 'Light';
       } else {
         icon.textContent = '🌙';
-        label.textContent = 'Dark';
       }
       localStorage.setItem('theme', theme);
     }
     document.addEventListener('DOMContentLoaded', function() {
       const btn = document.getElementById('theme-toggle');
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
         const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
         setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+      btn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          btn.click();
+        }
+      });
+      btn.addEventListener('focus', function() {
+        btn.style.boxShadow = '0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12)';
+        btn.style.borderColor = '#ff0';
+      });
+      btn.addEventListener('blur', function() {
+        btn.style.boxShadow = '';
+        btn.style.borderColor = '';
       });
       setTheme(getPreferredTheme());
     });
   </script>
+  <style>
+    .theme-toggle-floating {
+      position: fixed;
+      left: 0.7em;
+      top: 5.5em;
+      z-index: 1000;
+      background: var(--button-bg, #222);
+      color: var(--button-fg, #fff);
+      border: 2px solid var(--button-border, #bbb);
+      border-radius: 50%;
+      width: 2.2em;
+      height: 2.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+    }
+    .theme-toggle-floating:focus {
+      outline: 3px solid #ff0 !important;
+      border-color: #ff0 !important;
+      box-shadow: 0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12) !important;
+    }
+    @media (max-width: 700px) {
+      .theme-toggle-floating {
+        left: 0.3em;
+        top: 0.3em;
+        width: 1.7em;
+        height: 1.7em;
+        font-size: 1em;
+      }
+    }
+  </style>
     '''
 
     head_path = os.path.join('static', 'templates', 'head.html')
@@ -583,35 +628,72 @@ def build_html_for_files(files, debug=False):
 
     # Theme toggle button (inserted after header)
     theme_toggle_html = '''
-  <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
-      <span id="theme-toggle-icon" aria-hidden="true">🌙</span> <span id="theme-toggle-label">Dark</span>
-    </button>
-  </div>
+  <button id="theme-toggle" class="theme-toggle-floating" aria-label="Toggle dark/light mode" tabindex="0" title="Toggle dark/light mode" style="position: fixed; left: 1.2em; top: 7em; z-index: 1000; background: var(--theme-toggle-bg, #222); color: var(--theme-toggle-fg, #fff); border: 2px solid var(--theme-toggle-border, #888); border-radius: 50%; width: 3.2em; height: 3.2em; display: flex; align-items: center; justify-content: center; font-size: 2em; box-shadow: 0 2px 8px rgba(0,0,0,0.12); cursor: pointer; outline: none; transition: border-color 0.2s, box-shadow 0.2s;">
+    <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
+  </button>
   <script>
-    // Simple theme toggle script
-    const btn = document.getElementById('theme-toggle');
-    const icon = document.getElementById('theme-toggle-icon');
-    const label = document.getElementById('theme-toggle-label');
+    // Default to dark mode unless user has set a preference
+    function getPreferredTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved) return saved;
+      return 'dark';
+    }
     function setTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
+      const icon = document.getElementById('theme-toggle-icon');
       if (theme === 'dark') {
         icon.textContent = '☀️';
-        label.textContent = 'Light';
       } else {
         icon.textContent = '🌙';
-        label.textContent = 'Dark';
       }
       localStorage.setItem('theme', theme);
     }
-    btn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme') || 'light';
-      setTheme(current === 'dark' ? 'light' : 'dark');
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('theme-toggle');
+      btn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+      btn.addEventListener('keydown', function(e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          btn.click();
+        }
+      });
+      btn.addEventListener('focus', function() {
+        btn.style.boxShadow = '0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12)';
+        btn.style.borderColor = '#ff0';
+      });
+      btn.addEventListener('blur', function() {
+        btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.12)';
+        btn.style.borderColor = 'var(--theme-toggle-border, #888)';
+      });
+      setTheme(getPreferredTheme());
     });
-    // On load, set theme from localStorage
-    const saved = localStorage.getItem('theme');
-    if (saved) setTheme(saved);
   </script>
+  <style>
+    .theme-toggle-floating:focus {
+      outline: 3px solid #ff0 !important;
+      border-color: #ff0 !important;
+      box-shadow: 0 0 0 3px #ff0, 0 2px 8px rgba(0,0,0,0.12) !important;
+    }
+    .theme-toggle-floating {
+      outline: none;
+      border: 2px solid var(--theme-toggle-border, #888);
+      background: var(--theme-toggle-bg, #222);
+      color: var(--theme-toggle-fg, #fff);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    @media (max-width: 700px) {
+      .theme-toggle-floating {
+        left: 0.5em;
+        top: 0.5em;
+        width: 2.2em;
+        height: 2.2em;
+        font-size: 1.3em;
+      }
+    }
+  </style>
     '''
 
     # Load head template
