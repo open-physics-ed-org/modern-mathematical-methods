@@ -2,13 +2,6 @@
 # This file was generated from _content.yml by scripts/preprocess_content_yml.py
 # Edit _content.yml instead and re-run the preprocessor.
 notebooks:
-  - content/about.md
-  - content/activities.md
-  - content/announcement.md
-  - content/cards.md
-  - content/index.md
-  - content/resources.md
-  - content/notebooks/intro.md
   - content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb
   - content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb
   - content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb
@@ -19,7 +12,6 @@ notebooks:
   - content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb
   - content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb
   - content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb
-  - content/notebooks/1_mechanics/lagrangian/notes_frames.md
   - content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb
   - content/notebooks/1_mechanics/sho/notes-SHO.ipynb
   - content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb
@@ -57,15 +49,3 @@ notebooks:
   - content/notebooks/4_distributions/notes-mcmc.ipynb
   - content/notebooks/4_distributions/notes-monte_carlo_simulations.ipynb
   - content/notebooks/4_distributions/notes-randomness.ipynb
-  - content/notebooks/9_assignments/project-1.md
-  - content/notebooks/9_assignments/project-2.md
-  - content/notebooks/9_assignments/project-3.md
-  - content/notebooks/9_assignments/project-4.md
-  - content/notebooks/9_assignments/updated_rubric.md
-  - content/notebooks/9_assignments/worked-problem-1.md
-  - content/notebooks/9_assignments/worked-problem-2.md
-  - content/notebooks/9_assignments/worked-problem-3.md
-  - content/notebooks/9_assignments/worked-problem-4.md
-  - content/notebooks/9_assignments/worked-problem-5.md
-  - content/notebooks/9_assignments/worked-problem-6.md
-  - content/notebooks/9_assignments/worked-problem-7.md

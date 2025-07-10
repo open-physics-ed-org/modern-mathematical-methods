@@ -46,6 +46,63 @@ import re
 import subprocess
 import string
 import yaml
+
+# --- Load _content.yml for site and menu titles ---
+content_yml = repo_root / '_content.yml'
+if not content_yml.exists():
+    print(f"[ERROR] {content_yml} not found. Site build cannot continue.")
+    sys.exit(1)
+with open(content_yml, 'r') as f:
+    content_manifest = yaml.safe_load(f)
+
+# --- Extract site title and navigation/menu from _content.yml ---
+def get_site_title():
+    site = content_manifest.get('site', {})
+    title = site.get('title')
+    if not title:
+        raise ValueError("[ERROR] Site title missing in _content.yml under 'site.title'.")
+    return title
+
+def get_navigation_menu():
+    nav = content_manifest.get('navigation', [])
+    chapters = content_manifest.get('chapters', [])
+    menu = []
+    # Top-level nav items
+    nav_items = []
+    for item in nav:
+        if not item.get('title'):
+            raise ValueError(f"[ERROR] Navigation item missing title: {item}")
+        nav_items.append({
+            'title': item['title'],
+            'path': Path(item['file']).with_suffix('.html').name if 'file' in item else None
+        })
+
+    # Chapters as a dropdown
+    chapters_menu = {'title': 'Chapters', 'path': 'chapters.html', 'children': []}
+    for chapter in chapters:
+        chap_title = chapter.get('title')
+        if not chap_title:
+            raise ValueError(f"[ERROR] Chapter missing title: {chapter}")
+        if 'files' in chapter:
+            for f in chapter['files']:
+                file_title = f.get('title')
+                if not file_title:
+                    raise ValueError(f"[ERROR] File in chapter '{chap_title}' missing title: {f}")
+                file_path = Path(f['file']).with_suffix('.html').name if 'file' in f else None
+                chapters_menu['children'].append({'title': file_title, 'path': file_path})
+
+    # Insert chapters menu as the second item
+    if chapters_menu['children']:
+        if len(nav_items) >= 1:
+            menu.append(nav_items[0])
+            menu.append(chapters_menu)
+            menu.extend(nav_items[1:])
+        else:
+            menu.append(chapters_menu)
+    else:
+        menu = nav_items
+    return menu
+
 def flatten_image_name(rel_path):
     # Lowercase, replace / and \ with _, remove spaces, keep only a-z0-9-_.
     name = rel_path.replace('/', '_').replace('\\', '_').lower().replace(' ', '_')
@@ -81,9 +138,9 @@ def convert_all_md_to_html():
             md_content = f.read()
         html_content = markdown.markdown(md_content, extensions=['extra', 'toc', 'admonition'])
         body = f'<div class="markdown-body">{html_content}</div>'
-        if 'get_html_template' in globals():
+        try:
             html = get_html_template(md_path.stem.replace('_', ' ').title(), body, html_output_path=html_out_path)
-        else:
+        except Exception:
             html = body
         with open(html_out_path, 'w', encoding='utf-8') as f:
             f.write(html)
@@ -769,23 +826,14 @@ def post_build_cleanup():
     css_light_rel = 'css/theme-light.css'
     css_dark_rel = 'css/theme-dark.css'
 
-    # --- Load menu structure from _menu.yml using basic_yaml2json.py ---
-    menu_yml = autogen_dir / '_menu.yml'
-    menu_data = None
-    if menu_yml.exists():
-        try:
-            result = subprocess.run([
-                'python3', str(repo_root / 'scripts/basic_yaml2json.py'), str(menu_yml)
-            ], capture_output=True, check=True)
-            menu_json = result.stdout.decode('utf-8')
-            menu_obj = json.loads(menu_json)
-            if isinstance(menu_obj, dict) and 'menu' in menu_obj:
-                menu_data = menu_obj['menu']
-            else:
-                menu_data = menu_obj
-        except Exception as e:
-            print(f'[ERROR] Could not convert _menu.yml to JSON using basic_yaml2json.py: {e}')
-            menu_data = None
+
+    # --- Build menu structure from _content.yml ---
+    try:
+        menu_data = get_navigation_menu()
+    except Exception as e:
+        print(str(e))
+        sys.exit(1)
+
 
     def build_menu_html(menu_items, level=0):
         html = ''
@@ -811,47 +859,30 @@ def post_build_cleanup():
         html += '</ul>'
         return html
 
+
     def get_nav_html():
-        # Accessible nav: desktop and mobile, with ARIA and toggle
         nav_html = ''
-        # nav_html = '<button class="site-nav-toggle" aria-label="Open menu" aria-controls="site-nav-menu" aria-expanded="false" tabindex="0">☰</button>'  # Hamburger menu commented out
-        # Use menu_data if available, else fallback
         if menu_data:
             nav_html += build_menu_html(menu_data)
         else:
             nav_html += '<!-- Menu data not available, fallback menu here -->'
-        # Removed dark mode toggle button
         nav_html += """
 <!-- Hamburger menu and toggle JS commented out -->
 """
         return nav_html
 
-    def get_html_template(title, body, html_output_path=None):
+
+    def get_html_template(page_title, body, html_output_path=None):
         nav_html = get_nav_html()
-        import yaml
-        config_path = autogen_dir / '_config.yml'
-        book_title = title
-        footer_html = None
-        # Use relative path for logo and favicon for portability
+        book_title = get_site_title()
+        footer_html = f"&copy; {book_title}. All rights reserved."
         logo_path = "./images/logo.png"
         favicon_path = "./images/favicon.ico"
-        if config_path.exists():
-            with open(config_path, 'r') as f:
-                config = yaml.safe_load(f)
-                if 'title' in config:
-                    book_title = config['title']
-                if 'footer' in config:
-                    footer_html = config['footer']
-        # No need to compute relative paths; always use absolute from site root
-        if not footer_html:
-            footer_html = f"&copy; {book_title}. All rights reserved."
-        # Read the HTML template from static/html_template.html
         template_path = Path(__file__).parent / 'static/html_template.html'
         if not template_path.exists():
             raise FileNotFoundError(f"HTML template not found: {template_path}")
         with open(template_path, 'r', encoding='utf-8') as f:
             template = f.read()
-        # Replace placeholders, including logo and favicon
         html = template.format(title=book_title, body=body, nav=nav_html, footer=footer_html, logo=logo_path, favicon=favicon_path)
         return html
 
@@ -860,7 +891,7 @@ def post_build_cleanup():
     cards_md = repo_root / 'content/cards.md'
     announcement_md = repo_root / 'content/announcement.md'
     index_html_path = build_dir / 'index.html'
-    title = 'Modern Classical Mechanics'
+    title = get_site_title()
     main_html = ''
     card_grid = ''
     announcement_html = ''

@@ -2,13 +2,6 @@
 format: jb-book
 root: content/index
 chapters:
-- file: content/about.md
-- file: content/activities.md
-- file: content/announcement.md
-- file: content/cards.md
-- file: content/index.md
-- file: content/resources.md
-- file: content/notebooks/intro.md
 - file: content/notebooks/1_mechanics/dynamical_systems/activity-duffing
 - file: content/notebooks/1_mechanics/dynamical_systems/activity-phase_space
 - file: content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol
@@ -19,7 +12,6 @@ chapters:
 - file: content/notebooks/1_mechanics/lagrangian/activity-lagrange_2
 - file: content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics
 - file: content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d
-- file: content/notebooks/1_mechanics/lagrangian/notes_frames.md
 - file: content/notebooks/1_mechanics/modeling/activity-what_is_a_model
 - file: content/notebooks/1_mechanics/sho/notes-SHO
 - file: content/notebooks/2_EM/Numerics/activity-relaxation_2d
@@ -57,15 +49,3 @@ chapters:
 - file: content/notebooks/4_distributions/notes-mcmc
 - file: content/notebooks/4_distributions/notes-monte_carlo_simulations
 - file: content/notebooks/4_distributions/notes-randomness
-- file: content/notebooks/9_assignments/project-1.md
-- file: content/notebooks/9_assignments/project-2.md
-- file: content/notebooks/9_assignments/project-3.md
-- file: content/notebooks/9_assignments/project-4.md
-- file: content/notebooks/9_assignments/updated_rubric.md
-- file: content/notebooks/9_assignments/worked-problem-1.md
-- file: content/notebooks/9_assignments/worked-problem-2.md
-- file: content/notebooks/9_assignments/worked-problem-3.md
-- file: content/notebooks/9_assignments/worked-problem-4.md
-- file: content/notebooks/9_assignments/worked-problem-5.md
-- file: content/notebooks/9_assignments/worked-problem-6.md
-- file: content/notebooks/9_assignments/worked-problem-7.md

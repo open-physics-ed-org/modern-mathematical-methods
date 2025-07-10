@@ -7,45 +7,29 @@ menu:
 - title: Chapters
   path: chapters.html
   children:
-  - title: content/about.md
-    path: about.html
-  - title: content/activities.md
-    path: activities.html
-  - title: content/announcement.md
-    path: announcement.html
-  - title: content/cards.md
-    path: cards.html
-  - title: content/index.md
-    path: index.html
-  - title: content/resources.md
-    path: resources.html
-  - title: content/notebooks/intro.md
-    path: intro.html
-  - title: content/notebooks/1_mechanics/dynamical_systems/activity-duffing.ipynb
+  - title: 19 Sep 23 - The Duffing Oscillator
     path: activity-duffing.html
-  - title: content/notebooks/1_mechanics/dynamical_systems/activity-phase_space.ipynb
+  - title: '12 Sep 23 - Activity: The Dynamical Systems Approach and Phase Portraits'
     path: activity-phase_space.html
-  - title: content/notebooks/1_mechanics/dynamical_systems/activity_vanderpol.ipynb
+  - title: 14 Sept 23 - Conducting a complete analysis of an ODE
     path: activity_vanderpol.html
-  - title: content/notebooks/1_mechanics/dynamical_systems/notes-linearization_odes.ipynb
+  - title: '19 Sep 23 - Notes: Heading towards Chaos'
     path: notes-linearization_odes.html
-  - title: content/notebooks/1_mechanics/dynamical_systems/notes-phase_space.ipynb
+  - title: '12 Sept 23 - Notes: Dynamical Systems and Phase Space'
     path: notes-phase_space.html
-  - title: content/notebooks/1_mechanics/lagrangian/activity-frames.ipynb
+  - title: '31 Aug 23 - Activity: Frames and Coordinates'
     path: activity-frames.html
-  - title: content/notebooks/1_mechanics/lagrangian/activity-lagrange_1.ipynb
+  - title: '5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics'
     path: activity-lagrange_1.html
-  - title: content/notebooks/1_mechanics/lagrangian/activity-lagrange_2.ipynb
+  - title: '7 Sep 23 - Activity: Numerical Integration and More Lagrangians'
     path: activity-lagrange_2.html
-  - title: content/notebooks/1_mechanics/lagrangian/notes-lagrangian-dynamics.ipynb
+  - title: 'Book Reading: '
     path: notes-lagrangian-dynamics.html
-  - title: content/notebooks/1_mechanics/lagrangian/notes-numerical_integration_1d.ipynb
+  - title: '7 Sept 23 - Notes: Numerical Integration in 1D'
     path: notes-numerical_integration_1d.html
-  - title: content/notebooks/1_mechanics/lagrangian/notes_frames.md
-    path: notes_frames.html
-  - title: content/notebooks/1_mechanics/modeling/activity-what_is_a_model.ipynb
+  - title: '29 Aug 23 - Activity: What is a Model?'
     path: activity-what_is_a_model.html
-  - title: content/notebooks/1_mechanics/sho/notes-SHO.ipynb
+  - title: '29 Aug 23 - Notes: Simple Harmonic Oscillator'
     path: notes-SHO.html
   - title: content/notebooks/2_EM/Numerics/activity-relaxation_2d.ipynb
     path: activity-relaxation_2d.html
@@ -117,30 +101,6 @@ menu:
     path: notes-monte_carlo_simulations.html
   - title: content/notebooks/4_distributions/notes-randomness.ipynb
     path: notes-randomness.html
-  - title: content/notebooks/9_assignments/project-1.md
-    path: project-1.html
-  - title: content/notebooks/9_assignments/project-2.md
-    path: project-2.html
-  - title: content/notebooks/9_assignments/project-3.md
-    path: project-3.html
-  - title: content/notebooks/9_assignments/project-4.md
-    path: project-4.html
-  - title: content/notebooks/9_assignments/updated_rubric.md
-    path: updated_rubric.html
-  - title: content/notebooks/9_assignments/worked-problem-1.md
-    path: worked-problem-1.html
-  - title: content/notebooks/9_assignments/worked-problem-2.md
-    path: worked-problem-2.html
-  - title: content/notebooks/9_assignments/worked-problem-3.md
-    path: worked-problem-3.html
-  - title: content/notebooks/9_assignments/worked-problem-4.md
-    path: worked-problem-4.html
-  - title: content/notebooks/9_assignments/worked-problem-5.md
-    path: worked-problem-5.html
-  - title: content/notebooks/9_assignments/worked-problem-6.md
-    path: worked-problem-6.html
-  - title: content/notebooks/9_assignments/worked-problem-7.md
-    path: worked-problem-7.html
 - title: Activities
   path: activities.html
   children: []
