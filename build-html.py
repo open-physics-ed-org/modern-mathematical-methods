@@ -692,6 +692,19 @@ def main():
             if args.debug:
                 print("[INFO] Building DOCX for all content.")
             build_docx_all(debug=args.debug)
+    
+    if args.pdf:
+        if args.debug:
+            print("[INFO] PDF build selected.")
+        if args.files:
+            if args.debug:
+                print(f"[INFO] Building PDF for specified files: {args.files}")
+            build_pdf_for_files(args.files, debug=args.debug)
+        else:
+            if args.debug:
+                print("[INFO] Building PDF for all content.")
+            build_pdf_all(debug=args.debug)
+    
 def build_docx_all(debug=False):
     """Build DOCX for all files referenced in the menu/content tree (_content.yml)."""
     from content_parser import load_and_validate_content_yml, get_all_content_files
@@ -738,16 +751,21 @@ def build_docx_for_files(files, debug=False):
             def replace_img_link(match):
                 img_path = match.group(1)
                 if img_path.startswith('http'):
-                    return match.group(0)
+                    # Always replace remote images with a warning/placeholder for PDF export
+                    warning = '\\n> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**\\n'
+                    placeholder = f'![Image not embedded: remote image]({img_path})'
+                    if debug:
+                        print(f"[WARN] Replacing ALL remote images with placeholder: {img_path}")
+                    return warning + placeholder
                 img_filename = os.path.basename(img_path)
                 flat_name = f"{stem}_{img_filename}"
-                src_img = file_path.parent / img_path
+                src_img = build_pdf_dir / img_path
                 dest_img = img_dir / flat_name
                 if src_img.exists():
                     shutil.copy2(src_img, dest_img)
-                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
-                # For docx, use relative path from docx_dir to img_dir
-                rel_path = os.path.relpath(dest_img, docx_dir)
+                    if debug:
+                        print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                rel_path = os.path.relpath(dest_img, build_pdf_dir)
                 return match.group(0).replace(img_path, rel_path)
             new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
             with open(out_md, 'w', encoding='utf-8') as f:
@@ -768,7 +786,12 @@ def build_docx_for_files(files, debug=False):
             def replace_img_link(match):
                 img_path = match.group(1)
                 if img_path.startswith('http'):
-                    return match.group(0)
+                    # Always replace remote images with a warning/placeholder for PDF export
+                    warning = '\n> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**\n'
+                    placeholder = f'![Image not embedded: remote image]({img_path})'
+                    if debug:
+                        print(f"[WARN] Replacing ALL remote images with placeholder: {img_path}")
+                    return warning + placeholder
                 img_filename = os.path.basename(img_path)
                 flat_name = f"{stem}_{img_filename}"
                 src_img = docx_dir / img_path
@@ -891,6 +914,135 @@ def build_md_for_files(files, debug=False):
                 print(f"[SKIP] Unsupported file type: {file}")
             continue
         print(f"[OK] Built {out_md} from {file}")
+    if missing_files:
+        print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:")
+        for mf in missing_files:
+            print(f"  - {mf}")
+
+def build_pdf_all(debug=False):
+    """Build PDF for all files referenced in the menu/content tree (_content.yml)."""
+    from content_parser import load_and_validate_content_yml, get_all_content_files
+    content = load_and_validate_content_yml('_content.yml')
+    files = get_all_content_files(content)
+    if not files:
+        if debug:
+            print("[WARN] No files found in _content.yml toc.")
+        return
+    if debug:
+        print(f"[INFO] Building PDF for {len(files)} files from menu/content tree.")
+    build_pdf_for_files(files, debug=debug)
+
+def build_pdf_for_files(files, debug=False):
+    """Build PDF for specified markdown and notebook files."""
+    import subprocess
+    import sys
+    import os
+    from pathlib import Path
+    import shutil
+    import re
+    repo_root = Path(__file__).parent.resolve()
+    pdf_dir = repo_root / 'docs' / 'pdf'
+    build_pdf_dir = repo_root / '_build' / 'pdf'
+    img_dir = repo_root / 'docs' / 'images'
+    pdf_dir.mkdir(parents=True, exist_ok=True)
+    build_pdf_dir.mkdir(parents=True, exist_ok=True)
+    img_dir.mkdir(parents=True, exist_ok=True)
+    missing_files = []
+    for file in files:
+        file_path = Path(file)
+        if not file_path.exists():
+            if debug:
+                print(f"[ERROR] File not found: {file}")
+            missing_files.append(file)
+            continue
+        ext = file_path.suffix.lower()
+        stem = file_path.stem
+        out_md = build_pdf_dir / f"{stem}.md"
+        out_pdf = build_pdf_dir / f"{stem}.pdf"
+        # Step 1: Ensure we have a markdown file with correct image links
+        if ext == '.md':
+            if debug:
+                print(f"[INFO] Copying markdown file: {file_path} -> {out_md}")
+            shutil.copy2(file_path, out_md)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                md_content = f.read()
+            def replace_img_link(match):
+                img_path = match.group(1)
+                if img_path.startswith('http'):
+                    # Always replace remote images with a warning/placeholder for PDF export
+                    warning = '\n> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**\n'
+                    placeholder = f'![Image not embedded: remote image]({img_path})'
+                    if debug:
+                        print(f"[WARN] Replacing ALL remote images with placeholder: {img_path}")
+                    return warning + placeholder
+                img_filename = os.path.basename(img_path)
+                flat_name = f"{stem}_{img_filename}"
+                src_img = file_path.parent / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    if debug:
+                        print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                # For pdf, use relative path from build_pdf_dir to img_dir
+                rel_path = os.path.relpath(dest_img, build_pdf_dir)
+                return match.group(0).replace(img_path, rel_path)
+            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            with open(out_md, 'w', encoding='utf-8') as f:
+                f.write(new_md_content)
+        elif ext == '.ipynb':
+            if debug:
+                print(f"[INFO] Converting notebook to markdown: {file_path} -> {out_md}")
+            import nbformat
+            nb = nbformat.read(str(file_path), as_version=4)
+            tmp_md = build_pdf_dir / f"{stem}_tmp.md"
+            cmd = [sys.executable, '-m', 'nbconvert', '--to', 'markdown', str(file_path), '--output', tmp_md.name, '--output-dir', str(build_pdf_dir)]
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            if result.returncode != 0:
+                if debug:
+                    print(f"[ERROR] nbconvert failed for {file_path}: {result.stderr}")
+                continue
+            with open(tmp_md, 'r', encoding='utf-8') as f:
+                md_content = f.read()
+            def replace_img_link(match):
+                img_path = match.group(1)
+                if img_path.startswith('http'):
+                    # Always replace remote images with a warning/placeholder for PDF export
+                    warning = '\n> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**\n'
+                    placeholder = f'![Image not embedded: remote image]({img_path})'
+                    if debug:
+                        print(f"[WARN] Replacing ALL remote images with placeholder: {img_path}")
+                    return warning + placeholder
+                img_filename = os.path.basename(img_path)
+                flat_name = f"{stem}_{img_filename}"
+                src_img = build_pdf_dir / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    if debug:
+                        print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                rel_path = os.path.relpath(dest_img, build_pdf_dir)
+                return match.group(0).replace(img_path, rel_path)
+            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            with open(out_md, 'w', encoding='utf-8') as f:
+                f.write(new_md_content)
+            tmp_md.unlink()
+        else:
+            if debug:
+                print(f"[SKIP] Unsupported file type: {file}")
+            continue
+        # Step 2: Convert markdown to pdf with pandoc
+        if debug:
+            print(f"[INFO] Converting markdown to pdf: {out_md} -> {out_pdf}")
+        cmd = ['pandoc', str(out_md), '-o', str(out_pdf), '--resource-path', str(img_dir)]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0:
+            if debug:
+                print(f"[ERROR] pandoc failed for {out_md}: {result.stderr}")
+            continue
+        # Copy to docs/pdf as well
+        shutil.copy2(out_pdf, pdf_dir / f"{stem}.pdf")
+        if debug:
+            print(f"[OK] Built {out_pdf} and copied to {pdf_dir / f'{stem}.pdf'} from {file}")
     if missing_files:
         print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:")
         for mf in missing_files:
