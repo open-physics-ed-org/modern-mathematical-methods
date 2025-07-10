@@ -1,3 +1,17 @@
+import shutil
+
+def copy_css_assets(debug=False):
+    """Copy all CSS files from static/css/ to docs/css/."""
+    src_dir = Path('static/css')
+    dest_dir = Path('docs/css')
+    if not src_dir.exists():
+        debug_print(f"[WARN] Source CSS directory {src_dir} does not exist.", debug)
+        return
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    for css_file in src_dir.glob('*.css'):
+        dest = dest_dir / css_file.name
+        shutil.copy2(css_file, dest)
+        debug_print(f"[INFO] Copied {css_file} to {dest}", debug)
 def debug_print(msg, debug):
     if debug:
         print(msg)
@@ -19,6 +33,7 @@ import sys
 
 
 def build_html_all(debug=False):
+    copy_css_assets(debug=debug)
     """Build HTML for all files referenced in the menu/content tree (_content.yml)."""
     from content_parser import load_and_validate_content_yml, get_all_content_files
     content = load_and_validate_content_yml('_content.yml')
@@ -45,6 +60,7 @@ from build_footer_html import render_footer
 from menu_parser import get_menu_tree
 
 def build_html_for_files(files, debug=False):
+    copy_css_assets(debug=debug)
     debug_print("[DEBUG] build_html_for_files() is running!", debug)
     """
     Build HTML for specified markdown and notebook files using YAML-driven templates and navigation.
