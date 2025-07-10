@@ -93,6 +93,20 @@ footer {
   border-top: 3px solid var(--color-link);
 }
 
+footer a {
+  color: var(--color-link);
+  text-decoration: underline;
+  transition: color 0.2s, background 0.2s;
+  border-radius: 4px;
+  font-weight: 500;
+}
+footer a:hover, footer a:focus {
+  color: #fff;
+  background: var(--color-menu-hover);
+  text-decoration: none;
+  outline: none;
+}
+
 
 
 .markdown-body .highlight,
@@ -126,6 +140,8 @@ footer {
   min-height: 100vh;
   color: var(--color-fg) !important;
 }
+
+:root {
   --jp-cell-editor-background: var(--color-card) !important;
   --jp-cell-editor-active-background: var(--color-card) !important;
   --jp-layout-color0: var(--color-card) !important;
