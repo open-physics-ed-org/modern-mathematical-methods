@@ -128,9 +128,11 @@ def build_html_for_files(files):
                     continue
                 title = node.get('title')
                 file = node.get('file')
+                # Accept any top-level menu item with a title and file or children
                 if not file:
                     file = first_child_file(node)
-                if title and file:
+                if title and (file or node.get('children')):
+                    # Use file if present, else first child file
                     items.append((file, title))
         return items
 
