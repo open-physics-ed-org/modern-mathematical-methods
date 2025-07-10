@@ -171,15 +171,20 @@ def build_html_for_files(files, debug=False):
     theme_toggle_html = '''
   <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
-      <span id="theme-toggle-icon" aria-hidden="true">🌙</span> <span id="theme-toggle-label">Dark</span>
+      <span id="theme-toggle-icon" aria-hidden="true">☀️</span> <span id="theme-toggle-label">Light</span>
     </button>
   </div>
   <script>
-    const btn = document.getElementById('theme-toggle');
-    const icon = document.getElementById('theme-toggle-icon');
-    const label = document.getElementById('theme-toggle-label');
+    // Default to dark mode unless user has set a preference
+    function getPreferredTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved) return saved;
+      return 'dark';
+    }
     function setTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
+      const icon = document.getElementById('theme-toggle-icon');
+      const label = document.getElementById('theme-toggle-label');
       if (theme === 'dark') {
         icon.textContent = '☀️';
         label.textContent = 'Light';
@@ -189,12 +194,14 @@ def build_html_for_files(files, debug=False):
       }
       localStorage.setItem('theme', theme);
     }
-    btn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme') || 'light';
-      setTheme(current === 'dark' ? 'light' : 'dark');
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('theme-toggle');
+      btn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+      setTheme(getPreferredTheme());
     });
-    const saved = localStorage.getItem('theme');
-    if (saved) setTheme(saved);
   </script>
     '''
 
