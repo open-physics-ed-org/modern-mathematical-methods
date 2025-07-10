@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Mathematical Methods</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+  <!-- MathJax for LaTeX rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+        <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+        <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+      </div>
+    </div>
+  </header>
+    
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+  <main class="site-main container">
+    
+  <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
+      <span id="theme-toggle-icon" aria-hidden="true">🌙</span> <span id="theme-toggle-label">Dark</span>
+    </button>
+  </div>
+  <script>
+    const btn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-toggle-icon');
+    const label = document.getElementById('theme-toggle-label');
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+      localStorage.setItem('theme', theme);
+    }
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  </script>
+    
+    <div class="notebook-markdown-cell"><h1 id="19-sep-23-the-duffing-oscillator">19 Sep 23 - The Duffing Oscillator</h1>
+<p>We have developed a set of tools to investigate differential equations. You will now apply those skills to the <a href="https://en.wikipedia.org/wiki/Duffing_equation">Duffing Oscillator</a>. The Duffing Oscillator is a second order differential equation that is used to model a forced nonlinear spring. The equation is given by:</p>
+<p>$$\frac{d^2x}{dt^2} + \delta \frac{dx}{dt} + \alpha x + \beta x^3 = \gamma \cos(\omega t)$$</p>
+<p>And written in the form $\ddot{x} = f(x, \dot{x}, t)$, it is:</p>
+<p>$$\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3 + \gamma \cos(\omega t)$$</p>
+<p>where $x$ is the position of the oscillator, $\delta$ is a damping term, $\alpha$ is the stiffness of the spring, $\beta$ is the strength of the non-linear term, $\gamma$ is the amplitude of the driving force, and $\omega$ is the frequency of the driving force.</p>
+<p><img alt="Duffing Oscillator" src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Duffing_oscillator_strange_attractor_with_color.gif" /></p>
+<p><em>From <a href="https://commons.wikimedia.org/wiki/File:Duffing_oscillator_strange_attractor_with_color.gif">Wikipedia</a></em></p>
+<h2 id="activity">Activity</h2>
+<p>This is a complicated oscillator with damping, forcing, and non-linearity. We will investigate the behavior of the oscillator for different values of the parameters, and you will need to bring all the tools we have used so far to bear on this problem. We will perform this work systematically, as way of helping you recognize the steps you can take to investigate any differential equation. <em>You are welcome to use any of the code that we developed or presented in class.</em></p>
+<h3 id="organizing-your-analysis">Organizing your analysis</h3>
+<p>The Duffing Oscillator has a lot of different elements and can become complicated very quickly. To help start our analysis let's consider three models with increasing complexity:</p>
+<ol>
+<li><strong>Model 1</strong> (no damping and no forcing) $\ddot{x} = - \alpha x - \beta x^3$</li>
+<li><strong>Model 2</strong> (no forcing) $\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3$</li>
+<li><strong>Model 3</strong> (full model) $\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3 + \gamma \cos(\omega t)$</li>
+</ol>
+<p><strong>&#9989; Do this</strong> </p>
+<h3 id="tasks-to-complete">Tasks to complete</h3>
+<p>For each of these models, you should produce the following:</p>
+<ol>
+<li>The fixed points (if they can be found and their linear stability)</li>
+<li>A phase portrait of the system</li>
+<li>A graph of x(t) for a given set of initial conditions</li>
+<li>A graph of a trajectory in the phase portrait</li>
+<li>An approximate solution to the differential equation for a limiting case</li>
+</ol>
+<h3 id="exploring-your-models">Exploring your models</h3>
+<p>As you are developing your models, you should consider the following questions:</p>
+<ol>
+<li>What kinds of motion seems possible for each model?</li>
+<li>What are the limiting cases for each model? What solutions do they represent? Think about the physical meaning of the parameters.</li>
+<li>What relationships exist between the parameters and the motion of the system? That is, what happens when you change the parameters?</li>
+</ol></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## Imports to get started
+
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.integrate import solve_ivp</code></pre></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## YOUR CODE HERE</code></pre></div>
+<div class="notebook-markdown-cell"><h2 id="routes-to-chaos">Routes to Chaos</h2>
+<p>One important route to chaotic behavior is through <a href="https://en.wikipedia.org/wiki/Period-doubling_bifurcation">period doubling</a>. It is not the only way for a system to become chaotic, but it is a characteristic way that a system will tend towards chaos. </p>
+<p><strong>&#9989; Do this</strong> </p>
+<p>If your code is fully working, you can use known values of the parameters to investigate this behavior. For this part of the activity, you should use the full model and the following parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\alpha$</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>$\beta$</td>
+<td>+1</td>
+</tr>
+<tr>
+<td>$\delta$</td>
+<td>+0.3</td>
+</tr>
+<tr>
+<td>$\omega$</td>
+<td>+1.2</td>
+</tr>
+<tr>
+<td>$\gamma$</td>
+<td>+0.20 to +0.65</td>
+</tr>
+</tbody>
+</table>
+<p>Here $\gamma$ is the only parameter that we will change. Produce phase plots of $x(t)$ and $x(\dot{x})$ for several choices of $\gamma$ with $x(0) = 1$ and $\dot{x}(0) = 0$.</p></div>
+<div class="notebook-markdown-cell"></div>
+  </main>
+  <footer>
+    <footer class="site-footer">
+  <p><p>&copy; Modern Mathematical Methods. All rights reserved.</p></p>
+</footer>
+
+  </footer>
+</body>
+</html>

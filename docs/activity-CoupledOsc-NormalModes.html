@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Mathematical Methods</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+  <!-- MathJax for LaTeX rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+        <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+        <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+      </div>
+    </div>
+  </header>
+    
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+  <main class="site-main container">
+    
+  <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
+      <span id="theme-toggle-icon" aria-hidden="true">🌙</span> <span id="theme-toggle-label">Dark</span>
+    </button>
+  </div>
+  <script>
+    const btn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-toggle-icon');
+    const label = document.getElementById('theme-toggle-label');
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+      localStorage.setItem('theme', theme);
+    }
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  </script>
+    
+    <div class="notebook-markdown-cell"><h1 id="17-oct-23-activity-normal-modes">17 Oct 23 - Activity: Normal Modes</h1>
+<p>As we begin to work with multi-particle systems, we begin to open the number of degrees of freedom of the system. We increase the complexity of it and the challenge of modeling it. We will increasingly need tools that help us take less tractable issues and make them palatable. One such tool that forms the basis of many others is <strong>Normal Modes</strong>.</p>
+<p>Normal modes are ways of breaking up our understanding of a system into discrete (potentially infinite and hopefully vanishingly small) pieces. This lets us get at the big picture of the system and characterize how much we are neglecting. The concept of normal modes underlies much of the analysis done in quantum mechanics, field theory, fluid mechanics, and signal processing. In fact, numerical routines often make use of forms of these modes to do economize calculations -- <em>especially when we move beyond a few hundred bodies in the system</em>. This stuff is part and parcel of most research in physics. For example, how we understand the <a href="https://en.wikipedia.org/wiki/Cosmic_background_radiation">Cosmic Background Radiation</a> relies on a <a href="https://www.quantamagazine.org/how-ancient-light-reveals-the-universes-contents-20200128/">normal mode like analysis</a>.</p></div>
+<div class="notebook-markdown-cell"><h2 id="canonical-coupled-oscillators">Canonical Coupled Oscillators</h2>
+<p>There is still plenty of room for pencil and paper. We will explore this numerically later. </p>
+<p>We will start with a form of guided lecture and build the understanding of these methods together. Then you will apply what you learned to a new system.</p>
+<p>Let's assume you have a chain of two mass connected by springs (all the same $k$) as below.</p>
+<p><img alt="Coupled Oscillator set up. Two oscillators connected by three springs in a horizontal line." src="../assets/images/two-coupled-gliders-diagram.png" /></p>
+<h3 id="deriving-the-equations-of-motion">Deriving the Equations of Motion</h3>
+<p>Let's write the Lagrangian for this system to get equations of motion. The kinetic and potential energies are:</p>
+<p>$$T=\frac{1}{2}m\dot{x}_1^2+\frac{1}{2}m\dot{x}_2^2$$
+$$U=\frac{1}{2}k{x_1}^2+\frac{1}{2}k(x_2-x_1)^2 + \frac{1}{2}k{x_2}^2$$</p>
+<p>Thus the Lagrangian is for this system is:</p>
+<p>$$L = \frac{1}{2}m\dot{x}_1^2+\frac{1}{2}m\dot{x}_2^2 - \frac{1}{2}k{x_1}^2-\frac{1}{2}k(x_2-x_1)^2 - \frac{1}{2}k{x_2}^2$$</p>
+<p>Which produces two equations of motion:</p>
+<p>$$\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}_1}\right) - \frac{\partial L}{\partial x_1} = 0$$
+$$\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}_2}\right) - \frac{\partial L}{\partial x_2} = 0$$</p>
+<p>Which we can write as:</p>
+<p>$$m\ddot{x}_1 = -kx_1 + k(x_2-x_1)$$
+$$m\ddot{x}_2 = -kx_2 + k(x_1-x_2)$$</p>
+<p>Or</p>
+<p>$$\ddot{x}_1 = -\frac{2k}{m}x_1 + \frac{k}{m}x_2$$
+$$\ddot{x}_2 = -\frac{2k}{m}x_2 + \frac{k}{m}x_1$$</p></div>
+<div class="notebook-markdown-cell"><h3 id="finding-normal-modes">Finding Normal Modes</h3>
+<h4 id="method-1-assume-a-solution">Method 1: Assume a Solution</h4>
+<p>A normal mode solution is one in which all parts of a system oscillate with the same frequency. For linear systems, this can be a very useful approach because any solution can be represented as a linear combination of normal modes. In general,</p>
+<p>$$f(t) = \sum_n c_n \psi_n(t)$$</p>
+<p>where $f(t)$ is the solution, $c_n$ are constants, and $\psi_n(t)$ are the normal modes. This kind of normal mode analysis forms the basis for signal analysis, image processing, and many other fields. For non-linear systems, we lose superposition and thus, we lose out ability to employ normal modes. However, near equilibria and in other limits, normal modes are still used. We will start by assuming a normal mode solution for both masses and plug that into our equations of motion. </p>
+<p>Assume:</p>
+<p>$$x_1(t) = A_1\cos(\omega t + \phi_1)$$
+$$x_2(t) = A_2\cos(\omega t + \phi_2)$$</p>
+<p>where $A_1$, $A_2$, $\phi_1$, and $\phi_2$ are constants to be determined. We can plug these into our differential equations and find the normal modes. We made a chose for the form of the solution. Other forms are acceptable as long as they have two free parameters; it's a second order differential equation.</p>
+<p>We can plug these into our differential equations and get:</p>
+<p>$$-\omega^2A_1\cos(\omega t + \phi_1) = -\frac{k}{m}A_1\cos(\omega t + \phi_1) + \frac{k}{m}(A_2\cos(\omega t + \phi_2)-A_1\cos(\omega t + \phi_1))$$
+$$-\omega^2A_2\cos(\omega t + \phi_2) = -\frac{k}{m}A_2\cos(\omega t + \phi_2) + \frac{k}{m}(A_1\cos(\omega t + \phi_1)-A_2\cos(\omega t + \phi_2))$$</p>
+<p>which we can collect the terms $A_1$ and $A_2$ and get:</p>
+<p>$$-\omega^2A_1\cos(\omega t + \phi_1) + 2\frac{k}{m}A_1\cos(\omega t + \phi_1) = \frac{k}{m}A_2\cos(\omega t + \phi_2)$$
+$$-\omega^2A_2\cos(\omega t + \phi_2) + 2\frac{k}{m}A_2\cos(\omega t + \phi_2) = \frac{k}{m}A_1\cos(\omega t + \phi_1)$$</p>
+<p>Which we rewrite as:</p>
+<p>$$\left(2\frac{k}{m}-\omega^2\right)A_1\cos(\omega t + \phi_1) = \frac{k}{m}A_2\cos(\omega t + \phi_2)$$
+$$\frac{k}{m}A_1\cos(\omega t + \phi_1)=\left(2\frac{k}{m}-\omega^2\right)A_2\cos(\omega t + \phi_2)$$</p>
+<p>Assuming non-zero solutions, we can divide the equations:</p>
+<p>$$\dfrac{\left(2\frac{k}{m}-\omega^2\right)}{\frac{k}{m}} = \dfrac{\frac{k}{m}}{\left(2\frac{k}{m}-\omega^2\right)}$$</p>
+<p>So that,</p>
+<p>$$\left(2\frac{k}{m}-\omega^2\right)^2 = \left(\frac{k}{m}\right)^2$$</p>
+<p>Or, </p>
+<p>$$\omega^2 = \frac{2k}{m} \pm \frac{k}{m}$$</p>
+<p>So, if solution is a normal mode, there's actually two of them it could be: one with $\omega = \sqrt{\frac{3k}{m}}$ and one with $\omega = \sqrt{\frac{k}{m}}$.</p>
+<p><strong>&#9989; Do this</strong> </p>
+<ol>
+<li>Given the frequencies of the normal mode solutions, find the relative amplitudes of the two masses for each mode. How do the masses move relative to each other?</li>
+<li>Consider the following initial conditions, the left mass ($x_1$) is displaced by $x_0$. Everything else is at rest. Find the particular solution for each mass ($x_1$ and $x_2$).</li>
+<li>Plot their motion.</li>
+<li>(later, if time) develop a numerical solution for $x_1$ and $x_2$ for any choice of conditions.</li>
+</ol></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## Your code here</code></pre></div>
+<div class="notebook-markdown-cell"><h4 id="method-2-matrix-analysis-the-eigenvalue-problem">Method 2: Matrix Analysis (the Eigenvalue Problem)</h4>
+<p>That analysis to find the normal modes was a bit of a pain in algebra. As we add more objects, that pain will grow. We can use a matrix approach to make this easier. It's also a systematic approach that as we will see plays nicely with computing. </p>
+<p>Starting from the equations of motion:</p>
+<p>$$\ddot{x}_1 = -\frac{2k}{m}x_1 + \frac{k}{m}x_2$$
+$$\ddot{x}_2 = -\frac{2k}{m}x_2 + \frac{k}{m}x_1$$</p>
+<p>We rewrite them as a set of matrix equations for the vector $\mathbf{x} = \begin{bmatrix}x_1\x_2\end{bmatrix}$:</p>
+<p>$$\ddot{\mathbf{x}} = \begin{bmatrix}-\frac{2k}{m} &amp; \frac{k}{m}\\frac{k}{m} &amp; -\frac{2k}{m}\end{bmatrix}\mathbf{x}$$</p>
+<p>This is a form of the equation $\ddot{\mathbf{x}} = \pmb{A} \mathbf{x}$ where $\pmb{A}$ is the coefficient matrix. We can solve this equation by finding the eigenvalues and eigenvectors of $\pmb{A}$. The eigenvalues are the frequencies of the normal modes and the eigenvectors are the relative amplitudes of the masses. The reason is that the determinant of the coefficient matrix when there is a normal mode solution vanishes. That is,</p>
+<p>$$\det(\pmb{A}+\omega^2\pmb{I}) = 0$$</p>
+<p>where $\pmb{I}$ is the identity matrix. This is a polynomial equation in $\omega^2$ and the roots of that polynomial are the normal mode frequencies.  This technique is very common in theoretical physics with different guesses for the solution forms giving rise to different eigenvalue problems (e.g., <a href="https://en.wikipedia.org/wiki/Bessel_function">Bessel functions for 2D surface problems</a> or <a href="https://en.wikipedia.org/wiki/Hermite_polynomials">Hermite polynomials for the Quantum Harmonic Oscillator</a>.</p>
+<p><strong>&#9989; Do this</strong> </p>
+<ol>
+<li>Using the "determinant of the coefficient matrix" (really the eigenvalues of $\pmb{A}$ solved by $\det(\pmb{A}+\omega^2\pmb{I})$), find the normal mode $\omega^2$.</li>
+<li>Find the eigenvectors of the coefficient matrix. These are the relative amplitudes of the masses.</li>
+<li>These results should agree with the previous method. Do they?</li>
+<li>Plot the normal modes solutions.</li>
+</ol></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## your code here</code></pre></div>
+<div class="notebook-markdown-cell"><h2 id="applying-normal-modes-to-a-new-system">Applying Normal Modes to a New System</h2>
+<h3 id="two-vertical-pendulums-connected-by-a-spring">Two vertical pendulums connected by a spring</h3>
+<p>Consider two vertical pendulums of length $l$ connected via their masses $M$ by a weak spring $k$. By weak, we mean that the spring constant is small. See below for a canonical setup:</p>
+<p><img alt="Coupled pendulua diagram" src="../assets/images/coupled_diag.jpg" /></p>
+<p><strong>&#9989; Do this</strong> </p>
+<ol>
+<li>In this limit, write down the pair of second order linear differential equations for the horizontal motion of each pendulum bob around its equilibrium.</li>
+<li>Find and describe the normal modes. Use plots of your choosing to explain what you found.</li>
+</ol></div>
+<div class="notebook-code-cell-block"><pre class="notebook-code-cell"><code>## your code here</code></pre></div>
+<div class="notebook-markdown-cell"><h2 id="three-coupled-oscillators">Three Coupled Oscillators</h2>
+<p>Consider the setup below consisting of three masses connected by springs to each other. We intend to find the normal modes of the system by denoting each mass's displacement ($x_1$, $x_2$, and $x_3$).</p>
+<p><img alt="3 Coupled Oscillators" src="../assets/images/3_coupled_osc.png" /></p></div>
+<div class="notebook-markdown-cell"><h2 id="finding-the-normal-mode-frequencies">Finding the Normal Mode Frequencies</h2>
+<p><strong>&#9989; Do this</strong> </p>
+<p>This is not magic as we will see, it follows from our choices of solution. Here's the steps and what you might notice about them:</p>
+<ol>
+<li>Guess what the normal modes might look like? Write your guesses down; how should the masses move? (It's ok if you are not sure about all of them, try to determine one of them)</li>
+<li>Write down the energy for the whole system, $T$ and $U$ (We have done this before, but not for this many particles)</li>
+<li>Use the Euler-Lagrange Equation to find the equations of motion for $x_1$, $x_2$, and $x_3$. (We have done this lots, so make sure it feels solid)</li>
+<li>Reformulate the equations of motion as a matrix equation $\ddot{\mathbf{x}} = \mathbf{A} \mathbf{x}$. What is $\mathbf{A}$? (We have done this, but only quickly, so take your time)</li>
+<li>Consider solutions of the form $Ce^{i{\omega}t}$, plug that into $x_1$, $x_2$, and $x_3$ to show you get $\mathbf{A}\mathbf{x} = -\omega^2 \mathbf{x}$. (We have not done this, we just assumed it works! It's ok if this is annoying, we only have to show it once.)</li>
+<li>Find the normal mode frequencies by taking the determinant of $\mathbf{A} - \mathbf{I}\lambda$. Note that this produces the following definition: $\lambda = -\omega^2$ (We have not done this together and we can if it's confusing.)</li>
+</ol>
+<h2 id="finding-the-normal-modes-amplitudes">Finding the Normal Modes Amplitudes</h2>
+<p>Ok, now we need to find the normal mode amplitudes. That is we assumed sinusoidal oscillations, but at what amplitudes? We will show how to do this with one frequency ($\omega_1$), and then break up the work of the the other two. These frequencies are:</p>
+<p>$$\omega_A = 2\dfrac{k}{m}; \qquad \omega_B = \left(2-\sqrt{2}\right)\dfrac{k}{m}; \qquad \omega_C = \left(2+\sqrt{2}\right)\dfrac{k}{m}\qquad$$</p>
+<p><strong>&#9989; Do this</strong> </p>
+<p>After we do the first one, pick another frequencies and repeat. Answer the follow questions:</p>
+<ol>
+<li>What does this motion physically look like? What are the masses doing?</li>
+<li>
+<p>How does the frequency of oscillation make sense? Why is it higher or lower than $\omega_A$?</p>
+</li>
+<li>
+<p><a href="../assets/notes/Notes-Three_Coupled_Oscillators.pdf">Partial Solution to Activity</a></p>
+</li>
+</ol></div>
+<div class="notebook-markdown-cell"></div>
+  </main>
+  <footer>
+    <footer class="site-footer">
+  <p><p>&copy; Modern Mathematical Methods. All rights reserved.</p></p>
+</footer>
+
+  </footer>
+</body>
+</html>

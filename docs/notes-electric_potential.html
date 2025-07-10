@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Mathematical Methods</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+  <!-- MathJax for LaTeX rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+        <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+        <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+      </div>
+    </div>
+  </header>
+    
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+  <main class="site-main container">
+    
+  <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
+      <span id="theme-toggle-icon" aria-hidden="true">🌙</span> <span id="theme-toggle-label">Dark</span>
+    </button>
+  </div>
+  <script>
+    const btn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-toggle-icon');
+    const label = document.getElementById('theme-toggle-label');
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+      localStorage.setItem('theme', theme);
+    }
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  </script>
+    
+    <div class="notebook-markdown-cell"><h1 id="3-oct-23-notes-electric-potential-a-scalar-field">3 Oct 23 - Notes: Electric Potential - a scalar field</h1>
+<p>We've seen that there's a lot of challenges with solving field problems where the fields are vectors and described by partial differential equations. The electric and magnetic field are vector fields that have a size and direction are every points in space. They are described by a set of 4 partial differential equations, <a href="https://en.wikipedia.org/wiki/Maxwell%27s_equations">Maxwell's Equations</a>. In Cartesian coordinates, these equations are described by 8 coupled partial differential equations.</p>
+<h2 id="electrostatics">Electrostatics</h2>
+<p>In electrostatic situations, where charges don't move, we've seen that the equations that describe the electric field are simplified to:</p>
+<p>$$\nabla \cdot \vec{E} = \frac{\rho}{\epsilon_0}$$</p>
+<p>$$\nabla \times \vec{E} = 0$$</p>
+<p>In general, in Cartesian coordinates, these are still four partial differential equations. However, the electric field is <a href="https://en.wikipedia.org/wiki/Curl_(mathematics)">curl-less</a>, so we can write it as the gradient of a scalar field, $V$:</p>
+<p>$$\vec{E}(x,y,z) = -\nabla V(x,y,z)$$</p>
+<p>We might prefer to work with this scalar field, $V$, rather than the vector field, $\vec{E}$, because it is a simpler object to work with. There's a number of tools we can use to find the potential and then we take the gradient to find the electric field.</p></div>
+<div class="notebook-markdown-cell"><h3 id="electric-potential">Electric Potential</h3>
+<p>Parth G has a really nice video on the conceptual elements of electric potential, we will concern ourselves with more mathematical aspects as we move forward.</p>
+<p><a href="https://inv.tux.pizza/watch?v=7rjAtuwxrEA"><img alt="Electric Potential" src="https://markdown-videos-api.jorgenkh.no/youtube/7rjAtuwxrEA?width=720&amp;height=405" /></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=7rjAtuwxrEA">https://inv.tux.pizza/watch?v=7rjAtuwxrEA</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=7rjAtuwxrEA">https://youtube.com/watch?v=7rjAtuwxrEA</a></li>
+</ul>
+<p>The <a href="https://en.wikipedia.org/wiki/Electric_potential">electric potential</a> is the scalar field that we have developed. One thing to note about it, is that it is only defined up to a constant. That is because when we take the gradient, and constant will drop out. This is really important when stitching together solutions from multiple sources. They need to all have the same "zero of potential."</p>
+<p>With the definition, $\vec{E}(x,y,z) = -\nabla V(x,y,z)$, we can conclude the following:</p>
+<p>$$\nabla \cdot \vec{E} = \nabla \cdot (-\nabla V) = -\nabla^2 V = \frac{\rho}{\epsilon_0}$$</p>
+<p>where $\nabla^2$ is the <a href="https://en.wikipedia.org/wiki/Laplace_operator">Laplacian operator</a>. This is <a href="https://en.wikipedia.org/wiki/Poisson%27s_equation">Poisson's Equation</a>, a well-studied second order partial differential equation. When used in electrostatics, it is a central equation for solving for the electric potential. In addition, we can integrate to show that:</p>
+<p>$$\Delta V = -\int \vec{E} \cdot d\vec{l}$$</p>
+<p>where the line integral is taken along a path from one point to another. For the electric field, this is independent of path, so we can write:</p>
+<p>$$\Delta V = -\int_{\vec{r}_1}^{\vec{r}_2} \vec{E} \cdot d\vec{l} = V(\vec{r}_2) - V(\vec{r}_1)$$</p>
+<p>And</p>
+<p>$$\oint \vec{E} \cdot d\vec{l} = 0$$</p>
+<p>which is a direct results of applying Stokes' Theorem to the curl-less electric field, and indicates that the electric field is conservative.</p></div>
+<div class="notebook-markdown-cell"><h2 id="getting-to-laplaces-equation">Getting to Laplace's Equation</h2>
+<p>Poisson's Equation is a description of a scalar potential (e.g., the electric potential) and how it relates to sources of the potential (e.g., charges). This is a <strong>local</strong> description of the field. At every point, the Laplacian can be computed (for well-behaved functions) and it indicates a source or lack of sources. For example, in empty space with no charges, the Laplacian is zero everywhere. </p>
+<p>So if we imagine setting up charges far from the place we are interested in finding the electric potential, we have an equation that is describes that space.</p>
+<p>$$\nabla^2 V = 0$$</p>
+<p>This is Laplace's equation and is a commonly occurring equation in physics. In fact, as we saw here, it shows up anytime we find local situations where the charges are absent. So the idea is that charges are far away setting the potential at the boundaries (hence, calling these <strong><a href="https://en.wikipedia.org/wiki/Boundary_value_problem">boundary value problems</a></strong>). The idea is that the PDE is solved in the region of interest often giving some general solution in the form of an infinite sum. The boundary conditions are then used to determine the coefficients in the solution, giving a unique solution. Because Laplace's equation is a linear PDE, the superposition principle applies, so we can add solutions together to get new solutions.</p>
+<h3 id="a-typical-problem">A typical problem</h3>
+<p>It might seem odd to have an equation that is everywhere equal to zero and somehow suggest it produces non-zero solutions. But remember that it is a PDE that describes the second derivatives of this scalar function,</p>
+<p>$$\nabla^2 V = \frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} + \frac{\partial^2 V}{\partial z^2} = 0$$</p>
+<p>It turns out there's lots of functions that will satisfy that differential equation. And it's mostly a matter of if the function fits the boundary conditions. Let's look at a typical problem.</p>
+<p><img alt="Typical Laplace's Equation Problem" src="https://www.physics.uoguelph.ca/sites/default/files/uploads/fig10_1-parallel-plates.jpg" />
+<em>Image from <a href="https://www.physics.uoguelph.ca/chapter-10-laplaces-equation">University of Guelph</a></em></p>
+<p>Here is a "gutter" where the electric potential for different sides of the gutter are set. Laplace's equation applies inside the gutter. So the idea is to find a solution that satisfies Laplace's equation and the boundary conditions. We will develop this solution in class, but the representative results look like this:</p>
+<p><img alt="Typical Laplace's Equation Solution" src="https://www.physics.uoguelph.ca/sites/default/files/uploads/fig10_2_potential-plates.jpg" />
+<em>Image from <a href="https://www.physics.uoguelph.ca/chapter-10-laplaces-equation">University of Guelph</a></em></p></div>
+<div class="notebook-markdown-cell"><h2 id="separation-of-variables">Separation of Variables</h2>
+<p>One of the key analytical tools that we have for Laplace's Equation is the <a href="https://en.wikipedia.org/wiki/Separation_of_variables">separation of variables</a> method of solving PDEs. We posit an ansatz in which the solution is a product of functions of the individual variables. For example, in Cartesian coordinates, we might write:</p>
+<p>$$V(x,y,z) = X(x)Y(y)Z(z)$$</p>
+<p>And then we plug that into Laplace's equation and see if we can find solutions. In this case, we get:</p>
+<p>$$\nabla^2 V = YZ\frac{d^2 X}{dx^2} + XZ\frac{d^2 Y}{dy^2} + XY\frac{d^2 Z}{dz^2} = 0$$</p>
+<p>which we divide by $XYZ$ to obtain the following expression: </p>
+<p>$$\frac{1}{X}\frac{\partial^2 X}{\partial x^2} + \frac{1}{Y}\frac{\partial^2 Y}{\partial y^2} + \frac{1}{Z}\frac{\partial^2 Z}{\partial z^2} = 0$$</p>
+<p>Here each partial derivative is a of a pure function of a single variable. So we can conclude that each term is a constant that sum to zero. We can write this as:</p>
+<p>$$\frac{d^2 X}{d x^2} = -k_x^2X$$
+$$\frac{d^2 Y}{d y^2} = -k_y^2Y$$
+$$\frac{d^2 Z}{d z^2} = -k_z^2Z$$</p>
+<p>where $k_x^2 + k_y^2 + k_z^2 = 0$. We have converted our problem to a set of 3 ODEs that we know how to solve. We can then solve each of these equations separately and show a general solution is:</p>
+<p>$$X(x) = Ae^{ik_xx} + Be^{-ik_xx}$$
+$$Y(y) = Ce^{ik_yy} + De^{-ik_yy}$$
+$$Z(z) = Fe^{ik_zz} + Ge^{-ik_zz}$$</p>
+<p>where $A,B,C,D,E,F,G$ are constants. We can then use the boundary conditions to determine the constants. Notice we wrote these as complex exponentials, those are sinusoidal or exponential solutions depending on if the resulting $k$'s are real or complex. The electric potential is a real measurable quantity.</p>
+<p>This general approach is well known and well-traveled territory. It's working with these boundary conditions that can be tricky, and that we will practice. We will find that for most cases that we end up with infinite sums of these solutions. We will also find that we can use the <a href="https://en.wikipedia.org/wiki/Orthogonal_functions">orthogonality of the solutions</a> to simplify the solutions.</p>
+<p><strong>We should not suggest that every PDE can be solved with separation of variables, but rather that:</strong>
+* Separation of variables is a powerful tool for solving PDEs that you can try, but it might not work.
+* It is a tool that can produce general solutions to Laplace's Equation when the Laplacian is separable in the given coordinate system.
+* It cannot be used for some problems (e.g., when the boundary conditions cannot be expressed as <a href="https://en.wikipedia.org/wiki/Neumann_boundary_condition">Neumann</a> or <a href="https://en.wikipedia.org/wiki/Dirichlet_boundary_condition">Dirichlet</a> boundary conditions).</p>
+<h3 id="other-coordinate-systems">Other Coordinate Systems</h3>
+<p>It turns out the trick of positing a solution that is a product of functions of the individual variables works in other coordinate systems as well. For example, in cylindrical coordinates, we might write:</p>
+<p>$$V(r,\theta,z) = R(r)\Theta(\theta)Z(z)$$</p>
+<p>Or in spherical coordinates, we might write:</p>
+<p>$$V(r,\theta,\phi) = R(r)\Theta(\theta)\Phi(\phi)$$</p>
+<p>It turns out both of these are separable in their respective coordinate systems. We will work through some examples of spherical coordinates in class as it forms the basis of the <a href="https://en.wikipedia.org/wiki/Multipole_expansion">Multipole Expansion</a>, which is a critical mathematical tool with wide applications.</p>
+<p>This idea of funding general solutions to Laplace's equation in known orthogonal coordinate systems remains incredible common. Experimental setups and theoretical models often have situations where Laplace's equation is relevant and there is a symmetry that can be exploited to find solutions. Laplace's equation is separable in 13 coordinate systems. You can find some of the more <a href="https://en.wikipedia.org/wiki/Orthogonal_coordinates#Table_of_three-dimensional_orthogonal_coordinates">exotic equations and coordinate systems here</a>. Check out the <a href="https://en.wikipedia.org/wiki/Prolate_spheroidal_coordinates">Prolate Spheroidal coordinates</a>, which are used in nuclear physics when the nucleus is deformed.</p>
+<p><img alt="Prolate Spheroidal Coordinates" src="https://upload.wikimedia.org/wikipedia/commons/b/be/Prolate_spheroidal_coordinates.png" /></p></div>
+<div class="notebook-markdown-cell"><h2 id="additional-resources">Additional Resources</h2>
+<h3 id="textbook-chapter">Textbook Chapter</h3>
+<p>The University of Guelph provides free notes in physics. Here's the <a href="https://www.physics.uoguelph.ca/chapter-10-laplaces-equation">relevant chapter on Laplace's Equation</a>. It is also where some of the figures were taken from.</p>
+<h3 id="videos-derivations">Videos Derivations</h3>
+<p>Steve Brunton at Washington has some really great videos on the derivations associated with PDEs like those above.</p>
+<h4 id="possions-and-laplaces-equation">Possion's and Laplace's Equation</h4>
+<p><a href="https://inv.tux.pizza/watch?v=nmvs0vrBT18"><img alt="Possion's and Laplace's Equation" src="https://markdown-videos-api.jorgenkh.no/youtube/nmvs0vrBT18?width=720&amp;height=405" /></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=nmvs0vrBT18?">https://inv.tux.pizza/watch?v=nmvs0vrBT18?</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=nmvs0vrBT18?">https://youtube.com/watch?v=nmvs0vrBT18?</a></li>
+</ul>
+<h4 id="separation-of-variables">Separation of Variables</h4>
+<p><a href="https://inv.tux.pizza/watch?v=VjWtMl6vQ3Q"><img alt="Separation of Variables" src="https://markdown-videos-api.jorgenkh.no/youtube/VjWtMl6vQ3Q?width=720&amp;height=405" /></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=VjWtMl6vQ3Q">https://inv.tux.pizza/watch?v=VjWtMl6vQ3Q</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=VjWtMl6vQ3Q">https://youtube.com/watch?v=VjWtMl6vQ3Q</a></li>
+</ul>
+<h3 id="handwritten-notes">Handwritten Notes</h3>
+<ul>
+<li><a href="../../assets/notes/Notes-Electric_Potential.pdf">Electric Potential</a></li>
+<li><a href="../../assets/notes/Notes-Separation_of_Variables_Cartesian.pdf">Separation of Variables</a></li>
+<li><a href="../../assets/notes/Notes-Separation_of_Variables_Spherical.pdf">Separation of Variables (Spherical Coordinates)</a></li>
+<li><a href="../../assets/notes/Notes-Multipole_Expansion.pdf">Multipole Expansion</a></li>
+</ul></div>
+<div class="notebook-markdown-cell"></div>
+  </main>
+  <footer>
+    <footer class="site-footer">
+  <p><p>&copy; Modern Mathematical Methods. All rights reserved.</p></p>
+</footer>
+
+  </footer>
+</body>
+</html>

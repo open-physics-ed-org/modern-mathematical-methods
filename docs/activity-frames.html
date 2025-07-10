@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Mathematical Methods</title>
+  <!-- Both themes loaded, JS enables/disables as needed -->
+  <link id="theme-light" href="css/theme-light.css" rel="stylesheet" disabled>
+  <link id="theme-dark" href="css/theme-dark.css" rel="stylesheet" disabled>
+  <script>
+    (function() {
+      function setTheme(mode) {
+        const light = document.getElementById('theme-light');
+        const dark = document.getElementById('theme-dark');
+        if (mode === 'dark') {
+          dark.disabled = false;
+          light.disabled = true;
+          document.documentElement.classList.add('dark');
+        } else {
+          dark.disabled = true;
+          light.disabled = false;
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      function getPreferredTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      window.applyTheme = function() {
+        setTheme(getPreferredTheme());
+      };
+      function toggleTheme() {
+        const current = getPreferredTheme();
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        setTheme(next);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', toggleTheme);
+      });
+      // Listen for system preference changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+      });
+      // Initial theme
+      window.applyTheme();
+    })();
+  </script>
+  <!-- MathJax for LaTeX rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+  
+  <header class="site-header" style="display: flex; flex-direction: column; align-items: center; gap: 0.7em;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1.2em; width: 100%;">
+      <img src="./images/logo.png" alt="Site logo" class="site-logo" style="height: 80px; width: 80px; border-radius: 18px; object-fit: cover;" />
+      <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
+        <h1 class="site-title" style="margin: 0; text-align: center; font-size: 3em; font-weight: 800; letter-spacing: -1.5px;">Modern Mathematical Methods</h1>
+        <div class="site-subtitle" style="margin: 0; text-align: center; font-size: 1.2em; font-weight: 400; color: #666; max-width: 32em;">A modern, open-source course in mathematical methods for physics and astrophysics.</div>
+      </div>
+    </div>
+  </header>
+    
+  <nav class="site-nav" id="site-nav" aria-label="Main navigation"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li><li><a href="resources.html">Resources</a></li><li><a href="about.html">About</a></li></ul></nav>
+  <main class="site-main container">
+    
+  <div class="theme-toggle-container" style="display: flex; justify-content: flex-end; width: 100%; margin: 0.5em 0 0.5em 0;">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" style="padding: 0.4em 1.2em; font-size: 1em; border-radius: 1.2em; border: 1px solid #bbb; background: var(--theme-toggle-bg, #f8f8f8); cursor: pointer;">
+      <span id="theme-toggle-icon" aria-hidden="true">🌙</span> <span id="theme-toggle-label">Dark</span>
+    </button>
+  </div>
+  <script>
+    const btn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-toggle-icon');
+    const label = document.getElementById('theme-toggle-label');
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+      localStorage.setItem('theme', theme);
+    }
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+  </script>
+    
+    <div class="notebook-markdown-cell"><h1 id="31-aug-23-activity-frames-and-coordinates">31 Aug 23 - Activity: Frames and Coordinates</h1></div>
+<div class="notebook-markdown-cell"><h2 id="forces-in-different-frames">Forces in different frames</h2>
+<p>One of the critical things that we must note is that the natural world changes and we observe it. The models (or laws) that we use to describe nature must accurately describe our observations. This is challenging when observers use different frames (or even different coordinates in the same frame) to show we have the same observations. Moving between coordinate systems and frames is a critical skill in physics.</p></div>
+<div class="notebook-markdown-cell"><h2 id="polar-coordinates">Polar coordinates</h2>
+<p>Many problems in physics require the use of non-Cartesian coordinates, such as the Hydrogen atom or the two-body problem. One such coordinate system is <strong>plane-polar coordinates</strong>. In this coordinate system, any vector $\mathbf{r}\in \mathbb{R}^2$ is described by a distance $r$ and angle $\phi$ instead of Cartesian coordinates $x$ and $y$. The following four equations show how points transform in these coordinate systems.</p>
+<p>$$
+x = r\cos \phi \hspace{1in} y = r\sin \phi
+$$</p>
+<p>$$
+r = \sqrt{x^2 + y^2} \hspace{1in} \phi = \arctan(y / x)
+$$</p></div>
+<div class="notebook-markdown-cell"><h3 id="getting-oriented">Getting Oriented</h3>
+<p><strong>&#9989; Do this</strong> </p>
+<p>Borrowed from <a href="https://physicscourses.colorado.edu/EducationIssues/ClassicalMechanics/">CU Boulder Physics</a></p>
+<p>A particle moves in the plane. We could describe its motion in two different ways:</p>
+<p><strong>CARTESIAN</strong>: I tell you $x(t)$ and $y(t)$.</p>
+<p><strong>POLAR</strong>: I tell you $r(t)$ and $\phi(t)$. (Here $r(t)$ = $|\mathbf{r}(t)|$, it's the "distance to the origin")</p>
+<ul>
+<li>(a) Draw a picture showing the location of the point at some arbitrary time, labeling $x, y, r, \phi$ and also showing the unit vectors $\hat{x}, \hat{y}, \hat{r},$ and $\hat{\phi}$, all at this one time.</li>
+<li>(b) Using this picture, determine the formula for $\hat{r}(t)$ in terms of the Cartesian unit vectors. You answer should contain $\phi(t)$.</li>
+<li>(c) Write down the analogous expression for $\hat{\phi}(t)$.</li>
+<li>(d) We can claim the position vector in Cartesian coordinates is $\vec{r}(t) = x(t)\hat{x} + y(t)\hat{y}$. Do you agree? Is this consistent with your picture above?</li>
+<li>(e) We can claim the position vector in polar coordinates is just $\vec{r}(t) = r(t)\hat{r}$. Again, do you agree? Why isn't there a $+\phi(t)\hat{\phi}$ term?</li>
+</ul></div>
+<div class="notebook-markdown-cell"><h3 id="getting-kinetic">Getting Kinetic</h3>
+<p><strong>&#9989; Do this</strong> </p>
+<ul>
+<li>(a) Now let's find the velocity, $\vec{v}(t) = d\vec{r}/dt$. In Cartesian coordinates, it's just $\vec{v}(t) = \dot{x}(t)\hat{x} + \dot{y}(t)\hat{y}$. Explain why, in polar coordinates, the velocity can be written as $d\vec{r}/dt = r(t)\:d\hat{r}/dt + dr(t)/dt\:\hat{r}$.</li>
+<li>(b) It appears we need to figure out what $d\hat{r}/dt$ is. Use the formula your determined in question 1b to get started -- first in terms of $\hat{x}$ and $\hat{y}$, and then converting to pure polar.</li>
+<li>(c) Write an expression for $\vec{v}(t)$ in polar coordinates.</li>
+<li>(d) Finally, determine the acceleration $\vec{a} = d\vec{v}(t)/dt$. In Cartesian coordinates, it's just $\vec{a}(t) = \ddot{x(t)}\hat{x} + \ddot{y}(t)\hat{y}$. Work it on in polar coordinates.</li>
+</ul></div>
+<div class="notebook-markdown-cell"><h2 id="forces-and-acceleration-in-plane-polar-coordinates">Forces and acceleration in plane-polar coordinates</h2>
+<p>We can show that the acceleration in plane-polar coordinates is given by:</p>
+<p>$$\mathbf{a} = a_r\hat{r} + a_{\phi}\hat{\phi} = \left(\ddot{r}-r\dot{\phi}^2\right)\hat{r} + \left(r\ddot{\phi}+2\dot{r}\dot{\phi}\right)\hat{\phi}$$</p>
+<p>Because this coordinate system is orthgonal ($\hat{r}\cdot\hat{\phi} = 0$), we can write the Newton's second law in this coordinate system as:</p>
+<p>$$\mathbf{F}<em _phi="\phi">{net} = m\mathbf{a} = m\left(a_r\hat{r} + a</em> \right)$$}\hat{\phi</p>
+<p>So that,</p>
+<p>$$\mathbf{F}_r = m\left(\ddot{r}-r\dot{\phi}^2\right)\hat{r}$$</p>
+<p>and </p>
+<p>$$\mathbf{F}_{\phi} = m\left(r\ddot{\phi}+2\dot{r}\dot{\phi}\right)\hat{\phi}$$</p></div>
+<div class="notebook-markdown-cell"><h3 id="example-to-work-in-a-group">Example to Work in a Group</h3>
+<p><strong>&#9989; Do this</strong> </p>
+<p>Borrowed from <a href="https://bookshop.org/p/books/classical-mechanics-john-r-taylor/17213436?ean=9781891389221">Taylor's Classical Mechanics</a></p>
+<p>Consider a "half-pipe" that has a circular cross section of radius $R$. If we release the skateboard near the bottom of the "half-pipe" approximately how long does it take to get to the bottom?</p>
+<ul>
+<li>Make sure you draw a picture and define your coordinate system.</li>
+<li>Consider all the assumptions you need to make to solve this problem, and write them down.</li>
+<li>Be careful not to make big assumptions too early; try instead to write the forces acting on the skateboard in plane-polar coordinates.</li>
+<li>Do not use Lagrangian dynamics to solve this problem if you know how you, please instead use Newton's Second Law.</li>
+</ul>
+<p><strong>Hint: The equation of motion to small angle oscillation frequency pipeline is real.</strong></p></div>
+<div class="notebook-markdown-cell"><ul>
+<li><a href="../../assets/notes/Notes-Newton_2nd_Plane_polar.pdf">Notes on Newton's Second Law in Plane Polar Coordinates</a></li>
+</ul></div>
+<div class="notebook-markdown-cell"></div>
+  </main>
+  <footer>
+    <footer class="site-footer">
+  <p><p>&copy; Modern Mathematical Methods. All rights reserved.</p></p>
+</footer>
+
+  </footer>
+</body>
+</html>
