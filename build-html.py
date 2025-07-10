@@ -117,13 +117,13 @@ def build_html_for_files(files, debug=False):
                 if not file:
                     file = first_child_file(node)
                 if title and (file or node.get('children')):
-                    items.append((file, title))
+                    items.append((file, title, node))
         return items
 
     top_menu = top_level_menu_items(menu)
 
     menu_html = ['<ul class="site-nav-menu" id="site-nav-menu">']
-    for file, title in top_menu:
+    for file, title, _ in top_menu:
         menu_html.append('<li>')
         menu_html.append(file_to_html_link(file, title))
         menu_html.append('</li>')
@@ -188,80 +188,110 @@ def build_html_for_files(files, debug=False):
 
     import nbformat
     import base64
-    if debug:
-        print(f"[DEBUG] build_html_for_files called with {len(files)} files:")
-        for f in files:
-            print(f"  - {f}")
-        print("[DEBUG] Starting main file processing loop...")
+    debug_print(f"[DEBUG] build_html_for_files called with {len(files)} files:", debug)
+    for f in files:
+        debug_print(f"  - {f}", debug)
+    debug_print(f"[DEBUG] Current working directory: {os.getcwd()}", debug)
+    debug_print(f"[DEBUG] Output directory absolute path: {str(Path('docs').resolve())}", debug)
+    debug_print(f"[DEBUG] Output directory exists: {Path('docs').exists()}", debug)
+    debug_print("[DEBUG] Listing files in output directory (docs/):", debug)
+    try:
+        for p in Path('docs').iterdir():
+            debug_print(f"    - {p.name} (dir: {p.is_dir()}, file: {p.is_file()})", debug)
+            if p.is_dir():
+                for subp in p.iterdir():
+                    debug_print(f"      - {subp.name} (dir: {subp.is_dir()}, file: {subp.is_file()})", debug)
+    except Exception as e:
+        debug_print(f"[ERROR] Could not list docs/: {e}", debug)
+    debug_print("[DEBUG] Starting main file processing loop...", debug)
     missing_files = []
+
+    # --- Auto-generate index pages for top-level menus with no file ---
+    for file, title, node in top_menu:
+        if not node.get('file') and node.get('children'):
+            # Generate an index page for this menu
+            slug = title.lower().replace(' ', '_')
+            out_path = Path('docs') / f"{slug}.html"
+            # Build a list of children (and grandchildren)
+            def render_children(children, level=1):
+                html = ['<ul class="menu-section">']
+                for child in children:
+                    if not isinstance(child, dict):
+                        continue
+                    child_title = child.get('title', '(untitled)')
+                    child_file = child.get('file')
+                    if child_file:
+                        html.append(f'<li>{file_to_html_link(child_file, child_title)}</li>')
+                    elif child.get('children'):
+                        html.append(f'<li><b>{child_title}</b>')
+                        html.append(render_children(child['children'], level+1))
+                        html.append('</li>')
+                html.append('</ul>')
+                return ''.join(html)
+            section_html = f'<h2>{title}</h2>'
+            if node.get('description'):
+                section_html += f'<div class="menu-description">{node["description"]}</div>'
+            section_html += render_children(node['children'])
+            page_title = title
+            head_html = head_template.replace('{{ title }}', page_title).replace('{{ css_light }}', css_light).replace('{{ css_dark }}', css_dark)
+            full_html = f'''<!DOCTYPE html>\n<html lang="{site.get('language', 'en')}">\n{head_html}\n<body>\n  {header_html}\n  <nav class="site-nav" id="site-nav" aria-label="Main navigation">{menu_html}</nav>\n  <main class="site-main container">\n    {theme_toggle_html}\n    {section_html}\n  </main>\n  <footer>\n    {footer_html}\n  </footer>\n</body>\n</html>\n'''
+            out_path.parent.mkdir(exist_ok=True)
+            with open(out_path, 'w', encoding='utf-8') as f:
+                f.write(full_html)
+            debug_print(f"[OK] Auto-generated index page: {out_path}", debug)
+
+    # --- Normal file build logic ---
     for file in files:
-        if debug:
-            print(f"[DEBUG] ---\n[DEBUG] Processing file: {file}")
+        debug_print(f"[DEBUG] ---\n[DEBUG] Processing file: {file}", debug)
         file_path = Path(file)
-        if debug:
-            print(f"[DEBUG] Starting processing for: {file}")
+        debug_print(f"[DEBUG] Starting processing for: {file}", debug)
         if not file_path.exists():
-            if debug:
-                print(f"[ERROR] File not found: {file}")
+            debug_print(f"[ERROR] File not found: {file}", debug)
             missing_files.append(file)
             continue
         ext = file_path.suffix.lower()
-        if debug:
-            print(f"[DEBUG] File extension: {ext}")
+        debug_print(f"[DEBUG] File extension: {ext}", debug)
         try:
             if ext == '.md':
-                if debug:
-                    print(f"[DEBUG] Reading markdown file: {file_path}")
+                debug_print(f"[DEBUG] Reading markdown file: {file_path}", debug)
                 with open(file_path, 'r', encoding='utf-8') as f:
                     md_content = f.read()
-                if debug:
-                    print(f"[DEBUG] Rendering markdown to HTML...")
+                debug_print(f"[DEBUG] Rendering markdown to HTML...", debug)
                 body_html = markdown.markdown(md_content, extensions=['extra', 'toc', 'tables'])
             elif ext == '.ipynb':
-                if debug:
-                    print(f"[DEBUG] Reading notebook file: {file_path}")
+                debug_print(f"[DEBUG] Reading notebook file: {file_path}", debug)
                 try:
                     nb = nbformat.read(str(file_path), as_version=4)
                 except Exception as e:
-                    if debug:
-                        print(f"[ERROR] Could not read notebook: {file_path}: {e}")
+                    debug_print(f"[ERROR] Could not read notebook: {file_path}: {e}", debug)
                     continue
-                if debug:
-                    print(f"[DEBUG] Notebook loaded. Keys: {list(nb.keys())}")
+                debug_print(f"[DEBUG] Notebook loaded. Keys: {list(nb.keys())}", debug)
                 if not nb.get('cells'):
-                    if debug:
-                        print(f"[WARN] Notebook {file_path} has no cells.")
+                    debug_print(f"[WARN] Notebook {file_path} has no cells.", debug)
                     continue
-                if debug:
-                    print(f"[DEBUG] Notebook {file_path} has {len(nb['cells'])} cells.")
+                debug_print(f"[DEBUG] Notebook {file_path} has {len(nb['cells'])} cells.", debug)
                 body_html = []
                 for idx, cell in enumerate(nb.get('cells', [])):
-                    if debug:
-                        print(f"[DEBUG] Processing cell {idx+1} of type {cell.get('cell_type')}")
+                    debug_print(f"[DEBUG] Processing cell {idx+1} of type {cell.get('cell_type')}", debug)
                     cell_type = cell.get('cell_type')
                     lang = cell.get('metadata', {}).get('language', 'python' if cell_type == 'code' else 'markdown')
-                    if debug:
-                        print(f"[DEBUG] Cell {idx}: type={cell_type}, lang={lang}")
+                    debug_print(f"[DEBUG] Cell {idx}: type={cell_type}, lang={lang}", debug)
                     if cell_type == 'markdown':
                         import markdown as mdmod
                         try:
-                            if debug:
-                                print(f"[DEBUG] Rendering markdown cell {idx+1}")
+                            debug_print(f"[DEBUG] Rendering markdown cell {idx+1}", debug)
                             cell_html = mdmod.markdown(''.join(cell.get('source', [])), extensions=['extra', 'toc', 'tables'])
                             body_html.append(f'<div class="notebook-markdown-cell">{cell_html}</div>')
                         except Exception as e:
-                            if debug:
-                                print(f"[ERROR] Failed to render markdown cell {idx+1} in {file_path}: {e}")
+                            debug_print(f"[ERROR] Failed to render markdown cell {idx+1} in {file_path}: {e}", debug)
                     elif cell_type == 'code':
-                        if debug:
-                            print(f"[DEBUG] Rendering code cell {idx+1}")
+                        debug_print(f"[DEBUG] Rendering code cell {idx+1}", debug)
                         code = ''.join(cell.get('source', []))
                         code_html = f'<pre class="notebook-code-cell"><code>{code}</code></pre>'
                         outputs_html = []
                         for oidx, output in enumerate(cell.get('outputs', [])):
                             otype = output.get('output_type')
-                            if debug:
-                                print(f"[DEBUG]   Output {oidx+1}: type={otype}")
+                            debug_print(f"[DEBUG]   Output {oidx+1}: type={otype}", debug)
                             try:
                                 if otype == 'stream':
                                     text = ''.join(output.get('text', []))
@@ -285,18 +315,15 @@ def build_html_for_files(files, debug=False):
                                     tb_html = '<br>'.join(traceback)
                                     outputs_html.append(f'<div class="notebook-output-error"><b>{ename}: {evalue}</b><br>{tb_html}</div>')
                             except Exception as e:
-                                if debug:
-                                    print(f"[ERROR] Failed to render output {oidx+1} in code cell {idx+1} in {file_path}: {e}")
+                                debug_print(f"[ERROR] Failed to render output {oidx+1} in code cell {idx+1} in {file_path}: {e}", debug)
                         cell_block = code_html + ''.join(outputs_html)
                         body_html.append(f'<div class="notebook-code-cell-block">{cell_block}</div>')
                 body_html = '\n'.join(body_html)
             else:
-                if debug:
-                    print(f"[SKIP] Unsupported file type: {file}")
+                debug_print(f"[SKIP] Unsupported file type: {file}", debug)
                 continue
             if not body_html:
-                if debug:
-                    print(f"[WARN] No content generated for {file_path}, skipping HTML output.")
+                debug_print(f"[WARN] No content generated for {file_path}, skipping HTML output.", debug)
                 continue
             page_title = title
             head_html = head_template.replace('{{ title }}', page_title).replace('{{ css_light }}', css_light).replace('{{ css_dark }}', css_dark)
@@ -308,18 +335,15 @@ def build_html_for_files(files, debug=False):
             try:
                 with open(out_path, 'w', encoding='utf-8') as f:
                     f.write(full_html)
-                if debug:
-                    print(f"[OK] Built {out_path} from {file}")
+                debug_print(f"[OK] Built {out_path} from {file}", debug)
             except Exception as e:
-                if debug:
-                    print(f"[ERROR] Failed to write HTML file {out_path}: {e}")
+                debug_print(f"[ERROR] Failed to write HTML file {out_path}: {e}", debug)
         except Exception as e:
-            if debug:
-                print(f"[FATAL] Unexpected error processing {file}: {e}")
-    if missing_files and debug:
-        print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:")
+            debug_print(f"[FATAL] Unexpected error processing {file}: {e}", debug)
+    if missing_files:
+        debug_print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:", debug)
         for mf in missing_files:
-            print(f"  - {mf}")
+            debug_print(f"  - {mf}", debug)
         # Always output a valid HTML page with .container for any fallback or summary
         # (This block is only for summary, not for outputting a page, so no fallback HTML is written here)
 
