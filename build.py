@@ -1,799 +1,1076 @@
-#!/usr/bin/env python3
-"""
-build.py - Python workflow for building PDFs and HTML from Jupyter notebooks and Jupyter Book.
+def build_tex_all(debug=False):
+    """Build LaTeX for all files referenced in the menu/content tree (_content.yml)."""
+    from content_parser import load_and_validate_content_yml, get_all_content_files
+    content = load_and_validate_content_yml('_content.yml')
+    files = get_all_content_files(content)
+    if not files:
+        if debug:
+            print("[WARN] No files found in _content.yml toc.")
+        return
+    if debug:
+        print(f"[INFO] Building LaTeX for {len(files)} files from menu/content tree.")
+    build_tex_for_files(files, debug=debug)
 
-- Reads notebooks.yaml for notebook list
-- Calls update_toc.sh to sync _toc.yml
-- Builds PDFs (only if needed) using nbconvert
-- Builds full book PDF and HTML using Jupyter Book
-- Copies/moves outputs to _build/latex and _build/html
-- Gives clear output and errors
-
-Usage:
-    python build.py [--pdf] [--html]
-    (default: both)
-"""
-
-import argparse
-import subprocess
-import sys
-import os
-import shutil
-import yaml
-from pathlib import Path
-import re
-
-def run_or_exit(cmd, **kwargs):
-    """
-    Run a subprocess command, print it, and exit on failure.
-    Returns the CompletedProcess object.
-    """
-    print(f"[RUN] {' '.join(str(x) for x in cmd)}")
-    # Always set MCM_BUILD_SUBPROCESS=1 in the environment for subprocesses
-    env = os.environ.copy()
-    env["MCM_BUILD_SUBPROCESS"] = "1"
-    if "env" in kwargs:
-        user_env = kwargs.pop("env")
-        env.update(user_env)
-    try:
-        result = subprocess.run(cmd, env=env, **kwargs)
-    except Exception as e:
-        print(f"[ERROR] Exception running command: {e}", file=sys.stderr)
-        sys.exit(1)
-    if result.returncode != 0:
-        print(f"[ERROR] Command failed with exit code {result.returncode}: {' '.join(str(x) for x in cmd)}", file=sys.stderr)
-        if hasattr(result, 'stderr') and result.stderr:
-            print(result.stderr, file=sys.stderr)
-        sys.exit(result.returncode)
-    return result
-
-def parse_yaml_list(yaml_path):
-    with open(yaml_path) as f:
-        data = yaml.safe_load(f)
-    # Expect a top-level list or dict with a key like 'notebooks'
-    if isinstance(data, dict) and 'notebooks' in data:
-        return [n for n in data['notebooks'] if n and not str(n).startswith('#')]
-    elif isinstance(data, list):
-        return [n for n in data if n and not str(n).startswith('#')]
-    else:
-        raise ValueError(f"Unexpected YAML structure in {yaml_path}")
-
-def main():
-
-    import requests
-    import contextlib
+def build_tex_for_files(files, debug=False):
+    """Build LaTeX for specified markdown and notebook files."""
+    import subprocess
+    import sys
+    import os
+    from pathlib import Path
     import shutil
-    from pathlib import Path  # Ensure Path is always imported in main()
-
-    parser = argparse.ArgumentParser(description="Build PDFs, Markdown, DOCX, HTML, custom web output, or just collect all images from Jupyter notebooks and Jupyter Book.")
-    parser.add_argument('--pdf', action='store_true', help='Build PDFs only')
-    parser.add_argument('--md', action='store_true', help='Build Markdown only')
-    parser.add_argument('--docx', action='store_true', help='Build DOCX only')
-    parser.add_argument('--tex', action='store_true', help='Build TeX only')
-    parser.add_argument('--html', action='store_true', help='Build HTML (calls build-web.py)')
-    parser.add_argument('--img', action='store_true', help='Collect all referenced images into _build/images/')
-    parser.add_argument('--all', action='store_true', help='Build all formats: LaTeX, PDF, Markdown, DOCX, and HTML web output')
-    parser.add_argument('--files', nargs='+', help='One or more notebook files to build (relative to notebooks/ or absolute)')
-    parser.add_argument('--jupyter', action='store_true', help='Build a unified Jupyter Notebook in _build/jupyter and copy to docs/jupyter')
-    args = parser.parse_args()
-
-    # --- Unified Jupyter Book HTML Build and Unified Notebook JSON Export ---
+    import re
     repo_root = Path(__file__).parent.resolve()
-    auto_gen = repo_root / '.autogen'
-    toc_yml = auto_gen / '_toc.yml'
-    notebooks_yaml = auto_gen / '_notebooks.yml'
-    if getattr(args, 'jupyter', False):
-        # Use .autogen/_notebooks.yml and .autogen/_toc.yml for all notebook and toc logic
-        build_html_dir = repo_root / '_build/html'
-        build_jupyter_execute_dir = repo_root / '_build/jupyter_execute'
-        docs_jupyter_dir = repo_root / 'docs/jupyter'
-        docs_sources_dir = repo_root / 'docs/sources'
-        tmp_jb_dir = repo_root / '_build/jb_tmp'
-        docs_jupyter_dir.mkdir(parents=True, exist_ok=True)
-        docs_sources_dir.mkdir(parents=True, exist_ok=True)
-
-        # --- Jupyter Book build will fail unless it supports custom TOC path ---
-        if not toc_yml.exists():
-            print(f"[ERROR] .autogen/_toc.yml does not exist. Cannot build Jupyter Book.", file=sys.stderr)
-            sys.exit(1)
-
-        # Copy .autogen/_toc.yml to project root as _toc.yml (with warning header)
-        root_toc = repo_root / '_toc.yml'
-        with open(toc_yml, 'r', encoding='utf-8') as src, open(root_toc, 'w', encoding='utf-8') as dst:
-            dst.write("# AUTO-GENERATED FILE. DO NOT EDIT BY HAND.\n")
-            dst.write("# This file is generated by build.py from _content.yml.\n")
-            dst.write("# To update, edit _content.yml and rerun the build.\n\n")
-            dst.writelines(src.readlines())
-        print(f"[INFO] Copied {toc_yml} to {root_toc} for Jupyter Book build.")
-
-        print(f"[INFO] Building Jupyter Book HTML into {tmp_jb_dir} ...")
-        jb_cmd = ["jupyter-book", "build", str(repo_root), "--path-output", str(tmp_jb_dir)]
-        print(f"[DEBUG] Running command: {' '.join(jb_cmd)}")
-        result = run_or_exit(jb_cmd, capture_output=True, text=True)
-        print("[DEBUG] jupyter-book stdout:\n" + (result.stdout or ""))
-        print("[DEBUG] jupyter-book stderr:\n" + (result.stderr or ""))
-
-        # The HTML output may be in tmp_jb_dir/_build/html or tmp_jb_dir/html. Detect and copy from the correct location.
-        html_nested = tmp_jb_dir / '_build' / 'html'
-        html_tmp = tmp_jb_dir / 'html'
-        if html_nested.exists():
-            html_output = html_nested
-        elif html_tmp.exists():
-            html_output = html_tmp
-        else:
-            print(f"[ERROR] Expected HTML output not found at {html_nested} or {html_tmp}")
-            sys.exit(1)
-
-        # Clean _build/html if it exists
-        if build_html_dir.exists():
-            shutil.rmtree(build_html_dir)
-        shutil.copytree(html_output, build_html_dir)
-
-        # Clean up temp build dir
-        shutil.rmtree(tmp_jb_dir)
-
-        # Only create/copy executed notebooks if they exist
-        executed_dir = build_html_dir / 'jupyter_execute'
-        if executed_dir.exists():
-            build_jupyter_execute_dir.mkdir(parents=True, exist_ok=True)
-            for item in executed_dir.iterdir():
-                dest = build_jupyter_execute_dir / item.name
-                if not dest.exists():
-                    if item.is_dir():
-                        shutil.copytree(item, dest)
-                    else:
-                        shutil.copy2(item, dest)
-
-        # Copy the built HTML site to docs/jupyter (replace contents only if needed)
-        for item in docs_jupyter_dir.iterdir():
-            if item.is_dir():
-                shutil.rmtree(item)
-            else:
-                item.unlink()
-        for item in build_html_dir.iterdir():
-            dest = docs_jupyter_dir / item.name
-            # Always copy everything from build_html_dir to docs_jupyter_dir
-            if item.is_dir():
-                shutil.copytree(item, dest)
-            else:
-                shutil.copy2(item, dest)
-        # Also copy the HTML folder to docs/sources/jupyterbook_html
-        sources_jb_html = docs_sources_dir / 'jupyterbook_html'
-        if sources_jb_html.exists():
-            shutil.rmtree(sources_jb_html)
-        shutil.copytree(build_html_dir, sources_jb_html)
-        print(f"[INFO] Jupyter Book HTML site copied to {docs_jupyter_dir} and to {sources_jb_html}")
-
-        # --- Unified Notebook JSON Export ---
-        # Collect all notebooks in the order of _notebooks.yml
-        import nbformat
-        import json
-        notebooks_yaml = repo_root / '.autogen/_notebooks.yml'
-        if not notebooks_yaml.exists():
-            print(f"[WARN] _notebooks.yml not found, skipping unified notebook export.")
-            return
-        # Use the top-level parse_yaml_list for consistency and robustness
-        notebooks = parse_yaml_list(notebooks_yaml)
-        unified_cells = []
-        for nb in notebooks:
-            nb_path = repo_root / nb
-            if not nb_path.exists():
-                print(f"[WARN] Notebook not found for unified export: {nb_path}")
-                continue
-            try:
-                nb_data = nbformat.read(str(nb_path), as_version=4)
-                for cell in nb_data.get('cells', []):
-                    cell_json = {
-                        "cell_type": cell.get("cell_type"),
-                        "metadata": {
-                            "language": cell.get("metadata", {}).get("language", "python" if cell.get("cell_type") == "code" else "markdown")
-                        },
-                        "source": cell.get("source", [])
-                    }
-                    # Preserve cell id if present (for existing cells)
-                    if "id" in cell.get("metadata", {}):
-                        cell_json["metadata"]["id"] = cell["metadata"]["id"]
-                    unified_cells.append(cell_json)
-            except Exception as e:
-                print(f"[WARN] Could not parse notebook for unified export: {nb_path}: {e}")
-        unified_notebook = {"cells": unified_cells}
-        unified_path = repo_root / '_build/jupyter/unified_notebook.json'
-        unified_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(unified_path, 'w', encoding='utf-8') as f:
-            json.dump(unified_notebook, f, indent=2, ensure_ascii=False)
-        print(f"[INFO] Unified notebook JSON exported to {unified_path}")
-        return
-
-    # --- HTML Build Option: just call build-web.py --html (and pass --files if given) ---
-    if getattr(args, 'html', False):
-        cmd = [sys.executable, str(Path(__file__).parent / 'build-web.py')]
-        if args.files:
-            cmd += ['--files'] + args.files
-        print(f"[INFO] Calling build-web.py: {' '.join(cmd)}")
-        run_or_exit(cmd)
-        return
-
-    # Directories and image search roots (must be set before any logic or function that uses them)
-    repo_root = Path(__file__).parent.resolve()
-    build_dir = repo_root / '_build'
-    build_dir.mkdir(parents=True, exist_ok=True)  # Ensure _build exists
-    chapters_dir = build_dir / 'tex'
-    html_dir = build_dir / 'html'
-    # notebook_dir is no longer used for notebook path construction
-    # Use .autogen/_toc.yml for notebook order (generated by preprocess_content_yml.py)
-    toc_yml = auto_gen / '_toc.yml'
-    notebooks_yaml = auto_gen / '_notebooks.yml'
-    images_root_candidates = [repo_root / 'images', repo_root / 'content/images']
-
-    # --- Ensure _toc.yml and _notebooks.yml are up to date and valid ---
-    # Only the top-level build process should run preprocessing and YAML validation
-    if not os.environ.get("MCM_BUILD_SUBPROCESS"):
-        import subprocess
-        def check_yaml_valid(yaml_path):
-            try:
-                with open(yaml_path) as f:
-                    yaml.safe_load(f)
-                print(f"[DEBUG] YAML file valid: {yaml_path}")
-                return True
-            except Exception as e:
-                print(f"[ERROR] Invalid YAML in {yaml_path}: {e}", file=sys.stderr)
-                return False
-
-        preproc_script = repo_root / 'scripts' / 'preprocess_content_yml.py'
-        content_yml = repo_root / '_content.yml'
-        parent_args = sys.argv[1:]
-        is_subbuild = any(arg in parent_args for arg in ['--img', '--md', '--docx', '--pdf', '--tex'])
-        need_preprocess = False
-        if not is_subbuild:
-            for yml_path in [toc_yml, notebooks_yaml]:
-                if not yml_path.exists():
-                    need_preprocess = True
-                    break
-                if content_yml.exists() and yml_path.stat().st_mtime < content_yml.stat().st_mtime:
-                    need_preprocess = True
-                    break
-            if need_preprocess:
-                print(f"[DEBUG] Running preprocessor: {preproc_script}")
-                result = subprocess.run([sys.executable, str(preproc_script)], capture_output=True, text=True)
-                if result.returncode != 0:
-                    print(f"[ERROR] Failed to run preprocess_content_yml.py:\n{result.stderr}", file=sys.stderr)
-                    sys.exit(1)
-                else:
-                    print(f"[DEBUG] Preprocessor output:\n{result.stdout}")
-            else:
-                print(f"[DEBUG] Preprocessing not needed: _toc.yml and _notebooks.yml are up to date.")
-
-        # Check YAML validity
-        if not toc_yml.exists() or not check_yaml_valid(toc_yml):
-            print(f"[ERROR] _toc.yml missing or invalid after preprocessing.", file=sys.stderr)
-            sys.exit(1)
-        if not notebooks_yaml.exists() or not check_yaml_valid(notebooks_yaml):
-            print(f"[ERROR] _notebooks.yml missing or invalid after preprocessing.", file=sys.stderr)
-            sys.exit(1)
-    else:
-        print("[DEBUG] Skipping preprocessing and YAML validation in subprocess (MCM_BUILD_SUBPROCESS=1)")
-
-    # --- Build Images Only ---
-    # Only run this block if --img is set, and return after
-    # If you need to process notebook order, read _toc.yml instead (already generated by another script)
-
-    # --- Setup logging ---
-    log_dir = repo_root / 'log'
-    log_dir.mkdir(parents=True, exist_ok=True)
-    build_log = log_dir / 'build.log'
-    prior_log = log_dir / 'build.log.prior'
-    if build_log.exists():
-        shutil.copy2(build_log, prior_log)
-    log_file = open(build_log, 'w')
-    log_stream = contextlib.ExitStack()
-    log_stream.enter_context(contextlib.redirect_stdout(log_file))
-    log_stream.enter_context(contextlib.redirect_stderr(log_file))
-    # All print() and errors after this point go to build.log
-
-    # Determine what to build
-    build_tex = args.tex or (not args.pdf and not args.md and not args.docx)
-    build_pdf = args.pdf or (not args.tex and not args.md and not args.docx)
-    build_md = args.md or (not args.tex and not args.pdf and not args.docx)
-    build_docx = args.docx or (not args.tex and not args.pdf and not args.md)
-
-    # Parse notebook list, or use --files if given
-    if args.files:
-        notebooks = []
-        for f in args.files:
-            nb_path = Path(f)
-            # If the file is not absolute and does not exist, try content/notebooks/
-            if nb_path.is_absolute():
-                pass
-            elif (repo_root / f).exists():
-                nb_path = repo_root / f
-            elif (repo_root / 'content' / 'notebooks' / f).exists():
-                nb_path = repo_root / 'content' / 'notebooks' / f
-            elif nb_path.exists():
-                pass
-            else:
-                print(f"[ERROR] Notebook not found: {nb_path}", file=sys.stderr)
-                continue
-            notebooks.append(str(nb_path))
-        if not notebooks:
-            print("[ERROR] No valid notebooks specified with --files.", file=sys.stderr)
-            sys.exit(1)
-        image_collection_mode = 'per-notebook'
-    else:
-        if not notebooks_yaml.exists():
-            print(f"[ERROR] {notebooks_yaml} not found.", file=sys.stderr)
-            sys.exit(1)
-        notebooks = parse_yaml_list(notebooks_yaml)
-        image_collection_mode = 'global'
-
-    # --- Efficient global image collection for full build ---
-    if image_collection_mode == 'global':
-        img_dir = build_dir / 'images'
-        img_dir.mkdir(parents=True, exist_ok=True)
-        print(f"[INFO] [Full Build] Collecting all images for all notebooks into {img_dir}")
-        def process_file_for_images(file_path, nb_stem=None):
-            from scripts.fetch_youtube import fetch_youtube_thumbnail
-            if not file_path.exists():
-                print(f"[WARN] File not found: {file_path}")
-                return
+    tex_dir = repo_root / 'docs' / 'tex'
+    img_dir = repo_root / 'docs' / 'images'
+    tex_dir.mkdir(parents=True, exist_ok=True)
+    img_dir.mkdir(parents=True, exist_ok=True)
+    missing_files = []
+    for file in files:
+        file_path = Path(file)
+        if not file_path.exists():
+            print(f"[ERROR] File not found: {file}")
+            missing_files.append(file)
+            continue
+        ext = file_path.suffix.lower()
+        stem = file_path.stem
+        out_md = tex_dir / f"{stem}.md"
+        out_tex = tex_dir / f"{stem}.tex"
+        # Step 1: Ensure we have a markdown file with correct image links
+        if ext == '.md':
+            print(f"[INFO] Copying markdown file: {file_path} -> {out_md}")
+            shutil.copy2(file_path, out_md)
             with open(file_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-            img_links = re.findall(r'!\[[^\]]*\]\(([^)]+)\)', content)
-            img_links += re.findall(r'\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}', content)
-            for img_path in set(img_links):
-                yt_match = re.match(r'https?://img\\.youtube\\.com/vi/([\w-]{11})/', img_path)
-                if yt_match:
-                    video_id = yt_match.group(1)
-                    flat_name = f"{nb_stem}_youtube_{video_id}.jpg" if nb_stem else f"youtube_{video_id}.jpg"
-                    dst_img = img_dir / flat_name
-                    if fetch_youtube_thumbnail(video_id, dst_img):
-                        print(f"[IMG] Downloaded YouTube thumbnail for {video_id} to {dst_img}")
-                    else:
-                        print(f"[WARN] Could not fetch YouTube thumbnail for {video_id}")
-                    continue
-                if img_path.startswith('http'):
-                    img_filename = os.path.basename(img_path.split('?')[0])
-                    flat_name = f"{nb_stem}_{img_filename}" if nb_stem else img_filename
-                    dst_img = img_dir / flat_name
-                    try:
-                        resp = requests.get(img_path, timeout=15)
-                        if resp.status_code == 200:
-                            with open(dst_img, 'wb') as outimg:
-                                outimg.write(resp.content)
-                            print(f"[IMG] Downloaded remote image {img_path} to {dst_img}")
-                        else:
-                            print(f"[WARN] Failed to download image {img_path}: HTTP {resp.status_code}")
-                    except Exception as e:
-                        print(f"[WARN] Could not download image {img_path}: {e}")
-                    continue
-                found = False
-                real_img_path = None
-                img_filename = os.path.basename(img_path)
-                if not os.path.isabs(img_path) and not img_path.startswith('~'):
-                    candidate = (file_path.parent / img_path).resolve()
-                    if candidate.exists():
-                        real_img_path = candidate
-                        found = True
-                if not found:
-                    for images_root in images_root_candidates:
-                        norm_img_path = os.path.normpath(img_path).lstrip(os.sep)
-                        candidate = images_root / norm_img_path
-                        if candidate.exists():
-                            real_img_path = candidate
-                            found = True
-                            break
-                if not found:
-                    for images_root in images_root_candidates:
-                        candidate = images_root / img_filename
-                        if candidate.exists():
-                            real_img_path = candidate
-                            found = True
-                            break
-                for fallback_root in [repo_root / 'content/notebooks/_images', repo_root / '_images']:
-                    if not found:
-                        candidate = fallback_root / img_filename
-                        if candidate.exists():
-                            real_img_path = candidate
-                            found = True
-                            break
-                if not found:
-                    html_img_root = repo_root / '_build/html/images'
-                    candidate = html_img_root / img_filename
-                    if candidate.exists():
-                        real_img_path = candidate
-                        found = True
-                    if not found:
-                        for subdir, _, files in os.walk(html_img_root):
-                            if img_filename in files:
-                                real_img_path = Path(subdir) / img_filename
-                                found = True
-                                break
-                if not found and os.path.dirname(img_path):
-                    norm_img_path = os.path.normpath(img_path).lstrip(os.sep)
-                    for images_root in images_root_candidates:
-                        for subdir, _, files in os.walk(images_root):
-                            candidate = Path(subdir) / Path(norm_img_path)
-                            if candidate.exists():
-                                real_img_path = candidate
-                                found = True
-                                break
-                        if found:
-                            break
-                if not found:
-                    for images_root in images_root_candidates:
-                        for subdir, _, files in os.walk(images_root):
-                            if img_filename in files:
-                                real_img_path = Path(subdir) / img_filename
-                                found = True
-                                break
-                        if found:
-                            break
-                if found and real_img_path:
-                    flat_name = f"{nb_stem}_{img_filename}" if nb_stem else img_filename
-                    dst_img = img_dir / flat_name
-                    try:
-                        shutil.copy2(real_img_path, dst_img)
-                        print(f"[IMG] Copied {img_path} from {real_img_path} to {dst_img}")
-                    except Exception as e:
-                        print(f"[WARN] Could not copy image {real_img_path} to {dst_img}: {e}")
-                else:
-                    print(f"[WARN] Could not find image: {img_path}")
-        for nb in notebooks:
-            nb_path = repo_root / nb
-            if nb_path.exists():
-                process_file_for_images(nb_path, nb_stem=Path(nb).stem)
-            md_path = nb_path.with_suffix('.md')
-            if md_path.exists():
-                process_file_for_images(md_path, nb_stem=Path(nb).stem)
-        print(f"[INFO] [Full Build] All referenced images copied to {img_dir}")
-
-    # --- If --all, run the build steps in the specified order ---
-    if getattr(args, 'all', False):
-        # 1. Build Markdown for all notebooks first
-        print("[ALL] Step 1: Building Markdown for all notebooks")
-        run_or_exit([
-            sys.executable, __file__, '--md'
-        ], check=True)
-
-        # 2. Build DOCX (now Markdown files are guaranteed to exist)
-        print("[ALL] Step 2: Building DOCX")
-        run_or_exit([
-            sys.executable, __file__, '--docx'
-        ], check=True)
-
-        # 3. Build PDF
-        print("[ALL] Step 3: Building PDF")
-        run_or_exit([
-            sys.executable, __file__, '--pdf'
-        ], check=True)
-        # 4. Build TeX (guaranteed after PDF, but ensure copy logic runs)
-        # The copy logic for .tex and .pdf files is handled in the per-notebook build and PDF steps.
-        print("[ALL] Step 4: TeX and PDF outputs are copied to docs/sources/ by per-notebook logic.")
-
-        # 5. Build custom HTML web output (build-web.py)
-        print("[ALL] Step 5: Building custom HTML web output (build-web.py)")
-        run_or_exit([
-            sys.executable, str(repo_root / 'build-web.py'), '--html'
-        ], check=True)
-
-        # --- FORCE COPY ALL .tex FILES TO docs/sources/<notebook>/<notebook>.tex ---
-        def copy_all_tex_files(src_dir, dest_root):
-            """
-            Copy all .tex files from src_dir to dest_root/<stem>/<stem>.tex.
-            Returns a list of (src, dest) tuples for reporting.
-            """
-            copied = []
-            if not src_dir.exists():
-                print(f"[ALL] Source TeX directory does not exist: {src_dir}")
-                return copied
-            tex_files = list(src_dir.glob('*.tex'))
-            if not tex_files:
-                print(f"[ALL] No .tex files found in {src_dir}")
-                return copied
-            created_dirs = set()
-            for tex_file in tex_files:
-                stem = tex_file.stem
-                dest_dir = dest_root / stem
-                if stem not in created_dirs:
-                    dest_dir.mkdir(parents=True, exist_ok=True)
-                    created_dirs.add(stem)
-                dest_tex = dest_dir / f"{stem}.tex"
-                try:
-                    shutil.copy2(tex_file, dest_tex)
-                    print(f"[ALL] Forced copy: {tex_file} -> {dest_tex}")
-                    copied.append((str(tex_file), str(dest_tex)))
-                except Exception as e:
-                    print(f"[ALL] ERROR copying {tex_file} to {dest_tex}: {e}")
-            return copied
-
-        print("[ALL] Step 5.5: Forcing copy of all .tex files to docs/sources/<notebook>/<notebook>.tex")
-        tex_dir = repo_root / '_build' / 'tex'
-        docs_sources_dir = repo_root / 'docs' / 'sources'
-        copy_all_tex_files(tex_dir, docs_sources_dir)
-
-        # 6. Build unified Jupyter notebook and Jupyter Book HTML
-        print("[ALL] Step 6: Building unified Jupyter notebook and Jupyter Book HTML")
-        run_or_exit([
-            sys.executable, __file__, '--jupyter'
-        ], check=True)
-
-        print("[ALL] All build steps completed.")
-        return
-
-    # --- Build TeX ---
-    jupyter_bin = str(repo_root / '.venv' / 'bin' / 'jupyter')
-    tex_images_dir = chapters_dir / 'images'
-    if build_tex:
-        chapters_dir.mkdir(parents=True, exist_ok=True)
-        tex_images_dir.mkdir(parents=True, exist_ok=True)
-        print(f"[INFO] Building TeX files for notebooks in project (absolute paths) -> {chapters_dir}")
-        for nb in notebooks:
-            nb_path = repo_root / nb
-            if not nb_path.exists():
-                print(f"[WARN] Notebook not found: {nb_path}")
-                continue
-            tex_name = nb_path.with_suffix('.tex').name
-            tex_path = chapters_dir / tex_name
-            print(f"Converting {nb_path} to {tex_path}")
-            missing_images = set()
-            try:
-                import nbformat
-                nb_data = nbformat.read(str(nb_path), as_version=4)
-                for cell in nb_data.get('cells', []):
-                    if cell.get('cell_type') == 'markdown':
-                        cell_source = ''.join(cell.get('source', []))
-                        for img_path in re.findall(r'!\[[^\]]*\]\(([^)]+)\)', cell_source):
-                            if img_path.startswith('http'):
-                                continue
-                            img_filename = f"{nb_path.stem}_{os.path.basename(img_path)}"
-                            img_file = tex_images_dir / img_filename
-                            if not img_file.exists():
-                                missing_images.add(img_path)
-            except Exception as e:
-                print(f"[WARN] Could not parse notebook for images: {e}")
-            if missing_images:
-                print(f"[WARN] Missing images for TeX in {nb_path}: {missing_images}. Proceeding to build TeX anyway; images will be missing in output.")
-            run_or_exit([
-                jupyter_bin, 'nbconvert', '--to', 'latex', str(nb_path),
-                '--output', tex_name, '--output-dir', str(chapters_dir)
-            ], check=True)
-            if tex_path.exists():
-                with open(tex_path, 'r', encoding='utf-8') as f:
-                    tex_content = f.read()
-                def replace_graphics(match):
-                    img_path = match.group(2)
-                    img_filename = os.path.basename(img_path)
-                    if img_filename.startswith(f"{nb_path.stem}_"):
-                        flat_name = img_filename
-                    else:
-                        flat_name = f"{nb_path.stem}_{img_filename}"
-                    return f"{match.group(1)}{{../images/{flat_name}}}"
-                tex_content = re.sub(r'(\\includegraphics(?:\[[^\]]*\])?)\{([^}]+)\}', replace_graphics, tex_content)
-                with open(tex_path, 'w', encoding='utf-8') as f:
-                    f.write(tex_content)
-                # Copy .tex to docs/sources/<notebook_stem>/<notebook_stem>.tex
-                stem_dir = repo_root / 'docs' / 'sources' / nb_path.stem
-                stem_dir.mkdir(parents=True, exist_ok=True)
-                dest_tex = stem_dir / f"{nb_path.stem}.tex"
-                shutil.copy2(tex_path, dest_tex)
-                print(f"[INFO] Copied {tex_path} to {dest_tex}")
-        print(f"[INFO] All notebooks converted to TeX and saved in {chapters_dir}. All image links updated to reference _build/images.")
-
-    log_file.close()
-    log_stream.close()
-
-    # --- Build PDFs from TeX (compile in place and copy PDFs to {pdf_dir}) ---
-    if build_pdf:
-        pdf_dir = build_dir / 'pdf'
-        pdf_dir.mkdir(parents=True, exist_ok=True)
-        print(f"[INFO] Compiling TeX files in {chapters_dir} and copying PDFs to {pdf_dir}")
-        for nb in notebooks:
-            tex_name = Path(nb).with_suffix('.tex').name
-            tex_path = chapters_dir / tex_name
-            pdf_name = tex_path.with_suffix('.pdf').name
-            pdf_path = chapters_dir / pdf_name
-            nb_path = repo_root / nb
-            # Check if .tex exists and is up to date (newer than .ipynb)
-            tex_needs_update = False
-            if not tex_path.exists():
-                tex_needs_update = True
-            elif nb_path.exists() and tex_path.stat().st_mtime < nb_path.stat().st_mtime:
-                tex_needs_update = True
-            if tex_needs_update:
-                print(f"[INFO] .tex file missing or outdated for {nb_path}, attempting to build...")
-                try:
-                    run_or_exit([
-                        sys.executable, __file__, '--tex', '--files', str(nb)
-                    ], check=True)
-                except Exception as e:
-                    print(f"[ERROR] Failed to build TeX for {nb_path}: {e}")
-                if not tex_path.exists():
-                    print(f"[ERROR] .tex file still not found for {tex_path} after attempting to build. Skipping PDF for this file.")
-                    continue
-            # Always copy .tex to docs/sources/<notebook_stem>/<notebook_stem>.tex if it exists
-            if tex_path.exists():
-                stem_dir = repo_root / 'docs' / 'sources' / nb_path.stem
-                stem_dir.mkdir(parents=True, exist_ok=True)
-                dest_tex = stem_dir / f"{nb_path.stem}.tex"
-                shutil.copy2(tex_path, dest_tex)
-                print(f"[INFO] Copied {tex_path} to {dest_tex}")
-            # Check if all referenced images exist in _build/images, else try to build with --img
-            with open(tex_path, 'r', encoding='utf-8') as f:
-                tex_content = f.read()
-            img_paths = re.findall(r'\\includegraphics(?:\\[[^\\]]*\\])?\\{\.\./images/([^}]+)\\}', tex_content)
-            missing_images = []
-            for img_filename in set(img_paths):
-                img_path = repo_root / '_build/images' / img_filename
-                if not img_path.exists():
-                    missing_images.append(img_filename)
-            if missing_images:
-                print(f"[WARN] Missing images for {tex_path}: {missing_images}. Not attempting recursive build. Skipping PDF for this file.")
-                continue
-            print(f"[INFO] Compiling {tex_path} to {pdf_path} using pdflatex...")
-            run_or_exit([
-                'pdflatex', '-interaction=nonstopmode', str(tex_path)
-            ], cwd=chapters_dir, check=True)
-            if pdf_path.exists():
-                dest_pdf = pdf_dir / pdf_name
-                shutil.copy2(pdf_path, dest_pdf)
-                print(f"[INFO] Copied {pdf_path} to {dest_pdf}")
-                # Also copy both PDF and TeX to docs/sources/<notebook_stem>/
-                stem_dir = repo_root / 'docs' / 'sources' / nb_path.stem
-                stem_dir.mkdir(parents=True, exist_ok=True)
-                dest_pdf2 = stem_dir / f"{nb_path.stem}.pdf"
-                shutil.copy2(pdf_path, dest_pdf2)
-                print(f"[INFO] Copied {pdf_path} to {dest_pdf2}")
-                # (TeX already copied above)
-            else:
-                print(f"[ERROR] PDF not generated for {tex_path}")
-        print(f"[INFO] All TeX files compiled and PDFs copied to {pdf_dir} and docs/sources/<notebook_stem>/")
-
-    # --- Build Markdown ---
-    if build_md:
-        md_dir = build_dir / 'md'
-        images_dir = build_dir / 'images'  # Use the global images dir
-        md_dir.mkdir(parents=True, exist_ok=True)
-        images_dir.mkdir(parents=True, exist_ok=True)
-        print(f"[INFO] Building Markdown files for notebooks in project (absolute paths) -> {md_dir}")
-        for nb in notebooks:
-            nb_path = repo_root / nb
-            if not nb_path.exists():
-                print(f"[WARN] Notebook not found: {nb_path}")
-                continue
-            md_name = nb_path.with_suffix('.md').name
-            md_path = md_dir / md_name
-            print(f"Converting {nb_path} to {md_path}")
-            missing_images = set()
-            try:
-                import nbformat
-                nb_data = nbformat.read(str(nb_path), as_version=4)
-                for cell in nb_data.get('cells', []):
-                    if cell.get('cell_type') == 'markdown':
-                        cell_source = ''.join(cell.get('source', []))
-                        for img_path in re.findall(r'!\[[^\]]*\]\(([^)]+)\)', cell_source):
-                            if img_path.startswith('http'):
-                                continue
-                            img_filename = f"{nb_path.stem}_{os.path.basename(img_path)}"
-                            img_file = images_dir / img_filename
-                            if not img_file.exists():
-                                missing_images.add(img_path)
-            except Exception as e:
-                print(f"[WARN] Could not parse notebook for images: {e}")
-            if missing_images:
-                print(f"[INFO] Missing images for {nb_path}: {missing_images}. Not attempting recursive build. Skipping markdown for this file.")
-                continue
-            run_or_exit([
-                jupyter_bin, 'nbconvert', '--to', 'markdown', str(nb_path),
-                '--output', md_name, '--output-dir', str(md_dir)
-            ])
-            with open(md_path, 'r', encoding='utf-8') as f:
                 md_content = f.read()
             def replace_img_link(match):
                 img_path = match.group(1)
                 if img_path.startswith('http'):
-                    return match.group(0)  # leave remote images unchanged
+                    return match.group(0)
                 img_filename = os.path.basename(img_path)
-                if img_filename.startswith(f"{nb_path.stem}_"):
-                    flat_name = img_filename
-                else:
-                    flat_name = f"{nb_path.stem}_{img_filename}"
-                return match.group(0).replace(img_path, f"../images/{flat_name}")
+                flat_name = f"{stem}_{img_filename}"
+                src_img = file_path.parent / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                # For tex, use relative path from tex_dir to img_dir
+                rel_path = os.path.relpath(dest_img, tex_dir)
+                return match.group(0).replace(img_path, rel_path)
             new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
-            with open(md_path, 'w', encoding='utf-8') as f:
+            with open(out_md, 'w', encoding='utf-8') as f:
                 f.write(new_md_content)
-            # Copy .md to docs/sources/<notebook_stem>/<notebook_stem>.md
-            stem_dir = repo_root / 'docs' / 'sources' / nb_path.stem
-            stem_dir.mkdir(parents=True, exist_ok=True)
-            dest_md = stem_dir / f"{nb_path.stem}.md"
-            shutil.copy2(md_path, dest_md)
-            print(f"[INFO] Copied {md_path} to {dest_md}")
-        print(f"[INFO] All notebooks converted to Markdown. All image links updated to reference _build/images and copied to docs/sources/<notebook_stem>.")
-
-    # --- Build DOCX from Markdown ---
-    if build_docx:
-        md_dir = build_dir / 'md'
-        images_dir = build_dir / 'images'  # Use the global images dir, same as Markdown
-        docx_dir = build_dir / 'docx'
-        docx_dir.mkdir(parents=True, exist_ok=True)
-        for nb in notebooks:
-            md_name = Path(nb).with_suffix('.md').name
-            md_path = md_dir / md_name
-            docx_name = Path(nb).with_suffix('.docx').name
-            docx_path = docx_dir / docx_name
-            # If markdown does not exist, try to build it once, then try again
-            if not md_path.exists():
-                print(f"[WARN] Markdown not found: {md_path}. Not attempting recursive build. Skipping DOCX for this file.")
+        elif ext == '.ipynb':
+            print(f"[INFO] Converting notebook to markdown: {file_path} -> {out_md}")
+            import nbformat
+            import subprocess
+            nb = nbformat.read(str(file_path), as_version=4)
+            tmp_md = tex_dir / f"{stem}_tmp.md"
+            cmd = [sys.executable, '-m', 'nbconvert', '--to', 'markdown', str(file_path), '--output', tmp_md.name, '--output-dir', str(tex_dir)]
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            if result.returncode != 0:
+                print(f"[ERROR] nbconvert failed for {file_path}: {result.stderr}")
                 continue
-            with open(md_path, 'r', encoding='utf-8') as f:
+            with open(tmp_md, 'r', encoding='utf-8') as f:
                 md_content = f.read()
-            missing_images = set()
-            for match in re.finditer(r'!\[[^\]]*\]\(([^)]+)\)', md_content):
-                img_path = match.group(1)
-                if img_path.startswith('http'):
-                    continue
-                img_filename = os.path.basename(img_path)
-                flat_name = f"{Path(nb).stem}_{img_filename}"
-                img_file = images_dir / flat_name
-                if not img_file.exists():
-                    missing_images.add(img_path)
-            if missing_images:
-                print(f"[WARN] Missing images for DOCX in {md_path}: {missing_images}. Proceeding to build DOCX anyway; images will be missing in output.")
-            def replace_img_link_docx(match):
+            def replace_img_link(match):
                 img_path = match.group(1)
                 if img_path.startswith('http'):
                     return match.group(0)
                 img_filename = os.path.basename(img_path)
-                if img_filename.startswith(f"{Path(nb).stem}_"):
-                    flat_name = img_filename
-                else:
-                    flat_name = f"{Path(nb).stem}_{img_filename}"
-                return match.group(0).replace(img_path, f"images/{flat_name}")
-            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link_docx, md_content)
-            with open(md_path, 'w', encoding='utf-8') as f:
+                flat_name = f"{stem}_{img_filename}"
+                src_img = tex_dir / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                rel_path = os.path.relpath(dest_img, tex_dir)
+                return match.group(0).replace(img_path, rel_path)
+            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            with open(out_md, 'w', encoding='utf-8') as f:
                 f.write(new_md_content)
-            print(f"Converting {md_path} to {docx_path} using pandoc with resource-path {build_dir}")
-            run_or_exit([
-                'pandoc', str(md_path), '-o', str(docx_path), '--resource-path', str(build_dir)
-            ], cwd=md_dir)
-            # Copy .docx to docs/sources/<notebook_stem>/<notebook_stem>.docx
-            stem_dir = repo_root / 'docs' / 'sources' / Path(nb).stem
-            stem_dir.mkdir(parents=True, exist_ok=True)
-            dest_docx = stem_dir / f"{Path(nb).stem}.docx"
-            shutil.copy2(docx_path, dest_docx)
-            print(f"[INFO] Copied {docx_path} to {dest_docx}")
-            # Also copy .md to docs/sources/<notebook_stem>/<notebook_stem>.md
-            dest_md = stem_dir / f"{Path(nb).stem}.md"
-            shutil.copy2(md_path, dest_md)
-            print(f"[INFO] Copied {md_path} to {dest_md}")
-        print(f"[INFO] All markdown files converted to DOCX using pandoc and saved in {docx_dir} and copied to docs/sources/<notebook_stem>.")
+            tmp_md.unlink()
+        else:
+            print(f"[SKIP] Unsupported file type: {file}")
+            continue
+        # Step 2: Convert markdown to tex with pandoc
+        print(f"[INFO] Converting markdown to tex: {out_md} -> {out_tex}")
+        cmd = ['pandoc', str(out_md), '-o', str(out_tex), '--resource-path', str(img_dir)]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0:
+            print(f"[ERROR] pandoc failed for {out_md}: {result.stderr}")
+            continue
+        print(f"[OK] Built {out_tex} from {file}")
+    if missing_files:
+        print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:")
+        for mf in missing_files:
+            print(f"  - {mf}")
+def render_download_buttons(file_path):
+    """
+    Generate HTML for download buttons for a given file (md or ipynb).
+    Uses .download-btn CSS. Follows the pattern from the live site.
+    For .ipynb files, dynamically finds the correct Jupyter Book HTML path.
+    """
+    import os
+    from pathlib import Path
+    stem = os.path.splitext(os.path.basename(file_path))[0]
+    ext = os.path.splitext(file_path)[1].lower()
+    # Always show these
+    buttons = [
+        (f'pdf/{stem}.pdf', 'PDF', '📄', True),
+        (f'md/{stem}.md', 'MD', '✍️', True),
+        (f'docx/{stem}.docx', 'DOCX', '📝', True),
+        (f'tex/{stem}.tex', 'TEX', '📐', True),
+    ]
+    # Add ipynb and jupyter for notebooks
+    if ext == '.ipynb':
+        buttons.append((f'ipynb/{stem}.ipynb', 'IPYNB', '📓', True))
+        # Dynamically find the Jupyter Book HTML file
+        jupyter_html = None
+        jupyter_root = Path('docs/jupyter-book/content/notebooks')
+        if jupyter_root.exists():
+            for html_file in jupyter_root.rglob(f'{stem}.html'):
+                # Use the first match found
+                rel_path = html_file.relative_to('docs')
+                jupyter_html = str(rel_path)
+                break
+        if jupyter_html:
+            buttons.append((jupyter_html, 'Jupyter', '🔗', False))
+        else:
+            # Fallback: keep the old (likely broken) path, but mark as disabled
+            buttons.append((f'jupyter/content/notebooks/{stem}.html', 'Jupyter (not found)', '❌', False))
+    html = ['<nav class="chapter-downloads" aria-label="Download chapter sources">']
+    html.append('<div role="group" aria-label="Download formats">')
+    for href, label, icon, is_download in buttons:
+        attrs = f'class="download-btn" href="{href}"'
+        if is_download:
+            attrs += ' download'
+        if label.startswith('Jupyter'):
+            attrs += ' target="_blank" rel="noopener"'
+        if 'not found' in label:
+            attrs += ' style="pointer-events:none;opacity:0.5;"'
+        html.append(f'<a {attrs}><span aria-hidden="true">{icon}</span> {label}</a>')
+    html.append('</div></nav>')
+    return '\n'.join(html)
 
-    # --- Generate _toc.yml only in top-level build process ---
-    if not os.environ.get("MCM_BUILD_SUBPROCESS"):
-        toc_yml = auto_gen / '_toc.yml'
-        print(f"[INFO] Generating _toc.yml from {notebooks_yaml} using Python...")
-        index_md = repo_root / 'content/index.md'
-        if not index_md.exists():
-            print(f"[ERROR] content/index.md not found. This file is required as the root for the Jupyter Book.", file=sys.stderr)
-            sys.exit(1)
-        toc_content = [
-            "# Auto-generated _toc.yml from _notebooks.yaml",
-            "format: jb-book",
-            "root: content/index",
-            "chapters:",
-        ]
-        for nb in notebooks:
-            nb_path = Path(nb)
-            # Remove .ipynb suffix for toc, keep path as in _notebooks.yaml
-            file_entry = str(nb_path.with_suffix(''))
-            # Do not include content/index as a chapter (should only be root)
-            if file_entry == "content/index":
+
+import shutil
+
+def copy_static_assets(debug=False):
+    """Copy CSS and image assets from static/ to docs/."""
+    # Copy CSS
+    css_src = Path('static/css')
+    css_dest = Path('docs/css')
+    if css_src.exists():
+        css_dest.mkdir(parents=True, exist_ok=True)
+        for css_file in css_src.glob('*.css'):
+            dest = css_dest / css_file.name
+            shutil.copy2(css_file, dest)
+            debug_print(f"[INFO] Copied {css_file} to {dest}", debug)
+    else:
+        debug_print(f"[WARN] Source CSS directory {css_src} does not exist.", debug)
+    # Copy images
+    img_src = Path('static/images')
+    img_dest = Path('docs/images')
+    if img_src.exists():
+        img_dest.mkdir(parents=True, exist_ok=True)
+        for img_file in img_src.glob('*'):
+            if img_file.is_file():
+                dest = img_dest / img_file.name
+                shutil.copy2(img_file, dest)
+                debug_print(f"[INFO] Copied {img_file} to {dest}", debug)
+    else:
+        debug_print(f"[WARN] Source images directory {img_src} does not exist.", debug)
+def debug_print(msg, debug):
+    if debug:
+        print(msg)
+#!/usr/bin/env python3
+
+"""
+build-html.py
+
+Skeleton script for building site outputs with flexible CLI flags.
+Supports: --html, --md, --docx, --tex, --pdf, --jupyter, --ppt, and --files FILE1 FILE2 ...
+
+No build logic yet—just argument parsing and structure.
+"""
+
+import argparse
+import sys
+import subprocess
+
+
+# --- Move build_html_all and build_html_for_files above main() ---
+
+
+def build_html_all(debug=False):
+    copy_static_assets(debug=debug)
+    """Build HTML for all files referenced in the menu/content tree (_content.yml)."""
+    from content_parser import load_and_validate_content_yml, get_all_content_files
+    content = load_and_validate_content_yml('_content.yml')
+    files = get_all_content_files(content)
+    if not files:
+        if debug:
+            print("[WARN] No files found in _content.yml toc.")
+        return
+    if debug:
+        print(f"[INFO] Building HTML for {len(files)} files from menu/content tree.")
+    build_html_for_files(files, debug=debug)
+
+from pathlib import Path
+import os
+import sys
+try:
+    import markdown
+except ImportError:
+    print("[ERROR] The 'markdown' package is required. Install with: pip install markdown", file=sys.stderr)
+    sys.exit(1)
+from content_parser import load_and_validate_content_yml
+from build_menu_html import build_menu_ul
+from build_footer_html import render_footer
+from menu_parser import get_menu_tree
+
+from notebook_kernel_utils import fix_all_notebook_kernels
+
+def build_html_for_files(files, debug=False):
+    # Always fix kernels before building
+    fix_all_notebook_kernels("content/", debug=debug)
+    debug_print("[DEBUG] build_html_for_files() is running!", debug)
+    """
+    Build HTML for specified markdown and notebook files using YAML-driven templates and navigation.
+    debug: if True, print debug output for menu and notebook processing.
+    """
+    # Load site config and menu
+    content = load_and_validate_content_yml('_content.yml')
+    site = content['site']
+    try:
+        menu = get_menu_tree('_content.yml')
+        if isinstance(menu, dict) and 'toc' in menu:
+            menu = menu['toc']
+    except Exception as e:
+        print(f"[ERROR] Could not load menu: {e}")
+        menu = []
+
+
+    import re
+    def slugify(title):
+        # Lowercase, replace spaces with hyphens, remove non-alphanum except hyphens
+        slug = title.lower().strip()
+        slug = re.sub(r'\s+', '-', slug)
+        slug = re.sub(r'[^a-z0-9\-]', '', slug)
+        return slug
+
+    def file_to_html_link(file_path, title, is_auto_index=False):
+        if is_auto_index:
+            base = slugify(title)
+        else:
+            base, ext = os.path.splitext(os.path.basename(file_path))
+        return f'<a href="{base}.html">{title}</a>'
+
+    def first_child_file(node):
+        if 'children' in node:
+            for child in node['children']:
+                if isinstance(child, dict):
+                    if 'file' in child:
+                        return child['file']
+                    result = first_child_file(child)
+                    if result:
+                        return result
+        return None
+
+    def top_level_menu_items(menu):
+        items = []
+        if isinstance(menu, list):
+            for node in menu:
+                if not isinstance(node, dict):
+                    continue
+                title = node.get('title')
+                file = node.get('file')
+                is_auto_index = False
+                if not file and node.get('children'):
+                    # This is an auto-generated index
+                    is_auto_index = True
+                    file = slugify(title) + '.html'
+                elif file:
+                    # Use the file as normal
+                    pass
+                if title and (file or node.get('children')):
+                    items.append((file, title, node, is_auto_index))
+        return items
+
+    top_menu = top_level_menu_items(menu)
+
+    menu_html = ['<ul class="site-nav-menu" id="site-nav-menu">']
+    for file, title, _, is_auto_index in top_menu:
+        menu_html.append('<li>')
+        menu_html.append(file_to_html_link(file, title, is_auto_index=is_auto_index))
+        menu_html.append('</li>')
+    menu_html.append('</ul>')
+    menu_html = ''.join(menu_html)
+
+    footer_text = content.get('footer', {}).get('text', '')
+    # Load footer from template and fill variable
+    with open('static/templates/footer.html', 'r', encoding='utf-8') as f:
+        footer_html = f.read().replace('{{ footer_text }}', footer_text)
+
+    # Load header HTML from template and fill variables
+    logo = site['logo']
+    title = site['title']
+    description = site.get('description', '')
+    logo_web = './' + logo[len('static/'):] if logo.startswith('static/') else logo
+    with open('static/templates/header.html', 'r', encoding='utf-8') as f:
+        header_html = f.read()
+    header_html = (header_html
+        .replace('{{ logo_web }}', logo_web)
+        .replace('{{ title }}', title)
+        .replace('{{ description }}', description)
+    )
+
+    # Load theme toggle HTML from template
+    with open('static/templates/theme-toggle.html', 'r', encoding='utf-8') as f:
+        theme_toggle_html = f.read()
+
+    head_path = os.path.join('static', 'templates', 'head.html')
+    with open(head_path, 'r') as f:
+        head_template = f.read()
+    css_light = 'css/theme-light.css'
+    css_dark = 'css/theme-dark.css'
+
+    import nbformat
+    import base64
+    debug_print(f"[DEBUG] build_html_for_files called with {len(files)} files:", debug)
+    for f in files:
+        debug_print(f"  - {f}", debug)
+    debug_print(f"[DEBUG] Current working directory: {os.getcwd()}", debug)
+    debug_print(f"[DEBUG] Output directory absolute path: {str(Path('docs').resolve())}", debug)
+    debug_print(f"[DEBUG] Output directory exists: {Path('docs').exists()}", debug)
+    debug_print("[DEBUG] Listing files in output directory (docs/):", debug)
+    try:
+        for p in Path('docs').iterdir():
+            debug_print(f"    - {p.name} (dir: {p.is_dir()}, file: {p.is_file()})", debug)
+            if p.is_dir():
+                for subp in p.iterdir():
+                    debug_print(f"      - {subp.name} (dir: {subp.is_dir()}, file: {subp.is_file()})", debug)
+    except Exception as e:
+        debug_print(f"[ERROR] Could not list docs/: {e}", debug)
+    debug_print("[DEBUG] Starting main file processing loop...", debug)
+    missing_files = []
+
+    # --- Auto-generate index pages for top-level menus with no file ---
+    for file, title, node, is_auto_index in top_menu:
+        if is_auto_index:
+            # Always generate at slugified-title.html for auto-indexes
+            slug = slugify(title)
+            out_path = Path('docs') / f"{slug}.html"
+            # Build a list of children (and grandchildren)
+            def render_children(children, level=1):
+                html = []
+                for child in children:
+                    if not isinstance(child, dict):
+                        continue
+                    child_title = child.get('title', '(untitled)')
+                    child_file = child.get('file')
+                    child_children = child.get('children')
+                    # Use h2/h3/h4 for subgroups, and always list grandchildren if present
+                    if child_file and child_children:
+                        # Submenu/group with a file: link and heading, then list grandchildren
+                        heading_tag = f'h{min(level+1, 4)}'
+                        html.append(f'<{heading_tag}>{file_to_html_link(child_file, child_title)}</{heading_tag}>')
+                        html.append(render_children(child_children, level+1))
+                    elif child_file:
+                        # Just a file
+                        html.append(f'<li>{file_to_html_link(child_file, child_title)}</li>')
+                    elif child_children:
+                        # Submenu/group with no file: heading, then list grandchildren
+                        heading_tag = f'h{min(level+1, 4)}'
+                        html.append(f'<{heading_tag}>{child_title}</{heading_tag}>')
+                        html.append(render_children(child_children, level+1))
+                # Only wrap in <ul> if there are <li> children at this level
+                if any(x.startswith('<li>') for x in html):
+                    return '<ul class="menu-section">' + ''.join(html) + '</ul>'
+                else:
+                    return ''.join(html)
+            section_html = f'<h2>{title}</h2>'
+            if node.get('description'):
+                section_html += f'<div class="menu-description">{node["description"]}</div>'
+            section_html += render_children(node['children'])
+            page_title = title
+            head_html = head_template.replace('{{ title }}', page_title).replace('{{ css_light }}', css_light).replace('{{ css_dark }}', css_dark)
+            full_html = f'''<!DOCTYPE html>\n<html lang="{site.get('language', 'en')}">\n{head_html}\n<body>\n  {header_html}\n  <nav class="site-nav" id="site-nav" aria-label="Main navigation">{menu_html}</nav>\n  <main class="site-main container">\n    {theme_toggle_html}\n    {section_html}\n  </main>\n  <footer>\n    {footer_html}\n  </footer>\n</body>\n</html>\n'''
+            out_path.parent.mkdir(exist_ok=True)
+            with open(out_path, 'w', encoding='utf-8') as f:
+                f.write(full_html)
+            debug_print(f"[OK] Auto-generated index page: {out_path}", debug)
+
+    # --- Normal file build logic ---
+    for file in files:
+        debug_print(f"[DEBUG] ---\n[DEBUG] Processing file: {file}", debug)
+        file_path = Path(file)
+        debug_print(f"[DEBUG] Starting processing for: {file}", debug)
+        if not file_path.exists():
+            debug_print(f"[ERROR] File not found: {file}", debug)
+            missing_files.append(file)
+            continue
+        ext = file_path.suffix.lower()
+        debug_print(f"[DEBUG] File extension: {ext}", debug)
+        try:
+            download_html = render_download_buttons(str(file_path))
+            if ext == '.md':
+                debug_print(f"[DEBUG] Reading markdown file: {file_path}", debug)
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    md_content = f.read()
+                debug_print(f"[DEBUG] Rendering markdown to HTML...", debug)
+                body_html = markdown.markdown(md_content, extensions=['extra', 'toc', 'tables'])
+            elif ext == '.ipynb':
+                debug_print(f"[DEBUG] Reading notebook file: {file_path}", debug)
+                try:
+                    nb = nbformat.read(str(file_path), as_version=4)
+                except Exception as e:
+                    debug_print(f"[ERROR] Could not read notebook: {file_path}: {e}", debug)
+                    continue
+                debug_print(f"[DEBUG] Notebook loaded. Keys: {list(nb.keys())}", debug)
+                if not nb.get('cells'):
+                    debug_print(f"[WARN] Notebook {file_path} has no cells.", debug)
+                    continue
+                debug_print(f"[DEBUG] Notebook {file_path} has {len(nb['cells'])} cells.", debug)
+                body_html = []
+                for idx, cell in enumerate(nb.get('cells', [])):
+                    debug_print(f"[DEBUG] Processing cell {idx+1} of type {cell.get('cell_type')}", debug)
+                    cell_type = cell.get('cell_type')
+                    lang = cell.get('metadata', {}).get('language', 'python' if cell_type == 'code' else 'markdown')
+                    debug_print(f"[DEBUG] Cell {idx}: type={cell_type}, lang={lang}", debug)
+                    if cell_type == 'markdown':
+                        import markdown as mdmod
+                        try:
+                            debug_print(f"[DEBUG] Rendering markdown cell {idx+1}", debug)
+                            cell_html = mdmod.markdown(''.join(cell.get('source', [])), extensions=['extra', 'toc', 'tables'])
+                            body_html.append(f'<div class="notebook-markdown-cell">{cell_html}</div>')
+                        except Exception as e:
+                            debug_print(f"[ERROR] Failed to render markdown cell {idx+1} in {file_path}: {e}", debug)
+                    elif cell_type == 'code':
+                        debug_print(f"[DEBUG] Rendering code cell {idx+1}", debug)
+                        code = ''.join(cell.get('source', []))
+                        code_html = f'<pre class="notebook-code-cell"><code>{code}</code></pre>'
+                        outputs_html = []
+                        for oidx, output in enumerate(cell.get('outputs', [])):
+                            otype = output.get('output_type')
+                            debug_print(f"[DEBUG]   Output {oidx+1}: type={otype}", debug)
+                            try:
+                                if otype == 'stream':
+                                    text = ''.join(output.get('text', []))
+                                    outputs_html.append(f'<div class="notebook-output-stream">{text}</div>')
+                                elif otype == 'execute_result' or otype == 'display_data':
+                                    data = output.get('data', {})
+                                    if 'text/plain' in data:
+                                        outputs_html.append(f'<div class="notebook-output-text">{data["text/plain"]}</div>')
+                                    if 'image/png' in data:
+                                        img_data = data['image/png']
+                                        outputs_html.append(f'<img class="notebook-output-img" src="data:image/png;base64,{img_data}" />')
+                                    if 'image/jpeg' in data:
+                                        img_data = data['image/jpeg']
+                                        outputs_html.append(f'<img class="notebook-output-img" src="data:image/jpeg;base64,{img_data}" />')
+                                    if 'text/html' in data:
+                                        outputs_html.append(f'<div class="notebook-output-html">{data["text/html"]}</div>')
+                                elif otype == 'error':
+                                    ename = output.get('ename', '')
+                                    evalue = output.get('evalue', '')
+                                    traceback = output.get('traceback', [])
+                                    tb_html = '<br>'.join(traceback)
+                                    outputs_html.append(f'<div class="notebook-output-error"><b>{ename}: {evalue}</b><br>{tb_html}</div>')
+                            except Exception as e:
+                                debug_print(f"[ERROR] Failed to render output {oidx+1} in code cell {idx+1} in {file_path}: {e}", debug)
+                        cell_block = code_html + ''.join(outputs_html)
+                        body_html.append(f'<div class="notebook-code-cell-block">{cell_block}</div>')
+                body_html = '\n'.join(body_html)
+            else:
+                debug_print(f"[SKIP] Unsupported file type: {file}", debug)
                 continue
-            toc_content.append(f"  - file: {file_entry}")
-        with open(toc_yml, 'w') as f:
-            f.write('\n'.join(toc_content) + '\n')
-        print(f"[INFO] _toc.yml generated with {len([nb for nb in notebooks if Path(nb).with_suffix('') != 'content/index'])} chapters.")
+            if not body_html:
+                debug_print(f"[WARN] No content generated for {file_path}, skipping HTML output.", debug)
+                continue
+            page_title = title
+            head_html = head_template.replace('{{ title }}', page_title).replace('{{ css_light }}', css_light).replace('{{ css_dark }}', css_dark)
+            # Use page skeleton template
+            with open('static/templates/page.html', 'r', encoding='utf-8') as f:
+                page_template = f.read()
+            full_html = page_template \
+                .replace('{{ language }}', site.get('language', 'en')) \
+                .replace('{{ head_html }}', head_html) \
+                .replace('{{ header_html }}', header_html) \
+                .replace('{{ menu_html }}', menu_html) \
+                .replace('{{ theme_toggle_html }}', theme_toggle_html) \
+                .replace('{{ download_html }}', download_html) \
+                .replace('{{ body_html }}', body_html) \
+                .replace('{{ footer_html }}', footer_html)
+            out_dir = Path('docs')
+            out_dir.mkdir(exist_ok=True)
+            out_name = file_path.stem + '.html'
+            out_path = out_dir / out_name
+            try:
+                with open(out_path, 'w', encoding='utf-8') as f:
+                    f.write(full_html)
+                debug_print(f"[OK] Built {out_path} from {file}", debug)
+            except Exception as e:
+                debug_print(f"[ERROR] Failed to write HTML file {out_path}: {e}", debug)
+        except Exception as e:
+            debug_print(f"[FATAL] Unexpected error processing {file}: {e}", debug)
+    if missing_files:
+        debug_print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:", debug)
+        for mf in missing_files:
+            debug_print(f"  - {mf}", debug)
+        # Always output a valid HTML page with .container for any fallback or summary
+        # (This block is only for summary, not for outputting a page, so no fallback HTML is written here)
 
-    # Clean up step removed: Do not remove any folders or files in _build during the build process.
-    # If cleanup is needed, it should be a separate explicit step, not part of the main build.
+import subprocess
+def build_jupyter_for_files(debug=False):
+    """
+    Orchestrate a robust Jupyter Book build:
+    1. Generate flat _toc.yml
+    2. Fix notebook kernels
+    3. Validate TOC and kernels
+    4. Build Jupyter Book
+    """
+    def run_script(cmd, desc):
+        import subprocess
+        print(f"[JUPYTER BUILD] {desc}...\n  $ {' '.join(cmd)}")
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0:
+            print(f"[ERROR] {desc} failed:\n{result.stderr}")
+            raise RuntimeError(f"Step failed: {desc}")
+        if debug:
+            print(result.stdout)
+    # 1. Generate flat _toc.yml
+    run_script([sys.executable, 'convert_content_to_jb_flat.py'], 'Generate flat _toc.yml')
+    # 2. Fix notebook kernels
+    run_script([sys.executable, 'fix_notebook_kernels.py'], 'Fix notebook kernels')
+    # 2.5. Ensure the Jupyter kernel is registered (idempotent)
+    import sys as _sys
+    def ensure_kernel():
+        try:
+            import ipykernel
+            import jupyter_client.kernelspec
+            ksm = jupyter_client.kernelspec.KernelSpecManager()
+            if 'open-physics-ed' in ksm.find_kernel_specs():
+                print('[OK] Jupyter kernel "open-physics-ed" already registered.')
+                return
+            print('[INFO] Registering Jupyter kernel: open-physics-ed')
+            import subprocess
+            result = subprocess.run([
+                _sys.executable, '-m', 'ipykernel', 'install', '--user', '--name', 'open-physics-ed', '--display-name', 'Python (open-physics-ed)'
+            ], capture_output=True, text=True)
+            if result.returncode == 0:
+                print('[OK] Registered Jupyter kernel: open-physics-ed')
+            else:
+                print('[ERROR] Failed to register kernel:')
+                print(result.stderr)
+        except Exception as e:
+            print(f'[ERROR] Could not ensure Jupyter kernel: {e}')
+    ensure_kernel()
+    # 3. Validate TOC and kernels
+    run_script([sys.executable, 'validate_yaml.py', '_toc.yml'], 'Validate _toc.yml YAML')
+    run_script([sys.executable, 'validate_jb_toc.py', '_toc.yml'], 'Validate _toc.yml for duplicates')
+    run_script([sys.executable, 'check_notebook_kernels.py', '--debug'], 'Check notebook kernels')
+    # 4. Build Jupyter Book
+    # Run jupyter-book build . and stream output live for better feedback
+    print('[JUPYTER BUILD] Jupyter Book build (jupyter-book build .)...\n  $ jupyter-book build .')
+    import subprocess
+    proc = subprocess.Popen(
+        ['jupyter-book', 'build', '.'],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True
+    )
+    while True:
+        line = proc.stdout.readline()
+        if not line:
+            break
+        print(line, end='')
+    proc.wait()
+    if proc.returncode != 0:
+        raise RuntimeError('Step failed: Jupyter Book build (jupyter-book build .)')
+        # Copy Jupyter Book HTML output to docs/jupyter-book/
+    src = '_build/html'
+    dest = 'docs/jupyter-book'
+    if os.path.exists(src):
+        if os.path.exists(dest):
+            shutil.rmtree(dest)
+        shutil.copytree(src, dest)
+        print(f'[JUPYTER BUILD] Copied Jupyter Book HTML from {src} to {dest}')
+    else:
+        print(f'[JUPYTER BUILD] WARNING: Source directory {src} does not exist. No files copied.')
 
-if __name__ == '__main__':
+def main():
+    parser = argparse.ArgumentParser(description="Build site outputs from content.")
+    parser.add_argument('--all', action='store_true', help='Build all outputs in sequence (md, docx, tex, pdf, jupyter, ipynb, html)')
+    parser.add_argument('--html', action='store_true', help='Build HTML output')
+    parser.add_argument('--ipynb', action='store_true', help='Copy Jupyter notebooks to flat _build/ipynb and docs/ipynb')
+    parser.add_argument('--md', action='store_true', help='Build Markdown output')
+    parser.add_argument('--docx', action='store_true', help='Build DOCX output')
+    parser.add_argument('--tex', action='store_true', help='Build LaTeX output')
+    parser.add_argument('--pdf', action='store_true', help='Build PDF output')
+    parser.add_argument('--jupyter', action='store_true', help='Build Jupyter Notebook output')
+    parser.add_argument('--ppt', action='store_true', help='Build PowerPoint output')
+    parser.add_argument('--files', nargs='+', help='Only build the specified files')
+    parser.add_argument('--debug', action='store_true', help='Print debug information about menu extraction')
+    args = parser.parse_args()
+
+
+    # All build
+    if args.all:
+        if args.debug:
+            print("[INFO] Full build (--all) selected.")
+        build_md_all(debug=args.debug)
+        build_docx_all(debug=args.debug)
+        build_tex_all(debug=args.debug)
+        build_pdf_all(debug=args.debug)
+        build_jupyter_for_files(debug=args.debug)
+        # IPYNB flat copy build
+        cmd = [sys.executable, 'copy_ipynb_flat.py']
+        if args.debug:
+            cmd.append('--debug')
+        print(f"[INFO] Running: {' '.join(cmd)}")
+        result = subprocess.run(cmd, capture_output=False)
+        if result.returncode != 0:
+            print(f"[ERROR] copy_ipynb_flat.py failed with exit code {result.returncode}")
+            sys.exit(result.returncode)
+        build_html_all(debug=args.debug)
+        return
+    # LaTeX build
+    if args.tex:
+        if args.debug:
+            print("[INFO] LaTeX build selected.")
+        if args.files:
+            if args.debug:
+                print(f"[INFO] Building LaTeX for specified files: {args.files}")
+            build_tex_for_files(args.files, debug=args.debug)
+        else:
+            if args.debug:
+                print("[INFO] Building LaTeX for all content.")
+            build_tex_all(debug=args.debug)
+
+    if args.debug:
+        print("[INFO] Build flags:")
+        print(f"  HTML:    {args.html}")
+        print(f"  Markdown:{args.md}")
+        print(f"  DOCX:    {args.docx}")
+        print(f"  LaTeX:   {args.tex}")
+        print(f"  PDF:     {args.pdf}")
+        print(f"  Jupyter: {args.jupyter}")
+        print(f"  PPT:     {args.ppt}")
+        print(f"  Files:   {args.files}")
+
+    # Jupyter Book build
+    if args.jupyter:
+        if args.debug:
+            print("[INFO] Jupyter Book build selected.")
+        build_jupyter_for_files(debug=args.debug)
+
+    # HTML build
+    if args.html:
+        if args.debug:
+            print("[INFO] HTML build selected.")
+        if args.files:
+            if args.debug:
+                print(f"[INFO] Building HTML for specified files: {args.files}")
+            build_html_for_files(args.files, debug=args.debug)
+        else:
+            if args.debug:
+                print("[INFO] Building HTML for all content.")
+            build_html_all(debug=args.debug)
+    
+    # IPYNB flat copy build
+    if args.ipynb:
+        cmd = [sys.executable, 'copy_ipynb_flat.py']
+        if args.files:
+            cmd.append('--files')
+            cmd.extend(args.files)
+        if args.debug:
+            cmd.append('--debug')
+        print(f"[INFO] Running: {' '.join(cmd)}")
+        result = subprocess.run(cmd, capture_output=False)
+        if result.returncode != 0:
+            print(f"[ERROR] copy_ipynb_flat.py failed with exit code {result.returncode}")
+            sys.exit(result.returncode)
+        return
+    
+    # Markdown build
+    if args.md:
+        if args.debug:
+            print("[INFO] Markdown build selected.")
+        if args.files:
+            if args.debug:
+                print(f"[INFO] Building Markdown for specified files: {args.files}")
+            build_md_for_files(args.files, debug=args.debug)
+        else:
+            if args.debug:
+                print("[INFO] Building Markdown for all content.")
+            build_md_all(debug=args.debug)
+    if args.docx:
+        if args.debug:
+            print("[INFO] DOCX build selected.")
+        if args.files:
+            if args.debug:
+                print(f"[INFO] Building DOCX for specified files: {args.files}")
+            build_docx_for_files(args.files, debug=args.debug)
+        else:
+            if args.debug:
+                print("[INFO] Building DOCX for all content.")
+            build_docx_all(debug=args.debug)
+    
+    if args.pdf:
+        if args.debug:
+            print("[INFO] PDF build selected.")
+        if args.files:
+            if args.debug:
+                print(f"[INFO] Building PDF for specified files: {args.files}")
+            build_pdf_for_files(args.files, debug=args.debug)
+        else:
+            if args.debug:
+                print("[INFO] Building PDF for all content.")
+            build_pdf_all(debug=args.debug)
+    
+def build_docx_all(debug=False):
+    """Build DOCX for all files referenced in the menu/content tree (_content.yml)."""
+    from content_parser import load_and_validate_content_yml, get_all_content_files
+    content = load_and_validate_content_yml('_content.yml')
+    files = get_all_content_files(content)
+    if not files:
+        if debug:
+            print("[WARN] No files found in _content.yml toc.")
+        return
+    if debug:
+        print(f"[INFO] Building DOCX for {len(files)} files from menu/content tree.")
+    build_docx_for_files(files, debug=debug)
+
+def build_docx_for_files(files, debug=False):
+    """Build DOCX for specified markdown and notebook files."""
+    import subprocess
+    import sys
+    import os
+    from pathlib import Path
+    import shutil
+    import re
+    repo_root = Path(__file__).parent.resolve()
+    img_dir = repo_root / 'docs' / 'images'
+    docx_dir = repo_root / 'docs' / 'docx'
+    img_dir.mkdir(parents=True, exist_ok=True)
+    docx_dir.mkdir(parents=True, exist_ok=True)
+    missing_files = []
+    for file in files:
+        file_path = Path(file)
+        if not file_path.exists():
+            print(f"[ERROR] File not found: {file}")
+            missing_files.append(file)
+            continue
+        ext = file_path.suffix.lower()
+        stem = file_path.stem
+        out_md = docx_dir / f"{stem}.md"
+        out_docx = docx_dir / f"{stem}.docx"
+        # Step 1: Ensure we have a markdown file with correct image links
+        if ext == '.md':
+            print(f"[INFO] Copying markdown file: {file_path} -> {out_md}")
+            shutil.copy2(file_path, out_md)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                md_content = f.read()
+            def replace_img_link(match):
+                img_path = match.group(1)
+                if img_path.startswith('http'):
+                    # Always replace remote images with a warning/placeholder for PDF export
+                    warning = '\\n> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**\\n'
+                    placeholder = f'![Image not embedded: remote image]({img_path})'
+                    if debug:
+                        print(f"[WARN] Replacing ALL remote images with placeholder: {img_path}")
+                    return warning + placeholder
+                img_filename = os.path.basename(img_path)
+                flat_name = f"{stem}_{img_filename}"
+                src_img = build_pdf_dir / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    if debug:
+                        print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                rel_path = os.path.relpath(dest_img, build_pdf_dir)
+                return match.group(0).replace(img_path, rel_path)
+            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            with open(out_md, 'w', encoding='utf-8') as f:
+                f.write(new_md_content)
+        elif ext == '.ipynb':
+            print(f"[INFO] Converting notebook to markdown: {file_path} -> {out_md}")
+            import nbformat
+            import subprocess
+            nb = nbformat.read(str(file_path), as_version=4)
+            tmp_md = docx_dir / f"{stem}_tmp.md"
+            cmd = [sys.executable, '-m', 'nbconvert', '--to', 'markdown', str(file_path), '--output', tmp_md.name, '--output-dir', str(docx_dir)]
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            if result.returncode != 0:
+                print(f"[ERROR] nbconvert failed for {file_path}: {result.stderr}")
+                continue
+            with open(tmp_md, 'r', encoding='utf-8') as f:
+                md_content = f.read()
+            def replace_img_link(match):
+                img_path = match.group(1)
+                if img_path.startswith('http'):
+                    # Always replace remote images with a warning/placeholder for PDF export
+                    warning = '\n> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**\n'
+                    placeholder = f'![Image not embedded: remote image]({img_path})'
+                    if debug:
+                        print(f"[WARN] Replacing ALL remote images with placeholder: {img_path}")
+                    return warning + placeholder
+                img_filename = os.path.basename(img_path)
+                flat_name = f"{stem}_{img_filename}"
+                src_img = docx_dir / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                rel_path = os.path.relpath(dest_img, docx_dir)
+                return match.group(0).replace(img_path, rel_path)
+            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            with open(out_md, 'w', encoding='utf-8') as f:
+                f.write(new_md_content)
+            tmp_md.unlink()
+        else:
+            print(f"[SKIP] Unsupported file type: {file}")
+            continue
+        # Step 2: Convert markdown to docx with pandoc
+        print(f"[INFO] Converting markdown to docx: {out_md} -> {out_docx}")
+        cmd = ['pandoc', str(out_md), '-o', str(out_docx), '--resource-path', str(img_dir)]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0:
+            print(f"[ERROR] pandoc failed for {out_md}: {result.stderr}")
+            continue
+        print(f"[OK] Built {out_docx} from {file}")
+    if missing_files:
+        print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:")
+        for mf in missing_files:
+            print(f"  - {mf}")
+import re
+import shutil
+from pathlib import Path
+def build_md_all(debug=False):
+    """Build Markdown for all files referenced in the menu/content tree (_content.yml)."""
+    from content_parser import load_and_validate_content_yml, get_all_content_files
+    content = load_and_validate_content_yml('_content.yml')
+    files = get_all_content_files(content)
+    if not files:
+        if debug:
+            print("[WARN] No files found in _content.yml toc.")
+        return
+    if debug:
+        print(f"[INFO] Building Markdown for {len(files)} files from menu/content tree.")
+    build_md_for_files(files, debug=debug)
+
+def build_md_for_files(files, debug=False):
+    """Build Markdown for specified markdown and notebook files."""
+    repo_root = Path(__file__).parent.resolve()
+    md_dir = repo_root / 'docs' / 'md'
+    img_dir = repo_root / 'docs' / 'images'
+    md_dir.mkdir(parents=True, exist_ok=True)
+    img_dir.mkdir(parents=True, exist_ok=True)
+    missing_files = []
+    for file in files:
+        file_path = Path(file)
+        if not file_path.exists():
+            if debug:
+                print(f"[ERROR] File not found: {file}")
+            missing_files.append(file)
+            continue
+        ext = file_path.suffix.lower()
+        stem = file_path.stem
+        out_md = md_dir / f"{stem}.md"
+        if ext == '.md':
+            print(f"[INFO] Copying markdown file: {file_path} -> {out_md}")
+            shutil.copy2(file_path, out_md)
+            # Copy images referenced in the markdown
+            with open(file_path, 'r', encoding='utf-8') as f:
+                md_content = f.read()
+            def replace_img_link(match):
+                img_path = match.group(1)
+                if img_path.startswith('http'):
+                    return match.group(0)
+                img_filename = os.path.basename(img_path)
+                flat_name = f"{stem}_{img_filename}"
+                src_img = file_path.parent / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                # Use ../images/ for correct relative path from docs/md/
+                return match.group(0).replace(img_path, f"../images/{flat_name}")
+            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            with open(out_md, 'w', encoding='utf-8') as f:
+                f.write(new_md_content)
+        elif ext == '.ipynb':
+            print(f"[INFO] Converting notebook to markdown: {file_path} -> {out_md}")
+            import nbformat
+            import subprocess
+            nb = nbformat.read(str(file_path), as_version=4)
+            tmp_md = md_dir / f"{stem}_tmp.md"
+            # Use nbconvert to convert to markdown
+            cmd = [sys.executable, '-m', 'nbconvert', '--to', 'markdown', str(file_path), '--output', tmp_md.name, '--output-dir', str(md_dir)]
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            if result.returncode != 0:
+                if debug:
+                    print(f"[ERROR] nbconvert failed for {file_path}: {result.stderr}")
+                continue
+            # Read and fix image links in the generated markdown
+            with open(tmp_md, 'r', encoding='utf-8') as f:
+                md_content = f.read()
+            def replace_img_link(match):
+                img_path = match.group(1)
+                if img_path.startswith('http'):
+                    return match.group(0)
+                img_filename = os.path.basename(img_path)
+                flat_name = f"{stem}_{img_filename}"
+                src_img = md_dir / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                # Use ../images/ for correct relative path from docs/md/
+                return match.group(0).replace(img_path, f"../images/{flat_name}")
+            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            with open(out_md, 'w', encoding='utf-8') as f:
+                f.write(new_md_content)
+            tmp_md.unlink()  # Remove temp file
+        else:
+            if debug:
+                print(f"[SKIP] Unsupported file type: {file}")
+            continue
+        print(f"[OK] Built {out_md} from {file}")
+    if missing_files:
+        print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:")
+        for mf in missing_files:
+            print(f"  - {mf}")
+
+def build_pdf_all(debug=False):
+    """Build PDF for all files referenced in the menu/content tree (_content.yml)."""
+    from content_parser import load_and_validate_content_yml, get_all_content_files
+    content = load_and_validate_content_yml('_content.yml')
+    files = get_all_content_files(content)
+    if not files:
+        if debug:
+            print("[WARN] No files found in _content.yml toc.")
+        return
+    if debug:
+        print(f"[INFO] Building PDF for {len(files)} files from menu/content tree.")
+    build_pdf_for_files(files, debug=debug)
+
+def build_pdf_for_files(files, debug=False):
+    """Build PDF for specified markdown and notebook files."""
+    import subprocess
+    import sys
+    import os
+    from pathlib import Path
+    import shutil
+    import re
+    from sanitize_unicode import sanitize_text as sanitize_unicode
+    repo_root = Path(__file__).parent.resolve()
+    pdf_dir = repo_root / 'docs' / 'pdf'
+    build_pdf_dir = repo_root / '_build' / 'pdf'
+    img_dir = repo_root / 'docs' / 'images'
+    pdf_dir.mkdir(parents=True, exist_ok=True)
+    build_pdf_dir.mkdir(parents=True, exist_ok=True)
+    img_dir.mkdir(parents=True, exist_ok=True)
+    missing_files = []
+    for file in files:
+        file_path = Path(file)
+        if not file_path.exists():
+            if debug:
+                print(f"[ERROR] File not found: {file}")
+            missing_files.append(file)
+            continue
+        ext = file_path.suffix.lower()
+        stem = file_path.stem
+        out_md = build_pdf_dir / f"{stem}.md"
+        out_pdf = build_pdf_dir / f"{stem}.pdf"
+        # Step 1: Ensure we have a markdown file with correct image links
+        if ext == '.md':
+            if debug:
+                print(f"[INFO] Copying markdown file: {file_path} -> {out_md}")
+            shutil.copy2(file_path, out_md)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                md_content = f.read()
+            def replace_img_link(match):
+                img_path = match.group(1)
+                if img_path.startswith('http'):
+                    # Always replace remote images with a warning/placeholder for PDF export
+                    warning = '\n> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**\n'
+                    placeholder = f'![Image not embedded: remote image]({img_path})'
+                    if debug:
+                        print(f"[WARN] Replacing ALL remote images with placeholder: {img_path}")
+                    return warning + placeholder
+                img_filename = os.path.basename(img_path)
+                flat_name = f"{stem}_{img_filename}"
+                src_img = file_path.parent / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    if debug:
+                        print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                # For pdf, use relative path from build_pdf_dir to img_dir
+                rel_path = os.path.relpath(dest_img, build_pdf_dir)
+                return match.group(0).replace(img_path, rel_path)
+            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            sanitized_md_content = sanitize_unicode(new_md_content)
+            with open(out_md, 'w', encoding='utf-8') as f:
+                f.write(sanitized_md_content)
+        elif ext == '.ipynb':
+            if debug:
+                print(f"[INFO] Converting notebook to markdown: {file_path} -> {out_md}")
+            import nbformat
+            nb = nbformat.read(str(file_path), as_version=4)
+            tmp_md = build_pdf_dir / f"{stem}_tmp.md"
+            cmd = [sys.executable, '-m', 'nbconvert', '--to', 'markdown', str(file_path), '--output', tmp_md.name, '--output-dir', str(build_pdf_dir)]
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            if result.returncode != 0:
+                if debug:
+                    print(f"[ERROR] nbconvert failed for {file_path}: {result.stderr}")
+                continue
+            with open(tmp_md, 'r', encoding='utf-8') as f:
+                md_content = f.read()
+            def replace_img_link(match):
+                img_path = match.group(1)
+                if img_path.startswith('http'):
+                    # Always replace remote images with a warning/placeholder for PDF export
+                    warning = '\n> **[Image not embedded: remote images are not included in PDF export. Check the original file for the image.]**\n'
+                    placeholder = f'![Image not embedded: remote image]({img_path})'
+                    if debug:
+                        print(f"[WARN] Replacing ALL remote images with placeholder: {img_path}")
+                    return warning + placeholder
+                img_filename = os.path.basename(img_path)
+                flat_name = f"{stem}_{img_filename}"
+                src_img = build_pdf_dir / img_path
+                dest_img = img_dir / flat_name
+                if src_img.exists():
+                    shutil.copy2(src_img, dest_img)
+                    if debug:
+                        print(f"[INFO] Copied image {src_img} -> {dest_img}")
+                rel_path = os.path.relpath(dest_img, build_pdf_dir)
+                return match.group(0).replace(img_path, rel_path)
+            new_md_content = re.sub(r'!\[[^\]]*\]\(([^)]+)\)', replace_img_link, md_content)
+            with open(out_md, 'w', encoding='utf-8') as f:
+                f.write(new_md_content)
+            tmp_md.unlink()
+        else:
+            if debug:
+                print(f"[SKIP] Unsupported file type: {file}")
+            continue
+        # Step 2: Convert markdown to pdf with pandoc
+        if debug:
+            print(f"[INFO] Converting markdown to pdf: {out_md} -> {out_pdf}")
+        cmd = ['pandoc', str(out_md), '-o', str(out_pdf), '--resource-path', str(img_dir)]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0:
+            if debug:
+                print(f"[ERROR] pandoc failed for {out_md}: {result.stderr}")
+            continue
+        # Copy to docs/pdf as well
+        shutil.copy2(out_pdf, pdf_dir / f"{stem}.pdf")
+        if debug:
+            print(f"[OK] Built {out_pdf} and copied to {pdf_dir / f'{stem}.pdf'} from {file}")
+    if missing_files:
+        print(f"[SUMMARY] {len(missing_files)} file(s) were missing and not processed:")
+        for mf in missing_files:
+            print(f"  - {mf}")
+
+if __name__ == "__main__":
     main()
