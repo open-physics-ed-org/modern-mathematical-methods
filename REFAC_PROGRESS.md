@@ -105,14 +105,17 @@ This refactor modularizes and automates the generation of navigation, head, and 
 - Menu classes/IDs are not fully matching legacy markup.
 - Footer has extra `<p>` nesting in new build.
 
+
+### Recently Completed (July 2025)
+- Menu logic in build-html.py now includes all top-level YAML items as menu items, regardless of the `menu:` key, matching legacy and expected behavior.
+- Debug mode (`--debug`) added to print menu extraction and structure for troubleshooting.
+- Verified that Resources and About now appear in the top-level menu for all pages.
+
 ### Next Steps (July 2025)
-1. Address menu structure and order to match legacy output.
-2. Add theme toggle button after header.
-3. Add container and markdown-body wrappers around `<main>`.
-4. Adjust header layout to match legacy (row, no subtitle for now).
-5. Ensure menu classes/IDs match legacy markup.
-6. Fix footer `<p>` nesting.
-7. Test each change incrementally with `build-html.py`.
+1. Continue aligning other aspects of the output: theme toggle button, container/wrappers, header layout, and footer structure.
+2. Add robust unit/integration tests for the build process.
+3. Integrate the build process into CI and document usage.
+4. Optionally, expand YAML/templates for more complex footers or per-page metadata.
 
 ---
 
