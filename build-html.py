@@ -1,3 +1,35 @@
+def render_download_buttons(file_path):
+    """
+    Generate HTML for download buttons for a given file (md or ipynb).
+    Uses .download-btn CSS. Follows the pattern from the live site.
+    """
+    import os
+    stem = os.path.splitext(os.path.basename(file_path))[0]
+    ext = os.path.splitext(file_path)[1].lower()
+    # Always show these
+    buttons = [
+        (f'sources/{stem}/{stem}.pdf', 'PDF', '📄', True),
+        (f'sources/{stem}/{stem}.md', 'MD', '✍️', True),
+        (f'sources/{stem}/{stem}.docx', 'DOCX', '📝', True),
+        (f'sources/{stem}/{stem}.tex', 'TEX', '📐', True),
+    ]
+    # Add ipynb and jupyter for notebooks
+    if ext == '.ipynb':
+        buttons.append((f'sources/{stem}/{stem}.ipynb', 'IPYNB', '📓', True))
+        # Jupyter HTML link (open in new tab)
+        buttons.append((f'jupyter/content/notebooks/{stem}.html', 'Jupyter', '🔗', False))
+    html = ['<nav class="chapter-downloads" aria-label="Download chapter sources">']
+    html.append('<div role="group" aria-label="Download formats">')
+    for href, label, icon, is_download in buttons:
+        attrs = f'class="download-btn" href="{href}"'
+        if is_download:
+            attrs += ' download'
+        if label == 'Jupyter':
+            attrs += ' target="_blank" rel="noopener"'
+        html.append(f'<a {attrs}><span aria-hidden="true">{icon}</span> {label}</a>')
+    html.append('</div></nav>')
+    return '\n'.join(html)
+
 
 import shutil
 
@@ -289,6 +321,7 @@ def build_html_for_files(files, debug=False):
         ext = file_path.suffix.lower()
         debug_print(f"[DEBUG] File extension: {ext}", debug)
         try:
+            download_html = render_download_buttons(str(file_path))
             if ext == '.md':
                 debug_print(f"[DEBUG] Reading markdown file: {file_path}", debug)
                 with open(file_path, 'r', encoding='utf-8') as f:
@@ -364,7 +397,8 @@ def build_html_for_files(files, debug=False):
                 continue
             page_title = title
             head_html = head_template.replace('{{ title }}', page_title).replace('{{ css_light }}', css_light).replace('{{ css_dark }}', css_dark)
-            full_html = f'''<!DOCTYPE html>\n<html lang="{site.get('language', 'en')}">\n{head_html}\n<body>\n  {header_html}\n  <nav class="site-nav" id="site-nav" aria-label="Main navigation">{menu_html}</nav>\n  <main class="site-main container">\n    {theme_toggle_html}\n    {body_html}\n  </main>\n  <footer>\n    {footer_html}\n  </footer>\n</body>\n</html>\n'''
+            # Insert download buttons before main content
+            full_html = f'''<!DOCTYPE html>\n<html lang="{site.get('language', 'en')}">\n{head_html}\n<body>\n  {header_html}\n  <nav class="site-nav" id="site-nav" aria-label="Main navigation">{menu_html}</nav>\n  <main class="site-main container">\n    {theme_toggle_html}\n    {download_html}\n    {body_html}\n  </main>\n  <footer>\n    {footer_html}\n  </footer>\n</body>\n</html>\n'''
             out_dir = Path('docs')
             out_dir.mkdir(exist_ok=True)
             out_name = file_path.stem + '.html'

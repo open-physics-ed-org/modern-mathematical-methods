@@ -102,6 +102,15 @@
     });
   </script>
     
+    <nav class="chapter-downloads" aria-label="Download chapter sources">
+<div role="group" aria-label="Download formats">
+<a class="download-btn" href="sources/activity-Waves-Signals/activity-Waves-Signals.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+<a class="download-btn" href="sources/activity-Waves-Signals/activity-Waves-Signals.md" download><span aria-hidden="true">✍️</span> MD</a>
+<a class="download-btn" href="sources/activity-Waves-Signals/activity-Waves-Signals.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+<a class="download-btn" href="sources/activity-Waves-Signals/activity-Waves-Signals.tex" download><span aria-hidden="true">📐</span> TEX</a>
+<a class="download-btn" href="sources/activity-Waves-Signals/activity-Waves-Signals.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+<a class="download-btn" href="jupyter/content/notebooks/activity-Waves-Signals.html" target="_blank" rel="noopener"><span aria-hidden="true">🔗</span> Jupyter</a>
+</div></nav>
     <div class="notebook-markdown-cell"><h1 id="31-oct-23-activity-signal-deconstruction">31 Oct 23 - Activity: Signal Deconstruction</h1>
 <p>We have started to show that we can take waves of any periodicity and add them together to get new signals. But more common is for us to receive a signal and want to know what waves are in it. This is the process of signal deconstruction. We will be using $V(t)$ to describe this signal because pretty much everything is a voltage. But now we introduce the toolkit that can help us do this. </p>
 <p>We can build up this idea by starting with a given $V(t)$ with some base periodicity ($w_0$ or $T_0$), really the longest period or lowest frequency in the signal. We can use a Fourier Series to decompose those signals in terms of harmonics ($n\;\omega_0$) of the base frequency. The model of this decomposition is given by the <a href="https://en.wikipedia.org/wiki/Fourier_series#Sine-cosine_form">infinite series</a>:</p>

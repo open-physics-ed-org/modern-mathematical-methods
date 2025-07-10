@@ -102,6 +102,15 @@
     });
   </script>
     
+    <nav class="chapter-downloads" aria-label="Download chapter sources">
+<div role="group" aria-label="Download formats">
+<a class="download-btn" href="sources/notes-fft/notes-fft.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+<a class="download-btn" href="sources/notes-fft/notes-fft.md" download><span aria-hidden="true">✍️</span> MD</a>
+<a class="download-btn" href="sources/notes-fft/notes-fft.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+<a class="download-btn" href="sources/notes-fft/notes-fft.tex" download><span aria-hidden="true">📐</span> TEX</a>
+<a class="download-btn" href="sources/notes-fft/notes-fft.ipynb" download><span aria-hidden="true">📓</span> IPYNB</a>
+<a class="download-btn" href="jupyter/content/notebooks/notes-fft.html" target="_blank" rel="noopener"><span aria-hidden="true">🔗</span> Jupyter</a>
+</div></nav>
     <div class="notebook-markdown-cell"><h1 id="6-oct-23-notes-fast-fourier-transform">6 Oct 23 - Notes: Fast Fourier Transform</h1></div>
 <div class="notebook-markdown-cell"><p>It might not have been obvious to you, but our work so far has expected that our $V(t)$ be a continuous function of time, and that we can sample it any time we want. In reality, you are limited to the response of your equipment, which leads to a phenomenon knows as the <a href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem">Nyquist-Shannon sampling theorem</a>. This theorem states that if you want to study a signal with a frequency $f$, you need to sample it at least $2f$ times per second. This is known as the <a href="https://en.wikipedia.org/wiki/Nyquist_frequency">Nyquist frequency</a>. If you don't sample at least this often, you will get aliasing, which is when a signal at a higher frequency is indistinguishable from a signal at a lower frequency. As you can tell, there's a lot of issues with sampling when it comes to studying signals.</p>
 <h2 id="the-fast-fourier-transform">The Fast Fourier Transform</h2>

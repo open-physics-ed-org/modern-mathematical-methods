@@ -102,6 +102,13 @@
     });
   </script>
     
+    <nav class="chapter-downloads" aria-label="Download chapter sources">
+<div role="group" aria-label="Download formats">
+<a class="download-btn" href="sources/announcement/announcement.pdf" download><span aria-hidden="true">📄</span> PDF</a>
+<a class="download-btn" href="sources/announcement/announcement.md" download><span aria-hidden="true">✍️</span> MD</a>
+<a class="download-btn" href="sources/announcement/announcement.docx" download><span aria-hidden="true">📝</span> DOCX</a>
+<a class="download-btn" href="sources/announcement/announcement.tex" download><span aria-hidden="true">📐</span> TEX</a>
+</div></nav>
     <h2 id="release-v092-unified-urubu-highlights">🚀 Release v0.9.2 "Unified Urubu" Highlights</h2>
 <ul>
 <li><strong>Unified All-in-One Build:</strong> The <code>--all</code> flag now runs all major build steps in strict order: DOCX (and Markdown) → PDF → Jupyter Book HTML → Custom HTML web output. All output formats are copied to <code>docs/sources/&lt;notebook_stem&gt;/</code> for each notebook.</li>
