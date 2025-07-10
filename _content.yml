@@ -152,6 +152,9 @@ toc:
       - title: "Announcements"
         file: content/announcement.md
 
+footer:
+  text: "<p>&copy; Modern Mathematical Methods. All rights reserved.</p>"
+
 static:
   images:
     - path: static/images/

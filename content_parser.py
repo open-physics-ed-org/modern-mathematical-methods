@@ -77,6 +77,13 @@ def validate_content(content: dict):
     for item in content['toc']:
         validate_menu_item(item, level=0)
 
+
+    # Validate 'footer' section
+    if 'footer' not in content or not isinstance(content['footer'], dict):
+        raise ContentValidationError("Missing or invalid 'footer' (must be a dict) in _content.yml.")
+    if 'text' not in content['footer'] or not isinstance(content['footer']['text'], str):
+        raise ContentValidationError("Missing or invalid 'text' in 'footer' section of _content.yml.")
+
     # Validate 'static' section
     if 'static' not in content or not isinstance(content['static'], dict):
         raise ContentValidationError("Missing or invalid 'static' (must be a dict) in _content.yml.")

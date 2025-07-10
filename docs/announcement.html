@@ -66,32 +66,17 @@
     
 <nav class="site-nav" id="site-nav"><ul class="site-nav-menu" id="site-nav-menu"><li><a href="index.html">Home</a></li><li><a href="chapters.html">Chapters</a></li></ul></nav>
 <main class="site-main">
-<h1 id="activities">Activities</h1>
-<p>Welcome to the activities page! Here you'll find interactive and hands-on exercises to deepen your understanding of modern classical mechanics.</p>
-<h2 id="sample-activity-pendulum-lab">Sample Activity: Pendulum Lab</h2>
+<h2 id="release-v092-unified-urubu-highlights">🚀 Release v0.9.2 "Unified Urubu" Highlights</h2>
 <ul>
-<li><strong>Objective:</strong> Explore the motion of a simple pendulum and measure its period.</li>
-<li><strong>Materials:</strong> String, weight, stopwatch, ruler.</li>
-<li><strong>Instructions:</strong></li>
-<li>Set up a pendulum of known length.</li>
-<li>Displace it by a small angle and release.</li>
-<li>Measure the time for 10 oscillations.</li>
-<li>Calculate the period and compare with theory.</li>
+<li><strong>Unified All-in-One Build:</strong> The <code>--all</code> flag now runs all major build steps in strict order: DOCX (and Markdown) → PDF → Jupyter Book HTML → Custom HTML web output. All output formats are copied to <code>docs/sources/&lt;notebook_stem&gt;/</code> for each notebook.</li>
+<li><strong>Jupyter Book HTML Improvements:</strong> Built into a temp directory, then copied to both <code>docs/jupyter/</code> and <code>docs/sources/jupyterbook_html/</code> for easy access and deployment.</li>
+<li><strong>Documentation Overhaul:</strong> <code>README.md</code> and <code>build.md</code> have been fully rewritten to reflect the new build workflow, directory structure, and usage patterns.</li>
+<li><strong>Output Directory Clarity:</strong> All outputs are organized in <code>_build/</code> (intermediate) and <code>docs/</code> (final, published), with clear subfolders for each format. Downloadable sources for each notebook are always available in <code>docs/sources/&lt;notebook_stem&gt;/</code>.</li>
+<li><strong>Robust Image Handling:</strong> All referenced images are collected into <code>_build/images/</code> and linked consistently in all output formats.</li>
+<li><strong>No Automatic Cleanup:</strong> The build system no longer deletes any files or folders automatically; manual cleanup is recommended if needed.</li>
 </ul>
-<blockquote>
-<p><strong>Tip:</strong> Try different lengths and plot period vs. length!</p>
-</blockquote>
-<h2 id="sample-activity-energy-skate-park-phet">Sample Activity: Energy Skate Park (PhET)</h2>
-<ul>
-<li><strong>Objective:</strong> Investigate conservation of energy using a virtual skate park.</li>
-<li><strong>Link:</strong> <a href="https://phet.colorado.edu/en/simulation/energy-skate-park">PhET Energy Skate Park</a></li>
-<li><strong>Instructions:</strong></li>
-<li>Open the simulation and build a track.</li>
-<li>Observe kinetic and potential energy as the skater moves.</li>
-<li>Experiment with friction and track shapes.</li>
-</ul>
-<hr />
-<p>Add your own activities in <code>activities.md</code> using markdown!</p>
+<p>See the <code>releases/</code> folder for full historical release notes.</p>
+<p>For more details and instructions, see the <a href="https://github.com/dannycab/modern-classical-mechanics/releases">Release Notes</a>.</p>
 </main>
 <footer class="site-footer">
   <p><p>&copy; Modern Mathematical Methods. All rights reserved.</p></p>
