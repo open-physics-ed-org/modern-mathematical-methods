@@ -210,8 +210,11 @@ from build_menu_html import build_menu_ul
 from build_footer_html import render_footer
 from menu_parser import get_menu_tree
 
+from notebook_kernel_utils import fix_all_notebook_kernels
+
 def build_html_for_files(files, debug=False):
-    copy_static_assets(debug=debug)
+    # Always fix kernels before building
+    fix_all_notebook_kernels("content/", debug=debug)
     debug_print("[DEBUG] build_html_for_files() is running!", debug)
     """
     Build HTML for specified markdown and notebook files using YAML-driven templates and navigation.
@@ -498,6 +501,57 @@ def build_html_for_files(files, debug=False):
         # Always output a valid HTML page with .container for any fallback or summary
         # (This block is only for summary, not for outputting a page, so no fallback HTML is written here)
 
+import subprocess
+def build_jupyter_for_files(debug=False):
+    """
+    Orchestrate a robust Jupyter Book build:
+    1. Generate flat _toc.yml
+    2. Fix notebook kernels
+    3. Validate TOC and kernels
+    4. Build Jupyter Book
+    """
+    def run_script(cmd, desc):
+        print(f"[JUPYTER BUILD] {desc}...\n  $ {' '.join(cmd)}")
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0:
+            print(f"[ERROR] {desc} failed:\n{result.stderr}")
+            raise RuntimeError(f"Step failed: {desc}")
+        if debug:
+            print(result.stdout)
+    # 1. Generate flat _toc.yml
+    run_script([sys.executable, 'convert_content_to_jb_flat.py'], 'Generate flat _toc.yml')
+    # 2. Fix notebook kernels
+    run_script([sys.executable, 'fix_notebook_kernels.py'], 'Fix notebook kernels')
+    # 2.5. Ensure the Jupyter kernel is registered (idempotent)
+    import sys as _sys
+    def ensure_kernel():
+        try:
+            import ipykernel
+            import jupyter_client.kernelspec
+            ksm = jupyter_client.kernelspec.KernelSpecManager()
+            if 'open-physics-ed' in ksm.find_kernel_specs():
+                print('[OK] Jupyter kernel "open-physics-ed" already registered.')
+                return
+            print('[INFO] Registering Jupyter kernel: open-physics-ed')
+            import subprocess
+            result = subprocess.run([
+                _sys.executable, '-m', 'ipykernel', 'install', '--user', '--name', 'open-physics-ed', '--display-name', 'Python (open-physics-ed)'
+            ], capture_output=True, text=True)
+            if result.returncode == 0:
+                print('[OK] Registered Jupyter kernel: open-physics-ed')
+            else:
+                print('[ERROR] Failed to register kernel:')
+                print(result.stderr)
+        except Exception as e:
+            print(f'[ERROR] Could not ensure Jupyter kernel: {e}')
+    ensure_kernel()
+    # 3. Validate TOC and kernels
+    run_script([sys.executable, 'validate_yaml.py', '_toc.yml'], 'Validate _toc.yml YAML')
+    run_script([sys.executable, 'validate_jb_toc.py', '_toc.yml'], 'Validate _toc.yml for duplicates')
+    run_script([sys.executable, 'check_notebook_kernels.py', '--debug'], 'Check notebook kernels')
+    # 4. Build Jupyter Book
+    run_script(['jupyter-book', 'build', '.'], 'Jupyter Book build (jupyter-book build .)')
+
 def main():
     parser = argparse.ArgumentParser(description="Build site outputs from content.")
     parser.add_argument('--html', action='store_true', help='Build HTML output')
@@ -524,7 +578,6 @@ def main():
                 print("[INFO] Building LaTeX for all content.")
             build_tex_all(debug=args.debug)
 
-    # Print parsed arguments for now
     if args.debug:
         print("[INFO] Build flags:")
         print(f"  HTML:    {args.html}")
@@ -536,8 +589,13 @@ def main():
         print(f"  PPT:     {args.ppt}")
         print(f"  Files:   {args.files}")
 
+    # Jupyter Book build
+    if args.jupyter:
+        if args.debug:
+            print("[INFO] Jupyter Book build selected.")
+        build_jupyter_for_files(debug=args.debug)
 
-    # HTML build skeleton
+    # HTML build
     if args.html:
         if args.debug:
             print("[INFO] HTML build selected.")

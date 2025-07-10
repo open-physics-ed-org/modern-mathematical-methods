@@ -93,19 +93,6 @@ def main():
         return 'index', toc
 
     root_file, rest = find_first_file_and_rest(toc_list)
-    # Remove any chapters that duplicate the root file
-    def filter_out_root(entries, root_file):
-        filtered = []
-        for entry in entries:
-            if entry.get('file') == root_file:
-                continue
-            if 'chapters' in entry:
-                entry = dict(entry)
-                entry['chapters'] = filter_out_root(entry['chapters'], root_file)
-            filtered.append(entry)
-        return filtered
-
-    filtered_chapters = filter_out_root(make_toc_entries(rest), root_file)
     # Find the title for the root file
     def get_root_title(toc, root_file):
         for node in toc:
@@ -113,12 +100,34 @@ def main():
                 return node.get('title', 'Home')
         return 'Home'
     root_title = get_root_title(toc_list, root_file)
+
+
+    # All other top-level nodes (except the root) become chapters/parts under the root
+    def make_chapters(rest):
+        chapters = []
+        for node in rest:
+            if not isinstance(node, dict):
+                continue
+            file = node.get('file')
+            title = node.get('title', '')
+            children = node.get('children')
+            if file:
+                entry = {'file': Path(file).with_suffix('').as_posix(), 'title': title}
+                if children:
+                    entry['chapters'] = make_toc_entries(children)
+                chapters.append(entry)
+            elif children:
+                # If this is a top-level grouping (e.g., 'Chapters'), flatten its children
+                if title.lower() in ('chapters', 'sections'):
+                    chapters.extend(make_toc_entries(children))
+                else:
+                    chapters.append({'part': title, 'chapters': make_toc_entries(children)})
+        return chapters
+
     toc = {
         'format': 'jb-book',
         'root': root_file,
-        'chapters': [
-            {'file': root_file, 'title': root_title}
-        ] + filtered_chapters
+        'chapters': make_chapters(rest)
     }
     write_yaml(toc, '_toc.yml')
     print('[OK] Wrote _toc.yml')
