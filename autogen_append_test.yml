@@ -1,4 +1,0 @@
-toc:
-  - .autogen: notebooks/section/*.md
-  - file: notebooks/section/parent
-    append_children: notebooks/section

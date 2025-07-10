@@ -116,9 +116,6 @@ This document provides a detailed overview of the build system and all scripts i
 - **remove_remote_images.py**
   - Removes or replaces remote image links in markdown files
 
-- **all_python_code.txt**
-  - (Reference) May contain all code snippets for review or export
-
 ---
 
 ## Scripts Directory (scripts)
