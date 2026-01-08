@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>31 Oct 23 - Activity: Signal Deconstruction | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>31 Oct 23 - Activity: Signal Deconstruction</h1>
+        
+    </header>
+
+    <p>We have started to show that we can take waves of any periodicity and add them together to get new signals. But more common is for us to receive a signal and want to know what waves are in it. This is the process of signal deconstruction. We will be using $V(t)$ to describe this signal because pretty much everything is a voltage. But now we introduce the toolkit that can help us do this.</p>
+<p>We can build up this idea by starting with a given $V(t)$ with some base periodicity ($w_0$ or $T_0$), really the longest period or lowest frequency in the signal. We can use a Fourier Series to decompose those signals in terms of harmonics ($n;\omega_0$) of the base frequency. The model of this decomposition is given by the <a href="https://en.wikipedia.org/wiki/Fourier_series#Sine-cosine_form">infinite series</a>:</p>
+<p>$f(t) = \dfrac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(n\omega_0t) + b_n \sin(n\omega_0t)$</p>
+<p>Or</p>
+<p>$f(t) = \dfrac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos\left(\dfrac{2n\pi}{T_0}t\right) + b_n \sin\left(\dfrac{2n\pi}{T_0}t\right)$</p>
+<p>By using the <a href="https://en.wikipedia.org/wiki/Orthogonal_functions">orthogonal nature</a> of $\sin$ and $\cos$ over one period, we can find the unknown coefficients for a given signal $V(t)$.</p>
+<h2 id="dc-offset">DC Offset</h2>
+<p>The first term in the sum is just related to the DC offset, that is the average of the signal over one period. That&rsquo;s because $sin$ and $cos$ don&rsquo;t shift the average (they have a time average of zero, remember?)</p>
+<p>$\dfrac{a_0}{2} = \dfrac{1}{T_0}\int_{T_0} f(t) dt$</p>
+<h2 id="periodic-models">Periodic Models</h2>
+<p>For the periodicity, we use &ldquo;Fourier&rsquo;s Trick&rdquo; to determine the value of the coefficients. <em>Note that you need the signal $V(t)$ to complete this work.</em> And this isn&rsquo;t a trick, it&rsquo;s a well-established method.</p>
+<p>$a_n = \dfrac{2}{T_0}\int_{T_0}V(t)\cos(n\omega_0t)\qquad n\neq0$</p>
+<p>$b_n = \dfrac{2}{T_0}\int_{T_0}V(t)\sin(n\omega_0t)\qquad n\neq0$</p>
+<p>Given this, our approximate $V(t)$ is given up to the $N$ term is,</p>
+<p>$V(t) \approx \dfrac{a_0}{2} + \sum_{n=1}^{N} a_n \cos(n\omega_0t) + b_n \sin(n\omega_0t)$</p>
+<h2 id="example-the-duty-cycle">Example: The Duty Cycle</h2>
+<p>There are many signals we could analyze, but one of the common (and more mathematically tractable) ones is the <a href="https://en.wikipedia.org/wiki/Duty_cycle">Duty Cycle</a>. In fact, this signal is in wide use across electrical devices for timed on and off states. Moreover, the behaviors of some neurons and muscle fibers have been shown to approximate duty cycle firing. Synthesizers and electronic music are similar heavy users of <a href="https://en.wikipedia.org/wiki/Pulse-width_modulation">pulse width modulation</a>, which stems from this signal.</p>
+<p>The half-wave (square wave) duty cycle is given by,</p>
+<p>$V(t) = \begin{cases} 0 &amp; 0 \leq t &lt; \dfrac{T_0}{2} \ V_0 &amp; \dfrac{T_0}{2} \leq t &lt; T_0 \end{cases}$</p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Identify which integrals you have to do (consider the orthogonality of the functions).</li>
+<li>Construct the integrals you need to do (over what cycle are you integrating?).</li>
+<li>Perform the integrals (consider using <code>sympy</code>).</li>
+<li>Determine the coefficients $a_n$&rsquo;s and $b_n$&rsquo;s.</li>
+<li>Write the function $V(t)$ in terms of the $a_n$&rsquo;s and $b_n$&rsquo;s.</li>
+</ol>
+<h3 id="visualizing-the-duty-cycle">Visualizing the Duty Cycle</h3>
+<p>It&rsquo;s great that we can produce a solution to this problem,</p>
+<p>$$V(t) = \dfrac{V_0}{2} + \sum_{n=1}^{\infty} \dfrac{V_0}{n\pi}\left[\cos(n\pi)-1\right]\sin\left(\dfrac{2n\pi}{T_0}t\right)$$</p>
+<p>but what does it look like?</p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Write the relevant functions to compute the coefficients $a_n$&rsquo;s and $b_n$&rsquo;s.</li>
+<li>Write the relevant functions to compute the $V(t)$.</li>
+<li>Plot the $V(t)$ along with the square wave (look into the <code>scipy.signal.square</code> function).</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> scipy.signal <span style="color:#66d9ef">as</span> sig
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%</span>matplotlib inline
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
+</span></span></code></pre></div><h2 id="complex-numbers">Complex Numbers</h2>
+<p>One the most useful approaches to representing periodic signals is to use complex numbers. This is because the <a href="https://en.wikipedia.org/wiki/Euler%27s_formula">Euler&rsquo;s Formula</a> allows us to represent the trigonometric functions as complex exponentials. Euler&rsquo;s formula is given by,</p>
+<p>$e^{i\theta} = \cos(\theta) + i\sin(\theta)$</p>
+<p>where $i$ is the imaginary number. But what are the properties of <a href="https://en.wikipedia.org/wiki/Complex_number">complex numbers</a>? There are a larger class of numbers than the reals, and they have interesting properties. The generic form of a complex number is given by,</p>
+<p>$$z = a + ib$$</p>
+<p>where $a$ and $b$ are real numbers and $i$ is the square root of negative one. We can also write this in terms of the magnitude and phase,</p>
+<p>$$z = r e^{i\theta}$$</p>
+<p>where $r$ is the magnitude and $\theta$ is the phase and both are real numbers. These two representations are compatible if we think of a complex number represented in the complex plane where the reals appears on the $x$ and the imaginaries on the $y$.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Argandgaussplane.png" alt="Complex Plane"></p>
+<p>The basic properties of complex numbers are below for two numbers $z_1 = a_1 + ib_1$ and $z_2 = a_2 + ib_2$:</p>
+<ul>
+<li>Addition: $z_1 + z_2 = (a_1 + a_2) + i(b_1 + b_2)$</li>
+<li>Subtraction: $z_1 - z_2 = (a_1 - a_2) + i(b_1 - b_2)$</li>
+<li>Multiplication: $z_1 z_2 = (a_1 a_2 - b_1 b_2) + i(a_1 b_2 + a_2 b_1)$</li>
+<li>Division: $\dfrac{z_1}{z_2} = \dfrac{a_1 a_2 + b_1 b_2}{a_2^2 + b_2^2} + i\dfrac{a_2 b_1 - a_1 b_2}{a_2^2 + b_2^2}$</li>
+</ul>
+<p>Some of these operations are simpler in the polar form. For example, multiplication is just the product of the magnitudes and the sum of the phases. Division is the ratio of the magnitudes and the difference of the phases. For two complex numbers $z_1 = r_1 e^{i\theta_1}$ and $z_2 = r_2 e^{i\theta_2}$:</p>
+<ul>
+<li>Multiplication: $z_1 z_2 = r_1 r_2 e^{i(\theta_1 + \theta_2)}$</li>
+<li>Division: $\dfrac{z_1}{z_2} = \dfrac{r_1}{r_2} e^{i(\theta_1 - \theta_2)}$</li>
+</ul>
+<p>Other operations are best represented in the polar form:</p>
+<ul>
+<li>Powers: $z^n = r^n e^{in\theta}$</li>
+<li>Roots: $z^{1/n} = r^{1/n} e^{i\theta/n}$</li>
+</ul>
+<h3 id="representing-trigonometric-functions">Representing Trigonometric Functions</h3>
+<p>We can use Euler&rsquo;s formula to represent the trigonometric functions as complex exponentials. For example,</p>
+<p>$$\cos(\theta) = \dfrac{e^{i\theta} + e^{-i\theta}}{2}$$
+$$\sin(\theta) = \dfrac{e^{i\theta} - e^{-i\theta}}{2i}$$</p>
+<p>Take the square wave function from above:</p>
+<p>$$V(t) = \begin{cases} 0 &amp; 0 \leq t &lt; \dfrac{T_0}{2} \ V_0 &amp; \dfrac{T_0}{2} \leq t &lt; T_0 \end{cases}$$</p>
+<p>and compute the complex coefficients $c_n$&rsquo;s,</p>
+<p>$$c_n = \dfrac{1}{T_0}\int_{T_0}V(t)e^{-in\omega_0t}dt$$</p>
+<p>where our new model is,</p>
+<p>$$V(t) = a_0 + \sum_{n=-\infty}^{\infty} c_n e^{in\omega_0t}$$</p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Take the signal $V(t)$ and determine which integrals you have to do.</li>
+<li>Construct the integrals you need to do (over what cycle are you integrating?).</li>
+<li>Perform the integrals (consider using <code>sympy</code>) and find the coefficients $c_n$&rsquo;s.</li>
+<li>Write the function $V(t)$ in terms of the $c_n$&rsquo;s. (What about the imaginary part?)</li>
+</ol>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/3---waves-and-oscillations/activity-waves-seriesexpand/">← 2 Nov 23 - Activity: Automated Signal Deconstruction &amp; Reconstruction</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/3---waves-and-oscillations/notes-waves-fouriers_trick/">30 Oct 2023 - Notes: Deconstructing Waves →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

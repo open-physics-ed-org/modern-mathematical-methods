@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Welcome to Mathematical Modeling in Physics on PHY 415 Fall 2023</title>
+    <link>//localhost:1313/</link>
+    <description>Recent content in Welcome to Mathematical Modeling in Physics on PHY 415 Fall 2023</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 08 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>16 Oct 23 - Notes: Coupled Oscillations</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-coupled_oscillations/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-coupled_oscillations/</guid>
+      <description>&lt;p&gt;Single particle dynamics like the SHO and other singular point particle motion (e.g., basic kinematics, charges in fields modeled without interactions) are helpful in building our intuition of how physics &lt;em&gt;should&lt;/em&gt; work. We can track the position, velocity, and other dynamical quantities for these singular particles. We can determine how the act on and interact with their surroundings. We can find points of stasis (stable and unstable points); we can find different families of solutions (orbits vs runaway behavior); we can predict the motion of those particles with numerical routines.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>20 Nov 23 - Notes: Random Processes</title>
+      <link>//localhost:1313/4---randomness-and-distributions/notes-randomness/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/4---randomness-and-distributions/notes-randomness/</guid>
+      <description>&lt;p&gt;Until now, all of our work has been with &lt;a href=&#34;https://en.wikipedia.org/wiki/Deterministic_system&#34;&gt;deterministic systems&lt;/a&gt;. That is, we have a set of equations that allow us to describe the future of the system in space and time with certainty. Some differential equations are deterministic and all the ones that we have worked on so far are. Our analysis of ordinary differential equations, partial differential equations, and the wave equation have all been drawn from deterministic systems. We obtain equations or results that we can predict with (up to numerical) certainty.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>26 Sept 23 - Notes: Maxwell&#39;s Equations</title>
+      <link>//localhost:1313/2---em-and-pdes/notes-em_intro/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/2---em-and-pdes/notes-em_intro/</guid>
+      <description>&lt;h2 id=&#34;electromagnetic-phenomena&#34;&gt;Electromagnetic Phenomena&lt;/h2&gt;&#xA;&lt;p&gt;You have certainly experienced a wide variety of electromagnetic phenomena in your life &amp;ndash; both natural (e.g., a sun rise, a rainbow, your hair standing on end) and human-made (e.g., switching on a light, using a microwave, using a cell phone). We now know that we can explain many of those phenomenon using a set of four partial differential equations: &lt;a href=&#34;https://en.wikipedia.org/wiki/Maxwell%27s_equations&#34;&gt;Maxwell&amp;rsquo;s Equations&lt;/a&gt;. These equations describe a new mathematical object: a &lt;a href=&#34;https://en.wikipedia.org/wiki/Field_(physics)&#34;&gt;field&lt;/a&gt;. The models that we develop from this theory are still &lt;a href=&#34;https://en.wikipedia.org/wiki/Classical_physics&#34;&gt;Classical&lt;/a&gt; &amp;ndash; in that we don&amp;rsquo;t consider quantum mechanical effects. Rather we treat the fields as continuous functions of space and time.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Course Objectives</title>
+      <link>//localhost:1313/0---intro-and-syllabus/1_goals/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/0---intro-and-syllabus/1_goals/</guid>
+      <description>&lt;p&gt;This course emphasizes making models of physical phenomenon and how we use various tools at our disposal to investigate those models. Hence, we have learning objectives for making models of these systems and for learning specific tools.&lt;/p&gt;&#xA;&lt;div class=&#34;admonition admonition-admonition tip&#34; role=&#34;note&#34; aria-label=&#34;Admonition&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;Principle Learning Objectives&lt;/p&gt;&lt;div class=&#34;admonition-content&#34;&gt;&#xA;    &lt;p&gt;Students will demonstrate they can:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;investigate physical systems of their choosing using a variety of tools and approaches&lt;/li&gt;&#xA;&lt;li&gt;construct and document a reproducible process for those investigations&lt;/li&gt;&#xA;&lt;li&gt;use analytical, computational, and graphical approaches to answer specific questions in those investigations&lt;/li&gt;&#xA;&lt;li&gt;provide evidence of the quality of their work using a variety of sources&lt;/li&gt;&#xA;&lt;li&gt;collaborate effectively and contribute to a inclusive learning environment&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;  &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;Each of these learning objectives contributes to your development as a physicist. I recognize that these are &lt;strong&gt;big&lt;/strong&gt; ideas to think about. What I mean is that the objectives above are quite broad and you might be able to see a little about what or why they are included. But, below, I added more detail about each one along with a smaller scale list of objectives that you will engage with. Throughout our course, you will have opportunities to demonstrate these objectives in your work. &lt;em&gt;My aim is to make what you are assessed on in this course something you are interested in, so these objectives reflect that.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Syllabus and Overview of PHY 415</title>
+      <link>//localhost:1313/0---intro-and-syllabus/0_syllabus/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/0---intro-and-syllabus/0_syllabus/</guid>
+      <description>&lt;p&gt;In designing this course, we plan to emphasize more independent learning on your part and greater agency for you in determining what you learn and how you demonstrate you have learned. So you should expect:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;to read a variety of pieces of information to coordinate information&lt;/li&gt;&#xA;&lt;li&gt;to present your ideas publicly and to discuss them&lt;/li&gt;&#xA;&lt;li&gt;to learn new approaches and novel techniques on your own&lt;/li&gt;&#xA;&lt;li&gt;to become more expert than me in the areas of your interest&lt;/li&gt;&#xA;&lt;li&gt;to learn more about scientists that you have not learned about&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;This is not to say that you are on your own. Here&amp;rsquo;s what you can expect from us:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Updated Rubric for Worked Problems and Projects</title>
+      <link>//localhost:1313/assignments/updated_rubric/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/updated_rubric/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;19 Oct 2023&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;choosing-and-explaining-an-appropriate-problem-30&#34;&gt;Choosing and Explaining an Appropriate Problem (30%)&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;30 points total&lt;/strong&gt; - An appropriate problem is often one one on the border of analytical and numerical methods (or one that can be simplified or extended to be either). If you can solve it completely analytically, then consider how it can be extended for a computing activity. If you have questions or thoughts, please ask Danny, Alia, or Ian.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Works Cited</title>
+      <link>//localhost:1313/appendices/references/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/appendices/references/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>16 Oct 23 - Notes: Introduction to Waves</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-waves_intro/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-waves_intro/</guid>
+      <description>&lt;p&gt;Coupled oscillations are quite common in nature; collections of objects and larger systems exhibit oscillatory behavior frequently. At times, the number of objects in a system that are oscillating are so many that we begin to zoom out and look at the behavior not of individual elements but of larger collections. This is moving to a continuum view of this oscillatory behavior. Consider going from 1 SHO, to two coupled SHO, to N coupled SHOs where N is very large, and, finally to a rope. It seems like there is a connection between a rope and a set of SHOs. Indeed, we can develop the wave equation for a rope using this kind of modeling. That is a well-known result, so we will instead use it. We start with motivating ourselves with how important waves are to our understanding of nature.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>21 Nov 23 - Activity: Introduction to Random Processes</title>
+      <link>//localhost:1313/4---randomness-and-distributions/activity-radioactive_decay/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/4---randomness-and-distributions/activity-radioactive_decay/</guid>
+      <description>&lt;p&gt;So far we have focused on mostly deterministic systems. These are systems that are typically described by regular ODEs and PDEs; think the SHO or the Wave Equation. In these systems, the game is to analytically determine or estimate the trajectory, field, or wave given the set of equations that describe it. But many processes in nature are random or have a random element ot them.&lt;/p&gt;&#xA;&lt;p&gt;How do we model the decay of nuclear isotopes? The gas atoms in a container? Even things like when your bus will arrive.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>26 Sept 23 - Notes: Static Fields</title>
+      <link>//localhost:1313/2---em-and-pdes/notes-static_fields/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/2---em-and-pdes/notes-static_fields/</guid>
+      <description>&lt;h2 id=&#34;vector-calculus&#34;&gt;Vector Calculus&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Maxwell%27s_equations&#34;&gt;Maxwell&amp;rsquo;s Equations&lt;/a&gt;, even in their static form (i.e., static charges or steady currents), are a set of coupled partial differential equations. In order to develop solutions and models to approximate the behavior of electromagnetic fields, we need to be able to use vector calculus.&lt;/p&gt;&#xA;&lt;p&gt;The video below from &lt;a href=&#34;https://www.3blue1brown.com/&#34;&gt;3Blue1Brown&lt;/a&gt; provides a conceptual introduction to the vector calculus that we are going to need for this.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://inv.tux.pizza/watch?v=rB83DpBJQsE&#34;&gt;&lt;img src=&#34;https://markdown-videos-api.jorgenkh.no/youtube/rB83DpBJQsE?width=720&amp;amp;height=405&#34; alt=&#34;Vector Calculus&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Non-Commercial Link: &lt;a href=&#34;https://inv.tux.pizza/watch?v=rB83DpBJQsE&#34;&gt;https://inv.tux.pizza/watch?v=rB83DpBJQsE&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Commercial Link: &lt;a href=&#34;https://youtube.com/watch?v=rB83DpBJQsE&#34;&gt;https://youtube.com/watch?v=rB83DpBJQsE&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;electrostatic-fields&#34;&gt;Electrostatic fields&lt;/h2&gt;&#xA;&lt;p&gt;The electrostatic field is one that is created by static (stationary) charges. This is often the first type of field that we encounter, where $\rho(\mathbf{r},t)) = \rho(\mathbf{r})$. Because the charges are stationary, the current density is zero, $\mathbf{J}(\mathbf{r},t) = \mathbf{0}$.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>29 Aug 23 - Notes: Simple Harmonic Oscillator</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes-sho/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes-sho/</guid>
+      <description>&lt;h2 id=&#34;a-linear-restoring-force&#34;&gt;A Linear Restoring Force&lt;/h2&gt;&#xA;&lt;p&gt;The SHO model, as we will see, is the root of many more sophisticated models in physics &amp;ndash; across many subdisciplines. There&amp;rsquo;s a reason for this. The SHO is a simple model that captures the essence of many physical systems. It is a mathematical model for a &amp;ldquo;linear restoring force&amp;rdquo;. Such a force gives rise to local stability, that is, a tendency for the system to return to a stable equilibrium position. The richness of this statement is not entirely clear, but we will see that it is a very powerful idea, that is related to to energy minimization, and the idea of a potential energy function.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Course Design</title>
+      <link>//localhost:1313/0---intro-and-syllabus/2_design/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/0---intro-and-syllabus/2_design/</guid>
+      <description>&lt;p&gt;For most of you, 415 is an elective course that you are taking to learn more about how we use mathematical techniques in physics. As such, this course is designed under several different principles than a standard course. Below, I provide those principles and their rationale.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;415 should help you learn the central tenets of modeling physical systems&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The sheer volume of mathematical and computational physics knowledge out there is immense and impossible for any one person to learn. However, the central elements of making models, how to learn about specific techniques, and how to debug your approaches are things we can learn and employ broadly as well as to specific problems.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;415 should be a celebration of your knowledge&#xA;&lt;ul&gt;&#xA;&lt;li&gt;For most of you, this course is part of your senior level coursework. What you have achieved in the last three to four years should be celebrated and enjoyed. This course will provide ample opportunities for you to share what things you know and what things you are learning with me and with each other.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;415 should give you opportunities to engage in professional practice&#xA;&lt;ul&gt;&#xA;&lt;li&gt;As you start towards your professional career, it&amp;rsquo;s important to learn what professional scientists do. You have probably already begun this work in advanced lab and research projects that you have worked on. We will continue developing your professional skills in this course through the use of course projects.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;415 will illustrate that we can learn from each other&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Even though I&amp;rsquo;ve been learning physics for almost 20 years, I don&amp;rsquo;t know everything. I am excited to learn from you and I hope that you are excited to learn from me and each other.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;optional-purchases&#34;&gt;Optional purchases:&lt;/h2&gt;&#xA;&lt;p&gt;The core readings and work for this course will be this jupyterbook. I will find resources online, make my own, and provide as much organized free material as possible. If you want to have a textbook that helps you organize your readings, please obtain copies of:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Worked Problem Assignment 1</title>
+      <link>//localhost:1313/assignments/worked-problem-1/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/worked-problem-1/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Due 15 Sep 23&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;In this first few class periods, we have discussed formulating mechanics using Lagrangian Dynamics to produce equations of motion and how we can use numerical integration to solve for trajectories.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/0---intro-and-syllabus/8_worked_problems/&#34;&gt;&lt;strong&gt;Grading Rubric&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.&lt;/p&gt;&#xA;&lt;h2 id=&#34;places-to-find-candidate-problems&#34;&gt;Places to find candidate problems:&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Classical mechanics textbooks; look at the problems in the Lagrangian chapters&lt;/li&gt;&#xA;&lt;li&gt;Differential equations textbooks; look at ODEs that represent real systems&lt;/li&gt;&#xA;&lt;li&gt;Wikipedia has lists of named differential equations and problems&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_named_differential_equations&#34;&gt;List of named Diffy Qs&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_nonlinear_ordinary_differential_equations&#34;&gt;List of nonlinear differential equations&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Ask on Slack&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;developing-equations-of-motion&#34;&gt;Developing Equations of Motion&lt;/h2&gt;&#xA;&lt;p&gt;Remember that the process we have developed is:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>17 Oct 23 - Activity: Normal Modes</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-coupledosc-normalmodes/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-coupledosc-normalmodes/</guid>
+      <description>&lt;p&gt;As we begin to work with multi-particle systems, we begin to open the number of degrees of freedom of the system. We increase the complexity of it and the challenge of modeling it. We will increasingly need tools that help us take less tractable issues and make them palatable. One such tool that forms the basis of many others is &lt;strong&gt;Normal Modes&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Normal modes are ways of breaking up our understanding of a system into discrete (potentially infinite and hopefully vanishingly small) pieces. This lets us get at the big picture of the system and characterize how much we are neglecting. The concept of normal modes underlies much of the analysis done in quantum mechanics, field theory, fluid mechanics, and signal processing. In fact, numerical routines often make use of forms of these modes to do economize calculations &amp;ndash; &lt;em&gt;especially when we move beyond a few hundred bodies in the system&lt;/em&gt;. This stuff is part and parcel of most research in physics. For example, how we understand the &lt;a href=&#34;https://en.wikipedia.org/wiki/Cosmic_background_radiation&#34;&gt;Cosmic Background Radiation&lt;/a&gt; relies on a &lt;a href=&#34;https://www.quantamagazine.org/how-ancient-light-reveals-the-universes-contents-20200128/&#34;&gt;normal mode like analysis&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>26 Sep 23 - Activity: Electrostatic Fields</title>
+      <link>//localhost:1313/2---em-and-pdes/activity-efields/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/2---em-and-pdes/activity-efields/</guid>
+      <description>&lt;p&gt;As we saw the electric field is described by the 4 Maxwell equations. But, in the electrostatic situation where the charges do not move, we find the electric field is described by the following equations:&lt;/p&gt;&#xA;&lt;p&gt;$$\nabla \cdot \mathbf{E} = \frac{\rho}{\epsilon_0}$$&lt;/p&gt;&#xA;&lt;p&gt;$$\nabla \times \mathbf{E} = 0$$&lt;/p&gt;&#xA;&lt;p&gt;These linear partial differential equations can be solved analytically for a number of situations. In this activity we will explore the electric field for a number of situations.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>27 Nov 23 - Notes: Counting and Combinatorics</title>
+      <link>//localhost:1313/4---randomness-and-distributions/notes-counting_and_combinatorics/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/4---randomness-and-distributions/notes-counting_and_combinatorics/</guid>
+      <description>&lt;p&gt;As we discussed, &lt;a href=&#34;https://en.wikipedia.org/wiki/Entropy&#34;&gt;entropy&lt;/a&gt; is a fundamental concept that quantifies the degree of disorder or randomness in a system. It was initially introduced in the mid-19th century in the field of &lt;a href=&#34;https://en.wikipedia.org/wiki/Thermodynamics&#34;&gt;thermodynamics&lt;/a&gt; by Rudolf Clausius, entropy was a measure of the unavailability of a system&amp;rsquo;s energy to do work.&lt;/p&gt;&#xA;&lt;h2 id=&#34;statistical-mechanics-and-combinatorics&#34;&gt;Statistical Mechanics and Combinatorics&lt;/h2&gt;&#xA;&lt;p&gt;In &lt;a href=&#34;https://en.wikipedia.org/wiki/Statistical_mechanics&#34;&gt;statistical mechanics&lt;/a&gt;, developed by Ludwig Boltzmann and J. Willard Gibbs, entropy was redefined as a measure of uncertainty or information about a system. This brings in the concept of entropy as a measure of the number of possible microstates (specific arrangements of particles) corresponding to a macrostate (the observable state of the system). As it goes, the more microstates there are, the higher the entropy, and hence, the greater the disorder. This is an over-simplification of what is a fundamentally complex and interesting set of processes. This interpretation does bridge thermodynamics with statistical mechanics, offering a deeper understanding of temperature, pressure, and phase transitions in terms of atomic or molecular behavior as we will see with &lt;a href=&#34;https://en.wikipedia.org/wiki/Ideal_gas_law&#34;&gt;the ideal gas law&lt;/a&gt; and the &lt;a href=&#34;https://en.wikipedia.org/wiki/Ising_model&#34;&gt;Ising model&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>31 Aug 23 - Notes: Frames and Coordinates</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes_frames/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes_frames/</guid>
+      <description>&lt;p&gt;A &lt;strong&gt;Frame of Reference&lt;/strong&gt;, &lt;strong&gt;Reference Frame&lt;/strong&gt;, or simply &lt;strong&gt;Frame&lt;/strong&gt; is a set of coordinates. These coordinates describe where things are. Sometimes it makes sense to choose different coordinates to describe the same situation. It is also important to recognize when to change coordinates to make a problem easier to work with. This will lead us to the concept of &lt;a href=&#34;https://en.wikipedia.org/wiki/Generalized_coordinates&#34;&gt;generalized coordinates&lt;/a&gt;, which are quite powerful in working with mechanical systems.&lt;/p&gt;&#xA;&lt;p&gt;In physics, we often seek to work with a problem in the simplest way possible. That means we are typically looking to work with a problem in an &lt;strong&gt;inertial frame&lt;/strong&gt;. Now, this is not always possible, consider systems that can flow and deform like in fluid mechanics or continuum mechanics. But, regardless, we should always know what frame we are working in.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Assessments</title>
+      <link>//localhost:1313/0---intro-and-syllabus/3_assessments/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/0---intro-and-syllabus/3_assessments/</guid>
+      <description>&lt;h2 id=&#34;formative-assessment&#34;&gt;Formative Assessment&lt;/h2&gt;&#xA;&lt;p&gt;Formative assessment is often ungraded and reflective assessment. It is meant to help you make changes to your thinking, approaches, or practice. It is not evaluative, it&amp;rsquo;s corrective; to help you make changes. We will make heavy use of ungraded formative feedback throughout the course. Our weekly readings and your worked problems are meant to be formative; meaning most folks will receive full credit, but the important part to review the feedback and reflect on it.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Worked Problem Assignment 2</title>
+      <link>//localhost:1313/assignments/worked-problem-2/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/worked-problem-2/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Due 22 Sep 23&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;We have spent much of our time on a dynamical systems view of ODEs. In this assignment, you will choose an ODE and work through a dynamical analysis of the system.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/0---intro-and-syllabus/8_worked_problems/&#34;&gt;&lt;strong&gt;Grading Rubric&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.&lt;/p&gt;&#xA;&lt;h2 id=&#34;places-to-find-candidate-problems&#34;&gt;Places to find candidate problems:&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Classical mechanics textbooks; look at the problems in the Lagrangian chapters (you only need to the ODEs)&lt;/li&gt;&#xA;&lt;li&gt;Differential equations textbooks; look at ODEs that represent real systems&lt;/li&gt;&#xA;&lt;li&gt;Wikipedia has lists of named differential equations and problems&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_named_differential_equations&#34;&gt;List of named Diffy Qs&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_nonlinear_ordinary_differential_equations&#34;&gt;List of nonlinear differential equations&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Ask on Slack&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;starting-your-analysis&#34;&gt;Starting your Analysis&lt;/h2&gt;&#xA;&lt;p&gt;You will need to orient us to your problem as there are many ODEs available. You should limit yourself to systems with two degrees of freedom (either 3d with a constraint or 2d with no constraint).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-coupledosc-numericalnormalmodes/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-coupledosc-numericalnormalmodes/</guid>
+      <description>&lt;p&gt;Now that we have discussed and built some facility with Lagrangian dynamics, let&amp;rsquo;s see how using it makes our study of normal modes much simpler than Newtonian mechanics. We will couple this analysis to solving an eigenvalue problem by guessing the form of the solutions. This technique is very common in theoretical physics with different guesses for the solution forms giving rise to different eigenvalue problems (e.g., &lt;a href=&#34;https://en.wikipedia.org/wiki/Bessel_function&#34;&gt;Bessel functions for 2D surface problems&lt;/a&gt; or &lt;a href=&#34;https://en.wikipedia.org/wiki/Hermite_polynomials&#34;&gt;Hermite polynomials for the Quantum Harmonic Oscillator&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>27 Nov 23 - Notes: Monte Carlo Simulations</title>
+      <link>//localhost:1313/4---randomness-and-distributions/notes-monte_carlo_simulations/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/4---randomness-and-distributions/notes-monte_carlo_simulations/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Monte Carlo Simulations&lt;/strong&gt; are a class of computational algorithms that rely on repeated random sampling to obtain numerical results. The method is named after the Monte Carlo Casino in Monaco, reflecting its foundational principle of randomness and chance. Initially developed as part of the Manhattan Project during World War II, Monte Carlo simulations have since evolved into a crucial tool in both physics and a myriad of other fields.&lt;/p&gt;&#xA;&lt;h2 id=&#34;overview-of-monte-carlo-simulations&#34;&gt;Overview of Monte Carlo Simulations&lt;/h2&gt;&#xA;&lt;p&gt;At its core, a &lt;a href=&#34;https://en.wikipedia.org/wiki/Monte_Carlo_method&#34;&gt;Monte Carlo simulation&lt;/a&gt; involves using randomness to solve problems that might be deterministic in principle. It&amp;rsquo;s particularly useful for systems with a large number of variables, where traditional analytical methods become impractical.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>28 Sep 23 - Activity: Superposition of Fields</title>
+      <link>//localhost:1313/2---em-and-pdes/activity-superposition/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/2---em-and-pdes/activity-superposition/</guid>
+      <description>&lt;h2 id=&#34;coulombs-law&#34;&gt;Coulomb&amp;rsquo;s Law&lt;/h2&gt;&#xA;&lt;p&gt;We&amp;rsquo;ve seen that the electric field of a set of point charges if given by the vector sum of the contributions from each charge:&lt;/p&gt;&#xA;&lt;p&gt;$$\mathbf{E}(\mathbf{r}) = \sum_i \frac{1}{4\pi\epsilon_0} \frac{q_i}{(\mathbf{r}-\mathbf{r}&amp;rsquo;_i)^3} (\mathbf{r}-\mathbf{r}&amp;rsquo;_i)$$&lt;/p&gt;&#xA;&lt;p&gt;where $\mathbf{r}&amp;rsquo;_i$ is the location of the charge relative to the origin, and $\mathbf{r}$ is the location of the field point relative to the origin. This &lt;strong&gt;net electric field&lt;/strong&gt; is the result of the &lt;strong&gt;superposition&lt;/strong&gt; of the electric fields from each charge. But here the charges are discrete, we can identify each charge uniquely in terms of it&amp;rsquo;s charge and location. This concept can be abstracted to a continuous distribution of charge, where we can identify the charge at any point in space by the charge density $\rho(\mathbf{r})$. In this case, the charge is not a point charge, but rather a small chunk of charge that we model as a point charge. That is, we can write the electric field contributed by that chunk $dq$ as:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>31 Aug 23 - Activity: Frames and Coordinates</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity-frames/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity-frames/</guid>
+      <description>&lt;h2 id=&#34;forces-in-different-frames&#34;&gt;Forces in different frames&lt;/h2&gt;&#xA;&lt;p&gt;One of the critical things that we must note is that the natural world changes and we observe it. The models (or laws) that we use to describe nature must accurately describe our observations. This is challenging when observers use different frames (or even different coordinates in the same frame) to show we have the same observations. Moving between coordinate systems and frames is a critical skill in physics.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Project 1 - Classical Mechanics and ODEs</title>
+      <link>//localhost:1313/assignments/project-1/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/project-1/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Due 29 Sep 23&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Project 1 will focus on the the topic of ordinary differential equations in physics. Differential equations are often how we describe nature because nature often changes continuously (quantum mechanics notwithstanding). We focused in class on various oscillators. Your job is to develop a project that investigates some nonlinear differential equation of your choosing. Our expectation is that this ODE is nonlinear, at least 2nd order or two coupled 1st order equations, and that is of interest to you personally or professionally. Below is a list of potential candidates.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Project Rubrics</title>
+      <link>//localhost:1313/0---intro-and-syllabus/4_rubric/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/0---intro-and-syllabus/4_rubric/</guid>
+      <description>&lt;h2 id=&#34;preliminary-for-first-out-of-class-project&#34;&gt;Preliminary (For first out of class project)&lt;/h2&gt;&#xA;&lt;p&gt;We have worked together to define elements of a rubric that matter for making physical models. These elements appear as part of major learning goals below.&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Goal&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: right&#34;&gt;Fractional Importance&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Investigate physical systems&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;0.30&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Construct and document a reproducible process&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;0.10&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Use analytical, computational, and graphical approaches&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;0.30&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Provide evidence of the quality of their work&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;0.10&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Collaborate effectively&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;0.20&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h3 id=&#34;goal-investigate-physical-systems-030&#34;&gt;Goal: Investigate physical systems (0.30)&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well does your computational essay predict or explain the system of interest?&lt;/li&gt;&#xA;&lt;li&gt;How well does your computational essay allow the user to explore and investigate the system?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;goal-construct-and-document-a-reproducible-process-010&#34;&gt;Goal: Construct and document a reproducible process (0.10)&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well does your computational essay reproduce your results and claims?&lt;/li&gt;&#xA;&lt;li&gt;How  well documented is your computational essay?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;goal-use-analytical-computational-and-graphical-approaches-030&#34;&gt;Goal: Use analytical, computational, and graphical approaches (0.30)&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well does your computational essay document your assumptions?&lt;/li&gt;&#xA;&lt;li&gt;How well does your computational essay produce an understandable and parsimonious model?&lt;/li&gt;&#xA;&lt;li&gt;How well does your computational essay explain the limitations of your analysis?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;goal-provide-evidence-of-the-quality-of-their-work&#34;&gt;Goal: Provide evidence of the quality of their work&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well does your computational essay present  the case for its claims?&lt;/li&gt;&#xA;&lt;li&gt;How well validated  is your model?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;goal-collaborate-effectively&#34;&gt;Goal: Collaborate effectively&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well did you share  in the class&amp;rsquo;s knowledge?&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well is that documented in your computational essay?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;How well did you work with your partner ? &lt;em&gt;For those choosing to do so&lt;/em&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>25 Oct 23 - Notes: Solutions to The Wave Equation</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-solve_the_wave_eq/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-solve_the_wave_eq/</guid>
+      <description>&lt;p&gt;The wave equation is a partial differential equation that describes how waves propagate (they are fundamentally a disturbance of a medium) in space and time. The general wave equations is:&lt;/p&gt;&#xA;&lt;p&gt;$$\nabla^2 u(\mathbf{r},t) = \frac{1}{v^2} \frac{\partial^2 u(\mathbf{r},t)}{\partial t^2}$$&lt;/p&gt;&#xA;&lt;p&gt;where $u(\mathbf{r},t)$ is the displacement of the wave at position $\mathbf{r}$ and time $t$ and $v$ is the speed of the wave in the medium. Now we typically don&amp;rsquo;t solve this problem in general, like most PDEs, we need a context in which to work on the problem. Moreover, that wave equation is 4 dimensional and we really are going to have a hard time with intuition if we focus on that. Let&amp;rsquo;s instead consider the 1D wave equations:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>28 Nov 23 - Activity: Model of Two Bodies in Thermal Contact</title>
+      <link>//localhost:1313/4---randomness-and-distributions/activity-thermal_contact/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/4---randomness-and-distributions/activity-thermal_contact/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;ve developed an equation for the number of ways we can arrange a small amount of quanta on a small number of oscillators. The formula we developed for arranging $q$ on $N$ oscillators is given below:&lt;/p&gt;&#xA;&lt;p&gt;$$\Omega = \dfrac{(q+N-1)!}{q!(N-1)!}$$&lt;/p&gt;&#xA;&lt;p&gt;These calculations are only tractable with pencil and paper when the number of quanta and oscillators is low. For even a few hundred oscillators and quanta the calculations can only be done on a computer. In fact, we will see with this model how we can easily blow out our computational tools as well.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>3 Oct 23 - Notes: Electric Potential - a scalar field</title>
+      <link>//localhost:1313/2---em-and-pdes/notes-electric_potential/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/2---em-and-pdes/notes-electric_potential/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;ve seen that there&amp;rsquo;s a lot of challenges with solving field problems where the fields are vectors and described by partial differential equations. The electric and magnetic field are vector fields that have a size and direction are every points in space. They are described by a set of 4 partial differential equations, &lt;a href=&#34;https://en.wikipedia.org/wiki/Maxwell%27s_equations&#34;&gt;Maxwell&amp;rsquo;s Equations&lt;/a&gt;. In Cartesian coordinates, these equations are described by 8 coupled partial differential equations.&lt;/p&gt;&#xA;&lt;h2 id=&#34;electrostatics&#34;&gt;Electrostatics&lt;/h2&gt;&#xA;&lt;p&gt;In electrostatic situations, where charges don&amp;rsquo;t move, we&amp;rsquo;ve seen that the equations that describe the electric field are simplified to:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>5 Sept 23 - Notes: Lagrangian Dynamics</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes-lagrangian-dynamics/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes-lagrangian-dynamics/</guid>
+      <description>&lt;p&gt;Book Reading:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Any Classical Mechanics Book Section on Lagrangian Dynamics&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.physics.rutgers.edu/~shapiro/507/book.pdf&#34;&gt;[Section 2.1 and 2.2 of Shapiro&amp;rsquo;s Book is online]&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion&#34;&gt;Newtonian Mechanics&lt;/a&gt; is an incredibly useful model of the natural world. In fact, it wasn&amp;rsquo;t until the mid 1970s that we were able to truly &lt;a href=&#34;https://en.wikipedia.org/wiki/Tests_of_general_relativity&#34;&gt;test Einstein&amp;rsquo;s gravity as a true replacement&lt;/a&gt; for Newton. That being said, for most terrestrial situations (macroscopic objects moving at low speeds), Newton&amp;rsquo;s mechanics is very good. However, the problem with Newton is that it requires a few things:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Calendar</title>
+      <link>//localhost:1313/0---intro-and-syllabus/5_calendar/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/0---intro-and-syllabus/5_calendar/</guid>
+      <description>&lt;p&gt;In this course, we will cover four principal topics in physics (in this order):&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Classical Mechanics and Ordinary Differential Equations&lt;/li&gt;&#xA;&lt;li&gt;Electromagnetism and Partial Differential Equations&lt;/li&gt;&#xA;&lt;li&gt;Waves and Fourier Analysis&lt;/li&gt;&#xA;&lt;li&gt;Statistical Mechanics and Monte Carlo models&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;The class is roughly broken into equal parts for each section. Below we indicate how each week will be spent. This is subject to change based on your input and feedback. But roughly you can expect the following:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Worked Problem Assignment 3</title>
+      <link>//localhost:1313/assignments/worked-problem-3/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/worked-problem-3/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Due 6 Oct 23&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;We have developed tools to create general electrostatic situations. And we have worked with some analytical tools to solve for the electric field. Now you will put these together to solve for the electric field in a specific situation.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/0---intro-and-syllabus/8_worked_problems/&#34;&gt;&lt;strong&gt;Grading Rubric&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.&lt;/p&gt;&#xA;&lt;h2 id=&#34;starting-your-analysis&#34;&gt;Starting your Analysis&lt;/h2&gt;&#xA;&lt;p&gt;You will need to orient us to your problem as there are many potential electrostatic situations. You will need to develop an analytical tractable situation that can also be explored using the numerical methods we have developed. You will need to do the following:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>26 Oct 2023 - Activity: 1-Dimensional Travelling Waves</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-waves-1d/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-1d/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Wave_equation&#34;&gt;Wave equations&lt;/a&gt; are common to all branches of physics. In fact, many modern research topics include some investigations that use wave theory. So useful is the concept of a wave, that we adapted it for quantum mechanics in the form of the &lt;a href=&#34;https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation&#34;&gt;Schrodinger Equation&lt;/a&gt; and the position representation of the wavefunction ($\psi(x,t)$). While wildly useful and broadly applicable, we need to build up some intuition and use cases for waves. We will start with the 1D wave equation:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>3 Oct 23 - Activity: PDEs and Separation of Variables</title>
+      <link>//localhost:1313/2---em-and-pdes/activity-sep_var/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/2---em-and-pdes/activity-sep_var/</guid>
+      <description>&lt;p&gt;As we have realized, solving field problems using vector equations is not always the best way to go about solving our problems. The integrals can be difficult to set up and the equations might be difficult, if not, impossible to solve (e.g., because there is no anti-derivative for the integrand). While we might not fully eliminate the need for vector equations, in electrostatic situations, we can posit the &lt;a href=&#34;https://en.wikipedia.org/wiki/Electric_potential&#34;&gt;electric potential&lt;/a&gt;, $\Phi$.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>30 Nov 23 - Activity: Monte Carlo Integration</title>
+      <link>//localhost:1313/4---randomness-and-distributions/activity-mc_integration/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/4---randomness-and-distributions/activity-mc_integration/</guid>
+      <description>&lt;p&gt;A useful approach to making models of systems is using randomness to find solutions to problems that are stable or static. One such approach is called &lt;a href=&#34;https://en.wikipedia.org/wiki/Monte_Carlo_integration&#34;&gt;Monte Carlo integration&lt;/a&gt; that can be used to find particularly problematic integrals. It&amp;rsquo;s a useful pedagogical introduction to what we are attempting to do, use &lt;a href=&#34;https://en.wikipedia.org/wiki/Monte_Carlo_method&#34;&gt;Monte Carlo approaches&lt;/a&gt; to model thermodynamical systems using the &lt;a href=&#34;https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm&#34;&gt;Metropolis-Hastings algorithm&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; np&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; plt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; random&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;matplotlib inline&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;finding-pi&#34;&gt;Finding Pi&lt;/h2&gt;&#xA;&lt;p&gt;This is a classic use of Monte Carlo integration that illustrates many of the concepts of the technique. Effectively, we can assume there&amp;rsquo;s a constant (undetermined) that links that the area of a circle and the radius squared.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity-lagrange_1/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity-lagrange_1/</guid>
+      <description>&lt;p&gt;In this activity, you will work through an example Lagrangian dynamics problem. This problem is a standard one which sets up both our understanding of the Lagrangian and the Lagrangian equations of motion, but also coupled oscillators. The latter is a very important concept in physics, and we will see it again in the context of waves. In addition, we will change coordinate systems from Cartesian to polar coordinates on our way to generalized coordinates.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Classroom Environment</title>
+      <link>//localhost:1313/0---intro-and-syllabus/6_environment/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/0---intro-and-syllabus/6_environment/</guid>
+      <description>&lt;h2 id=&#34;commitment-to-an-inclusive-classroom&#34;&gt;Commitment to an Inclusive Classroom&lt;/h2&gt;&#xA;&lt;p&gt;I am deeply committed to creating an inclusive classroom - one where you and your classmates&#xA;feel comfortable, intellectually challenged, and able to speak up about your ideas&#xA;and experiences. This means that our classroom, our virtual environments, and our interactions&#xA;need to be as inclusive as possible. Mutual respect, civility, and the ability to listen&#xA;and observe others are central to creating a classroom that is inclusive. I will strive to&#xA;do this and I ask that you do the same. If I can do anything to make the classroom a better&#xA;learning environment for you, please let me know.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Worked Problem Assignment 4</title>
+      <link>//localhost:1313/assignments/worked-problem-4/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/worked-problem-4/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Due 13 Oct 23&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;The electric potential, $\Phi$, is often a better quantity to work with when solving electrostatics problems. As we have seen, we can do direct integration to find the potential at a given point. We&amp;rsquo;ve also seen that we can solve for the potential using the Laplace equation. In this worked problem, you will explore the potential in a specific situation of your choosing.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/0---intro-and-syllabus/8_worked_problems/&#34;&gt;&lt;strong&gt;Grading Rubric&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>30 Oct 2023 - Notes: Deconstructing Waves</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-waves-fouriers_trick/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-waves-fouriers_trick/</guid>
+      <description>&lt;p&gt;While we observe waves in many places, it&amp;rsquo;s the case that we don&amp;rsquo;t often have the luxury of constructing them as we want. In fact, much of the science we do relies on measurements of voltage or current to represent the dynamics of the system.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Want to measure distance? Interferometry gives you a voltage to calibrate.&lt;/li&gt;&#xA;&lt;li&gt;Want to measure material surface properties? Voltage jumps across probes give you proxies&lt;/li&gt;&#xA;&lt;li&gt;Viscosity? Stick the stuff in a rheometer, squeeze it, and measure voltage changes.&lt;/li&gt;&#xA;&lt;li&gt;AYO exoplanets? Light curves are really just measures of voltage across a CCD.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The point is that you will almost always be dealing with signals that are proxies for the actual thing you care about. So let&amp;rsquo;s construct some and deconstruct them.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling</title>
+      <link>//localhost:1313/4---randomness-and-distributions/notes-mcmc/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/4---randomness-and-distributions/notes-mcmc/</guid>
+      <description>&lt;p&gt;One of the principal tools we have at our disposal when it comes to systems with randomness is the Monte Carlo simulation. Monte Carlo is a large class of approaches that all rely on probabilistic outcomes to determine results. In physics, we often use Monte Carlo to find integrals or sums that we are unable to compute by hand.&lt;/p&gt;&#xA;&lt;h2 id=&#34;markov-chain-monte-carlo&#34;&gt;Markov Chain Monte Carlo&lt;/h2&gt;&#xA;&lt;p&gt;We often find ourselves using a type of Monte Carlo simulation that makes use of a Markov Chain. This is called the MCMC model. The mathematical foundations of Markov Chains are well beyond the scope of this course, but the principal issue is that we want to describe is how this simulation works. The video below describes the conceptual backing of MCMC and how it was first used in physics in 1953 to develop a model of an ideal gas. We will make a similar model!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates</title>
+      <link>//localhost:1313/2---em-and-pdes/activity-sep_var_spherical/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/2---em-and-pdes/activity-sep_var_spherical/</guid>
+      <description>&lt;p&gt;We can extend the ideas we developed from Separation of Variables to solve PDEs in spherical coordinates. We propose a similar solution to the one we used for Cartesian coordinates, functions of a single variable.&lt;/p&gt;&#xA;&lt;p&gt;$$V(r,\theta,\phi) = R(r) \Theta(\theta) \Phi(\phi)$$&lt;/p&gt;&#xA;&lt;p&gt;We have &lt;a href=&#34;../../assets/notes/Notes-Separation_of_Variables_Spherical.pdf&#34;&gt;shown that we can solve this problem in general&lt;/a&gt;. We will now apply this to a specific problem. Recall these general solutions are written in the following ways:&lt;/p&gt;&#xA;&lt;p&gt;$$R(r) = A r^n + \frac{B}{r^{n+1}}$$&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>7 Sept 23 - Notes: Numerical Integration in 1D</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes-numerical_integration_1d/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes-numerical_integration_1d/</guid>
+      <description>&lt;p&gt;Principal Ideas for this unit will come from &lt;a href=&#34;https://github.com/dannycab/phy415msu/blob/main/MMIPbook/assets/pdfs/scans/Newman_Ch8_ODEs.pdf&#34;&gt;Newman Chapter 8, Section 1&lt;/a&gt;, which is the reading assigned below.&lt;/p&gt;&#xA;&lt;p&gt;We have seen how we can quickly exhaust our analytical tools when we investigate systems with interesting and complex behavior. We can see much from the perspective of phase space in terms of the qualitatively different behaviors (e.g., oscillations vs rotations, both clockwise and counter-clockwise, in the large angle pendulum). But what if we want to find the specific trajectory of a given set of initial conditions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Project 2 - PDEs, Laplace&#39;s Equation, and the Method of Relaxation</title>
+      <link>//localhost:1313/assignments/project-2/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/project-2/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Due 27 Oct 23&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/assignments/updated_rubric/&#34;&gt;&lt;strong&gt;Updated Rubric&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Project 2 will focus on the topic of partial differential equations, specifically Laplace&amp;rsquo;s equation. For this project, &lt;strong&gt;you will be given a choice to work alone or in a pair&lt;/strong&gt;. If you work in a pair, we expect the work to be more in-depth and to explore more aspects of the problem. For example, you should consider one of the extensions listed below to add to your project. If you work alone, we expect the same level of depth as with project 1.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Resources</title>
+      <link>//localhost:1313/0---intro-and-syllabus/7_resources/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/0---intro-and-syllabus/7_resources/</guid>
+      <description>&lt;h2 id=&#34;confidentiality-and-mandatory-reporting&#34;&gt;Confidentiality and Mandatory Reporting&lt;/h2&gt;&#xA;&lt;p&gt;College students often experience issues that may interfere with academic success such as academic stress, sleep problems, juggling responsibilities, life events, relationship concerns, or feelings of anxiety, hopelessness, or depression.&#xA;As your instructor, one of my responsibilities is to help create a safe learning environment and to support you through these situations and experiences.&#xA;I also have a mandatory reporting responsibility related to my role as a University employee.&#xA;It is my goal that you feel able to share information related to your life experiences in classroom&#xA;discussions, in written work, and in one-on-one meetings.&#xA;I will seek to keep information you share private to the greatest extent possible.&#xA;However, under Title IX, I am required to share information regarding sexual misconduct, relationship violence, or information&#xA;about criminal activity on MSU&amp;rsquo;s campus with the University including the Office of Institutional Equity (OIE).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>31 Oct 23 - Activity: Signal Deconstruction</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-waves-signals/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-signals/</guid>
+      <description>&lt;p&gt;We have started to show that we can take waves of any periodicity and add them together to get new signals. But more common is for us to receive a signal and want to know what waves are in it. This is the process of signal deconstruction. We will be using $V(t)$ to describe this signal because pretty much everything is a voltage. But now we introduce the toolkit that can help us do this.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>7 Dec 23 - Activity: Modeling</title>
+      <link>//localhost:1313/4---randomness-and-distributions/activity-zombies/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/4---randomness-and-distributions/activity-zombies/</guid>
+      <description>&lt;p&gt;While this course has focused on physics and physical systems, the same techniques and approaches that you have developed, can be used to investigate systems in other fields. In this activity, we will demonstrate an initial model, and then ask you to complicate it with the ideas you have developed. Consider the critical issue of a potential &lt;strong&gt;zombie apocalypse&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;While this might seem a little silly, the models and dynamics of a zombie apocalypse can be adapted from the models of disease spread. In fact, the &lt;a href=&#34;https://www.usatoday.com/story/news/nation/2021/03/05/zombie-apocalypse-cdc-useful-advice-any-emergency-pandemic/6920614002/&#34;&gt;CDC had a page dedicated&lt;/a&gt; to this topic. For those who might be really interested, the behavior fo zombie hoards can be modeled like flocking birds or schools of fish.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>7 Sep 23 - Activity: Numerical Integration and More Lagrangians</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity-lagrange_2/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity-lagrange_2/</guid>
+      <description>&lt;p&gt;Now that we have an idea how to find a wealth of interesting ordinary differential equations using Lagrangian mechanics, we&amp;rsquo;ll work on building up ways to understand these equations, their solutions and behavior. The issue with this is that &lt;strong&gt;most ODEs do not have analytical solutions&lt;/strong&gt;. That means we can&amp;rsquo;t write down nice closed-form solutions for them using transcendental functions. However, don&amp;rsquo;t despair, because that does not mean there is no solution. In fact, the vast majority of non-pathological ODEs one might come across in physics are &lt;strong&gt;guaranteed&lt;/strong&gt; to have unique solutions (at least for finite time). We can easily calculate these solutions using &lt;strong&gt;numerical integration&lt;/strong&gt;. Next week we&amp;rsquo;ll also see how we can characterize the behavior of ODEs even without access to numerical integration.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>9 Oct 23 - Notes: Method of Relaxation</title>
+      <link>//localhost:1313/2---em-and-pdes/notes-relaxation/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/2---em-and-pdes/notes-relaxation/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;ve found a number of potential ways to solve Laplace&amp;rsquo;s equation. All of them have so far been analytical &amp;ndash; making use of special functions and introducing basis functions to expand our solutions and develop (potentially infinite) series solutions. As we saw with spherical problems, this is a very powerful method to use, but it is not always possible to find a solution in this way. In some cases you might be able to find general solutions of the form (or in alternative coordinate systems)):&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Worked Problem Assignment 5</title>
+      <link>//localhost:1313/assignments/worked-problem-5/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/worked-problem-5/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Due 3 Nov 23&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;We have developed an approach to find the normal modes of a linear oscillating systems. For this problem you will choose a system that oscillates with at least 3 oscillators and explore the motion and dynamics of that system. You cannot choose coupled springs; it must be a system that you have not already explored in class.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/assignments/updated_rubric/&#34;&gt;&lt;strong&gt;Updated Rubric&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Worked Problems</title>
+      <link>//localhost:1313/0---intro-and-syllabus/8_worked_problems/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/0---intro-and-syllabus/8_worked_problems/</guid>
+      <description>&lt;p&gt;In lieu of homework sets where we ask you to reproduce work that we&amp;rsquo;ve done in class, or try to solve problems that are similar to what we&amp;rsquo;ve done, we will instead ask you to investigate a problem that you are interested in using the techniques we have developed in class. For example, we&amp;rsquo;ve all taken an introductory physics course where we learn how to analyze a problem using energy conservation. So if this were an introductory course, you might develop a scenario where energy conservation applies and then show how you can apply it (doing some calculations and graphing), and discuss what the meaning of those calculations and graphs are.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</title>
+      <link>//localhost:1313/2---em-and-pdes/activity-sep_var_spherical_examples/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/2---em-and-pdes/activity-sep_var_spherical_examples/</guid>
+      <description>&lt;h2 id=&#34;azimuthally-symmetric-solutions&#34;&gt;Azimuthally Symmetric Solutions&lt;/h2&gt;&#xA;&lt;p&gt;As we saw, azimuthally symmetric solutions, the electric potential is independent of $\phi$ and the solutions are of the form:&lt;/p&gt;&#xA;&lt;p&gt;$$V(r,\theta) = \sum_{n=0}^\infty \sum_{l=0}^\infty \left(A_{nl} r^n + \frac{B_{nl}}{r^{n+1}}\right) P_l(\cos\theta)$$&lt;/p&gt;&#xA;&lt;p&gt;where $P_l(\cos\theta)$ are the &lt;a href=&#34;https://en.wikipedia.org/wiki/Legendre_polynomials&#34;&gt;Legendre polynomials&lt;/a&gt;. The coefficients $A_{nl}$ and $B_{nl}$ are determined by the boundary conditions. We will practice solving for these coefficients in this activity.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;✅ Do this&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;sphere-of-constant-surface-potential&#34;&gt;Sphere of constant surface potential&lt;/h3&gt;&#xA;&lt;p&gt;Consider a sphere of with a radius $a$. If the potential on the surface is $V_0$, what is the potential inside and outside the sphere?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>12 Sept 23 - Notes: Dynamical Systems and Phase Space</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes-phase_space/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes-phase_space/</guid>
+      <description>&lt;p&gt;Dynamical systems is a branch of mathematics that seeks to investigate the time dependence of a system and characterize the families of trajectories that the system can have. We don&amp;rsquo;t often solve the system for a given set of initial conditions in dynamical systems work. Instead, we want to &lt;strong&gt;uncover the families of possible solutions&lt;/strong&gt; for a system to see what kinds of things it &lt;em&gt;can&lt;/em&gt; do. An excellent book on this subject that we will draw from is Strogatz&amp;rsquo;s book on Nonlinear Dynamics [strogatz2018nonlinear]; I highly recommend you find a copy for yourself.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2 Nov 23 - Activity: Automated Signal Deconstruction &amp; Reconstruction</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-waves-seriesexpand/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-seriesexpand/</guid>
+      <description>&lt;p&gt;We found that it was possible to use the Fourier transform to decompose the signal into its constituent frequencies. Later we will use this idea to build up the &lt;a href=&#34;https://en.wikipedia.org/wiki/Fast_Fourier_transform&#34;&gt;Fast Fourier Transform&lt;/a&gt; (FFT) algorithm. For now, we will write everything out in full to mirror our analytical work.&lt;/p&gt;&#xA;&lt;p&gt;We will start with the same signal as before, but then you will work with other signals to achieve a particular signal decomposition.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Worked Problem Assignment 6</title>
+      <link>//localhost:1313/assignments/worked-problem-6/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/worked-problem-6/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Due 10 Nov 23&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;We have shown that we can use a Fourier Transform to decompose a function into its frequency components. We&amp;rsquo;ve graphed the solutions, and we&amp;rsquo;ve seen how we can construct signals with certain properties. In this assignment, you are asked to use these tools to solve a problem of your choosing. Consider a scenario where a signal of some sort is being generated and you want to understand the frequency content of the signal. You can use the tools we have developed to do this.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>12 Oct 23 - Activity: Method of Relaxation</title>
+      <link>//localhost:1313/2---em-and-pdes/activity-relaxation_2d/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/2---em-and-pdes/activity-relaxation_2d/</guid>
+      <description>&lt;p&gt;As we discussed, we can use the relaxation approach to solve Laplace&amp;rsquo;s equation. As a reminder the process for doing this is as follows:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Divide the region into a grid&lt;/li&gt;&#xA;&lt;li&gt;Set the boundary conditions on the edges of the grid&lt;/li&gt;&#xA;&lt;li&gt;Guess the starting values for the potential in the interior of the grid (not on the edges)&lt;/li&gt;&#xA;&lt;li&gt;Calculate the potential at each point in the grid using the average of the neighboring points (replacing the value as you go)&lt;/li&gt;&#xA;&lt;li&gt;Repeat step 4 until the values in the grid stops changing&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Below, we have written up a 1D code that performs each of these steps. Your task is to modify this code to work in 2D. You will need to write the functions that compute the potential at each point in the 2D grid as well as the function that sets the boundary conditions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>12 Sep 23 - Activity: The Dynamical Systems Approach and Phase Portraits</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity-phase_space/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity-phase_space/</guid>
+      <description>&lt;p&gt;Up to now, most of your work with models in physics are those you can solve analytically in terms of known functions. Think about solving differential equations that produce polynomials or sines and cosines.&lt;/p&gt;&#xA;&lt;p&gt;But what happens when the solution to the problem is not obviously tractable in an analytical form. Rather, how can we investigate systems that are new to us?&lt;/p&gt;&#xA;&lt;p&gt;In today&amp;rsquo;s activity you will:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Remind yourself how to interpret a 1d phase portrait using the differential equation $\dot{x} = x^2 + 1$&lt;/li&gt;&#xA;&lt;li&gt;Remind yourself how to interpret a 2d phase portrait (phase space plot) using the SHO model&lt;/li&gt;&#xA;&lt;li&gt;Explain what you see in the phase space figure for the SHO&lt;/li&gt;&#xA;&lt;li&gt;Develop the ODE for the large angle pendulum&lt;/li&gt;&#xA;&lt;li&gt;Show how we can recover the SHO using mathematics and graphs&lt;/li&gt;&#xA;&lt;li&gt;Use an existing program to work with a new system&lt;/li&gt;&#xA;&lt;li&gt;Explain the insights developed from a phase space plot of the Large Angle Pendulum&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;1d-system&#34;&gt;1D System&lt;/h2&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s look at a simple 1d system first, given by the differential equation:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>6 Oct 23 - Notes: Fast Fourier Transform</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-fft/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-fft/</guid>
+      <description>&lt;p&gt;It might not have been obvious to you, but our work so far has expected that our $V(t)$ be a continuous function of time, and that we can sample it any time we want. In reality, you are limited to the response of your equipment, which leads to a phenomenon knows as the &lt;a href=&#34;https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem&#34;&gt;Nyquist-Shannon sampling theorem&lt;/a&gt;. This theorem states that if you want to study a signal with a frequency $f$, you need to sample it at least $2f$ times per second. This is known as the &lt;a href=&#34;https://en.wikipedia.org/wiki/Nyquist_frequency&#34;&gt;Nyquist frequency&lt;/a&gt;. If you don&amp;rsquo;t sample at least this often, you will get aliasing, which is when a signal at a higher frequency is indistinguishable from a signal at a lower frequency. As you can tell, there&amp;rsquo;s a lot of issues with sampling when it comes to studying signals.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Project 3 - Waves and Fourier Analysis</title>
+      <link>//localhost:1313/assignments/project-3/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/project-3/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Due 17 Nov 23&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/assignments/updated_rubric/&#34;&gt;&lt;strong&gt;Updated Rubric&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Project 3 will focus on the topic of waves and Fourier analysis. You will need to do an analysis of some data of your choosing. You may start this work during the class week of 10/13 after we go through some initial work.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-do-you-need-to-do&#34;&gt;What do you need to do?&lt;/h2&gt;&#xA;&lt;p&gt;Think about the ways that an FFT can be used. How we can extract frequency information, clean signals, and more. You can use the FFT to explore any data you want. You can use this project to explore any data you want. It only needs to be 1D data, but you have to provide a full analysis and explanation of what you are doing.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>14 Sept 23 - Conducting a complete analysis of an ODE</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity_vanderpol/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity_vanderpol/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;ve built up all the tools that we use to investigate ODEs. Now we are going to practice with an oscillator that exhibits really interesting dynamics: the &lt;a href=&#34;https://en.wikipedia.org/wiki/Van_der_Pol_oscillator&#34;&gt;Van der Pol oscillator&lt;/a&gt;. This equation originates from nonlinear circuits in early radios, but has now also been used in neuroscience and geology. It is given by the differential equation:&lt;/p&gt;&#xA;&lt;p&gt;$$&#xA;\ddot{x} = -\mu (x^2 - 1)\dot{x} - x&#xA;$$&lt;/p&gt;&#xA;&lt;p&gt;or, written as two first order equations:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>7 Nov 23 - Activity: The Fast Fourier Transform</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-waves-introduction_to_fft/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-introduction_to_fft/</guid>
+      <description>&lt;p&gt;We have shown how to decompose a signal using a Fourier series decomposition:&lt;/p&gt;&#xA;&lt;p&gt;$$V(t) = \sum_{n=-\infty}^{\infty} c_n e^{i n \omega t}$$&lt;/p&gt;&#xA;&lt;p&gt;where we find the Fourier coefficients $c_n$ by integrating over the period of the signal (performing a Fourier transform of the signal):&lt;/p&gt;&#xA;&lt;p&gt;$$c_n = \frac{1}{T} \int_0^T V(t) e^{-i n \omega t} dt$$&lt;/p&gt;&#xA;&lt;h2 id=&#34;extracting-the-fourier-coefficients&#34;&gt;Extracting the Fourier coefficients&lt;/h2&gt;&#xA;&lt;p&gt;We wrote some code earlier to perform the Fourier transform of a signal and obtain the coefficients. We will see how to do that using the &lt;code&gt;scipy&lt;/code&gt; library later, but let&amp;rsquo;s produce these results first without it. We are going to prepare several test signals, but you will need to make more.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Worked Problem Assignment 7</title>
+      <link>//localhost:1313/assignments/worked-problem-7/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/worked-problem-7/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Due 1 Dec 23&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;We have started to use probability and counting statistics to understand the behavior of systems. In this worked problem, you will explore a system of your choosing.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/assignments/updated_rubric/&#34;&gt;&lt;strong&gt;Updated Rubric&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.&lt;/p&gt;&#xA;&lt;h2 id=&#34;starting-your-analysis&#34;&gt;Starting your Analysis&lt;/h2&gt;&#xA;&lt;p&gt;You will need to orient us to your problem as there are many potential statistical models. You will need to develop an analytical tractable situation that can also be explored using the numerical methods we have developed. You will need to do the following:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>19 Sep 23 - Notes: Heading towards Chaos</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes-linearization_odes/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes-linearization_odes/</guid>
+      <description>&lt;p&gt;One of the principal motivations for our work thus far has been to get to analyze systems that show suprising and complex behavior. In mechanics, you might have heard of those kinds of behviors as chaotic or exhibiting chaos. It turns out the chaos is a specific kind of behavior that we can find. To motivate us, let&amp;rsquo;s remind ourselves of how cool nature can be.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://inv.tux.pizza/watch?v=fDek6cYijxI&#34;&gt;&lt;img src=&#34;https://markdown-videos-api.jorgenkh.no/youtube/fDek6cYijxI?width=720&amp;amp;height=405&#34; alt=&#34;&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Non-Commercial Link: &lt;a href=&#34;https://inv.tux.pizza/watch?v=fDek6cYijxI&#34;&gt;https://inv.tux.pizza/watch?v=fDek6cYijxI&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Commercial Link: &lt;a href=&#34;https://youtube.com/watch?v=fDek6cYijxI&#34;&gt;https://youtube.com/watch?v=fDek6cYijxI&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;reminders-of-the-large-angle-pendulum&#34;&gt;Reminders of the Large Angle Pendulum&lt;/h2&gt;&#xA;&lt;p&gt;Last time we investigated the phase portrait of the large angle pendulum, we we could arrive at by re-writing the differential equation&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>9 Nov 23 - Activity: Applying The Fast Fourier Transform</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-waves-applying_the_fft/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-applying_the_fft/</guid>
+      <description>&lt;p&gt;We were able to find the complex expansion coefficients for a signal using a Fourier series. However, this method is only applicable to periodic signals. Here we will introduce the Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT) which can be used to find the complex expansion coefficients for any signal. The DFT is the discrete analog to our expansion approach, the FFT improves the algorithmic efficiency of the DFT, which we won&amp;rsquo;t describe.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Project 4 - Probabilistic Modeling</title>
+      <link>//localhost:1313/assignments/project-4/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/assignments/project-4/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Due 14 Dec 23&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;//localhost:1313/assignments/updated_rubric/&#34;&gt;&lt;strong&gt;Updated Rubric&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Project 4 emphasizes probabilistic models. We&amp;rsquo;ve done work with counting statistics (flipping coins and rolling die). We&amp;rsquo;ve modeled radioactive decay and decay chains. We&amp;rsquo;ve developed Monte Carlo simulations to do integrals and to model different systems. In this project, you are free to choose a particular probabilistic model and apply it to a new physics situation of your choosing. You may be creative in your choice of model and situation, but you must be able to justify your choices.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>13 Nov 23 - Notes: Applications of FFTs</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-using-ffts/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-using-ffts/</guid>
+      <description>&lt;p&gt;As you have learned, we can use the Fourier Transform to decompose a signal into its frequency components. This is useful for many applications, including filtering, noise removal, and compression. All of these rely on some reconstruction of the original signal from the frequency components.&lt;/p&gt;&#xA;&lt;p&gt;While this might not seem like a big deal, it is quite powerful, if we realize that we can also manipulate the frequency components before reconstructing the signal. This is the basis of many signal processing techniques. We will use this reading to highlight two common examples of data in physics where FFTs are used: time series and images. Let&amp;rsquo;s start by importing our libraries.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>19 Sep 23 - The Duffing Oscillator</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity-duffing/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity-duffing/</guid>
+      <description>&lt;p&gt;We have developed a set of tools to investigate differential equations. You will now apply those skills to the &lt;a href=&#34;https://en.wikipedia.org/wiki/Duffing_equation&#34;&gt;Duffing Oscillator&lt;/a&gt;. The Duffing Oscillator is a second order differential equation that is used to model a forced nonlinear spring. The equation is given by:&lt;/p&gt;&#xA;&lt;p&gt;$$\frac{d^2x}{dt^2} + \delta \frac{dx}{dt} + \alpha x + \beta x^3 = \gamma \cos(\omega t)$$&lt;/p&gt;&#xA;&lt;p&gt;And written in the form $\ddot{x} = f(x, \dot{x}, t)$, it is:&lt;/p&gt;&#xA;&lt;p&gt;$$\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3 + \gamma \cos(\omega t)$$&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>14 &amp; 16 Nov 23 - Using the FFT with Real Data</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-fft-applications/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-fft-applications/</guid>
+      <description>&lt;p&gt;Y&amp;rsquo;all have learned the main process for using an FFT on a 1D signal, so let&amp;rsquo;s use it in the context of some real world data. We&amp;rsquo;ll give you different kind of data that you can choose to work with: Transit light curve data and audio signals. Take a look at both datasets and start working on whichever one you&amp;rsquo;d like first.&lt;/p&gt;&#xA;&lt;h2 id=&#34;transit-data&#34;&gt;Transit Data&lt;/h2&gt;&#xA;&lt;p&gt;You work in a lab that is observing light curves to determine if there are transiting objects near a star and, if so, what is their period. Using the brightness of the star itself, we can determine it&amp;rsquo;s mass and then it&amp;rsquo;s a quick analysis to get the mass of the transiting objects (Thanks, Newton!).&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

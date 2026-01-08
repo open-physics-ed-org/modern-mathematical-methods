@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1 - Classical Mechanics and ODEs | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>Project 1 - Classical Mechanics and ODEs</h1>
+        
+    </header>
+
+    <p><strong>Due 29 Sep 23</strong></p>
+<p>Project 1 will focus on the the topic of ordinary differential equations in physics. Differential equations are often how we describe nature because nature often changes continuously (quantum mechanics notwithstanding). We focused in class on various oscillators. Your job is to develop a project that investigates some nonlinear differential equation of your choosing. Our expectation is that this ODE is nonlinear, at least 2nd order or two coupled 1st order equations, and that is of interest to you personally or professionally. Below is a list of potential candidates.</p>
+<h2 id="what-do-you-need-to-do">What do you need to do?</h2>
+<p>Think about the ways we have explored things in class. This is meant to be an introduction to making a project, so the expectation is that the projects will get more involved and interesting over time. That is, as you learn how to do things, you will apply new ideas and do more exploration on your own. We will also reflect on our project rubric and make changes to it as you get more experience and can do more cool things.</p>
+<p>But for this first project, I have a list of tasks that you have experienced in class:</p>
+<ul>
+<li>Describe the differential equation.
+<ul>
+<li>what is it</li>
+<li>what does it model</li>
+<li>what assumptions and limitations are baked into it</li>
+</ul>
+</li>
+<li>Investigate it analytically as best you can
+<ul>
+<li>Take limits on the nonlinear aspects</li>
+<li>Investigate approximate behaviors</li>
+<li>Make claims about what should happen in different regimes (based on limits)</li>
+</ul>
+</li>
+<li>Develop a computational investigation to compliment the analytics
+<ul>
+<li>Create a phase space diagram</li>
+<li>Describe qualitatively important behaviors and regimes in which they occur
+<ul>
+<li>Compare to your analytical work</li>
+</ul>
+</li>
+<li>Compute trajectories in the space and describe the evolution</li>
+</ul>
+</li>
+<li>Produce visualizations of you work
+<ul>
+<li>Make graphs that are labeled and titled appropriately for your claims</li>
+<li>Add mathematics to the notebook is you see fit ($LaTeX$, handwritten, typed are all ok)</li>
+</ul>
+</li>
+<li>Document your work
+<ul>
+<li>We should be able to run your notebooks and get exactly what you want us to</li>
+<li>Comment everything</li>
+</ul>
+</li>
+</ul>
+<h2 id="candidate-odes">Candidate ODEs</h2>
+<ul>
+<li>Classical mechanics textbooks; look at the problems in the Lagrangian chapters (you only need the ODEs)</li>
+<li>Differential equations textbooks; look at ODEs that represent real systems</li>
+<li>Wikipedia has lists of named differential equations and problems
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/List_of_named_differential_equations">List of named Diffy Qs</a></li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_nonlinear_ordinary_differential_equations">List of nonlinear differential equations</a>
+<ul>
+<li>Consider: the Chandrasekhar equation, the Duffing model, the Langmuir equation, the Rayleigh equation, the Van Der Pol oscillator</li>
+</ul>
+</li>
+<li>Strogatz&rsquo;s Nonlinear Dynamics and Chaos
+<ul>
+<li>Check out Chapters 4-5. There are many interesting examples and problem setups you could use.</li>
+</ul>
+</li>
+<li>Think about other systems that are described mathematically as an ODE
+<ul>
+<li>Predator-prey models, Pursuit models, Fireflies, etc.</li>
+</ul>
+</li>
+<li>Ask on Slack</li>
+</ul>
+</li>
+</ul>
+<h2 id="earning-extra-credit-for-more-explorations">Earning extra credit for more explorations</h2>
+<ul>
+<li>Start from the description of the physical system and derive the EOMs using Lagrangian mechanics</li>
+<li>Explore a higher-dimensional system (3D or more)</li>
+<li>Explore a system with a tunable parameter and show how solutions change when that parameter is varied.</li>
+</ul>
+<h2 id="submitting-your-work">Submitting your work</h2>
+<p>You will upload your work to D2L. It should be a single PDF of your work. If you also write code, please submit the associated files as well. If you do all of this in a Jupyter notebook, please export the notebook as a PDF and submit the notebook and PDF file. If you have any questions, please ask. We want you to enjoy working on these problems.</p>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/assignments/worked-problem-3/">← Worked Problem Assignment 3</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/assignments/worked-problem-2/">Worked Problem Assignment 2 →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>1 - Mechanics and ODEs on PHY 415 Fall 2023</title>
+    <link>//localhost:1313/1---mechanics-and-odes/</link>
+    <description>Recent content in 1 - Mechanics and ODEs on PHY 415 Fall 2023</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 08 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/1---mechanics-and-odes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>29 Aug 23 - Notes: Simple Harmonic Oscillator</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes-sho/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes-sho/</guid>
+      <description>&lt;h2 id=&#34;a-linear-restoring-force&#34;&gt;A Linear Restoring Force&lt;/h2&gt;&#xA;&lt;p&gt;The SHO model, as we will see, is the root of many more sophisticated models in physics &amp;ndash; across many subdisciplines. There&amp;rsquo;s a reason for this. The SHO is a simple model that captures the essence of many physical systems. It is a mathematical model for a &amp;ldquo;linear restoring force&amp;rdquo;. Such a force gives rise to local stability, that is, a tendency for the system to return to a stable equilibrium position. The richness of this statement is not entirely clear, but we will see that it is a very powerful idea, that is related to to energy minimization, and the idea of a potential energy function.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>31 Aug 23 - Notes: Frames and Coordinates</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes_frames/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes_frames/</guid>
+      <description>&lt;p&gt;A &lt;strong&gt;Frame of Reference&lt;/strong&gt;, &lt;strong&gt;Reference Frame&lt;/strong&gt;, or simply &lt;strong&gt;Frame&lt;/strong&gt; is a set of coordinates. These coordinates describe where things are. Sometimes it makes sense to choose different coordinates to describe the same situation. It is also important to recognize when to change coordinates to make a problem easier to work with. This will lead us to the concept of &lt;a href=&#34;https://en.wikipedia.org/wiki/Generalized_coordinates&#34;&gt;generalized coordinates&lt;/a&gt;, which are quite powerful in working with mechanical systems.&lt;/p&gt;&#xA;&lt;p&gt;In physics, we often seek to work with a problem in the simplest way possible. That means we are typically looking to work with a problem in an &lt;strong&gt;inertial frame&lt;/strong&gt;. Now, this is not always possible, consider systems that can flow and deform like in fluid mechanics or continuum mechanics. But, regardless, we should always know what frame we are working in.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>31 Aug 23 - Activity: Frames and Coordinates</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity-frames/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity-frames/</guid>
+      <description>&lt;h2 id=&#34;forces-in-different-frames&#34;&gt;Forces in different frames&lt;/h2&gt;&#xA;&lt;p&gt;One of the critical things that we must note is that the natural world changes and we observe it. The models (or laws) that we use to describe nature must accurately describe our observations. This is challenging when observers use different frames (or even different coordinates in the same frame) to show we have the same observations. Moving between coordinate systems and frames is a critical skill in physics.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>5 Sept 23 - Notes: Lagrangian Dynamics</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes-lagrangian-dynamics/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes-lagrangian-dynamics/</guid>
+      <description>&lt;p&gt;Book Reading:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Any Classical Mechanics Book Section on Lagrangian Dynamics&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.physics.rutgers.edu/~shapiro/507/book.pdf&#34;&gt;[Section 2.1 and 2.2 of Shapiro&amp;rsquo;s Book is online]&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion&#34;&gt;Newtonian Mechanics&lt;/a&gt; is an incredibly useful model of the natural world. In fact, it wasn&amp;rsquo;t until the mid 1970s that we were able to truly &lt;a href=&#34;https://en.wikipedia.org/wiki/Tests_of_general_relativity&#34;&gt;test Einstein&amp;rsquo;s gravity as a true replacement&lt;/a&gt; for Newton. That being said, for most terrestrial situations (macroscopic objects moving at low speeds), Newton&amp;rsquo;s mechanics is very good. However, the problem with Newton is that it requires a few things:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity-lagrange_1/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity-lagrange_1/</guid>
+      <description>&lt;p&gt;In this activity, you will work through an example Lagrangian dynamics problem. This problem is a standard one which sets up both our understanding of the Lagrangian and the Lagrangian equations of motion, but also coupled oscillators. The latter is a very important concept in physics, and we will see it again in the context of waves. In addition, we will change coordinate systems from Cartesian to polar coordinates on our way to generalized coordinates.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>7 Sept 23 - Notes: Numerical Integration in 1D</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes-numerical_integration_1d/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes-numerical_integration_1d/</guid>
+      <description>&lt;p&gt;Principal Ideas for this unit will come from &lt;a href=&#34;https://github.com/dannycab/phy415msu/blob/main/MMIPbook/assets/pdfs/scans/Newman_Ch8_ODEs.pdf&#34;&gt;Newman Chapter 8, Section 1&lt;/a&gt;, which is the reading assigned below.&lt;/p&gt;&#xA;&lt;p&gt;We have seen how we can quickly exhaust our analytical tools when we investigate systems with interesting and complex behavior. We can see much from the perspective of phase space in terms of the qualitatively different behaviors (e.g., oscillations vs rotations, both clockwise and counter-clockwise, in the large angle pendulum). But what if we want to find the specific trajectory of a given set of initial conditions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>7 Sep 23 - Activity: Numerical Integration and More Lagrangians</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity-lagrange_2/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity-lagrange_2/</guid>
+      <description>&lt;p&gt;Now that we have an idea how to find a wealth of interesting ordinary differential equations using Lagrangian mechanics, we&amp;rsquo;ll work on building up ways to understand these equations, their solutions and behavior. The issue with this is that &lt;strong&gt;most ODEs do not have analytical solutions&lt;/strong&gt;. That means we can&amp;rsquo;t write down nice closed-form solutions for them using transcendental functions. However, don&amp;rsquo;t despair, because that does not mean there is no solution. In fact, the vast majority of non-pathological ODEs one might come across in physics are &lt;strong&gt;guaranteed&lt;/strong&gt; to have unique solutions (at least for finite time). We can easily calculate these solutions using &lt;strong&gt;numerical integration&lt;/strong&gt;. Next week we&amp;rsquo;ll also see how we can characterize the behavior of ODEs even without access to numerical integration.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>12 Sept 23 - Notes: Dynamical Systems and Phase Space</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes-phase_space/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes-phase_space/</guid>
+      <description>&lt;p&gt;Dynamical systems is a branch of mathematics that seeks to investigate the time dependence of a system and characterize the families of trajectories that the system can have. We don&amp;rsquo;t often solve the system for a given set of initial conditions in dynamical systems work. Instead, we want to &lt;strong&gt;uncover the families of possible solutions&lt;/strong&gt; for a system to see what kinds of things it &lt;em&gt;can&lt;/em&gt; do. An excellent book on this subject that we will draw from is Strogatz&amp;rsquo;s book on Nonlinear Dynamics [strogatz2018nonlinear]; I highly recommend you find a copy for yourself.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>12 Sep 23 - Activity: The Dynamical Systems Approach and Phase Portraits</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity-phase_space/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity-phase_space/</guid>
+      <description>&lt;p&gt;Up to now, most of your work with models in physics are those you can solve analytically in terms of known functions. Think about solving differential equations that produce polynomials or sines and cosines.&lt;/p&gt;&#xA;&lt;p&gt;But what happens when the solution to the problem is not obviously tractable in an analytical form. Rather, how can we investigate systems that are new to us?&lt;/p&gt;&#xA;&lt;p&gt;In today&amp;rsquo;s activity you will:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Remind yourself how to interpret a 1d phase portrait using the differential equation $\dot{x} = x^2 + 1$&lt;/li&gt;&#xA;&lt;li&gt;Remind yourself how to interpret a 2d phase portrait (phase space plot) using the SHO model&lt;/li&gt;&#xA;&lt;li&gt;Explain what you see in the phase space figure for the SHO&lt;/li&gt;&#xA;&lt;li&gt;Develop the ODE for the large angle pendulum&lt;/li&gt;&#xA;&lt;li&gt;Show how we can recover the SHO using mathematics and graphs&lt;/li&gt;&#xA;&lt;li&gt;Use an existing program to work with a new system&lt;/li&gt;&#xA;&lt;li&gt;Explain the insights developed from a phase space plot of the Large Angle Pendulum&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;1d-system&#34;&gt;1D System&lt;/h2&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s look at a simple 1d system first, given by the differential equation:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>14 Sept 23 - Conducting a complete analysis of an ODE</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity_vanderpol/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity_vanderpol/</guid>
+      <description>&lt;p&gt;We&amp;rsquo;ve built up all the tools that we use to investigate ODEs. Now we are going to practice with an oscillator that exhibits really interesting dynamics: the &lt;a href=&#34;https://en.wikipedia.org/wiki/Van_der_Pol_oscillator&#34;&gt;Van der Pol oscillator&lt;/a&gt;. This equation originates from nonlinear circuits in early radios, but has now also been used in neuroscience and geology. It is given by the differential equation:&lt;/p&gt;&#xA;&lt;p&gt;$$&#xA;\ddot{x} = -\mu (x^2 - 1)\dot{x} - x&#xA;$$&lt;/p&gt;&#xA;&lt;p&gt;or, written as two first order equations:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>19 Sep 23 - Notes: Heading towards Chaos</title>
+      <link>//localhost:1313/1---mechanics-and-odes/notes-linearization_odes/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/notes-linearization_odes/</guid>
+      <description>&lt;p&gt;One of the principal motivations for our work thus far has been to get to analyze systems that show suprising and complex behavior. In mechanics, you might have heard of those kinds of behviors as chaotic or exhibiting chaos. It turns out the chaos is a specific kind of behavior that we can find. To motivate us, let&amp;rsquo;s remind ourselves of how cool nature can be.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://inv.tux.pizza/watch?v=fDek6cYijxI&#34;&gt;&lt;img src=&#34;https://markdown-videos-api.jorgenkh.no/youtube/fDek6cYijxI?width=720&amp;amp;height=405&#34; alt=&#34;&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Non-Commercial Link: &lt;a href=&#34;https://inv.tux.pizza/watch?v=fDek6cYijxI&#34;&gt;https://inv.tux.pizza/watch?v=fDek6cYijxI&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Commercial Link: &lt;a href=&#34;https://youtube.com/watch?v=fDek6cYijxI&#34;&gt;https://youtube.com/watch?v=fDek6cYijxI&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;reminders-of-the-large-angle-pendulum&#34;&gt;Reminders of the Large Angle Pendulum&lt;/h2&gt;&#xA;&lt;p&gt;Last time we investigated the phase portrait of the large angle pendulum, we we could arrive at by re-writing the differential equation&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>19 Sep 23 - The Duffing Oscillator</title>
+      <link>//localhost:1313/1---mechanics-and-odes/activity-duffing/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/1---mechanics-and-odes/activity-duffing/</guid>
+      <description>&lt;p&gt;We have developed a set of tools to investigate differential equations. You will now apply those skills to the &lt;a href=&#34;https://en.wikipedia.org/wiki/Duffing_equation&#34;&gt;Duffing Oscillator&lt;/a&gt;. The Duffing Oscillator is a second order differential equation that is used to model a forced nonlinear spring. The equation is given by:&lt;/p&gt;&#xA;&lt;p&gt;$$\frac{d^2x}{dt^2} + \delta \frac{dx}{dt} + \alpha x + \beta x^3 = \gamma \cos(\omega t)$$&lt;/p&gt;&#xA;&lt;p&gt;And written in the form $\ddot{x} = f(x, \dot{x}, t)$, it is:&lt;/p&gt;&#xA;&lt;p&gt;$$\ddot{x} = - \delta \dot{x} - \alpha x - \beta x^3 + \gamma \cos(\omega t)$$&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

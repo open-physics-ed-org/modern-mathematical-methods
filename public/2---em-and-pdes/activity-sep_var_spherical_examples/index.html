@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</h1>
+        
+    </header>
+
+    <h2 id="azimuthally-symmetric-solutions">Azimuthally Symmetric Solutions</h2>
+<p>As we saw, azimuthally symmetric solutions, the electric potential is independent of $\phi$ and the solutions are of the form:</p>
+<p>$$V(r,\theta) = \sum_{n=0}^\infty \sum_{l=0}^\infty \left(A_{nl} r^n + \frac{B_{nl}}{r^{n+1}}\right) P_l(\cos\theta)$$</p>
+<p>where $P_l(\cos\theta)$ are the <a href="https://en.wikipedia.org/wiki/Legendre_polynomials">Legendre polynomials</a>. The coefficients $A_{nl}$ and $B_{nl}$ are determined by the boundary conditions. We will practice solving for these coefficients in this activity.</p>
+<p><strong>✅ Do this</strong></p>
+<h3 id="sphere-of-constant-surface-potential">Sphere of constant surface potential</h3>
+<p>Consider a sphere of with a radius $a$. If the potential on the surface is $V_0$, what is the potential inside and outside the sphere?</p>
+<ol>
+<li>Consider the radial solutions (what doesn&rsquo;t blow up?)</li>
+<li>Consider the polar angle solutions, what has to be true? What does that say about terms with $l&gt;0$?</li>
+<li>Write down the solution inside and outside the sphere.</li>
+<li>Make a heat map plot (in $x$ and $y$) of the potential inside and outside the sphere. You can set $a=1$ and $V_0=1$ if that helps.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
+</span></span></code></pre></div><p><strong>✅ Do this</strong></p>
+<h3 id="sphere-of-variable-potential">Sphere of variable potential</h3>
+<p>Consider a sphere of with a radius $a$. If the potential on the surface is $V(\theta)$, what is the potential inside and outside the sphere?</p>
+<ol>
+<li>Consider the radial solutions (what doesn&rsquo;t blow up?)</li>
+<li>Consider the polar angle solutions, what has to be true? Can you say anything about them?</li>
+<li>What if $V(\theta) = V_0 \cos(\theta)$? What is the potential inside and outside the sphere?</li>
+</ol>
+<h3 id="a-thick-spherical-shell">A thick spherical shell</h3>
+<p>Suppose you have a spherical shell of inner radius $a$ and outer radius $b$, and you know the electric potential on the inner ($V(a,\theta) = V_a(\theta)$) and outer ($V(b,\theta) = V_b(\theta)$) surfaces. You want to find the electric potential $V(r,\theta)$ inside the hole ($r&lt;a$) and outside the shell ($r&gt;b$).</p>
+<p>Let&rsquo;s allow:</p>
+<p>$$V_a(\theta) = V_{a0} + V_{a1} \cos(\theta)$$
+$$V_b(\theta) = V_{b0} + V_{b1} \cos(\theta)$$</p>
+<ol>
+<li>What is the general solution? (all three regions)</li>
+<li>What are the boundary conditions for $r$?</li>
+<li>What terms are left in the general solutions?</li>
+<li>Find the unique solution for $V(r,\theta)$ inside the hole ($r&lt;a$) and outside the shell ($r&gt;b$).</li>
+</ol>
+<p>What do you do in the case of $V_a(\theta) = f(\theta)$ and $V_b(\theta) = g(\theta)$ - generic functions?</p>
+<h3 id="example-of-polarization">Example of Polarization</h3>
+<p><strong>✅ Do this</strong></p>
+<p>Put a metal sphere of radius $a$ in a uniform electric field $\vec{E} = E_0 \hat{z}$.</p>
+<p><img src="https://d2vlcm61l7u1fs.cloudfront.net/media%2F2f6%2F2f6e4bc3-0070-470f-9451-6376a4eceddc%2Fphpl2HMKa.png" alt="Sphere in a uniform electric field"></p>
+<p>What is the potential inside and outside the sphere?</p>
+<ol>
+<li>Draw the picture and write down the boundary conditions. What is the potential everywhere on a metal?</li>
+<li>What general solution do you need to use? How do you know?</li>
+<li>What are the boundary conditions for the radial solutions? The polar angle solutions?</li>
+<li>Match your boundary conditions to your general solution. What is the potential inside and outside the sphere?</li>
+<li>Make a heat map plot (in $x$ and $y$) of the potential inside and outside the sphere. You can set $a=1$ and $E_0=1$ if that helps.</li>
+<li>(challenge) Find the polarization charge density on the surface of the sphere. What is the total charge on the sphere?</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"></code></pre></div>
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/2---em-and-pdes/activity-relaxation_2d/">← 12 Oct 23 - Activity: Method of Relaxation</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/2---em-and-pdes/notes-relaxation/">9 Oct 23 - Notes: Method of Relaxation →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Sept 23 - Notes: Lagrangian Dynamics | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>5 Sept 23 - Notes: Lagrangian Dynamics</h1>
+        
+    </header>
+
+    <p>Book Reading:</p>
+<ul>
+<li>Any Classical Mechanics Book Section on Lagrangian Dynamics</li>
+<li><a href="https://www.physics.rutgers.edu/~shapiro/507/book.pdf">[Section 2.1 and 2.2 of Shapiro&rsquo;s Book is online]</a></li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion">Newtonian Mechanics</a> is an incredibly useful model of the natural world. In fact, it wasn&rsquo;t until the mid 1970s that we were able to truly <a href="https://en.wikipedia.org/wiki/Tests_of_general_relativity">test Einstein&rsquo;s gravity as a true replacement</a> for Newton. That being said, for most terrestrial situations (macroscopic objects moving at low speeds), Newton&rsquo;s mechanics is very good. However, the problem with Newton is that it requires a few things:</p>
+<ol>
+<li>We must be able identify each interaction on the object or model an average behavior from many littler interactions (e.g., models of friction vs. detailed E&amp;M forces)</li>
+<li>We must be able to mathematically describe the size and direction of the interaction at all times we want to model</li>
+<li>We must be able to vectorially add the interactions to produce the net force $\sum_i \vec{F}<em>i = \vec{F}</em>{net}$.</li>
+</ol>
+<p>In many cases, we can do this. But consider the picture below of a bead sliding inside a cone. How would you write down the contact force between the cone and the bead for all space and time?</p>
+<p><img src="/images/content/assets/cylindrical_cone_mass.jpg" alt="Cone"></p>
+<p>Enter the <a href="https://en.wikipedia.org/wiki/Lagrangian_mechanics">Lagrangian Mechanics</a>, an equivalent description of Newton&rsquo;s mechanics developed through several advances in physics and mathematics in the 17th and 18th centuries. Some of the major contributors included Newton, Gottfried Wilhelm Leibniz, Pierre Louis Moreau de Maupertuis, Guillaume de l&rsquo;Hôpital, Jacques Bernoulli, Jean Bernoulli, and Jean D&rsquo;Alembert. This period of the development of mechanics was foundational to the development of concepts like the <a href="https://en.wikipedia.org/wiki/Action_(physics)">action</a> and <a href="https://en.wikipedia.org/wiki/Phase_space">phase space</a> as well as approaches like <a href="https://en.wikipedia.org/wiki/Calculus_of_variations">variational analysis</a>, which formed the basis for <a href="https://en.wikipedia.org/wiki/Dynamical_system">dynamical systems</a> (phase space describes real motion), <a href="https://en.wikipedia.org/wiki/Quantum_mechanics">quantum mechanics</a> (quantize the action), and <a href="https://en.wikipedia.org/wiki/Perturbation_theory">perturbation theory</a> (approximate answers can be iteratively sought).</p>
+<p>This analysis is grounded in optimization or rather extremization. The idea is as follows:</p>
+<ol>
+<li>Consider all potential paths a system can take through phase space</li>
+<li>Time each of them between the same two points in phase space</li>
+<li>The one that minimizes the action integral over that time/space is the one the system takes</li>
+</ol>
+<p>This might seem magical! But it&rsquo;s truly a deep connection to the energetics of the system, which limit the the relevant equations of motion by both the number of degrees of freedom (ways the system can move) and the constraints equation (things that influence the motion).</p>
+<h2 id="variational-analysis">Variational Analysis</h2>
+<p>The name of the game in calculus of variations is finding extrema (minima, maxima, or stationary points) of integrals that have the form:</p>
+<p>$$
+S = \int_{x_1}^{x_2} f[y(x),\dot{y}(x),x] dx
+$$</p>
+<p>While at first this might seem like a strange thing to do, it turns out that this is a very powerful way to solve problems. In fact, we are able to characterize the path of a system through phase space by finding the path that minimizes the <a href="https://en.wikipedia.org/wiki/Action_(physics)">action integral</a> . This is called the <a href="https://en.wikipedia.org/wiki/Stationary-action_principle">principle of least action</a>. This kind of analysis also tells us that a <a href="https://en.wikipedia.org/wiki/Great_circle">Great Circle</a> is the shortest path between two points on a sphere and that <a href="https://en.wikipedia.org/wiki/Snell%27s_law">Snell&rsquo;s Law</a> is the shortest path (in time) light takes between two points in different media.</p>
+<p>While you are trying to find the minimize $S$, what you end up finding is the <strong>function</strong> $y(x)$ that satisfies this minimization. It turns out that for $S$ to have extrema, the Euler-Lagrange equation (below) must be satisfied. The handwritten notes below show how to derive this equation for a 1D system, but it can be generalized to $N$ dimensions.</p>
+<p>$$
+\frac{\partial f}{\partial y} - \frac{d}{dx}\left(\frac{\partial f}{\partial \dot{y}} \right) = 0
+$$</p>
+<h3 id="applications-to-classical-mechanics">Applications to Classical Mechanics</h3>
+<p>In practice, when approaching a variational problem, the typical workflow if something like this:</p>
+<ol>
+<li>Write your problem down in the form of an integral like $S$.</li>
+<li>Use the Euler-Lagrange equation to get a differential equation for the unknown function $y$.</li>
+<li>Solve the differential equation.</li>
+</ol>
+<p>We can extend this framework for use in classical mechanics by defining the lagrangian of a system with independent, generalized coordinates $(q_1,\dot{q}_1&hellip; q_n,\dot{q}_n)$ as the kinetic energy minus potential energy of a system:</p>
+<p>$$
+\mathcal{L(q_1,\dot{q}_1&hellip; q_n,\dot{q}_n)} = T(q_1,\dot{q}_1&hellip; q_n,\dot{q}_n) - V(q_1,\dot{q}_1&hellip; q_n,\dot{q}_n)
+$$</p>
+<p>Here, the function $\mathcal{L}$ is called the Lagrangian of the system and takes the place of $f$ in the Euler-Lagrange equation. The coordinates $q_i$ are called the generalized coordinates of the system and they take the place of $y$ in the 1D Euler-Lagrange equation.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Action_(physics)">action</a> is a scalar quantity that &ldquo;tracks&rdquo; how the energy changes in a physical system over time. It is the integral of the Lagrangian over a time interval, which we write as the action integral:</p>
+<p>$$
+S = \int_{t_1}^{t_2} \mathcal{L(q_1,\dot{q}_1&hellip; q_n,\dot{q}_n)} dt
+$$</p>
+<p>Several mathematicians contributed to this work including Leibniz, BErnoulli, Maupertuis, and Euler. Through their collective work, it turns out we can think of the path that a system takes through an abstract space of all the measurements that uniquely characterize it (a phase space). That trajectory through phase space is just as useful as a real physical trajectory in $x$, $y$, $z$ space if we understand what it is doing. And we can abstract that concept to new systems that might not have mechanical analogs (e.g., quantum mechanics).</p>
+<p>Their work showed that the path a system takes between points $1$ and $2$ in these generalized coordinates is the path such that $S$ is stationary (you can think of this as minimizing the action integral). This is called the principle of least action. This lets us leverage the Euler-Lagrange equation for the generalized coordinates of our system $q_n$. We can derive that result, but it is not necessary for you to do so to see the connection between the equation below and the 1D Euler-Lagrange equation.</p>
+<p>$$
+\frac{\partial \mathcal{L}}{\partial q_i} - \frac{d}{dt}\left(\frac{\partial \mathcal{L}}{\partial \dot{q}_i} \right) = 0
+$$</p>
+<p>Once we perform these derivatives on this function, we will obtain $n$ equations of motion (EOM) for our system; one for each generalized coordinate ($q_i$). Note how we didn&rsquo;t have to know anything about the forces acting on our system to arrive at equations of motion, but rather the energy.</p>
+<h2 id="video-on-lagrangian-dynamics">Video on Lagrangian Dynamics</h2>
+<p>Parth G. has a lovely video below about the basics of Lagrangian Dynamics.</p>
+<p><a href="https://inv.tux.pizza/watch?v=KpLno70oYHE"><img src="https://markdown-videos-api.jorgenkh.no/youtube/KpLno70oYHE?width=720&amp;height=405" alt=""></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=KpLno70oYHE">https://inv.tux.pizza/watch?v=KpLno70oYHE</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=KpLno70oYHE">https://youtube.com/watch?v=KpLno70oYHE</a></li>
+</ul>
+<h2 id="additional-resources">Additional Resources</h2>
+<p>My notes go into detail on the development of the Lagrangian problem. But practice is the best approach.</p>
+<h3 id="handwritten-notes">Handwritten Notes</h3>
+<p>Here are my handwritten notes on the Calculus of Variations and Lagrangian Mechanics.</p>
+<ul>
+<li><a href="../../assets/notes/Notes-Calculus_of_Variations.pdf">Calculus of Variations</a></li>
+<li><a href="../../assets/notes/Notes-Lagrangian_Dynamics.pdf">Lagrangian Dynamics</a></li>
+<li><a href="../../assets/notes/Notes-Lagrangian_Example.pdf">Lagrangian Example</a></li>
+<li><a href="../../assets/notes/Notes-Lagrangian_Example_Gen_Force.pdf">Lagrangian Example with Generalized Forces and Lagrange Multipliers</a></li>
+</ul>
+<h3 id="book-readings">Book Readings</h3>
+<p>This reading is useful preparation for reminding yourself of Lagrangian Dynamics.</p>
+<ul>
+<li>Any classical mechanics book you like! Taylor is a good one.</li>
+<li><a href="https://www.physics.rutgers.edu/~shapiro/507/book.pdf">Section 2.1 and 2.2 of Shapiro&rsquo;s Book</a></li>
+<li><a href="https://www.google.com/books/edition/A_Student_s_Guide_to_Lagrangians_and_Ham/ebTCAQAAQBAJ?hl=en&amp;gbpv=1&amp;dq=lagrangian+dynamics+book&amp;printsec=frontcover">A Google Book you can review</a></li>
+</ul>
+<h3 id="video-resources">Video Resources</h3>
+<p>If you are a feeling that you would like a little direct instruction on this, this lecture is great. Lots of examples!</p>
+<p><a href="https://inv.tux.pizza/watch?v=zhk9xLjrmi4"><img src="https://markdown-videos-api.jorgenkh.no/youtube/zhk9xLjrmi4?width=720&amp;height=405" alt=""></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=zhk9xLjrmi4">https://inv.tux.pizza/watch?v=zhk9xLjrmi4</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=zhk9xLjrmi4">https://youtube.com/watch?v=zhk9xLjrmi4</a></li>
+</ul>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/1---mechanics-and-odes/activity-lagrange_1/">← 5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/1---mechanics-and-odes/activity-frames/">31 Aug 23 - Activity: Frames and Coordinates →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

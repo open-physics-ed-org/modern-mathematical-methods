@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25 Oct 23 - Notes: Solutions to The Wave Equation | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>25 Oct 23 - Notes: Solutions to The Wave Equation</h1>
+        
+    </header>
+
+    <p>The wave equation is a partial differential equation that describes how waves propagate (they are fundamentally a disturbance of a medium) in space and time. The general wave equations is:</p>
+<p>$$\nabla^2 u(\mathbf{r},t) = \frac{1}{v^2} \frac{\partial^2 u(\mathbf{r},t)}{\partial t^2}$$</p>
+<p>where $u(\mathbf{r},t)$ is the displacement of the wave at position $\mathbf{r}$ and time $t$ and $v$ is the speed of the wave in the medium. Now we typically don&rsquo;t solve this problem in general, like most PDEs, we need a context in which to work on the problem. Moreover, that wave equation is 4 dimensional and we really are going to have a hard time with intuition if we focus on that. Let&rsquo;s instead consider the 1D wave equations:</p>
+<p>$$\frac{\partial^2 u(x,t)}{\partial x^2} = \frac{1}{v^2} \frac{\partial^2 u(x,t)}{\partial t^2}$$</p>
+<p>where $u(x,t)$ is the displacement of the wave at position $x$ and time $t$ and $v$ is the speed of the wave in the medium. This is a much more tractable problem.</p>
+<p>It is comment to rewrite this problem using the <a href="https://en.wikipedia.org/wiki/D%27Alembert_operator">D&rsquo;Alembert operator</a> $\square$:</p>
+<p>$$\square u(x,t) = 0$$</p>
+<p>where $\square$ is defined as:</p>
+<p>$$\square = \frac{\partial^2}{\partial x^2} - \frac{1}{v^2} \frac{\partial^2}{\partial t^2}$$</p>
+<h2 id="traveling-waves">Traveling Waves</h2>
+<p>Through this operator and proposed change of variables: $\eta = x - vt$ (movement to the right) and $\xi = x + vt$ (movement to the left) <a href="https://inv.tux.pizza/watch?v=Sc21aPg2RyE">we can show that the general solution</a> to the 1D wave equation are just functions of those variables:</p>
+<p>$$u(x,t) = f(\eta) + g(\xi) = f(x-vt) + g(x+vt)$$</p>
+<p>where $f$ and $g$ are arbitrary functions. This is a very powerful result; the solution to the wave equation is a function of a given shape ($f(x)$ or $g(x)$) that travels to the right and/or left; if both, they superpose in space and time. We will use a special case of these solutions <a href="https://en.wikipedia.org/wiki/Sinusoidal_plane_wave">sinusoidal traveling waves</a> as they demonstrate the key features of waves; but also behave nicely (in the mathematical sense) in the context of the wave equation.</p>
+<h2 id="sinusoidal-traveling-waves">Sinusoidal Traveling Waves</h2>
+<p>A sinusoidal traveling wave is a infinite wave that has a sinusoidal shape ($\sin$ or $\cos$). It is a solution to the wave equation (notice it is not a separable solution):</p>
+<p>$$u(x,t) = A \sin(kx - \omega t + \phi)$$</p>
+<p>where $A$ is the amplitude of the wave, $k$ is the wave number, $\omega$ is the angular frequency, and $\phi$ is the phase. This wave exists for all space and time, so it is a model of a real wave. We often use series of these waves to build up <a href="https://en.wikipedia.org/wiki/Wave_packet">shorter wave packets</a>. Like below is a sum of travelling waves with different wave numbers and angular frequencies to produce a packet. It can be analyzed simply because it&rsquo;s a sum of sinusoidal waves.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Wave_packet_%28dispersion%29.gif" alt="Wave packet"></p>
+<p>In the traveling wave solution, the wave number and angular frequency are related to the speed of the wave in the medium:</p>
+<p>$$v = \frac{\omega}{k}$$</p>
+<p>Notice that this is a right traveling wave. We can also write a left traveling wave:</p>
+<p>$$u(x,t) = A \sin(kx + \omega t + \phi)$$</p>
+<p>In general the 1D wave is a superposition of these two waves:</p>
+<p>$$u(x,t) = A_1 \sin(kx - \omega t + \phi_1) + A_2 \sin(kx + \omega t + \phi_2)$$</p>
+<p>where the amplitudes and phases are set by the problem. Below we see how this general solution satisfies the wave equation.</p>
+<p>$$\frac{\partial^2 u(x,t)}{\partial x^2} = -k^2 A_1 \sin(kx - \omega t + \phi_1) - k^2 A_2 \sin(kx + \omega t + \phi_2)$$</p>
+<p>$$\frac{\partial^2 u(x,t)}{\partial t^2} = -\omega^2 A_1 \sin(kx - \omega t + \phi_1) - \omega^2 A_2 \sin(kx + \omega t + \phi_2)$$</p>
+<p>Pop into the wave equation:</p>
+<p>$$-k^2 A_1 \sin(kx - \omega t + \phi_1) - k^2 A_2 \sin(kx + \omega t + \phi_2) = \frac{1}{v^2} \left(-\omega^2 A_1 \sin(kx - \omega t + \phi_1) - \omega^2 A_2 \sin(kx + \omega t + \phi_2)\right)$$</p>
+<p>Collect terms and then divide by the common factor:</p>
+<p>$$-k^2\left(A_1 \sin(kx - \omega t + \phi_1) + A_2 \sin(kx + \omega t + \phi_2)\right) = -\frac{\omega^2}{v^2} \left(A_1 \sin(kx - \omega t + \phi_1) + A_2 \sin(kx + \omega t + \phi_2)\right)$$</p>
+<p>For nonzero solutions:</p>
+<p>$$-k^2 = -\frac{\omega^2}{v^2} \rightarrow v = \pm \frac{\omega}{k}$$</p>
+<p>Left or right sinusoidal traveling waves solve the wave equation as long as the speed of the wave is related to the frequency and wave number as indicated.</p>
+<h2 id="diffraction">Diffraction</h2>
+<p>A critical result of superposition is the interference of waves. For example two waves in a pool below interfere to produce a wave that travels outward.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Two_sources_interference.gif" alt="Interference"></p>
+<p>It turns out these kinds of interference patterns are very useful. Because with models of waves, we can predict their pattern and shape. Moreover, they can serve as instruments to investigate systems. For example, <a href="https://en.wikipedia.org/wiki/X-ray_crystallography">x-ray diffraction</a> is a common and widely used tool to determine the shape and structure of matter. A number of folks have <a href="https://en.wikipedia.org/wiki/X-ray_crystallography#Nobel_Prizes_involving_X-ray_crystallography">earned Nobel prizes for their work</a> on X-ray diffraction and its applications. We will develop the mathematics of diffraction later, but Parth G has a nice video on the topic of Diffraction.</p>
+<p><a href="https://inv.tux.pizza/watch?v=TqTWSSBcV_4"><img src="https://markdown-videos-api.jorgenkh.no/youtube/TqTWSSBcV_4?width=720&amp;height=405" alt="Diffraction"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=TqTWSSBcV_4">https://inv.tux.pizza/watch?v=TqTWSSBcV_4</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=TqTWSSBcV_4">https://youtube.com/watch?v=TqTWSSBcV_4</a></li>
+</ul>
+<h3 id="single-photo-diffraction">Single Photo Diffraction</h3>
+<p>One of the most intersting things we have found in recent years is single particle diffraction. In fact, this was observed <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.97.154101">macroscopically in pilot wave hydrodynamics</a> by a French research group. We have found that interference patterns can build up in single photo experiments. The video below shows a set up that demonstrates this.</p>
+<p><a href="https://inv.tux.pizza/watch?v=GzbKb59my3U"><img src="https://markdown-videos-api.jorgenkh.no/youtube/GzbKb59my3U?width=720&amp;height=405" alt="Single Particle Diffraction"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=GzbKb59my3U">https://inv.tux.pizza/watch?v=GzbKb59my3U</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=GzbKb59my3U">https://youtube.com/watch?v=GzbKb59my3U</a></li>
+</ul>
+<h2 id="resources">Resources</h2>
+<p>Much of what we are discussing about waves appears in the following sets of notes:</p>
+<ul>
+<li><a href="../assets/notes/Notes-Introduction_to_waves.pdf">Introduction to Waves</a></li>
+<li><a href="../assets/notes/Notes-Electromagnetic_waves.pdf">Electromagnetic Waves in Vacuum</a></li>
+<li><a href="../assets/notes/Notes-Wavefunctions.pdf">The Wavefunction</a></li>
+<li><a href="../assets/notes/Notes-Infinite_Square_Well.pdf">The 1D Infinite Square Well</a></li>
+</ul>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/3---waves-and-oscillations/activity-waves-1d/">← 26 Oct 2023 - Activity: 1-Dimensional Travelling Waves</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/3---waves-and-oscillations/activity-coupledosc-numericalnormalmodes/">19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

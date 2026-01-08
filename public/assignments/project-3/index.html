@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 3 - Waves and Fourier Analysis | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>Project 3 - Waves and Fourier Analysis</h1>
+        
+    </header>
+
+    <p><strong>Due 17 Nov 23</strong></p>
+<p><a href="/assignments/updated_rubric/"><strong>Updated Rubric</strong></a></p>
+<p>Project 3 will focus on the topic of waves and Fourier analysis. You will need to do an analysis of some data of your choosing. You may start this work during the class week of 10/13 after we go through some initial work.</p>
+<h2 id="what-do-you-need-to-do">What do you need to do?</h2>
+<p>Think about the ways that an FFT can be used. How we can extract frequency information, clean signals, and more. You can use the FFT to explore any data you want. You can use this project to explore any data you want. It only needs to be 1D data, but you have to provide a full analysis and explanation of what you are doing.</p>
+<p>For this third project, we have a list of tasks that you have engaged with in class:</p>
+<ul>
+<li>Describe the physical system and an FFT can be used to explore it.
+<ul>
+<li>what are we modeling? or what data was used?</li>
+<li>what assumptions and limitations are baked into it</li>
+</ul>
+</li>
+<li>Develop a numerical investigation using an FFT
+<ul>
+<li>Set up and perform an FFT on the data</li>
+<li>Ensure you have no run into common issues we&rsquo;ve seen</li>
+</ul>
+</li>
+<li>Produce visualizations of you work
+<ul>
+<li>Make graphs (e.g., of the power spectrum, the reconstructed signals )that are labeled and titled appropriately for your claims</li>
+<li>Add mathematics to the notebook is you see fit ($LaTeX$, handwritten, typed are all ok)</li>
+</ul>
+</li>
+<li>Document your work
+<ul>
+<li>We should be able to run your notebooks and get exactly what you want us to</li>
+<li>Comment everything</li>
+</ul>
+</li>
+</ul>
+<h2 id="earning-extra-credit-for-more-explorations">Earning extra credit for more explorations</h2>
+<ul>
+<li>Filter your data in the frequency domain and reconstruct the signal</li>
+<li>Explore the effects of performing the FFT poorly (e.g., not enough points, not enough data, etc.)</li>
+<li>Perform a project with a 2D FFT</li>
+</ul>
+<h2 id="submitting-your-work">Submitting your work</h2>
+<p>You will upload your work to D2L. It should be a single PDF of your work. If you also write code, please submit the associated files as well. If you do all of this in a Jupyter notebook, please export the notebook as a PDF and submit the notebook and PDF file. If you have any questions, please ask. We want you to enjoy working on these problems.</p>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/assignments/worked-problem-7/">← Worked Problem Assignment 7</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/assignments/worked-problem-6/">Worked Problem Assignment 6 →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

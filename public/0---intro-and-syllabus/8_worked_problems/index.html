@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worked Problems | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>Worked Problems</h1>
+        
+    </header>
+
+    <p>In lieu of homework sets where we ask you to reproduce work that we&rsquo;ve done in class, or try to solve problems that are similar to what we&rsquo;ve done, we will instead ask you to investigate a problem that you are interested in using the techniques we have developed in class. For example, we&rsquo;ve all taken an introductory physics course where we learn how to analyze a problem using energy conservation. So if this were an introductory course, you might develop a scenario where energy conservation applies and then show how you can apply it (doing some calculations and graphing), and discuss what the meaning of those calculations and graphs are.</p>
+<p>In this course, we will ask you to do something similar, but using the more sophisticated techniques and approaches that we are learning. It will also be the case that we will ask a little more of you each time you work on a worked problem. This is because how you think about and do physics in this class will change over time. You will get better at your investigations and analysis, and what we consider good work will change. For the first couple of worked problems, you should ask questions about your grades and feedback to make sure you understand what we are looking for. Below is a the rubric we will use to grade your worked problems. The specifics will be discussed in class as we work through the first couple of worked problems.</p>
+<h2 id="worked-problem-rubric">Worked Problem Rubric</h2>
+<p>These worked problems emphasize the first three learning goals of the course:</p>
+<ol>
+<li>Investigate physical systems (25%)</li>
+<li>Construct and document a reproducible process (15%)</li>
+<li>Use analytical, computational, and graphical approaches (60%)</li>
+</ol>
+<p>Grading will proceed on the following scale in each category above:</p>
+<ul>
+<li>Full credit (100% in category) - sufficiently demonstrated the learning goal in their work, no issues</li>
+<li>Meeting expectations (90% in category) - demonstrated the learning goal in their work, but with some minor issues</li>
+<li>Partial credit (75% in category) - demonstrated the learning goal in their work, but with some major issues</li>
+<li>Attempted (50% in category) - attempted to demonstrate the learning goal in their work, but with major issues</li>
+<li>Not attempted (0% in category) - did not attempt to demonstrate the learning goal in their work</li>
+</ul>
+<p><strong>More importantly, you should read the feedback for each worked problem as they should help you do better on the next one and one your projects.</strong></p>
+<h3 id="investigate-physical-systems">Investigate physical systems</h3>
+<p>You can demonstrate this learning goal by conducting the following tasks in your worked problem:</p>
+<ul>
+<li>Identify a physical system that you are interested in investigating (5%)</li>
+<li>Describe the physical system in terms of the relevant physics principles and the model that is being used (5%)</li>
+<li>Explain and justify assumptions or approximations that are made in the model (5%)</li>
+<li>Provide a plan for investigating the physical system (10%)</li>
+</ul>
+<h3 id="construct-and-document-a-reproducible-process">Construct and document a reproducible process</h3>
+<p>You can demonstrate this learning goal by conducting the following tasks in your worked problem:</p>
+<ul>
+<li>Provide sufficient evidence for each step of the investigation; don&rsquo;t skip challenging parts of derivations or explanations (5%)</li>
+<li>Provide properly documented and cited work, especially for code, derivations, and figures (5%)</li>
+<li>Provide a coherent explanation for the results of the investigation (5%)</li>
+</ul>
+<h3 id="use-analytical-computational-and-graphical-approaches">Use analytical, computational, and graphical approaches</h3>
+<p>You can demonstrate this learning goal by conducting the following tasks in your worked problem:</p>
+<ul>
+<li>Use these mathematical, computational, and graphical tools (from class) to provide evidence for the investigations you propose (40%)</li>
+<li>Interpret the results of your analysis, graphing, modeling, or simulations (20%)</li>
+</ul>
+<h3 id="additional-credit">Additional credit</h3>
+<p>You can earn up to an additional 10% for each worked problem for exceeding these expectations, for deeper investigations, or for using new-to-you tools and approaches.</p>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/0---intro-and-syllabus/7_resources/">Resources →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

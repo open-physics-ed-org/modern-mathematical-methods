@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6 Oct 23 - Notes: Fast Fourier Transform | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>6 Oct 23 - Notes: Fast Fourier Transform</h1>
+        
+    </header>
+
+    <p>It might not have been obvious to you, but our work so far has expected that our $V(t)$ be a continuous function of time, and that we can sample it any time we want. In reality, you are limited to the response of your equipment, which leads to a phenomenon knows as the <a href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem">Nyquist-Shannon sampling theorem</a>. This theorem states that if you want to study a signal with a frequency $f$, you need to sample it at least $2f$ times per second. This is known as the <a href="https://en.wikipedia.org/wiki/Nyquist_frequency">Nyquist frequency</a>. If you don&rsquo;t sample at least this often, you will get aliasing, which is when a signal at a higher frequency is indistinguishable from a signal at a lower frequency. As you can tell, there&rsquo;s a lot of issues with sampling when it comes to studying signals.</p>
+<h2 id="the-fast-fourier-transform">The Fast Fourier Transform</h2>
+<p>This video from Veritasium really explains the importance of this algorithm. It&rsquo;s a great watch.</p>
+<p><a href="https://inv.tux.pizza/watch?v=nmgFG7PUHfo"><img src="https://markdown-videos-api.jorgenkh.no/youtube/nmgFG7PUHfo?width=720&amp;height=405" alt="History of the FFT"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=nmgFG7PUHfo">https://inv.tux.pizza/watch?v=nmgFG7PUHfo</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=nmgFG7PUHfo">https://youtube.com/watch?v=nmgFG7PUHfo</a></li>
+</ul>
+<h2 id="the-discrete-fourier-transform">The Discrete Fourier Transform</h2>
+<p>The foundation of this algorithm is the <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform">Discrete Fourier Transform</a>. This is a mathematical operation that takes a discrete signal and transforms it into a continuous function of frequency. The equation for this is:</p>
+<p>We start with complex form of the approximation of the Fourier Series:</p>
+<p>$$f(t) = \sum_{n=-\infty}^{\infty} c_n e^{i n \omega_0 t}$$</p>
+<p>Where $c_n$ is the complex coefficient of the $n$th harmonic, and $\omega_0$ is the fundamental frequency. As we have seen before, we can rewrite this as:</p>
+<p>$$c_n = \frac{1}{T_0} \int_{0}^{0 + T_0} f(t) e^{-i n \omega_0 t} dt$$</p>
+<p>Where $T_0$ is the period of the signal. Sometimes that integral is analytical and sometimes it isn&rsquo;t. If it&rsquo;s real data, it is definitely questionable if it&rsquo;s analytical. So, we can approximate this integral using the trapezoidal rule:</p>
+<p>$$c_n \approx \frac{1}{T_0} \sum_{k=0}^{N-1} f(t_k) e^{-i n \omega_0 t_k} \Delta t$$</p>
+<p>Where $N$ is the number of samples, $t_k$ is the time of the $k$th sample, and $\Delta t$ is the time between samples. We then use this to compute the approximate signal:</p>
+<p>$$f(t) \approx \sum_{n=-\infty}^{\infty} \left( \frac{1}{T_0} \sum_{k=0}^{N-1} f(t_k) e^{-i n \omega_0 t_k} \Delta t \right) e^{i n \omega_0 t}$$</p>
+<p>It&rsquo;s great that the numerical technique is well known and canned tools are available like <code>scipy.integrate.trapz</code>, but here we will start to use <code>scipy.fft</code> to do the heavy lifting for us.</p>
+<h2 id="additional-resources">Additional Resources</h2>
+<p>We do not expect you to understand the details of an FFT, how it is derived and how it works when written into a computer program. However, if you are interested, here are some resources that you can use to learn more about the FFT.</p>
+<h3 id="videos">Videos</h3>
+<p>This is an excellent discussion of the underlying mathematics and the setup of the algorithm.</p>
+<p><a href="https://inv.tux.pizza/watch?v=h7apO7q16V0"><img src="https://markdown-videos-api.jorgenkh.no/youtube/h7apO7q16V0?width=720&amp;height=405" alt="Mathematics of the FFT"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=h7apO7q16V0">https://inv.tux.pizza/watch?v=h7apO7q16V0</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=h7apO7q16V0">https://youtube.com/watch?v=h7apO7q16V0</a></li>
+</ul>
+<p>This is a presentation of how to implement the FFT using Python code.</p>
+<p><a href="https://inv.tux.pizza/watch?v=Ty0JcR6Dvis"><img src="https://markdown-videos-api.jorgenkh.no/youtube/Ty0JcR6Dvis?width=720&amp;height=405" alt="Implementing FFT"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=Ty0JcR6Dvis">https://inv.tux.pizza/watch?v=Ty0JcR6Dvis</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=Ty0JcR6Dvis">https://youtube.com/watch?v=Ty0JcR6Dvis</a></li>
+</ul>
+<h3 id="handwritten-notes">Handwritten notes</h3>
+<ul>
+<li><a href="../assets/notes/Notes-Introduction_to_FFT.pdf">Introduction to FFT</a></li>
+</ul>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/3---waves-and-oscillations/activity-waves-introduction_to_fft/">← 7 Nov 23 - Activity: The Fast Fourier Transform</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/3---waves-and-oscillations/activity-waves-seriesexpand/">2 Nov 23 - Activity: Automated Signal Deconstruction &amp; Reconstruction →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

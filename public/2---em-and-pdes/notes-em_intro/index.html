@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>26 Sept 23 - Notes: Maxwell&#39;s Equations | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>26 Sept 23 - Notes: Maxwell&#39;s Equations</h1>
+        
+    </header>
+
+    <h2 id="electromagnetic-phenomena">Electromagnetic Phenomena</h2>
+<p>You have certainly experienced a wide variety of electromagnetic phenomena in your life &ndash; both natural (e.g., a sun rise, a rainbow, your hair standing on end) and human-made (e.g., switching on a light, using a microwave, using a cell phone). We now know that we can explain many of those phenomenon using a set of four partial differential equations: <a href="https://en.wikipedia.org/wiki/Maxwell%27s_equations">Maxwell&rsquo;s Equations</a>. These equations describe a new mathematical object: a <a href="https://en.wikipedia.org/wiki/Field_(physics)">field</a>. The models that we develop from this theory are still <a href="https://en.wikipedia.org/wiki/Classical_physics">Classical</a> &ndash; in that we don&rsquo;t consider quantum mechanical effects. Rather we treat the fields as continuous functions of space and time.</p>
+<p>While this might not seem that this classical theory is still useful in modern research, it is often the basis for much of the work done in physics. In fact, some important fusion energy research uses <a href="https://en.wikipedia.org/wiki/Magnetic_confinement_fusion">magnetic confinement</a>, which is effectively a classical electromagnetic phenomenon. The South Korean experimental fusion reactor, <a href="https://en.wikipedia.org/wiki/KSTAR">KSTAR</a>, is an example of this type of research, and it recently <a href="https://www.popularmechanics.com/science/energy/a41191247/koreas-fusion-reactor-sustained-temperatures-7-times-hotter-than-the-sun-for-30-seconds/">sustained temperatures of 100 million degrees Celsius</a>.</p>
+<h3 id="magnetic-confinement-in-fusion-energy">Magnetic Confinement in Fusion Energy</h3>
+<p><a href="https://inv.tux.pizza/watch?v=PWCqwZoE0FY"><img src="https://markdown-videos-api.jorgenkh.no/youtube/PWCqwZoE0FY?width=720&amp;height=405" alt="Magnetic Confinement"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=PWCqwZoE0FY">https://inv.tux.pizza/watch?v=PWCqwZoE0FY</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=PWCqwZoE0FY">https://youtube.com/watch?v=PWCqwZoE0FY</a></li>
+</ul>
+<h2 id="developing-a-complete-theory">Developing a complete theory</h2>
+<p>The work to develop <a href="https://en.wikipedia.org/wiki/Maxwell%27s_equations">Maxwell&rsquo;s Equations</a> was substantial and involved not only theoretical developments but confirmations using experiments. A model of reality is only as good as its ability to predict the results of experiments, which classical electromagnetism does very well (up to the point of quantum phenomena). The resulting Maxwell Equations that describe the electric ($\mathbf{E}$) and magnetic ($\mathbf{B}$) fields (in vacuum) are given by:</p>
+<p>$$
+\textbf{Differential Form:}
+$$</p>
+<p>Gauss&rsquo;s Law for Electricity:</p>
+<p>$$
+\mathbf{\nabla} \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
+$$</p>
+<p>Gauss&rsquo;s Law for Magnetism:</p>
+<p>$$
+\mathbf{\nabla} \cdot \mathbf{B} = 0
+$$</p>
+<p>Faraday&rsquo;s Law of Electromagnetic Induction:</p>
+<p>$$
+\mathbf{\nabla} \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}
+$$</p>
+<p>Ampère&rsquo;s Law with Maxwell&rsquo;s Addition:</p>
+<p>$$
+\mathbf{\nabla} \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
+$$</p>
+<p>$$
+\textbf{Integral Form:}
+$$</p>
+<p>Gauss&rsquo;s Law for Electricity:</p>
+<p>$$
+\oint \mathbf{E} \cdot d\mathbf{A} = \frac{1}{\varepsilon_0} \int \rho dV
+$$</p>
+<p>Gauss&rsquo;s Law for Magnetism:</p>
+<p>$$
+\oint \mathbf{B} \cdot d\mathbf{A} = 0
+$$</p>
+<p>Faraday&rsquo;s Law of Electromagnetic Induction:</p>
+<p>$$
+\oint \mathbf{E} \cdot d\mathbf{l} = -\frac{d}{dt} \int \mathbf{B} \cdot d\mathbf{A}
+$$</p>
+<p>Ampère&rsquo;s Law with Maxwell&rsquo;s Addition:</p>
+<p>$$
+\oint \mathbf{B} \cdot d\mathbf{l} = \mu_0 \int \mathbf{J} \cdot d\mathbf{A} + \mu_0 \varepsilon_0 \frac{d}{dt} \int \mathbf{E} \cdot d\mathbf{A}
+$$</p>
+<p>We will work with different aspects of these equations as we make different assumptions about the physical system.</p>
+<h3 id="a-comment-on-the-development-of-this-theory">A comment on the development of this theory</h3>
+<p>During the development of Classical Electromagnetism, physics research was often lead by single individuals with small armies of technicians, specialists, drafters, secretarial staff, and the like. While presented as the intellectual work of a single person, the work was an effort by a number of underpaid and under-recognized people (including, at the time, women and non-white men) who are unnamed in many books. A classical, and non critical, view of the development appears below in the video, but also in Meyer&rsquo;s book <a href="https://mitpress.mit.edu/9780262130707/a-history-of-electricity-and-magnetism/">A History of Electricity and Magnetism</a>. A more nuanced view of how science develops and is negotiated appears in Traweek&rsquo;s book <a href="https://en.wikipedia.org/wiki/Beamtimes_and_Lifetimes">Beamtimes and Lifetimes</a>.</p>
+<h4 id="the-mechanical-universe">The Mechanical Universe</h4>
+<p>This video from the <a href="https://en.wikipedia.org/wiki/The_Mechanical_Universe">Mechanical Universe series</a> and tells the story of the development of this theory. The video is dated and sexist and the instructor&rsquo;s stories are similarly problematic. The video puts scientists on a pedestal. But, it is worth a watch, both to recognize the history as presented and to reckon with the issues that these perspectives have continued to perpetuate.</p>
+<p><a href="https://inv.tux.pizza/watch?v=SS4tcajTsW8"><img src="https://markdown-videos-api.jorgenkh.no/youtube/SS4tcajTsW8?width=720&amp;height=405" alt="Maxwell&rsquo;s Equations"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=SS4tcajTsW8">https://inv.tux.pizza/watch?v=SS4tcajTsW8</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=SS4tcajTsW8">https://youtube.com/watch?v=SS4tcajTsW8</a></li>
+</ul>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/2---em-and-pdes/notes-static_fields/">← 26 Sept 23 - Notes: Static Fields</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

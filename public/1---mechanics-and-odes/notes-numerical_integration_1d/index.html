@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Sept 23 - Notes: Numerical Integration in 1D | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>7 Sept 23 - Notes: Numerical Integration in 1D</h1>
+        
+    </header>
+
+    <p>Principal Ideas for this unit will come from <a href="https://github.com/dannycab/phy415msu/blob/main/MMIPbook/assets/pdfs/scans/Newman_Ch8_ODEs.pdf">Newman Chapter 8, Section 1</a>, which is the reading assigned below.</p>
+<p>We have seen how we can quickly exhaust our analytical tools when we investigate systems with interesting and complex behavior. We can see much from the perspective of phase space in terms of the qualitatively different behaviors (e.g., oscillations vs rotations, both clockwise and counter-clockwise, in the large angle pendulum). But what if we want to find the specific trajectory of a given set of initial conditions.</p>
+<p>That is we want to be able to take a more general differential equation:</p>
+<p>$$\ddot{x} = f(x,\dot{x},t)$$</p>
+<p>to a solution for all (or some specified amount)of time, $x(t)$&hellip;in (most) cases&hellip;because sometimes integrals don&rsquo;t converge. We can use <strong>numerical integration</strong> to find these trajectories.</p>
+<h2 id="numerical-integration">Numerical Integration</h2>
+<p><a href="https://en.wikipedia.org/wiki/Numerical_integration">Numerical Integration</a> is a vast and wide topic with lots of different approaches, important nuances, and difficult problems. Some of the most high profile numerical integration was done by NASA&rsquo;s <a href="https://education.nationalgeographic.org/resource/women-nasa">human computers</a> &ndash; a now well-known story thanks to the film <a href="https://en.wikipedia.org/wiki/Hidden_Figures">Hidden Figures</a>. Black women formed a core group of these especially talented scientists (including <a href="https://en.wikipedia.org/wiki/Mary_Jackson_(engineer)">Mary Jackson</a>, <a href="https://en.wikipedia.org/wiki/Katherine_Johnson">Katherine Johnson</a>, and <a href="https://en.wikipedia.org/wiki/Dorothy_Vaughan">Dorothy Vaughn</a>), without whom, John Glenn would not have orbited the Earth in 1962. This is also a very interesting story about the importance of <a href="https://en.wikipedia.org/wiki/Historically_black_colleges_and_universities">Historically Black Colleges and Universities</a> to American science.</p>
+<p>Below is a video describing 3 coupled ODEs, the <a href="https://en.wikipedia.org/wiki/Lorenz_system">Lorenz equations</a>, that are quite famous. You will be able to model systems like this, but for now think of it as motivation for why we want to learn numerical integration.</p>
+<p><a href="https://inv.tux.pizza/watch?v=aAJkLh76QnM"><img src="https://markdown-videos-api.jorgenkh.no/youtube/aAJkLh76QnM?width=720&amp;height=405" alt="">)</a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=aAJkLh76QnM?">https://inv.tux.pizza/watch?v=aAJkLh76QnM?</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=aAJkLh76QnM?">https://youtube.com/watch?v=aAJkLh76QnM?</a></li>
+</ul>
+<h2 id="nonlinear-science">Nonlinear Science</h2>
+<p>Some of the most interesting ODEs to work with are those that lead to chaos, have interesting behaviors in different parts of phase space, are highly sensitive to initial conditions, or that have complex bound orbits (in real or phase space). This area of study in physics overlaps with a broad interdisciplinary field called <a href="https://en.wikipedia.org/wiki/Nonlinear_system">Nonlinear Science</a>, which studies all manner of systems where the results are not simply proportional to the input features. This work includes theory, applied science, and experimental work. As it is difficult to find truly linear systems in the real world, nonlinear science is quite interdisciplinary with physics research in the areas of <a href="https://complex.umd.edu/research/MHD_dynamos/MHD_dynamos.php">magnetohydrodynamics</a>, <a href="">fluid mechanics</a>, <a href="https://meche.mit.edu/people/faculty/PEKO@MIT.EDU">bio-inspired design</a>, <a href="https://curtisresearch.gatech.edu/index.php">biophysics (cellular)</a>, <a href="https://crablab.gatech.edu/">biophysics (animal locomotion)</a>, <a href="https://jila.colorado.edu/lewandowski">atomic and molecular physics</a>, and many more fields.</p>
+<p>We will focus on integrating 1 dimensional ODEs (that is, ODEs of only one variable like the SHO). To that end the reding this week aims to inform you with the simplest of the integrators the <a href="https://en.wikipedia.org/wiki/Semi-implicit_Euler_method">Euler-Cromer integration</a> technique. This approach is intuitive, straight-forward, and forms the basis for better and far more accurate methods like <a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge-Kutta</a>.</p>
+<p>Through this week&rsquo;s activities, we will introduce several integration methods, but you will learn to use the <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html?highlight=odeint">built-in integrator</a> (<code>odeint</code>) from scipy, which are more efficient than what we could write ourselves.</p>
+<h2 id="how-does-numerical-integration-actually-work">How Does Numerical Integration actually work?</h2>
+<p>A computer understands things like updating individual variables with a change. It turns out this process of updating things in steps is the basis for numerical integration. We need a set of update equations. Making those update equations is effectively choosing our integrator.</p>
+<h3 id="update-equations">Update equations</h3>
+<p>The critical part of numerical integration is approximating the change to variables you are investigating. Going back to our differential equations, we can rewrite them as approximate equation, which a computer understands because it involves discrete steps. How we choose to approximate this update indicates which integration routine we&rsquo;ve chosen and sets the irreducible error we are stuck with (i.e., $O((\Delta t)^2)$, $O((\Delta t)^3)$, etc.).</p>
+<p>My handwritten notes (below) provide derivations for the Euler-Cromer method. Other forms of integration are more complex, but the basic idea is the same: <em>we are trying to approximate the &ldquo;area under the curve&rdquo; by sampling the slope of the function at different points.</em></p>
+<p>We will illustrate three approximations to the slope of these functions:</p>
+<ul>
+<li><strong>Euler-Cromer (EC)</strong> - definitely the most intuitive of the approaches, where we approximate the slope with two points separated by $\Delta t$ in time. It is quick to write, slow to solve, and requires small steps for accurate results. Even so, it fails to integrate periodic motion well because it doesn&rsquo;t always conserve energy in periodic motion. Turns out it&rsquo;s the best tool to use when you have random noise added to the model though (e.g., $\eta_n(\sigma(t))$). For a first order eqn, $\dot{x}=f(x,t)$,</li>
+</ul>
+<p>$$x(t+\Delta t) = x(t) + \textrm{change} = x(t) + \Delta t \left(f(x(t+\dfrac{1}{2}\Delta t), t+\dfrac{1}{2}\Delta t\right)$$</p>
+<ul>
+<li><strong>Runge-Kutta 2nd order (RK2)</strong> - just a step above Euler-Cromer; it uses three points to approximate the slope giving two measures of the slope (hence, 2nd order). It&rsquo;s not much more complex than Euler-Cromer, but gives an order of magnitude lower error. It&rsquo;s a good starting point for simple systems. For a first order eqn, $\dot{x}=f(x,t)$,</li>
+</ul>
+<p>$$k_1 = \Delta t\left(f(x,t)\right),$$
+$$k_2 =  \Delta t\left(x+\dfrac{1}{2}k_1, t+\dfrac{1}{2}\Delta t\right),$$
+$$x(t+\Delta t) = x(t) + \textrm{change} = x(t) + k_2$$</p>
+<ul>
+<li><strong>Runge Kutta 4th order (RK4)</strong> - this is the gold standard. Most researchers start with RK4 on most problems. It uses 5 points to build 4 slope profiles and integrates the system in 4 steps. It is highly adaptable and supported &ndash; it can be modified to take smaller or longer steps depending on the specific nature of the problem at the time. I mean that it can change step size in the middle of its work; including within the step it is taking presently. For a first order eqn, $\dot{x}=f(x,t)$,</li>
+</ul>
+<p>$$k_1 = \Delta t\left(f(x,t)\right),$$
+$$k_2 =  \Delta t\left(x+\dfrac{1}{2}k_1, t+\dfrac{1}{2}\Delta t\right),$$
+$$k_3 =  \Delta t\left(x+\dfrac{1}{2}k_2, t+\dfrac{1}{2}\Delta t\right),$$
+$$k_4 =  \Delta t\left(x+k_3, t+\Delta t\right),$$
+$$x(t+\Delta t) = x(t) + \textrm{change} = x(t) + \dfrac{1}{6}\left(k_1 + 2k_2 +2k_3 +k_4\right)$$</p>
+<p><strong>We don&rsquo;t expect you memorize these approaches or to derive them, but to understand how they work and what their limitations are.</strong> We will implement them in class using known tools.</p>
+<h2 id="additional-resources">Additional Resources</h2>
+<h3 id="handwritten-notes">Handwritten Notes</h3>
+<ul>
+<li><a href="../../assets/notes/Notes-Numerical_Integration_1D_Spatial.pdf">Numerical Integration - 1D Spatial integrals</a></li>
+<li><a href="../../assets/notes/Notes-Numerical_Integration_Euler_Cromer.pdf">Numerical Integration - Euler Cromer for ODEs</a></li>
+</ul>
+<h3 id="book-readings">Book Readings</h3>
+<p>These two readings are useful preparation for what we are going to do with numerical integration.</p>
+<h3 id="newmans-computational-physics---chapter-8">Newman&rsquo;s Computational Physics - Chapter 8</h3>
+<p>The first one is from <a href="https://github.com/dannycab/phy415msu/blob/main/MMIPbook/assets/pdfs/scans/Newman_Ch8_ODEs.pdf">Chapter 8 of Mark Newman&rsquo;s book, Computational Physics</a>, which is an excellent introduction to most of the computational physics approaches we use in physics. It uses Python and modern libraries, which is rare for a computational physics textbook for undergraduate students.</p>
+<p><strong>Read This</strong> Sections 8.1 and 8.1.1. We will discuss and work with ideas from 8.1.2 and 8.1.3, but I don&rsquo;t expect you to read those in detail. We will discuss how these work and then make use of the <a href="https://docs.scipy.org/doc/scipy/tutorial/integrate.html">built-in integrators from scipy</a>. The core one will be <code>odeint</code> <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html">(Documentation)</a>.</p>
+<h2 id="paper-readings">Paper Readings</h2>
+<p>Here&rsquo;s the original paper from Alan Cromer about the correction to the Euler step that makes it more accurate. It&rsquo;s a good read, but not required.</p>
+<ul>
+<li><a href="https://github.com/dannycab/phy415fall23/blob/main/content/assets/papers/euler_cromer_1981.pdf">Cromer, Alan H. &ldquo;Stable solutions using the Euler approximation.&rdquo; American Journal of Physics 49.5 (1981): 455-459.</a></li>
+</ul>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/1---mechanics-and-odes/activity-lagrange_2/">← 7 Sep 23 - Activity: Numerical Integration and More Lagrangians</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/1---mechanics-and-odes/activity-lagrange_1/">5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

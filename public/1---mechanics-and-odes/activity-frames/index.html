@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>31 Aug 23 - Activity: Frames and Coordinates | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>31 Aug 23 - Activity: Frames and Coordinates</h1>
+        
+    </header>
+
+    <h2 id="forces-in-different-frames">Forces in different frames</h2>
+<p>One of the critical things that we must note is that the natural world changes and we observe it. The models (or laws) that we use to describe nature must accurately describe our observations. This is challenging when observers use different frames (or even different coordinates in the same frame) to show we have the same observations. Moving between coordinate systems and frames is a critical skill in physics.</p>
+<h2 id="polar-coordinates">Polar coordinates</h2>
+<p>Many problems in physics require the use of non-Cartesian coordinates, such as the Hydrogen atom or the two-body problem. One such coordinate system is <strong>plane-polar coordinates</strong>. In this coordinate system, any vector $\mathbf{r}\in \mathbb{R}^2$ is described by a distance $r$ and angle $\phi$ instead of Cartesian coordinates $x$ and $y$. The following four equations show how points transform in these coordinate systems.</p>
+<p>$$
+x = r\cos \phi \hspace{1in} y = r\sin \phi
+$$</p>
+<p>$$
+r = \sqrt{x^2 + y^2} \hspace{1in} \phi = \arctan(y / x)
+$$</p>
+<h3 id="getting-oriented">Getting Oriented</h3>
+<p><strong>✅ Do this</strong></p>
+<p>Borrowed from <a href="https://physicscourses.colorado.edu/EducationIssues/ClassicalMechanics/">CU Boulder Physics</a></p>
+<p>A particle moves in the plane. We could describe its motion in two different ways:</p>
+<p><strong>CARTESIAN</strong>: I tell you $x(t)$ and $y(t)$.</p>
+<p><strong>POLAR</strong>: I tell you $r(t)$ and $\phi(t)$. (Here $r(t)$ = $|\mathbf{r}(t)|$, it&rsquo;s the &ldquo;distance to the origin&rdquo;)</p>
+<ul>
+<li>(a) Draw a picture showing the location of the point at some arbitrary time, labeling $x, y, r, \phi$ and also showing the unit vectors $\hat{x}, \hat{y}, \hat{r},$ and $\hat{\phi}$, all at this one time.</li>
+<li>(b) Using this picture, determine the formula for $\hat{r}(t)$ in terms of the Cartesian unit vectors. You answer should contain $\phi(t)$.</li>
+<li>(c) Write down the analogous expression for $\hat{\phi}(t)$.</li>
+<li>(d) We can claim the position vector in Cartesian coordinates is $\vec{r}(t) = x(t)\hat{x} + y(t)\hat{y}$. Do you agree? Is this consistent with your picture above?</li>
+<li>(e) We can claim the position vector in polar coordinates is just $\vec{r}(t) = r(t)\hat{r}$. Again, do you agree? Why isn&rsquo;t there a $+\phi(t)\hat{\phi}$ term?</li>
+</ul>
+<h3 id="getting-kinetic">Getting Kinetic</h3>
+<p><strong>✅ Do this</strong></p>
+<ul>
+<li>(a) Now let&rsquo;s find the velocity, $\vec{v}(t) = d\vec{r}/dt$. In Cartesian coordinates, it&rsquo;s just $\vec{v}(t) = \dot{x}(t)\hat{x} + \dot{y}(t)\hat{y}$. Explain why, in polar coordinates, the velocity can be written as $d\vec{r}/dt = r(t):d\hat{r}/dt + dr(t)/dt:\hat{r}$.</li>
+<li>(b) It appears we need to figure out what $d\hat{r}/dt$ is. Use the formula your determined in question 1b to get started &ndash; first in terms of $\hat{x}$ and $\hat{y}$, and then converting to pure polar.</li>
+<li>(c) Write an expression for $\vec{v}(t)$ in polar coordinates.</li>
+<li>(d) Finally, determine the acceleration $\vec{a} = d\vec{v}(t)/dt$. In Cartesian coordinates, it&rsquo;s just $\vec{a}(t) = \ddot{x(t)}\hat{x} + \ddot{y}(t)\hat{y}$. Work it on in polar coordinates.</li>
+</ul>
+<h2 id="forces-and-acceleration-in-plane-polar-coordinates">Forces and acceleration in plane-polar coordinates</h2>
+<p>We can show that the acceleration in plane-polar coordinates is given by:</p>
+<p>$$\mathbf{a} = a_r\hat{r} + a_{\phi}\hat{\phi} = \left(\ddot{r}-r\dot{\phi}^2\right)\hat{r} + \left(r\ddot{\phi}+2\dot{r}\dot{\phi}\right)\hat{\phi}$$</p>
+<p>Because this coordinate system is orthgonal ($\hat{r}\cdot\hat{\phi} = 0$), we can write the Newton&rsquo;s second law in this coordinate system as:</p>
+<p>$$\mathbf{F}<em>{net} = m\mathbf{a} = m\left(a_r\hat{r} + a</em>{\phi}\hat{\phi} \right)$$</p>
+<p>So that,</p>
+<p>$$\mathbf{F}_r = m\left(\ddot{r}-r\dot{\phi}^2\right)\hat{r}$$</p>
+<p>and</p>
+<p>$$\mathbf{F}_{\phi} = m\left(r\ddot{\phi}+2\dot{r}\dot{\phi}\right)\hat{\phi}$$</p>
+<h3 id="example-to-work-in-a-group">Example to Work in a Group</h3>
+<p><strong>✅ Do this</strong></p>
+<p>Borrowed from <a href="https://bookshop.org/p/books/classical-mechanics-john-r-taylor/17213436?ean=9781891389221">Taylor&rsquo;s Classical Mechanics</a></p>
+<p>Consider a &ldquo;half-pipe&rdquo; that has a circular cross section of radius $R$. If we release the skateboard near the bottom of the &ldquo;half-pipe&rdquo; approximately how long does it take to get to the bottom?</p>
+<ul>
+<li>Make sure you draw a picture and define your coordinate system.</li>
+<li>Consider all the assumptions you need to make to solve this problem, and write them down.</li>
+<li>Be careful not to make big assumptions too early; try instead to write the forces acting on the skateboard in plane-polar coordinates.</li>
+<li>Do not use Lagrangian dynamics to solve this problem if you know how you, please instead use Newton&rsquo;s Second Law.</li>
+</ul>
+<p><strong>Hint: The equation of motion to small angle oscillation frequency pipeline is real.</strong></p>
+<ul>
+<li><a href="../../assets/notes/Notes-Newton_2nd_Plane_polar.pdf">Notes on Newton&rsquo;s Second Law in Plane Polar Coordinates</a></li>
+</ul>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/1---mechanics-and-odes/notes-lagrangian-dynamics/">← 5 Sept 23 - Notes: Lagrangian Dynamics</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/1---mechanics-and-odes/notes_frames/">31 Aug 23 - Notes: Frames and Coordinates →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

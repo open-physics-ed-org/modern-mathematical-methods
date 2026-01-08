@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worked Problem Assignment 4 | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>Worked Problem Assignment 4</h1>
+        
+    </header>
+
+    <p><strong>Due 13 Oct 23</strong></p>
+<p>The electric potential, $\Phi$, is often a better quantity to work with when solving electrostatics problems. As we have seen, we can do direct integration to find the potential at a given point. We&rsquo;ve also seen that we can solve for the potential using the Laplace equation. In this worked problem, you will explore the potential in a specific situation of your choosing.</p>
+<p><a href="/0---intro-and-syllabus/8_worked_problems/"><strong>Grading Rubric</strong></a></p>
+<p>Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.</p>
+<h2 id="starting-your-analysis">Starting your Analysis</h2>
+<p>You will need to orient us to your problem as there are many potential electrostatic situations. You will need to develop an analytical tractable situation that can also be explored using the numerical methods we have developed. You will need to do the following:</p>
+<ol>
+<li>Write a paragraph or two describing the system you are investigating. Make sure to explain the parameters and variables.</li>
+<li>Explain what you are going to do and why. If you can point us to where things are being done, that&rsquo;s helpful.</li>
+<li>You need to clearly set up your analytical problem. This means write down and explain the equations you are constructing.</li>
+</ol>
+<h2 id="investigating-the-system">Investigating the System</h2>
+<p>After you set things up, please conduct an investigation using the tools we have developed in class. The order in which it proceeds is up to you, but make sure the flow is logical and clear. We want to understand how your investigations are going to help you be successful with your projects.</p>
+<h2 id="assignment">Assignment</h2>
+<ol>
+<li>Choose a tractable two-dimensional electrostatic problem that you can solve with the Laplace equation; you are welcome to choose a problem that you have already solved (not the specific examples from class) as long as you provide a clear explanation of the problem and the solution.</li>
+<li>Setup and develop the analytical solution to the problem. Your problem should require you to develop the general solution, match boundary conditions, and use them to determine the particular solution.</li>
+<li>Your solution is likely either going to be an infinite series or the product of some functions. You will need to take limits of your problem to show that you can make sense of the results.</li>
+<li>Extend our plotting tools and plot the electric potential of your system using a heat map, surface plot, or some other representation.</li>
+</ol>
+<h2 id="looking-ahead-earn-extra-credit">Looking ahead (earn extra credit)</h2>
+<p>If you are looking into these systems and finding them interesting here&rsquo;s two things you can do to earn extra credit.</p>
+<ol>
+<li>Set up different boundary conditions and find another potential and plot it.</li>
+<li>(challenging) Look into taking the <a href="https://numpy.org/doc/stable/reference/generated/numpy.gradient.html">gradient numerically</a> and try to determine the field the produces this potential.</li>
+</ol>
+<h2 id="submitting-your-work">Submitting your work</h2>
+<p>You will upload your work to D2L. It should be a single PDF of your work. If you also write code, please submit the associated files as well. If you do all of this in a Jupyter notebook, please export the notebook as a PDF and submit the notebook and PDF file. If you have any questions, please ask. We want you to enjoy working on these problems.</p>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/assignments/project-2/">← Project 2 - PDEs, Laplace&#39;s Equation, and the Method of Relaxation</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/assignments/worked-problem-3/">Worked Problem Assignment 3 →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

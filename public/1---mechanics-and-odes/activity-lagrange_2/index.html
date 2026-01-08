@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Sep 23 - Activity: Numerical Integration and More Lagrangians | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>7 Sep 23 - Activity: Numerical Integration and More Lagrangians</h1>
+        
+    </header>
+
+    <p>Now that we have an idea how to find a wealth of interesting ordinary differential equations using Lagrangian mechanics, we&rsquo;ll work on building up ways to understand these equations, their solutions and behavior. The issue with this is that <strong>most ODEs do not have analytical solutions</strong>. That means we can&rsquo;t write down nice closed-form solutions for them using transcendental functions. However, don&rsquo;t despair, because that does not mean there is no solution. In fact, the vast majority of non-pathological ODEs one might come across in physics are <strong>guaranteed</strong> to have unique solutions (at least for finite time). We can easily calculate these solutions using <strong>numerical integration</strong>. Next week we&rsquo;ll also see how we can characterize the behavior of ODEs even without access to numerical integration.</p>
+<h2 id="the-simple-harmonic-oscillator">The Simple Harmonic Oscillator</h2>
+<p>Let&rsquo;s start simple with everyone&rsquo;s favorite differential equation, the simple harmonic oscillator. Recall that we can write the SHO as:</p>
+<p>$$
+\ddot{x} =  -\omega_0^2x
+$$</p>
+<p>where $\omega_0^2 = \frac{k}{m}$. This equation is 2nd order, but numerical integration techniques only work on 1st order equations. Thankfully they work on any number of potentially coupled 1st order equations. This means that with a quick change of variables, we can write the SHO as a system of 2 first order equations by introducing a new variable $v$ equal to the velocity of the oscillator.</p>
+<p>$$
+v = \dot{x}
+$$</p>
+<p>Then the acceleration of the oscillator can be written as:</p>
+<p>$$
+\dot{v}  = -\omega_0^2x
+$$</p>
+<p>This trick for writing higher order differential equations as first order equations is incredibly common.</p>
+<h3 id="setting-up-to-numerically-integrate">Setting up to numerically integrate</h3>
+<p>We need a few things to numerically integrate using <code>solve_ivp</code> in python. First, we import the relevant libraries and functions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Import libraries</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.integrate <span style="color:#f92672">import</span> solve_ivp
+</span></span></code></pre></div><p>*<em>Note: The code in this block is not meant to be run directly, it is just a reference for the steps we need to take. Working code that is put together appears in the next cell.</em></p>
+<h4 id="1-derivatives-function">1. Derivatives Function</h4>
+<p>First, we need to set up a derivatives function that calculates and returns a list of the values of the first order derivatives given an input list of current values. These current values represent a location in <strong>phase space</strong>. As we will learn, <a href="https://en.wikipedia.org/wiki/Phase_space">phase space</a> is a space that contains all the information about the state of an ODE. The simple harmonic oscillator has a 2D phase space since its state is totally defined by its position and velocity.</p>
+<p>Here&rsquo;s what our derivatives function looks like for a SHO:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">diffyqs</span>(t, curr_vals, omega2):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 2 first-order differential equations for a SHO</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># first 2 arguments are always t and curr_vals, which are followed by any parameters of your ODEs</span>
+</span></span><span style="display:flex;"><span>    x, v <span style="color:#f92672">=</span> curr_vals   <span style="color:#75715e"># unpack current values</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vdot <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>omega2 <span style="color:#f92672">*</span> x <span style="color:#75715e"># calculate derivative</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> v, vdot <span style="color:#75715e"># return derivatives</span>
+</span></span></code></pre></div><p>We will pass this function to our solver, which will give us back integrated solutions of our list of derivatives. So since $v = \dot{x}$, our solution will return $x$ first, and $v$.</p>
+<h4 id="2-time-setup">2. Time Setup</h4>
+<p>We need to define the time span to solve the ODE for AND the specific times we&rsquo;d like solution points for. Here it is also convienient to choose a time step $dt$. Here&rsquo;s one way we could do this in python:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>dt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>
+</span></span><span style="display:flex;"><span>tspan <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, tmax)         <span style="color:#75715e"># time span</span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, tmax, dt) <span style="color:#75715e"># specific times to return solutions for</span>
+</span></span></code></pre></div><h4 id="3-parameters-and-initial-conditions">3. Parameters and Initial Conditions</h4>
+<p>Since we&rsquo;re dealing with ODEs, we need to supply an initial condition to be able to solve. The SHO has 2D phase space so we need 2 values for our initial condition. We&rsquo;ll also define parameter value(s) in this step.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>omega2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>initial_condition <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>] <span style="color:#75715e"># pull back 1m, no initial velocity</span>
+</span></span></code></pre></div><h4 id="4-call-integrator">4. Call Integrator</h4>
+<p>Now all we have left to do is to actually use <code>solve_ivp</code> to do the integration. The syntax for how to do this is shown below. We also get the opportunity to tell <code>solve_ivp</code> exactly what numerical integration method we&rsquo;d like it to use. For now we can think of the integrator as a magic box and choose <code>RK45</code>, or a Runge-Kutta 4th order method.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>solved <span style="color:#f92672">=</span> solve_ivp(diffyqs, tspan, initial_condition, t_eval <span style="color:#f92672">=</span> t, args <span style="color:#f92672">=</span> (omega2, ), method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;RK45&#34;</span>)
+</span></span></code></pre></div><p>To access the solution directly, use <code>solved.y</code>. The variable <code>solved.y[0]</code> is the solved for position array and <code>solved.y[1]</code> is the velocity array in this case. Now let&rsquo;s see a full implementation of this below, including some visualization that compares our numerical solution to the analytical solution of the SHO.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 1. Derivatives Function</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">diffyqs</span>(t, curr_vals, omega2):
+</span></span><span style="display:flex;"><span>    x, v <span style="color:#f92672">=</span> curr_vals 
+</span></span><span style="display:flex;"><span>    vdot <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>omega2 <span style="color:#f92672">*</span> x
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> v, vdot
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Time Setup</span>
+</span></span><span style="display:flex;"><span>tmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>dt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>
+</span></span><span style="display:flex;"><span>tspan <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, tmax)
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, tmax, dt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. Parameters and Initial Conditions</span>
+</span></span><span style="display:flex;"><span>omega2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>initial_condition <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>] 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. Call Integrator (note we can swamp them out, RK45 is the default)</span>
+</span></span><span style="display:flex;"><span>RK23solved <span style="color:#f92672">=</span> solve_ivp(diffyqs, tspan, initial_condition, t_eval <span style="color:#f92672">=</span> t, args <span style="color:#f92672">=</span> (omega2,), method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;RK23&#34;</span>)
+</span></span><span style="display:flex;"><span>RK45solved <span style="color:#f92672">=</span> solve_ivp(diffyqs, tspan, initial_condition, t_eval <span style="color:#f92672">=</span> t, args <span style="color:#f92672">=</span> (omega2,), method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;RK45&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 5. Visualization and Comparison to analytical solution</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">analytic_sol</span>(t, omega0, initial_condition):
+</span></span><span style="display:flex;"><span>    x0, v0 <span style="color:#f92672">=</span> initial_condition
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (v0<span style="color:#f92672">/</span>omega0)<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sin(omega0<span style="color:#f92672">*</span>t) <span style="color:#f92672">+</span> x0 <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(omega0<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t, analytic_sol(t, omega2<span style="color:#f92672">**</span><span style="color:#ae81ff">0.5</span>,initial_condition), label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Analytic Solution&#34;</span>, linewidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t, RK23solved<span style="color:#f92672">.</span>y[<span style="color:#ae81ff">0</span>], label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Numerical Solution (RK23)&#34;</span>, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;*&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Long term SHO motion with RK23 solution&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;t&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;x&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t,analytic_sol(t, omega2<span style="color:#f92672">**</span><span style="color:#ae81ff">0.5</span>,initial_condition), label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Analytic Solution&#34;</span>, linewidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t,RK45solved<span style="color:#f92672">.</span>y[<span style="color:#ae81ff">0</span>], label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Numerical Solution (RK45&#34;</span>, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;s&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Long term SHO motion with RK45 solution&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;t&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;x&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_4_0.png" alt="png"></p>
+<p><img src="output_4_1.png" alt="png"></p>
+<h2 id="group-activity">Group Activity</h2>
+<h3 id="back-to-paraboloid-paradise">Back to Paraboloid Paradise</h3>
+<p><a href="../../assets/notes/Notes-Bead_in_a_Paraboloid.pdf">Analytical Solution (Finding ODEs for Paraboloid)</a></p>
+<p>Let&rsquo;s consider the problem where a particle was constrained to move on the surface $z = c\rho^2$. The EOM we arrived at are complex
+$$\ddot{\rho} = \dfrac{\rho\dot{\phi}^2 - 4c^2\rho\dot{\rho}^2 -2cg\rho}{1 + 4c^2\rho^2}$$
+$$\ddot{\phi} = -2\frac{\dot{\rho}\dot{\phi}}{\rho} $$</p>
+<p><strong>✅ Do this</strong></p>
+<p>Introduce variables $v$ and $\omega$ to use our trick for reducing $&gt;1$ order differential equations to first order equations to write the equations of motion for this problem as a system of four first order differential equations (shown below). <strong>You may set c=1, but keep it as a variable.</strong></p>
+<p>$$\dot{\rho} = ?? $$</p>
+<p>$$\dot{v} = ??$$</p>
+ <!-- \frac{1}{1 + 4r^2}(- 8rv^2 + r\omega^2 + 4rv^2 -2gr) -->
+ <!-- (1/(1 + 4*r**2)) * (-4*v**2*r + r*omega**2 -2*g*r) -->
+<p>$$\dot{\phi} = ?? $$</p>
+<p>$$\dot{\omega} = ??$$</p>
+<!-- -2\frac{v\omega}{r} -->
+<!-- -2*v*omega/r -->
+<p><strong>✅ Do this</strong></p>
+<p>Use these equations to correct the <code>diffyqs</code> function in the cell below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 1. Derivatives Function</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">diffyqs</span>(t, curr_vals, g, c):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    r, v, theta, omega <span style="color:#f92672">=</span> curr_vals
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vdot <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    omegadot <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> v, vdot, omega, omegadot <span style="color:#75715e"># solution will return in this order, but integrated (r,v,theta,ω)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Time Setup</span>
+</span></span><span style="display:flex;"><span>tmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>dt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span> <span style="color:#75715e"># unneccecarily small dt to make plot super smooth</span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, tmax, dt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. Parameters and Initial Conditions</span>
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>g <span style="color:#f92672">=</span> <span style="color:#ae81ff">9.81</span>
+</span></span><span style="display:flex;"><span>x0 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2.6</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>] 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. Call Integrator</span>
+</span></span><span style="display:flex;"><span>solved <span style="color:#f92672">=</span> solve_ivp(diffyqs, (<span style="color:#ae81ff">0</span>, tmax), x0, t_eval <span style="color:#f92672">=</span> t, args <span style="color:#f92672">=</span> (g, c, ), method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;RK45&#34;</span>)
+</span></span></code></pre></div><p><strong>✅ Do this</strong></p>
+<ol>
+<li>
+<p>Make r vs t and theta vs t plots of this trajectory. Can you think of what that trajectory would look like in cartesian coordinates? 2. Run the cell below to see what the trajectory looks like in 3D. How does the true trajectory compare to your prediction?</p>
+</li>
+<li>
+<p>Change the initial condtion to examine the following cases and plot the trajectories in 3d:</p>
+<p>a. Particle starts from rest and is let go</p>
+<p>b. Particle starts at a given height and is given a low speed (less than needed to orbit)</p>
+<p>c. Particle starts at a given height and is given a low speed (more than needed to orbit)</p>
+<p>d. Can you find a flat horizontal circular orbit?</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parabaloid</span>(x, y, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># function of a paraboloid in Cartesian coordinates</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> alpha <span style="color:#f92672">*</span> (x<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> y<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cylindrical_to_cartesian</span>(r, th, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">1.</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># convert back to cartesian coordinates for ease of plotting</span>
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(r)
+</span></span><span style="display:flex;"><span>    th <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(th)
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> r<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>cos(th)
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> r<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sin(th)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x,y,parabaloid(x, y, alpha)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_solution</span>(solved):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Function to plot the trajectory </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># points of the surface to plot</span>
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">2.8</span>, <span style="color:#ae81ff">2.8</span>, <span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">2.8</span>, <span style="color:#ae81ff">2.8</span>, <span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>    alpha <span style="color:#f92672">=</span> c
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># construct meshgrid for plotting</span>
+</span></span><span style="display:flex;"><span>    X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+</span></span><span style="display:flex;"><span>    Z <span style="color:#f92672">=</span> parabaloid(X, Y, alpha)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># get trajectory in cartesian coords</span>
+</span></span><span style="display:flex;"><span>    xtraj, ytraj, ztraj <span style="color:#f92672">=</span> cylindrical_to_cartesian(solved<span style="color:#f92672">.</span>y[<span style="color:#ae81ff">0</span>], solved<span style="color:#f92672">.</span>y[<span style="color:#ae81ff">2</span>], alpha)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># plot plot plot</span>
+</span></span><span style="display:flex;"><span>    fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize <span style="color:#f92672">=</span> (<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span>    ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>axes(projection<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;3d&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Particle&#39;s Path in 3d&#34;</span>)
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>plot_surface(X, Y, Z, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;binary&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>) 
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>plot3D(xtraj, ytraj, ztraj, c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#18453B&#34;</span>)
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>set_xlim(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>); ax<span style="color:#f92672">.</span>set_ylim(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>); ax<span style="color:#f92672">.</span>set_zlim(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> ,<span style="color:#ae81ff">15</span>)
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;x&#39;</span>)
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;y&#39;</span>)
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>set_zlabel(<span style="color:#e6db74">&#39;z&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plot_solution(solved)
+</span></span></code></pre></div><p><img src="output_8_0.png" alt="png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"></code></pre></div>
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/1---mechanics-and-odes/notes-phase_space/">← 12 Sept 23 - Notes: Dynamical Systems and Phase Space</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/1---mechanics-and-odes/notes-numerical_integration_1d/">7 Sept 23 - Notes: Numerical Integration in 1D →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling</h1>
+        
+    </header>
+
+    <p>One of the principal tools we have at our disposal when it comes to systems with randomness is the Monte Carlo simulation. Monte Carlo is a large class of approaches that all rely on probabilistic outcomes to determine results. In physics, we often use Monte Carlo to find integrals or sums that we are unable to compute by hand.</p>
+<h2 id="markov-chain-monte-carlo">Markov Chain Monte Carlo</h2>
+<p>We often find ourselves using a type of Monte Carlo simulation that makes use of a Markov Chain. This is called the MCMC model. The mathematical foundations of Markov Chains are well beyond the scope of this course, but the principal issue is that we want to describe is how this simulation works. The video below describes the conceptual backing of MCMC and how it was first used in physics in 1953 to develop a model of an ideal gas. We will make a similar model!</p>
+<p><a href="https://inv.tux.pizza/watch?v=12eZWG0Z5gY"><img src="https://markdown-videos-api.jorgenkh.no/youtube/12eZWG0Z5gY?width=720&amp;height=405" alt=""></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=12eZWG0Z5gY">https://inv.tux.pizza/watch?v=12eZWG0Z5gY</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=12eZWG0Z5gY">https://youtube.com/watch?v=12eZWG0Z5gY</a></li>
+</ul>
+<h2 id="statistical-mechanics">Statistical Mechanics</h2>
+<p>MCMC is used in lots of statistical mechanics problems because they are fundamentally probabilistic by nature. Starting with the &ldquo;chance&rdquo; of finding our system in a given state (with known energy, $E_i$) at a known temperature (T) given by the Boltzmann factor:</p>
+<p>$$e^{-E_i/{k_b T}}$$</p>
+<p>where $k_b$ is the Boltzmann constant. Through this, we developed a statistical model where we found that the normalized probability of finding your system in a state $s$ with energy $E_s$ (just using the $s$ to indicate a state) is given by:</p>
+<p>$$P(s) = \dfrac{1}{Z} e^{-E_s/{k_b T}}$$</p>
+<p>where $Z$ is the partition function, a constant for a given temperature that normalizes our calculation. It is a sum over all states:</p>
+<p>$$Z = \sum_s e^{-E_s/{k_b T}}$$</p>
+<p>Our analysis relied on the development of a statistical theory of mechanics, and we illustrated it with an ideal gas.</p>
+<p>Because $P(S)$ is a probability we can use it find average values (expectation values) of a thermodynamic system. We did this for energy using the thermodynamic relations in the notes. But we can also use statistical properties to find the same. For example, finding the expected internal energy of a system, $\langle U \rangle$, just involves adding up all the possible energy states multiplied by their probabilities!</p>
+<p>$$\langle U \rangle = \sum_s E_s P(s)$$</p>
+<p>When these sums are really hard to compute because there&rsquo;s lots of states or only a few that contribute substantially (as in the case for large systems), we can use selective sampling, which is the basis for MCMC. We will discuss that conceptually in class before using MCMC.</p>
+<h2 id="additional-resources">Additional Resources</h2>
+<h3 id="handwritten-notes">Handwritten Notes</h3>
+<ul>
+<li><a href="../assets/notes/Notes-Intro_to_Stat_Mech.pdf">Introduction to Stat. Mech.</a></li>
+<li><a href="../assets/notes/Notes-Markov_Chain.pdf">Markvov Chain Monte Carlo</a></li>
+</ul>
+<h3 id="lecture-videos">Lecture Videos</h3>
+<p><strong>MCMC for Data Science</strong></p>
+<p><a href="https://inv.tux.pizza/watch?v=yApmR-c_hKU"><img src="https://markdown-videos-api.jorgenkh.no/youtube/yApmR-c_hKU?width=720&amp;height=405" alt=""></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=yApmR-c_hKU">https://inv.tux.pizza/watch?v=yApmR-c_hKU</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=yApmR-c_hKU">https://youtube.com/watch?v=yApmR-c_hKU</a></li>
+</ul>
+<p><strong>Details on the MCMC Algorithm</strong></p>
+<p><a href="https://inv.tux.pizza/watch?v=rZk2FqX2XnY"><img src="https://markdown-videos-api.jorgenkh.no/youtube/rZk2FqX2XnY?width=720&amp;height=405" alt=""></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=rZk2FqX2XnY">https://inv.tux.pizza/watch?v=rZk2FqX2XnY</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=rZk2FqX2XnY">https://youtube.com/watch?v=rZk2FqX2XnY</a></li>
+</ul>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/4---randomness-and-distributions/activity-zombies/">← 7 Dec 23 - Activity: Modeling</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/4---randomness-and-distributions/activity-mc_integration/">30 Nov 23 - Activity: Monte Carlo Integration →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

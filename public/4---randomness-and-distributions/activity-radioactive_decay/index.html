@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21 Nov 23 - Activity: Introduction to Random Processes | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>21 Nov 23 - Activity: Introduction to Random Processes</h1>
+        
+    </header>
+
+    <p>So far we have focused on mostly deterministic systems. These are systems that are typically described by regular ODEs and PDEs; think the SHO or the Wave Equation. In these systems, the game is to analytically determine or estimate the trajectory, field, or wave given the set of equations that describe it. But many processes in nature are random or have a random element ot them.</p>
+<p>How do we model the decay of nuclear isotopes? The gas atoms in a container? Even things like when your bus will arrive.</p>
+<p>Each of these processes has a randomness to it and how we model that randomness and what we can do depends a lot on the nature of the randomness. From a mathematical standpoint, what is the distribution of possible events, or the underlying probability distribution are key questions to ask in making these models. We will get there, but we will start by getting intuition from a place you have probably experienced: rolling dice.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random <span style="color:#66d9ef">as</span> rand
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span></code></pre></div><h2 id="the-random-library">The Random Library</h2>
+<p>If you have not used <code>random</code>, please read this section because it has some implementation things that are useful.</p>
+<p>Random numbers generated by a computer are not random, so it&rsquo;s important to know how to use them. They aren&rsquo;t truly random because a computer must generate them with an algorithm and thus we can potentially determine every number we&rsquo;d receive if we knew the algorithm. There&rsquo;s tons of research into how to generate good random numbers and there&rsquo;s precious few ways. The main way right now is the <a href="https://en.wikipedia.org/wiki/Mersenne_Twister">Mersenne Twister method</a>. Testing the quality of a random number generator is beyond the scope of this class, but a useful exercise if you are doing research into random processes.</p>
+<h3 id="seeding-the-number-generator">Seeding the number generator</h3>
+<p>But because it&rsquo;s an algorithm, we can control the sequence of random numbers we get. That is we can tell the random number generator to create random numbers for us in the same way. This helps because we can use them and test them over and over before running a full simulation. See below on how to generate random integers. Re-run to observe what happens.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>start <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>stop <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> rand<span style="color:#f92672">.</span>randint(start,stop)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;a =&#39;</span>, a)
+</span></span><span style="display:flex;"><span>rand<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> rand<span style="color:#f92672">.</span>randint(start,stop)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;b =&#39;</span>, b)
+</span></span><span style="display:flex;"><span>rand<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">18</span>)
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> rand<span style="color:#f92672">.</span>randint(start,stop)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;c =&#39;</span>, c)
+</span></span><span style="display:flex;"><span>rand<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">=</span> rand<span style="color:#f92672">.</span>randint(start,stop)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;d =&#39;</span>, d)
+</span></span></code></pre></div><pre><code>a = 5
+b = 2
+c = 3
+d = 2
+</code></pre>
+<h2 id="creating-a-uniform-distribution">Creating a uniform distribution</h2>
+<p>One of the simplest distributions to generate is one that you are likely most familiar with - a fair die or pair of dice. In the case of a single fair die, each outcome is equally likely and distinct from each other. That is rolling a one and rolling a six are different, distinct outcomes - and we can say that for each outcome.</p>
+<p>Below, write a short piece of code (maybe as a function), that rolls one N-sided die as many times as you like and returns all the outcomes. <strong>Be careful using rand.seed() here because you can just an array of all the same numbers!</strong></p>
+<p>Plot a histogram of the outcomes; vary the sides of the die and the number of times it rolls.</p>
+<p><strong>Can you come up with a scheme that quantifies how close your distribution is to uniform?</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
+</span></span></code></pre></div><h3 id="make-a-biased-die">Make a biased die</h3>
+<p>Adjust your program so that you get even numbered rolls twice as frequently as odd rolls. This is the basis for baking in a probability function into our models. So do try to this. <strong>Make a histogram of the results of the biased die</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Your code here</span>
+</span></span></code></pre></div><h3 id="micro-vs-macro-states">Micro vs Macro states</h3>
+<p>In many random processes, the results are not distinct. Think about rolling two dice (colors are green and white) instead. How many ways can you get a sum of 2 vs a sum of 6? The state of the two dice where we indicate the number of each die can be called a &ldquo;microstate&rdquo;. The state of the sum can be called a &ldquo;macrostate.&rdquo;</p>
+<p>So as an example consider the macrostate with a sum of 4. This can be constructed of out 3 potential microstates. First the green die could have a 1 and the white one a 3, the green could have a 2 and the white a 2, and then the green could have a 3 and the white a 1. But the result I care about is not the individual die, but the sum. Regardless I get 4.</p>
+<ul>
+<li>Microstate - tracks individual constituent states as if they were unique</li>
+<li>Macrostate - a group of microstates that share something</li>
+</ul>
+<p><strong>Modify or use your code above to roll two fair die and count their sum</strong></p>
+<p>Plot the resulting histogram of macrostates. Vary the number of sides and number of rolls. What do you notice?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
+</span></span></code></pre></div><h2 id="poisson-processes">Poisson Processes</h2>
+<p>Many events in physics can be represented by a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson Distribution</a>, which results from events that have the following properties:</p>
+<ul>
+<li>The occurrence of one event does not affect the probability that a second event will occur. That is, events occur independently.</li>
+<li>The average rate at which events occur is independent of any occurrences. For simplicity, this is usually assumed to be constant, but may in practice vary with time.</li>
+<li>Two events cannot occur at exactly the same instant; instead, at each very small sub-interval, either exactly one event occurs, or no event occurs.</li>
+</ul>
+<p>Oftentimes, it&rsquo;s the average rate (think lifetime of an isotope) that we think about as helping us decide. If it&rsquo;s true that the rate is roughly constant and the events are independent, then this modeling can work reasonably well. So an event can be random, but the average result should be relatively simple (e.g., a single average decay time), then we can consider the events Poisson distributed.</p>
+<h3 id="decay-of-an-isotope">Decay of an isotope</h3>
+<p>Consider a collection of $^{208}Tl$ that decays into $^{208}Pb$ with a half-life of 3.053 minutes. Note that any one atom decays randomly at a random time, but on average, we see that $1/e$ atoms decay in 3.053 minutes (this is characteristic of a Poisson Process).</p>
+<p>The number of atoms $N$ that will remain in our sample (that is still be Thallium 208) will fall off exponentially over time (we could observe that from data):</p>
+<p>$$N(t) = N(0)2^{-t/\tau}$$</p>
+<p>where $\tau$ is the half-life. The fraction of remaining Thallium 208 atoms at any given time $t$ is:</p>
+<p>$$\dfrac{N(t)}{N(0)} = 2^{-t/\tau}$$</p>
+<p>The probability that an atom decayed into Lead 208 is just this number subtracted from one:</p>
+<p>$$p(t) = 1 - 2^{-t/\tau}$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Constants</span>
+</span></span><span style="display:flex;"><span>NTl <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>          <span style="color:#75715e"># Starting Thallium Atoms</span>
+</span></span><span style="display:flex;"><span>NPb <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>             <span style="color:#75715e"># Starting Lead Atoms</span>
+</span></span><span style="display:flex;"><span>tau <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.053</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span>      <span style="color:#75715e"># Half life in seconds</span>
+</span></span><span style="display:flex;"><span>h <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>             <span style="color:#75715e"># Time step between checking if a decay occurred</span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span>(<span style="color:#f92672">-</span>h<span style="color:#f92672">/</span>tau) <span style="color:#75715e"># Probability the decay occurs in that time elapsed</span>
+</span></span><span style="display:flex;"><span>tmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>         <span style="color:#75715e"># Total time in seconds </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># List of plot points</span>
+</span></span><span style="display:flex;"><span>tpoints <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0.0</span>, tmax, h)
+</span></span><span style="display:flex;"><span>Tlpoints <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>Pbpoints <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>probabilities <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Model</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> tpoints:
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    Tlpoints<span style="color:#f92672">.</span>append(NTl)
+</span></span><span style="display:flex;"><span>    Pbpoints<span style="color:#f92672">.</span>append(NPb)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">## Calculate the number of atoms that decay</span>
+</span></span><span style="display:flex;"><span>    decay <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(NTl):        <span style="color:#75715e"># For each atom in the sample</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> rand<span style="color:#f92672">.</span>random() <span style="color:#f92672">&lt;</span> p:   <span style="color:#75715e"># Check if it decayed in the last dt </span>
+</span></span><span style="display:flex;"><span>            decay <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    NTl <span style="color:#f92672">-=</span> decay
+</span></span><span style="display:flex;"><span>    NPb <span style="color:#f92672">+=</span> decay
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot the data</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(tpoints, Tlpoints, label<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$^</span><span style="color:#e6db74">{208}</span><span style="color:#e6db74">Tl$&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(tpoints, Pbpoints, label<span style="color:#f92672">=</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$^</span><span style="color:#e6db74">{208}</span><span style="color:#e6db74">Pb$&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Time (s)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Number of atoms&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_12_0.png" alt="png"></p>
+<h3 id="decay-chains">Decay Chains</h3>
+<p>Here&rsquo;s the big project for today! It is less often the case that decays happen like above. Many times there are [Decay Channels] where the atoms decay over time into different elements with different probabilities. Consider the Bismuth 213 decay to Bismuth 209. It decays in two channels:</p>
+<p>$$^{213}Bi \rightarrow  ^{209}Tl \rightarrow  ^{209}Pb \rightarrow  ^{209}Bi$$
+$$^{213}Bi \rightarrow  ^{209}Pb \rightarrow  ^{209}Bi$$</p>
+<p>The first channel happens to about 2.09% of atoms. So we will ignore it for now. Let&rsquo;s focus on the two step decay to Lead.</p>
+<p>Rewrite the model above to account for both decays, which have lifetimes of 46 minutes ($^{213}Bi \rightarrow ^{209}Pb$) and 3.3 hours ($^{209}Pb \rightarrow  ^{209}Bi$) respectively.</p>
+<p><strong>Plot the number of all three atoms as a function of time</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Your code here</span>
+</span></span></code></pre></div><h3 id="a-challenge">A Challenge</h3>
+<p>Model the entire decay including the random but clearly biased split between Lead 209 and Thallium 209, which has a halflife of 2.2 minutes.</p>
+<p><em>Note: We are not including the transition between Bismuth 213 and Polonium 209, which is a very short lived isotope.</em></p>
+<p><strong>Plot the number of all four atoms as a function of time</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Your code here</span>
+</span></span></code></pre></div>
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/4---randomness-and-distributions/notes-counting_and_combinatorics/">← 27 Nov 23 - Notes: Counting and Combinatorics</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/4---randomness-and-distributions/notes-randomness/">20 Nov 23 - Notes: Random Processes →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>26 Sep 23 - Activity: Electrostatic Fields | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>26 Sep 23 - Activity: Electrostatic Fields</h1>
+        
+    </header>
+
+    <p>As we saw the electric field is described by the 4 Maxwell equations. But, in the electrostatic situation where the charges do not move, we find the electric field is described by the following equations:</p>
+<p>$$\nabla \cdot \mathbf{E} = \frac{\rho}{\epsilon_0}$$</p>
+<p>$$\nabla \times \mathbf{E} = 0$$</p>
+<p>These linear partial differential equations can be solved analytically for a number of situations. In this activity we will explore the electric field for a number of situations.</p>
+<h2 id="the-del-operator">The del operator</h2>
+<p>The del operator ($\nabla$) is a differential vector operator that can act in the same way that vectors do (i.e., through a dot $\cdot$ or cross $\times$ product). In addition, it can operate on a scalar function to produce a vector function (i.e., $\mathbf{E}(x,y,z) = - \nabla V(x,y,z)$). The operator itself is given by:</p>
+<p>$$\nabla = \hat{x} \frac{\partial}{\partial x} + \hat{y} \frac{\partial}{\partial y} + \hat{z} \frac{\partial}{\partial z}$$</p>
+<p>where $\hat{x}$, $\hat{y}$, and $\hat{z}$ are the unit vectors in the $x$, $y$, and $z$ directions, respectively. It acts on a scalar function $f(x,y,z)$ as follows:</p>
+<p>$$\nabla f(x,y,z) = \hat{x} \frac{\partial f}{\partial x} + \hat{y} \frac{\partial f}{\partial y} + \hat{z} \frac{\partial f}{\partial z}$$</p>
+<p>When taking the dot product (the divergence) of a vector function $\mathbf{F}(x,y,z)$, it acts as follows:</p>
+<p>$$\nabla \cdot \mathbf{F}(x,y,z) = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}$$</p>
+<p>And finally, when taking the cross product (the curl) of a vector function $\mathbf{F}(x,y,z)$, it acts as follows:</p>
+<p>$$\nabla \times \mathbf{F}(x,y,z) = \left( \frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z} \right) \hat{x} + \left( \frac{\partial F_x}{\partial z} - \frac{\partial F_z}{\partial x} \right) \hat{y} + \left( \frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y} \right) \hat{z}$$</p>
+<p>We rarely make use of the full form of these differential equations, instead solving them in restricted and highly symmetric cases (e.g., using Gauss&rsquo;s Law), computing directly the field contributed by infinitesimal charges (e.g., using Coulomb&rsquo;s Law), or using numerical methods (e.g., using summation or other techniques).</p>
+<p>Often, the most productive approach tends to be using electric potential (a scalar function), which we will discuss later.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## run to import libraries</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> matplotlib.colors <span style="color:#f92672">import</span> Normalize
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.cm <span style="color:#66d9ef">as</span> cm
+</span></span></code></pre></div><h2 id="coulombs-law-and-the-electric-field">Coulomb&rsquo;s Law and the Electric Field</h2>
+<p>As you have encountered in the past, a generic expression for the electric field observed at location $\mathbf{r}$ due to a point charge $q$ at location $\mathbf{r}&rsquo;$ is given by:</p>
+<p>$$\mathbf{E} = \dfrac{q}{4\pi\epsilon_0} \dfrac{\mathbf{r} - \mathbf{r}&rsquo;}{\left|\mathbf{r} - \mathbf{r}&rsquo;\right|^3}$$</p>
+<p>Notice that the electric field is a vector function of position and the differences that appear are vector ones:</p>
+<p>$$\mathbf{r} - \mathbf{r}&rsquo; = (x-x&rsquo;)\hat{x} + (y-y&rsquo;)\hat{y} + (z-z&rsquo;)\hat{z}$$</p>
+<p>We can show that the general solution for the electric field due to a set of point charges is simply the <a href="https://en.wikipedia.org/wiki/Superposition_principle">superposition</a> of the individual fields due to each charge:</p>
+<p>$$\mathbf{E} = \sum_i \mathbf{E}_i = \sum_i \dfrac{q_i}{4\pi\epsilon_0} \dfrac{\mathbf{r} - \mathbf{r}_i}{\left|\mathbf{r} - \mathbf{r}_i\right|^3}$$</p>
+<p>where $\mathbf{E}_i$ is the electric field due to the ith charge.</p>
+<h3 id="visualization-of-the-electric-field">Visualization of the Electric Field</h3>
+<p>Below we have written a a function that computes the electric field for a point charge at a known location. We use a few different libraries and known functions that we have used in the past for dynamical systems. But we apply them to the electric field.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">electric_field</span>(charge, x_points, y_points, x_charge<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, y_charge<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>    k <span style="color:#f92672">=</span> <span style="color:#ae81ff">8.99e9</span>  <span style="color:#75715e"># Nm^2/C^2, Coulomb&#39;s constant</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Initialize electric field components to zero</span>
+</span></span><span style="display:flex;"><span>    E_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(x_points)
+</span></span><span style="display:flex;"><span>    E_y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(y_points)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Calculate electric field components due to the point charge at each point on the grid</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(x_points<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(y_points<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]):
+</span></span><span style="display:flex;"><span>            r_x <span style="color:#f92672">=</span> x_points[i, j] <span style="color:#f92672">-</span> x_charge
+</span></span><span style="display:flex;"><span>            r_y <span style="color:#f92672">=</span> y_points[i, j] <span style="color:#f92672">-</span> y_charge
+</span></span><span style="display:flex;"><span>            r_magnitude <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sqrt(r_x<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> r_y<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> r_magnitude <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:  <span style="color:#75715e"># Avoid division by zero</span>
+</span></span><span style="display:flex;"><span>                r_unit_x <span style="color:#f92672">=</span> r_x <span style="color:#f92672">/</span> r_magnitude
+</span></span><span style="display:flex;"><span>                r_unit_y <span style="color:#f92672">=</span> r_y <span style="color:#f92672">/</span> r_magnitude
+</span></span><span style="display:flex;"><span>                E_x[i, j] <span style="color:#f92672">=</span> k <span style="color:#f92672">*</span> charge <span style="color:#f92672">*</span> r_unit_x <span style="color:#f92672">/</span> r_magnitude<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>                E_y[i, j] <span style="color:#f92672">=</span> k <span style="color:#f92672">*</span> charge <span style="color:#f92672">*</span> r_unit_y <span style="color:#f92672">/</span> r_magnitude<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> E_x, E_y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_electric_field</span>(X, Y, E_x, E_y, stream_color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;b&#39;</span>):
+</span></span><span style="display:flex;"><span>    fig, axs <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># First Subplot - Quiver Plot</span>
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>quiver(X, Y, E_x, E_y, scale<span style="color:#f92672">=</span><span style="color:#ae81ff">1e6</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Quiver Plot&#39;</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;x [m]&#39;</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;y [m]&#39;</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>axhline(<span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>axvline(<span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>grid(color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Second Subplot - Stream Plot</span>
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>streamplot(X, Y, E_x, E_y, color<span style="color:#f92672">=</span>stream_color, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, density<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, arrowstyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;-&gt;&#39;</span>, arrowsize<span style="color:#f92672">=</span><span style="color:#ae81ff">1.5</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Stream Plot&#39;</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;x [m]&#39;</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;y [m]&#39;</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>axhline(<span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>axvline(<span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>grid(color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Third Subplot - Color Scaled Quiver Plot</span>
+</span></span><span style="display:flex;"><span>    magnitude <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sqrt(E_x<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> E_y<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    colors <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>log(magnitude)
+</span></span><span style="display:flex;"><span>    strm <span style="color:#f92672">=</span> axs[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>streamplot(X, Y, E_x, E_y, color<span style="color:#f92672">=</span>colors, cmap <span style="color:#f92672">=</span> cm<span style="color:#f92672">.</span>inferno)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Color Scaled Stream Plot&#39;</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;x [m]&#39;</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;y [m]&#39;</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>axhline(<span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>axvline(<span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>    axs[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>grid(color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Add a colorbar to the plot</span>
+</span></span><span style="display:flex;"><span>    cbar <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>colorbar(strm<span style="color:#f92672">.</span>lines)
+</span></span><span style="display:flex;"><span>    cbar<span style="color:#f92672">.</span>set_label(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;$\log{\left|\mathbf</span><span style="color:#e6db74">{E}</span><span style="color:#e6db74">\right|}$&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>tight_layout()  <span style="color:#75715e"># Adjust spacing between subplots</span>
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="a-point-charge">A point charge</h3>
+<p>Below, we plot the electric field in 2D of a single point charge. We are using several different representations of the electric field. Sometimes, some work better than others. The code we wrote, should be able to handle multiple point charges. And you will need to create a list of charges and their locations to investigate the field of multiple charges.</p>
+<h4 id="positive-point-charge-at-the-origin">Positive Point Charge at the Origin</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Set Grid of Points</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A point charge</span>
+</span></span><span style="display:flex;"><span>charge <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span>  <span style="color:#75715e"># C</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>E_x, E_y <span style="color:#f92672">=</span> electric_field(charge, X, Y)
+</span></span><span style="display:flex;"><span>plot_electric_field(X, Y, E_x, E_y)
+</span></span></code></pre></div><p><img src="output_5_0.png" alt="png"></p>
+<h4 id="negative-point-charge-at-the-origin">Negative Point Charge at the Origin</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A negative point charge</span>
+</span></span><span style="display:flex;"><span>charge <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1e-6</span>  <span style="color:#75715e"># C</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>E_x, E_y <span style="color:#f92672">=</span> electric_field(charge, X, Y)
+</span></span><span style="display:flex;"><span>plot_electric_field(X, Y, E_x, E_y)
+</span></span></code></pre></div><p><img src="output_7_0.png" alt="png"></p>
+<h3 id="the-electric-dipole">The electric dipole</h3>
+<p>Now we can use these functions to place charges where we like and compute the total field. Below, we placed two oppositely signed charges to illustrate the field of an <a href="https://en.wikipedia.org/wiki/Electric_dipole_moment">electric dipole</a>. While not every distribution has an electric dipole moment, many do; especially those in water (as it&rsquo;s a polar molecule).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A positive point charge</span>
+</span></span><span style="display:flex;"><span>charge1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span>  <span style="color:#75715e"># C</span>
+</span></span><span style="display:flex;"><span>x1 <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>  <span style="color:#75715e"># m</span>
+</span></span><span style="display:flex;"><span>y1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># m</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A negative point charge</span>
+</span></span><span style="display:flex;"><span>charge2 <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1e-6</span>  <span style="color:#75715e"># C</span>
+</span></span><span style="display:flex;"><span>x2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>  <span style="color:#75715e"># m</span>
+</span></span><span style="display:flex;"><span>y2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># m</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>E_1_x, E_1_y <span style="color:#f92672">=</span> electric_field(charge1, X, Y, x1, y1)
+</span></span><span style="display:flex;"><span>E_2_x, E_2_y <span style="color:#f92672">=</span> electric_field(charge2, X, Y, x2, y2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Find the net electric field in each direction</span>
+</span></span><span style="display:flex;"><span>E_T_x <span style="color:#f92672">=</span> E_1_x <span style="color:#f92672">+</span> E_2_x
+</span></span><span style="display:flex;"><span>E_T_y <span style="color:#f92672">=</span> E_1_y <span style="color:#f92672">+</span> E_2_y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plot_electric_field(X, Y, E_T_x, E_T_y)
+</span></span></code></pre></div><p><img src="output_9_0.png" alt="png"></p>
+<h3 id="quadrupole">Quadrupole</h3>
+<p>We will end this game with a list of charges that we can iterate through. This will help you develop more complicated distributions of charges.</p>
+<p>Below, we have a <a href="https://en.wikipedia.org/wiki/Quadrupole">quadrupole</a>. You can change the charges and their locations to see how the field changes. Your activity below is to develop several situations and see how the field changes and consider the symmetry of the field. For this we will make a <a href="https://docs.python.org/3/tutorial/classes.html">Python class</a> for the charges. This will allow us to create a list of charges and iterate through them. This is showing an advantage of using aspects of <a href="https://en.wikipedia.org/wiki/Object-oriented_programming">object oriented programming</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Charge</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, q, x, y):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>q <span style="color:#f92672">=</span> q  <span style="color:#75715e"># charge value</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>x <span style="color:#f92672">=</span> x  <span style="color:#75715e"># x-coordinate</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> y  <span style="color:#75715e"># y-coordinate</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Creating instances of Charge class</span>
+</span></span><span style="display:flex;"><span>charge1 <span style="color:#f92672">=</span> Charge(<span style="color:#ae81ff">1e-6</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># e.g. Charge of 1 μC at (0, 0)</span>
+</span></span><span style="display:flex;"><span>charge2 <span style="color:#f92672">=</span> Charge(<span style="color:#f92672">-</span><span style="color:#ae81ff">1e-6</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># e.g. Charge of -1 μC at (1, 0)</span>
+</span></span><span style="display:flex;"><span>charge3 <span style="color:#f92672">=</span> Charge(<span style="color:#ae81ff">1e-6</span>, <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># e.g. Charge of 1 μC at (0, 1)</span>
+</span></span><span style="display:flex;"><span>charge4 <span style="color:#f92672">=</span> Charge(<span style="color:#f92672">-</span><span style="color:#ae81ff">1e-6</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># e.g. Charge of -1 μC at (1, 1)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Storing instances in a list</span>
+</span></span><span style="display:flex;"><span>charges <span style="color:#f92672">=</span> [charge1, charge2, charge3, charge4]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterating over the list of charges</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> charge <span style="color:#f92672">in</span> charges:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Charge: </span><span style="color:#e6db74">{</span>charge<span style="color:#f92672">.</span>q<span style="color:#e6db74">}</span><span style="color:#e6db74"> C, Location: (</span><span style="color:#e6db74">{</span>charge<span style="color:#f92672">.</span>x<span style="color:#e6db74">}</span><span style="color:#e6db74">, </span><span style="color:#e6db74">{</span>charge<span style="color:#f92672">.</span>y<span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>)
+</span></span></code></pre></div><pre><code>Charge: 1e-06 C, Location: (-1, 1)
+Charge: -1e-06 C, Location: (1, 1)
+Charge: 1e-06 C, Location: (1, -1)
+Charge: -1e-06 C, Location: (-1, -1)
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Set up the space again</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">40</span>)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">40</span>)
+</span></span><span style="display:flex;"><span>X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Set the total electric field to zero</span>
+</span></span><span style="display:flex;"><span>E_T_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(X)
+</span></span><span style="display:flex;"><span>E_T_y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(Y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Calculate the electric field due to each charge</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> charge <span style="color:#f92672">in</span> charges:
+</span></span><span style="display:flex;"><span>    E_x, E_y <span style="color:#f92672">=</span> electric_field(charge<span style="color:#f92672">.</span>q, X, Y, charge<span style="color:#f92672">.</span>x, charge<span style="color:#f92672">.</span>y)
+</span></span><span style="display:flex;"><span>    E_T_x <span style="color:#f92672">+=</span> E_x
+</span></span><span style="display:flex;"><span>    E_T_y <span style="color:#f92672">+=</span> E_y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plot_electric_field(X, Y, E_T_x, E_T_y)
+</span></span></code></pre></div><p><img src="output_12_0.png" alt="png"></p>
+<p><strong>✅ Do this</strong></p>
+<p>Now that we have built up some visualization codes. Let&rsquo;s make use of them. Create the following graphics and answer the following questions.</p>
+<ul>
+<li>Create a uniform line of charges. Make sure to include enough charges so that the field looks smooth. What is the symmetry of this situation. Where is the electric field constant (if at all)? Where is the electric field zero (if at all)?</li>
+<li>What if the line of charges varying their strength like a sinusoidal function?</li>
+<li>Create a circle of charges (like a ring). Is there any symmetry to this situation? Where is the electric field zero? How close does your calculation get to zero? What makes the calculation better or worse?</li>
+<li>Create a small locus of charges of different sizes and signs, but make sure the net charge is non-zero. How close do the charges need to be (or how far away do you need to be) for the field to look like a point charge field? What is the symmetry of this situation (or approximately so)? Where is the electric field zero (if at all)?</li>
+</ul>
+<h4 id="uniform-line-of-charges">Uniform line of charges</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Set up the space again</span>
+</span></span><span style="display:flex;"><span>size <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>step <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span>size, size, step)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span>size, size, step)
+</span></span><span style="display:flex;"><span>X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>  <span style="color:#75715e"># Number of charges</span>
+</span></span><span style="display:flex;"><span>charges <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(N):
+</span></span><span style="display:flex;"><span>    q <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span>  <span style="color:#75715e"># Charge Value</span>
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> i<span style="color:#f92672">*</span>(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>size)<span style="color:#f92672">/</span>(N<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">-</span> size  <span style="color:#75715e"># Spread the charges out</span>
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># everything on the x-axis</span>
+</span></span><span style="display:flex;"><span>    charges<span style="color:#f92672">.</span>append(Charge(q, x, y))  <span style="color:#75715e"># Add the charge to the list of charges</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Set the total electric field to zero</span>
+</span></span><span style="display:flex;"><span>E_T_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(X)
+</span></span><span style="display:flex;"><span>E_T_y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(Y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Calculate the electric field due to each charge</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> charge <span style="color:#f92672">in</span> charges:
+</span></span><span style="display:flex;"><span>    E_x, E_y <span style="color:#f92672">=</span> electric_field(charge<span style="color:#f92672">.</span>q, X, Y, charge<span style="color:#f92672">.</span>x, charge<span style="color:#f92672">.</span>y)
+</span></span><span style="display:flex;"><span>    E_T_x <span style="color:#f92672">+=</span> E_x
+</span></span><span style="display:flex;"><span>    E_T_y <span style="color:#f92672">+=</span> E_y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plot_electric_field(X, Y, E_T_x, E_T_y)
+</span></span></code></pre></div><p><img src="output_15_0.png" alt="png"></p>
+<h4 id="sinusoidal-line-of-charges">Sinusoidal line of charges</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Set up the space again</span>
+</span></span><span style="display:flex;"><span>size <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>step <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span>size, size, step)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span>size, size, step)
+</span></span><span style="display:flex;"><span>X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">600</span>  <span style="color:#75715e"># Number of charges</span>
+</span></span><span style="display:flex;"><span>charges <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(N):
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> i<span style="color:#f92672">*</span>(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>size)<span style="color:#f92672">/</span>(N<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">-</span> size  <span style="color:#75715e"># Spread the charges out</span>
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># everything on the x-axis</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    q <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">30</span><span style="color:#f92672">*</span>x<span style="color:#f92672">/</span>(size))  <span style="color:#75715e"># Charge Value</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    charges<span style="color:#f92672">.</span>append(Charge(q, x, y))  <span style="color:#75715e"># Add the charge to the list of charges</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Set the total electric field to zero</span>
+</span></span><span style="display:flex;"><span>E_T_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(X)
+</span></span><span style="display:flex;"><span>E_T_y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(Y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Calculate the electric field due to each charge</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> charge <span style="color:#f92672">in</span> charges:
+</span></span><span style="display:flex;"><span>    E_x, E_y <span style="color:#f92672">=</span> electric_field(charge<span style="color:#f92672">.</span>q, X, Y, charge<span style="color:#f92672">.</span>x, charge<span style="color:#f92672">.</span>y)
+</span></span><span style="display:flex;"><span>    E_T_x <span style="color:#f92672">+=</span> E_x
+</span></span><span style="display:flex;"><span>    E_T_y <span style="color:#f92672">+=</span> E_y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plot_electric_field(X, Y, E_T_x, E_T_y)
+</span></span></code></pre></div><p><img src="output_17_0.png" alt="png"></p>
+<h4 id="circle-of-charges">Circle of charges</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Set up the space again</span>
+</span></span><span style="display:flex;"><span>size <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>step <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>R <span style="color:#f92672">=</span> size<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span>size, size, step)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span>size, size, step)
+</span></span><span style="display:flex;"><span>X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">360</span>  <span style="color:#75715e"># Number of charges</span>
+</span></span><span style="display:flex;"><span>charges <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(N):
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    theta <span style="color:#f92672">=</span> i<span style="color:#f92672">*</span>(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi)<span style="color:#f92672">/</span>(N<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># Spread the charges out</span>
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> R<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>cos(theta)
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> R<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sin(theta)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    q <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span>  <span style="color:#75715e"># Charge Value</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    charges<span style="color:#f92672">.</span>append(Charge(q, x, y))  <span style="color:#75715e"># Add the charge to the list of charges</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Set the total electric field to zero</span>
+</span></span><span style="display:flex;"><span>E_T_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(X)
+</span></span><span style="display:flex;"><span>E_T_y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(Y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Calculate the electric field due to each charge</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> charge <span style="color:#f92672">in</span> charges:
+</span></span><span style="display:flex;"><span>    E_x, E_y <span style="color:#f92672">=</span> electric_field(charge<span style="color:#f92672">.</span>q, X, Y, charge<span style="color:#f92672">.</span>x, charge<span style="color:#f92672">.</span>y)
+</span></span><span style="display:flex;"><span>    E_T_x <span style="color:#f92672">+=</span> E_x
+</span></span><span style="display:flex;"><span>    E_T_y <span style="color:#f92672">+=</span> E_y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plot_electric_field(X, Y, E_T_x, E_T_y)
+</span></span><span style="display:flex;"><span>    
+</span></span></code></pre></div><p><img src="output_19_0.png" alt="png"></p>
+<h4 id="small-locus-of-random-charges">Small Locus of Random Charges</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Set up the space again</span>
+</span></span><span style="display:flex;"><span>size <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>step <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>R <span style="color:#f92672">=</span> size<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>scale <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-3</span> <span style="color:#75715e">#smaller scale means charges are closer to the origin</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span>size, size, step)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span>size, size, step)
+</span></span><span style="display:flex;"><span>X, Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span> <span style="color:#75715e"># If even there&#39;s a chance of a net charge of zero</span>
+</span></span><span style="display:flex;"><span>charges <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(N):
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">## Random charge value</span>
+</span></span><span style="display:flex;"><span>    q <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>choice([<span style="color:#f92672">-</span><span style="color:#ae81ff">1e-6</span>, <span style="color:#ae81ff">1e-6</span>]) <span style="color:#75715e"># Either a positive or negative charge</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">## Random x,y locations that are located close to the origin</span>
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>uniform(<span style="color:#f92672">-</span>scale<span style="color:#f92672">*</span>size, scale<span style="color:#f92672">*</span>size)
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>uniform(<span style="color:#f92672">-</span>scale<span style="color:#f92672">*</span>size, scale<span style="color:#f92672">*</span>size)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    charges<span style="color:#f92672">.</span>append(Charge(q, x, y))  <span style="color:#75715e"># Add the charge to the list of charges</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Set the total electric field to zero</span>
+</span></span><span style="display:flex;"><span>E_T_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(X)
+</span></span><span style="display:flex;"><span>E_T_y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros_like(Y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Calculate the electric field due to each charge</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> charge <span style="color:#f92672">in</span> charges:
+</span></span><span style="display:flex;"><span>    E_x, E_y <span style="color:#f92672">=</span> electric_field(charge<span style="color:#f92672">.</span>q, X, Y, charge<span style="color:#f92672">.</span>x, charge<span style="color:#f92672">.</span>y)
+</span></span><span style="display:flex;"><span>    E_T_x <span style="color:#f92672">+=</span> E_x
+</span></span><span style="display:flex;"><span>    E_T_y <span style="color:#f92672">+=</span> E_y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plot_electric_field(X, Y, E_T_x, E_T_y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>total_charge <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> charge <span style="color:#f92672">in</span> charges:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Charge: </span><span style="color:#e6db74">{</span>charge<span style="color:#f92672">.</span>q<span style="color:#e6db74">}</span><span style="color:#e6db74"> C, Location: (</span><span style="color:#e6db74">{</span>charge<span style="color:#f92672">.</span>x<span style="color:#e6db74">}</span><span style="color:#e6db74">, </span><span style="color:#e6db74">{</span>charge<span style="color:#f92672">.</span>y<span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>)
+</span></span><span style="display:flex;"><span>    total_charge <span style="color:#f92672">+=</span> charge<span style="color:#f92672">.</span>q
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Total Charge: </span><span style="color:#e6db74">{</span>total_charge<span style="color:#e6db74">}</span><span style="color:#e6db74"> C&#34;</span>)
+</span></span></code></pre></div><p><img src="output_21_0.png" alt="png"></p>
+<pre><code>Charge: 1e-06 C, Location: (-0.0012184532929861245, -0.0004979964164912648)
+Charge: 1e-06 C, Location: (0.00048390202162626635, 0.0014723630957774528)
+Charge: 1e-06 C, Location: (-0.0006583745072223969, -0.00044763882490302283)
+Charge: 1e-06 C, Location: (0.0011431645429140196, 0.001931463822718301)
+Charge: 1e-06 C, Location: (-5.60897369906103e-05, -0.0003944506192641625)
+Charge: -1e-06 C, Location: (-0.0011296991527068485, 0.0017233177048307227)
+Total Charge: 4e-06 C
+</code></pre>
+<h2 id="gausss-law">Gauss&rsquo;s Law</h2>
+<p>Clearly Coulomb&rsquo;s Law gives us a prescription to solve most problems and serves as the basis for generic approaches to solving these problems. However, we can use the <a href="https://en.wikipedia.org/wiki/Divergence_theorem">divergence theorem</a> with the first of the electrostatic equations above. This will convert this equation into a tool for solving highly symmetric problems.</p>
+<p>$$\int \int \int \nabla \cdot \mathbf{E};dV = \int \int \int \dfrac{\rho}{\epsilon_0} ;dV$$</p>
+<p>The left hand side can be rewritten as:</p>
+<p>$$\int \int \int \nabla \cdot \mathbf{E};dV = \iint \mathbf{E} \cdot d\mathbf{A}$$</p>
+<p>where $d\mathbf{A}$ is an infinitesimal area element that has a vector direction. It points outward from the surface (normal to the local surface). We use this to write <a href="https://en.wikipedia.org/wiki/Gauss%27s_law">Gauss&rsquo;s Law</a> for the electric field:</p>
+<p>$$\iint \mathbf{E} \cdot d\mathbf{A} = \int \int \int \dfrac{\rho}{\epsilon_0};dV$$</p>
+<p>Notice that this expression is always true, but it almost never useful for solving problems in general. The electric flux is often easily calculated considering the total enclosed charge:</p>
+<p>$$\Phi_E = \int \int \int \dfrac{\rho}{\epsilon_0};dV = \dfrac{Q_{enc}}{\epsilon_0}$$</p>
+<p>However, using that measure of the total electric flux to find the field is only possible in highly symmetric situations. For example, if we have a spherical charge distribution $\rho(r)$, we can use Gauss&rsquo;s Law to find the electric field at any point outside the sphere. Below, is a figure of a cylindrical charge distribution. We can use Gauss&rsquo;s Law to find the electric field at any point outside the cylinder because the charge per unit length is constant.</p>
+<p><img src="http://hyperphysics.phy-astr.gsu.edu/hbase/electric/imgele/gaucyl2.png" alt="Gaussian Cylinder"></p>
+<h3 id="a-charged-cylinder">A charged cylinder</h3>
+<p><strong>✅ Do this</strong></p>
+<p>Consider a long and thin plastic cylinder with a radius of $R_0$ and length $L$, such that $L&raquo;R_0$. The cylinder has a charge distribution that varies with radius $\rho(r) = cr^2$, where $c$ is a positive constant. Find the electric field inside and outside the cylinder using Gauss&rsquo;s Law.</p>
+<ul>
+<li>Sketch the situation. What are the units of $c$?</li>
+<li>Prove to yourself and your group that you can use Gauss&rsquo;s Law to find the electric field inside and outside the cylinder (why? what assumptions are you making?)</li>
+<li>Compute the electric field and graph it&rsquo;s magnitude $|\mathbf{E}(r)|$ as a function of $r$ for $r \in [0,4R_0]$.</li>
+</ul>
+<h3 id="invent-a-planar-problem">Invent a planar problem</h3>
+<p><strong>✅ Do this</strong></p>
+<p>It is very common to show that the electric field on a planar surface is given by:</p>
+<p>$$\mathbf{E} = \dfrac{\sigma}{2\epsilon_0}$$</p>
+<p>where $\sigma$ is the charge density on the surface (typically, $Q/A$). We can use Gauss&rsquo;s Law to find the electric field due to a charged plane. But, we want you to invent a problem for a thick plane of charge that has a varying charge density that depends on the distance from the center of the plane.</p>
+<ol>
+<li>Invent this problem and sketch it. Note here: $\rho(\mathbf{r}) = \rho(z)$ will still allow you to use Gauss&rsquo;s Law.</li>
+<li>Solve for the electric field using Gauss&rsquo;s Law inside and outside the thick plane.</li>
+</ol>
+<h2 id="numerical-superposition---coulombs-law">Numerical Superposition - Coulomb&rsquo;s Law</h2>
+<p>We gave you code and a class structure that lets you develop solutions to 2D electrostatic problems. In fact, we built a simple numerical integrator that uses superposition in 2D to solve for the electric field. This works because the electric field obeys superposition. So we can add up the electric field due to each charge.</p>
+<p>$$\mathbf{E} = \sum_i \mathbf{E}_i = \sum_i \dfrac{q_i}{4\pi\epsilon_0} \dfrac{\mathbf{r} - \mathbf{r}_i}{\left|\mathbf{r} - \mathbf{r}_i\right|^3}$$</p>
+<p>In the continuous limit ($q \rightarrow \rho;dV$), this becomes an integral that we can solve (sometimes). It depends on our ability to express the results in integrable functions:</p>
+<p>$$\mathbf{E} = \int \int \int \dfrac{\rho(\mathbf{r}&rsquo;)}{4\pi\epsilon_0} \dfrac{\mathbf{r} - \mathbf{r}&rsquo;}{\left|\mathbf{r} - \mathbf{r}&rsquo;\right|^3} dV&rsquo;$$</p>
+<p>However, the scheme to numerically integrate this expression to find the field follows this prescription. And as long as we avoid singularities and the sources are compact (locally distributed), we simply add the contributions numerically. We can use smaller and smaller chunks of the continuous distribution to get better approximations.</p>
+<p>$$\mathbf{E} \approx \sum_i \dfrac{\rho(\mathbf{r}_i)}{4\pi\epsilon_0} \dfrac{\mathbf{r} - \mathbf{r}_i}{\left|\mathbf{r} - \mathbf{r}<em>i\right|^3} \Delta V_i  = \sum_i \mathbf{E</em>{pt}}_i $$</p>
+<p>where $\mathbf{E_{pt}}_i$ is electric field of the ith point charge with charge $\rho(\mathbf{r}_i)\Delta V_i = q_i$. That is effectively what our 2D electric field visualization code does. It is a numerical integrator that uses superposition to find the electric field.</p>
+<p><strong>✅ Do this</strong></p>
+<ul>
+<li>Abstract our code to 3D. This will be a usueful tool for you to use in the future.</li>
+<li>Create known 3D distributions of charges and demonstrate you can view the field in 3D.
+<ul>
+<li>Note the visualizations will have to change more than the code to create the charges and compute their fields.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Your code here</span>
+</span></span></code></pre></div>
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/2---em-and-pdes/activity-superposition/">← 28 Sep 23 - Activity: Superposition of Fields</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/2---em-and-pdes/notes-static_fields/">26 Sept 23 - Notes: Static Fields →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

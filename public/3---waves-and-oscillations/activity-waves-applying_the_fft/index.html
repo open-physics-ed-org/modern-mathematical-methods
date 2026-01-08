@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9 Nov 23 - Activity: Applying The Fast Fourier Transform | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>9 Nov 23 - Activity: Applying The Fast Fourier Transform</h1>
+        
+    </header>
+
+    <p>We were able to find the complex expansion coefficients for a signal using a Fourier series. However, this method is only applicable to periodic signals. Here we will introduce the Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT) which can be used to find the complex expansion coefficients for any signal. The DFT is the discrete analog to our expansion approach, the FFT improves the algorithmic efficiency of the DFT, which we won&rsquo;t describe.</p>
+<p>Let&rsquo;s remind ourselves of the Fourier series expansion for a periodic signal $x(t)$ with some period $T_0$.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span></code></pre></div><h2 id="a-sinusoidal-signal-with-a-dc-offset">A sinusoidal signal with a DC offset</h2>
+<p>In this example we will use a sinusoidal signal with a DC offset. The signal is defined as:</p>
+<p>$$V(t) = A_0 \sin(2\pi f_0 t) + A_1 \sin(2\pi f_1 t) + A_2 \sin(2\pi f_2 t) + C$$</p>
+<p>We create the signal a graph it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">summed_signal</span>(t, A, f, C<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Creates a signal with multiple frequencies.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> A[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> f[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span>t) <span style="color:#f92672">+</span> A[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> f[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span>t) <span style="color:#f92672">+</span> A[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> f[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">*</span>t) <span style="color:#f92672">+</span> C
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>T0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span> <span style="color:#75715e"># Signal period</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span> <span style="color:#75715e"># Number of samples</span>
+</span></span><span style="display:flex;"><span>dt <span style="color:#f92672">=</span> T0<span style="color:#f92672">/</span>N <span style="color:#75715e"># Time step</span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>T0, dt)  <span style="color:#75715e"># Time points</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>f <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>T0, <span style="color:#ae81ff">2</span><span style="color:#f92672">/</span>T0, <span style="color:#ae81ff">3</span><span style="color:#f92672">/</span>T0]) <span style="color:#75715e"># Frequencies</span>
+</span></span><span style="display:flex;"><span>A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">8</span>]) <span style="color:#75715e"># Amplitudes</span>
+</span></span><span style="display:flex;"><span>C <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>  <span style="color:#75715e"># DC Offset</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>summed <span style="color:#f92672">=</span> summed_signal(t, A, f, C)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t, summed)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axvline(x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axhline(y<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Time (s)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Amplitude&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
+</span></span></code></pre></div><p><img src="output_4_0.png" alt="png"></p>
+<h2 id="extracting-the-fourier-coefficients">Extracting the Fourier coefficients</h2>
+<p>Let&rsquo;s extract the Fourier coefficients. We defined the base peridicity $T_0$ in the code above. If it was not changed it was 0.5 seconds. We will use this to define the base frequency of the signal $f_0 = 1/T_0 = 1/0.5 = 2$ Hz. We have two more parts of the signal from frequencies $f_1 = 4$ Hz and $f_2 = 6$ Hz. We will use the Fourier series expansion to find the complex expansion coefficients $c_n$.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compute_cn</span>(t_, f, n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Computes the Fourier coefficient c_n for a given time array.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Assumes that the time array is evenly spaced. f is the signal 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and must have the same length as t.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    dt <span style="color:#f92672">=</span> t_[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> t_[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>T0 <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sum(f <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>exp(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>j <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> n <span style="color:#f92672">*</span> t_<span style="color:#f92672">/</span>T0)) <span style="color:#f92672">*</span> dt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compute_power_spectrum</span>(t_, f, N):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Computes the power spectrum for a given time array and signal.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns the coefficients from -N,N.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    cn <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> N <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, dtype<span style="color:#f92672">=</span>complex)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> range(<span style="color:#f92672">-</span>N , N <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        cn[n <span style="color:#f92672">+</span> N] <span style="color:#f92672">=</span> compute_cn(t_, f, n)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cn
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>t_ <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, T0, dt)  <span style="color:#75715e"># Time points for a single period</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span> <span style="color:#75715e"># Number of coefficients (2N+1)</span>
+</span></span><span style="display:flex;"><span>freqs <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#f92672">-</span>N, N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> T0 <span style="color:#75715e"># Frequencies</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cn <span style="color:#f92672">=</span> compute_power_spectrum(t_, summed[:len(t_)], N) <span style="color:#75715e"># Compute the coefficients</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(freqs, np<span style="color:#f92672">.</span>abs(cn), <span style="color:#e6db74">&#39;--rx&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Frequency (Hz)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Amplitude&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axhline(y<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axvline(x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_8_0.png" alt="png"></p>
+<h3 id="where-are-the-coefficients">Where are the coefficients?</h3>
+<p>We get both positive and negative frequencies. But notice that if we add the amplitudes of the matched positive and negative amplitudes, we get the value of the coefficients in our constructed signal. This is because the signal is real, so the coefficients are conjugate symmetric. We can use this to plot the coefficients in a more intuitive way. Notice the DC part of the signal is NOT conjugate symmetric, so we don&rsquo;t add it to the negative frequency part.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>insert(freqs[N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>:], <span style="color:#ae81ff">0</span>, freqs[N])
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>insert(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>abs(cn[N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>:]), <span style="color:#ae81ff">0</span>, np<span style="color:#f92672">.</span>abs(cn[N]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x, y, <span style="color:#e6db74">&#39;--rx&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Fourier Components&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Frequency (Hz)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Amplitude&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axhline(y<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axvline(x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xticks(np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_10_0.png" alt="png"></p>
+<h2 id="the-discrete-fourier-transform">The Discrete Fourier Transform</h2>
+<p>One of the issues about the decomposition we have done is that it assumes the signal is periodic. In practice, we often have signals that are not periodic. For example, consider the signal below, which is a wave packet that is not periodic. This signal is still of interest to us and can often contain useful physics. But the techniques we have used so far will not work for this signal.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Define the wave packet parameters</span>
+</span></span><span style="display:flex;"><span>k0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>  <span style="color:#75715e"># central wavenumber</span>
+</span></span><span style="display:flex;"><span>x0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># initial position</span>
+</span></span><span style="display:flex;"><span>spread <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># spread of the packet</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a space vector</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define the wave packet function</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wave_packet</span>(x, k0, x0, spread):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>exp(<span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> ((x <span style="color:#f92672">-</span> x0) <span style="color:#f92672">/</span> spread) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>cos(k0 <span style="color:#f92672">*</span> x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate the wave packet</span>
+</span></span><span style="display:flex;"><span>psi <span style="color:#f92672">=</span> wave_packet(x, k0, x0, spread)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plot the wave packet</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x, psi)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Wave Packet&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Position&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Amplitude&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid(<span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
+</span></span></code></pre></div><p><img src="output_12_0.png" alt="png"></p>
+<h3 id="enter-the-discrete-fourier-transform">Enter the Discrete Fourier Transform</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform">Discrete Fourier Transform (DFT)</a> is a way to decompose a signal into a sum of sinusoids, but it does not require the signal to be periodic. You can think of it as a discretization of the processes we developed earlier. The expansion of the signal is still as it was before, but we understand it represents a finite number of samples of the signal:</p>
+<p>$$V(t) = \sum_{n=0}^{N-1} c_n e^{i n \omega t}.$$</p>
+<p>However, we now understand that the signal is only defined at discrete times $t_n = n \Delta t$ where $\Delta t$ is the time between samples. We can then write the Fourier coefficients as:</p>
+<p>$$c_n \approx \frac{1}{T_0} \sum_{k=0}^{N-1} V(t_k)e^{-i n \omega t_k} \Delta t$$</p>
+<p>where $V(t_k)$ is the value of the signal at time $t_k$ and $T_0 = N \Delta t$ is the total time of the signal.</p>
+<h3 id="assumptions">Assumptions</h3>
+<p>In doing this, we are not creating a tool that will always work. We note a few important assumptions and caveats:</p>
+<ol>
+<li>
+<p><strong>Periodicity</strong>: The DFT assumes that the input signal is periodic and that the period is exactly the length of the sample window. This means that the finite sequence of data points provided to the DFT is one period of a periodic signal that repeats indefinitely.</p>
+</li>
+<li>
+<p><strong>Discrete Samples</strong>: The signal being transformed is assumed to be sampled at discrete intervals. The DFT operates on these discrete samples and does not account for any data between the samples.</p>
+</li>
+<li>
+<p><strong>Finite Duration</strong>: The DFT is designed to handle signals of finite duration. The signal is assumed to have a finite number of samples, which is the number of points in the DFT.</p>
+</li>
+<li>
+<p><strong>Equally-Spaced Samples</strong>: The samples are assumed to be evenly spaced in time (or space, depending on the context of the signal). This uniform spacing is critical because non-uniformly spaced samples would require a different transform, such as the Non-uniform Discrete Fourier Transform (NDFT).</p>
+</li>
+</ol>
+<h2 id="the-fast-fourier-transform">The Fast Fourier Transform</h2>
+<p>While we can use the DFT directly, the FFT is more efficient and has become the standard way to perform these analyses. The code to have <code>numpy.fft</code> perform the FFT is pretty simple. But there&rsquo;s many things to understand about the FFT and a variety of ways to produce spurious and incoherent results. Let&rsquo;s use the simple signal we have above to make go through an analysis.</p>
+<h3 id="the-fft-in-numpyfft">The FFT in <code>numpy.fft</code></h3>
+<p>We start by importing the libraries. Then we need to:</p>
+<ol>
+<li>Define the time array</li>
+<li>Define the signal</li>
+<li>Perform the FFT using <code>numpy.fft.fft</code> (<em>We imported <code>numpy.fft</code> below, so you can call <code>fft</code> directly.</em>)</li>
+<li>Plot the coefficients</li>
+<li>Plot the power spectrum</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> numpy.fft <span style="color:#f92672">import</span> fft, fftfreq
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t, summed)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Summed Signal&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Time (s)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Amplitude&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_16_0.png" alt="png"></p>
+<h3 id="computing-and-plotting-fourier-coefficients">Computing and plotting Fourier Coefficients</h3>
+<p>We now use <code>fft</code> to calculate the Fourier transform of the signal and <code>fftfreq</code> to calculate the frequencies associated with the transform. This is a standard way to do this analysis, but the most common mistakes involve the frequencies. Because it is a real signal, we don&rsquo;t worry about the negative frequencies, they are duplicate information. The amplitudes of the non DC frequencies are doubled like before to illustrate the Fourier coefficients.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>t_ <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, T0, dt)  <span style="color:#75715e"># Time points for a single period</span>
+</span></span><span style="display:flex;"><span>one_cycle <span style="color:#f92672">=</span> summed[:len(t_)] <span style="color:#75715e"># One cycle of the summed signal</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> int(T0<span style="color:#f92672">/</span>dt<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>) <span style="color:#75715e"># Maximum number of coefficients</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fft_summed <span style="color:#f92672">=</span> fft(one_cycle)
+</span></span><span style="display:flex;"><span>freqs_array <span style="color:#f92672">=</span> fftfreq(len(one_cycle), dt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> freqs_array[:N]
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>insert(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>abs(fft_summed[<span style="color:#ae81ff">1</span>:N]), <span style="color:#ae81ff">0</span>, np<span style="color:#f92672">.</span>abs(fft_summed[<span style="color:#ae81ff">0</span>]))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x, y, <span style="color:#e6db74">&#39;--rx&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Signal FFT (numpy.fft)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Frequency (Hz)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Amplitude&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axhline(y<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axvline(x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlim(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xticks(np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_19_0.png" alt="png"></p>
+<p>Notice the FFT looks precisely the same as before. But the Amplitudes are scaled differently. The total amplitude is not the same, but the relative values are still meaningful. If the maximum amplitude is scaled to the amplitude we had before, then the signal would look the same. However, it&rsquo;s typical to instead plot these scaled in some way. The most common way is to either scale them by the maximum amplitude or the sum of all the amplitudes. Each have their own purpose and meaning. Below we plot them both for comparison.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">121</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x, y<span style="color:#f92672">/</span>np<span style="color:#f92672">.</span>max(y), <span style="color:#e6db74">&#39;o&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlim(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xticks(np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Signal FFT (normed by max)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Frequency (Hz)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Amplitude (Arb. Units)&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axhline(y<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axvline(x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">122</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x, np<span style="color:#f92672">.</span>abs(y)<span style="color:#f92672">/</span>np<span style="color:#f92672">.</span>sum(y), <span style="color:#e6db74">&#39;o&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlim(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xticks(np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Signal FFT (normed by total)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Frequency (Hz)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Amplitude (Arb. Units)&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axhline(y<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axvline(x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>, lw<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_21_0.png" alt="png"></p>
+<h3 id="investigating-the-fft">Investigating the FFT</h3>
+<p>Now that you have developed some code and some conceptual understanding of the FFT process, let&rsquo;s investigate some of the more nuanced aspects.</p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Complete the power spectrum analysis for the following signals that you construct:
+<ul>
+<li>Your signals have two frequencies that are close together (competing frequencies)</li>
+<li>Your signal has frequencies that are not integer multiples of the sampling rate (aliasing)</li>
+</ul>
+</li>
+<li>Use <code>fft</code> to do these analyses and plot the spectra.</li>
+<li>For the first case, what seems to be needed to resolve the two frequencies?</li>
+<li>For the second case, what happens when the frequency is not an integer multiple of the sampling rate? What does this mean when signals have two frequencies that are not integer multiples of each other or the sampling rate?</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
+</span></span></code></pre></div>
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/3---waves-and-oscillations/notes-using-ffts/">← 13 Nov 23 - Notes: Applications of FFTs</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/3---waves-and-oscillations/activity-waves-introduction_to_fft/">7 Nov 23 - Activity: The Fast Fourier Transform →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

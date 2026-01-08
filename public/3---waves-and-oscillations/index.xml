@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>3 - Waves and Oscillations on PHY 415 Fall 2023</title>
+    <link>//localhost:1313/3---waves-and-oscillations/</link>
+    <description>Recent content in 3 - Waves and Oscillations on PHY 415 Fall 2023</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 08 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/3---waves-and-oscillations/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>16 Oct 23 - Notes: Coupled Oscillations</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-coupled_oscillations/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-coupled_oscillations/</guid>
+      <description>&lt;p&gt;Single particle dynamics like the SHO and other singular point particle motion (e.g., basic kinematics, charges in fields modeled without interactions) are helpful in building our intuition of how physics &lt;em&gt;should&lt;/em&gt; work. We can track the position, velocity, and other dynamical quantities for these singular particles. We can determine how the act on and interact with their surroundings. We can find points of stasis (stable and unstable points); we can find different families of solutions (orbits vs runaway behavior); we can predict the motion of those particles with numerical routines.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>16 Oct 23 - Notes: Introduction to Waves</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-waves_intro/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-waves_intro/</guid>
+      <description>&lt;p&gt;Coupled oscillations are quite common in nature; collections of objects and larger systems exhibit oscillatory behavior frequently. At times, the number of objects in a system that are oscillating are so many that we begin to zoom out and look at the behavior not of individual elements but of larger collections. This is moving to a continuum view of this oscillatory behavior. Consider going from 1 SHO, to two coupled SHO, to N coupled SHOs where N is very large, and, finally to a rope. It seems like there is a connection between a rope and a set of SHOs. Indeed, we can develop the wave equation for a rope using this kind of modeling. That is a well-known result, so we will instead use it. We start with motivating ourselves with how important waves are to our understanding of nature.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>17 Oct 23 - Activity: Normal Modes</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-coupledosc-normalmodes/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-coupledosc-normalmodes/</guid>
+      <description>&lt;p&gt;As we begin to work with multi-particle systems, we begin to open the number of degrees of freedom of the system. We increase the complexity of it and the challenge of modeling it. We will increasingly need tools that help us take less tractable issues and make them palatable. One such tool that forms the basis of many others is &lt;strong&gt;Normal Modes&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Normal modes are ways of breaking up our understanding of a system into discrete (potentially infinite and hopefully vanishingly small) pieces. This lets us get at the big picture of the system and characterize how much we are neglecting. The concept of normal modes underlies much of the analysis done in quantum mechanics, field theory, fluid mechanics, and signal processing. In fact, numerical routines often make use of forms of these modes to do economize calculations &amp;ndash; &lt;em&gt;especially when we move beyond a few hundred bodies in the system&lt;/em&gt;. This stuff is part and parcel of most research in physics. For example, how we understand the &lt;a href=&#34;https://en.wikipedia.org/wiki/Cosmic_background_radiation&#34;&gt;Cosmic Background Radiation&lt;/a&gt; relies on a &lt;a href=&#34;https://www.quantamagazine.org/how-ancient-light-reveals-the-universes-contents-20200128/&#34;&gt;normal mode like analysis&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-coupledosc-numericalnormalmodes/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-coupledosc-numericalnormalmodes/</guid>
+      <description>&lt;p&gt;Now that we have discussed and built some facility with Lagrangian dynamics, let&amp;rsquo;s see how using it makes our study of normal modes much simpler than Newtonian mechanics. We will couple this analysis to solving an eigenvalue problem by guessing the form of the solutions. This technique is very common in theoretical physics with different guesses for the solution forms giving rise to different eigenvalue problems (e.g., &lt;a href=&#34;https://en.wikipedia.org/wiki/Bessel_function&#34;&gt;Bessel functions for 2D surface problems&lt;/a&gt; or &lt;a href=&#34;https://en.wikipedia.org/wiki/Hermite_polynomials&#34;&gt;Hermite polynomials for the Quantum Harmonic Oscillator&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>25 Oct 23 - Notes: Solutions to The Wave Equation</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-solve_the_wave_eq/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-solve_the_wave_eq/</guid>
+      <description>&lt;p&gt;The wave equation is a partial differential equation that describes how waves propagate (they are fundamentally a disturbance of a medium) in space and time. The general wave equations is:&lt;/p&gt;&#xA;&lt;p&gt;$$\nabla^2 u(\mathbf{r},t) = \frac{1}{v^2} \frac{\partial^2 u(\mathbf{r},t)}{\partial t^2}$$&lt;/p&gt;&#xA;&lt;p&gt;where $u(\mathbf{r},t)$ is the displacement of the wave at position $\mathbf{r}$ and time $t$ and $v$ is the speed of the wave in the medium. Now we typically don&amp;rsquo;t solve this problem in general, like most PDEs, we need a context in which to work on the problem. Moreover, that wave equation is 4 dimensional and we really are going to have a hard time with intuition if we focus on that. Let&amp;rsquo;s instead consider the 1D wave equations:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>26 Oct 2023 - Activity: 1-Dimensional Travelling Waves</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-waves-1d/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-1d/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Wave_equation&#34;&gt;Wave equations&lt;/a&gt; are common to all branches of physics. In fact, many modern research topics include some investigations that use wave theory. So useful is the concept of a wave, that we adapted it for quantum mechanics in the form of the &lt;a href=&#34;https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation&#34;&gt;Schrodinger Equation&lt;/a&gt; and the position representation of the wavefunction ($\psi(x,t)$). While wildly useful and broadly applicable, we need to build up some intuition and use cases for waves. We will start with the 1D wave equation:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>30 Oct 2023 - Notes: Deconstructing Waves</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-waves-fouriers_trick/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-waves-fouriers_trick/</guid>
+      <description>&lt;p&gt;While we observe waves in many places, it&amp;rsquo;s the case that we don&amp;rsquo;t often have the luxury of constructing them as we want. In fact, much of the science we do relies on measurements of voltage or current to represent the dynamics of the system.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Want to measure distance? Interferometry gives you a voltage to calibrate.&lt;/li&gt;&#xA;&lt;li&gt;Want to measure material surface properties? Voltage jumps across probes give you proxies&lt;/li&gt;&#xA;&lt;li&gt;Viscosity? Stick the stuff in a rheometer, squeeze it, and measure voltage changes.&lt;/li&gt;&#xA;&lt;li&gt;AYO exoplanets? Light curves are really just measures of voltage across a CCD.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The point is that you will almost always be dealing with signals that are proxies for the actual thing you care about. So let&amp;rsquo;s construct some and deconstruct them.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>31 Oct 23 - Activity: Signal Deconstruction</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-waves-signals/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-signals/</guid>
+      <description>&lt;p&gt;We have started to show that we can take waves of any periodicity and add them together to get new signals. But more common is for us to receive a signal and want to know what waves are in it. This is the process of signal deconstruction. We will be using $V(t)$ to describe this signal because pretty much everything is a voltage. But now we introduce the toolkit that can help us do this.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2 Nov 23 - Activity: Automated Signal Deconstruction &amp; Reconstruction</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-waves-seriesexpand/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-seriesexpand/</guid>
+      <description>&lt;p&gt;We found that it was possible to use the Fourier transform to decompose the signal into its constituent frequencies. Later we will use this idea to build up the &lt;a href=&#34;https://en.wikipedia.org/wiki/Fast_Fourier_transform&#34;&gt;Fast Fourier Transform&lt;/a&gt; (FFT) algorithm. For now, we will write everything out in full to mirror our analytical work.&lt;/p&gt;&#xA;&lt;p&gt;We will start with the same signal as before, but then you will work with other signals to achieve a particular signal decomposition.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>6 Oct 23 - Notes: Fast Fourier Transform</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-fft/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-fft/</guid>
+      <description>&lt;p&gt;It might not have been obvious to you, but our work so far has expected that our $V(t)$ be a continuous function of time, and that we can sample it any time we want. In reality, you are limited to the response of your equipment, which leads to a phenomenon knows as the &lt;a href=&#34;https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem&#34;&gt;Nyquist-Shannon sampling theorem&lt;/a&gt;. This theorem states that if you want to study a signal with a frequency $f$, you need to sample it at least $2f$ times per second. This is known as the &lt;a href=&#34;https://en.wikipedia.org/wiki/Nyquist_frequency&#34;&gt;Nyquist frequency&lt;/a&gt;. If you don&amp;rsquo;t sample at least this often, you will get aliasing, which is when a signal at a higher frequency is indistinguishable from a signal at a lower frequency. As you can tell, there&amp;rsquo;s a lot of issues with sampling when it comes to studying signals.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>7 Nov 23 - Activity: The Fast Fourier Transform</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-waves-introduction_to_fft/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-introduction_to_fft/</guid>
+      <description>&lt;p&gt;We have shown how to decompose a signal using a Fourier series decomposition:&lt;/p&gt;&#xA;&lt;p&gt;$$V(t) = \sum_{n=-\infty}^{\infty} c_n e^{i n \omega t}$$&lt;/p&gt;&#xA;&lt;p&gt;where we find the Fourier coefficients $c_n$ by integrating over the period of the signal (performing a Fourier transform of the signal):&lt;/p&gt;&#xA;&lt;p&gt;$$c_n = \frac{1}{T} \int_0^T V(t) e^{-i n \omega t} dt$$&lt;/p&gt;&#xA;&lt;h2 id=&#34;extracting-the-fourier-coefficients&#34;&gt;Extracting the Fourier coefficients&lt;/h2&gt;&#xA;&lt;p&gt;We wrote some code earlier to perform the Fourier transform of a signal and obtain the coefficients. We will see how to do that using the &lt;code&gt;scipy&lt;/code&gt; library later, but let&amp;rsquo;s produce these results first without it. We are going to prepare several test signals, but you will need to make more.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>9 Nov 23 - Activity: Applying The Fast Fourier Transform</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-waves-applying_the_fft/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-applying_the_fft/</guid>
+      <description>&lt;p&gt;We were able to find the complex expansion coefficients for a signal using a Fourier series. However, this method is only applicable to periodic signals. Here we will introduce the Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT) which can be used to find the complex expansion coefficients for any signal. The DFT is the discrete analog to our expansion approach, the FFT improves the algorithmic efficiency of the DFT, which we won&amp;rsquo;t describe.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>13 Nov 23 - Notes: Applications of FFTs</title>
+      <link>//localhost:1313/3---waves-and-oscillations/notes-using-ffts/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/notes-using-ffts/</guid>
+      <description>&lt;p&gt;As you have learned, we can use the Fourier Transform to decompose a signal into its frequency components. This is useful for many applications, including filtering, noise removal, and compression. All of these rely on some reconstruction of the original signal from the frequency components.&lt;/p&gt;&#xA;&lt;p&gt;While this might not seem like a big deal, it is quite powerful, if we realize that we can also manipulate the frequency components before reconstructing the signal. This is the basis of many signal processing techniques. We will use this reading to highlight two common examples of data in physics where FFTs are used: time series and images. Let&amp;rsquo;s start by importing our libraries.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>14 &amp; 16 Nov 23 - Using the FFT with Real Data</title>
+      <link>//localhost:1313/3---waves-and-oscillations/activity-fft-applications/</link>
+      <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/3---waves-and-oscillations/activity-fft-applications/</guid>
+      <description>&lt;p&gt;Y&amp;rsquo;all have learned the main process for using an FFT on a 1D signal, so let&amp;rsquo;s use it in the context of some real world data. We&amp;rsquo;ll give you different kind of data that you can choose to work with: Transit light curve data and audio signals. Take a look at both datasets and start working on whichever one you&amp;rsquo;d like first.&lt;/p&gt;&#xA;&lt;h2 id=&#34;transit-data&#34;&gt;Transit Data&lt;/h2&gt;&#xA;&lt;p&gt;You work in a lab that is observing light curves to determine if there are transiting objects near a star and, if so, what is their period. Using the brightness of the star itself, we can determine it&amp;rsquo;s mass and then it&amp;rsquo;s a quick analysis to get the mass of the transiting objects (Thanks, Newton!).&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

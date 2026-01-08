@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worked Problem Assignment 1 | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>Worked Problem Assignment 1</h1>
+        
+    </header>
+
+    <p><strong>Due 15 Sep 23</strong></p>
+<p>In this first few class periods, we have discussed formulating mechanics using Lagrangian Dynamics to produce equations of motion and how we can use numerical integration to solve for trajectories.</p>
+<p><a href="/0---intro-and-syllabus/8_worked_problems/"><strong>Grading Rubric</strong></a></p>
+<p>Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.</p>
+<h2 id="places-to-find-candidate-problems">Places to find candidate problems:</h2>
+<ul>
+<li>Classical mechanics textbooks; look at the problems in the Lagrangian chapters</li>
+<li>Differential equations textbooks; look at ODEs that represent real systems</li>
+<li>Wikipedia has lists of named differential equations and problems
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/List_of_named_differential_equations">List of named Diffy Qs</a></li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_nonlinear_ordinary_differential_equations">List of nonlinear differential equations</a></li>
+<li>Ask on Slack</li>
+</ul>
+</li>
+</ul>
+<h2 id="developing-equations-of-motion">Developing Equations of Motion</h2>
+<p>Remember that the process we have developed is:</p>
+<ol>
+<li>Identify problem and motivate assumptions</li>
+<li>Develop a Lagrangian using relevant general coordinates</li>
+<li>Use the Euler-Lagrange equations to produce equations of motion</li>
+</ol>
+<p>This &ldquo;pipeline&rdquo; is really how we formulate a mechanics problem into something we can do mathematics with. In this assignment, you will develop your own Lagrangian for a system and solve for the equations of motion.</p>
+<h2 id="investigating-the-system">Investigating the System</h2>
+<p>After we produce our equations of motion, we used both approximation techniques and numerical techniques to find solutions to the equations of motion. Here we developed &ldquo;trajectories&rdquo; for the system, that is, how the system evolves in time. In the approximate cases, we often sought frequencies of small oscillations to say something about how the system behaves near stable equilibria. In the numerical cases, we could choose particular initial conditions and see how they evolved in time.</p>
+<p>In this assignment, you will take your equations of motion and solve them numerically to produce trajectories. Approximate solutions, where you look into equilibria and frequencies of oscillation, should be included as well.</p>
+<h2 id="assignment">Assignment</h2>
+<ol>
+<li>Choose a mechanical (or dynamical) system with two degrees of freedom (e.g., $x$ and $\dot{x}$). This could be a system you have already worked with, or something new.</li>
+<li>Develop a Lagrangian for the system. You may need to make some assumptions to simplify the problem. You may also need to introduce some new variables to make the problem work. Make sure that is explained.</li>
+<li>Use the Euler-Lagrange equations to produce the equations of motion for the system.</li>
+<li>Solve the equations of motion numerically to produce trajectories for the system. You should include at least two different initial conditions.</li>
+<li>Use the approximate techniques we have discussed to find frequencies of oscillation and stable equilibria. Compare these to the numerical results.</li>
+</ol>
+<h2 id="looking-ahead-earn-extra-credit">Looking ahead (earn extra credit)</h2>
+<p>If you are looking into these systems and finding them interesting here&rsquo;s two things you can do to earn extra credit that we will discuss later in the course.</p>
+<ol>
+<li>Develop a phase space diagram for your system to show what families of solutions exist.</li>
+<li>Investigate the stability of the equilibria that you find.</li>
+</ol>
+<h2 id="submitting-your-work">Submitting your work</h2>
+<p>You will upload your work to D2L. It should be a single PDF of your work. If you also write code, please submit the associated files as well. If you do all of this in a Jupyter notebook, please export the notebook as a PDF and submit the notebook and PDF file. If you have any questions, please ask. We want you to enjoy working on these problems.</p>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/assignments/worked-problem-2/">← Worked Problem Assignment 2</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/assignments/updated_rubric/">Updated Rubric for Worked Problems and Projects →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

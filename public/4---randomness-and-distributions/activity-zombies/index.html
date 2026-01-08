@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Dec 23 - Activity: Modeling | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>7 Dec 23 - Activity: Modeling</h1>
+        
+    </header>
+
+    <p>While this course has focused on physics and physical systems, the same techniques and approaches that you have developed, can be used to investigate systems in other fields. In this activity, we will demonstrate an initial model, and then ask you to complicate it with the ideas you have developed. Consider the critical issue of a potential <strong>zombie apocalypse</strong>.</p>
+<p>While this might seem a little silly, the models and dynamics of a zombie apocalypse can be adapted from the models of disease spread. In fact, the <a href="https://www.usatoday.com/story/news/nation/2021/03/05/zombie-apocalypse-cdc-useful-advice-any-emergency-pandemic/6920614002/">CDC had a page dedicated</a> to this topic. For those who might be really interested, the behavior fo zombie hoards can be modeled like flocking birds or schools of fish.</p>
+<h2 id="what-are-we-doing">What are we doing?</h2>
+<p>Saving the world, obviously.</p>
+<p><a href="https://inv.tux.pizza/watch?v=MQ8ZKw7YIfQ"><img src="https://markdown-videos-api.jorgenkh.no/youtube/MQ8ZKw7YIfQ?width=720&amp;height=405" alt="Night of the Living Dead"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=MQ8ZKw7YIfQ">https://inv.tux.pizza/watch?v=MQ8ZKw7YIfQ</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=MQ8ZKw7YIfQ">https://youtube.com/watch?v=MQ8ZKw7YIfQ</a></li>
+</ul>
+<h2 id="where-do-we-start-compartmental-models">Where do we start? Compartmental models</h2>
+<p>The modeling of epidemics follows from a few simple considerations:</p>
+<ul>
+<li>the population under consideration ca be sufficiently compartmentalized into distinct groups, and</li>
+<li>there is a rate (fixed or variable) at which individuals can move between compartments.</li>
+</ul>
+<p>The <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology">compartmental model</a> is a simple way to model the spread of a disease and where we will start.</p>
+<h3 id="the-sis-model">The SIS model</h3>
+<p>The Susceptible-Infected-Susceptible (SIS) model describes an epidemic in which healthy individuals (Susceptibles) can become infected with the disease in question (Infected). The infected individuals can be cured but retain no natural immunity to the disease (i.e., become susceptible again). The figure below illustrates the compartments and flux of individuals in the SIS model. Such models are suitable for bacterial infections.</p>
+<p><img src="/images/content/assets/images/sis.png" alt="The SIS model"></p>
+<p>The dynamics are given by,</p>
+<p>$$\dfrac{dS}{dt} = -\beta S I + \gamma I$$
+$$\dfrac{dI}{dt} = \beta S I - \gamma I$$</p>
+<p>The rate at which susceptibles are infected is related to the contact rate ($\beta$). The recovery rate ($\gamma$) describes how quickly individuals are cured. The rate equations that govern this model are two ordinary non-linear differential equations. Here we have neglected the birth and death rates of the populations by making the approximation the epidemic occurs very quickly. If we assume there&rsquo;s a total number of people $N$, then we can write these equations as:</p>
+<p>$$\dfrac{dS}{dt} = -\beta S I + \gamma (N - S)$$
+$$I(t) = N - S(t)$$</p>
+<p>For given values of $\beta$ and $\gamma$, we can solve these equations numerically.</p>
+<h3 id="the-sir-model">The SIR model</h3>
+<p>The Susceptible-Infected-Recovered (SIR) model describes an epidemic in which healthy individuals (Susceptibles) can become infected with the disease in question (Infected). The infected individuals can be cured and retain a natural immunity to the disease (Recovered). The figure below illustrates the compartments and flux of individuals in the SIR model. Such models are suitable for viral infections. We can modify this model for the zombies.</p>
+<p><img src="/images/content/assets/images/sir.png" alt="The SIR model"></p>
+<p>The transfer rates can be defined for the SIR model as was for the SIS model. The rate equations that govern this model are three ordinary non-linear differential equations. Again, we have neglected the birth and death rates of the populations by making the approximation the epidemic occurs very quickly.</p>
+<p>$$\dfrac{dS}{dt} = -\beta S I$$
+$$\dfrac{dI}{dt} = \beta S I - \gamma I$$
+$$\dfrac{dR}{dt} = \gamma I$$</p>
+<p>Again, for given values of $\beta$ and $\gamma$, we can solve these equations numerically.</p>
+<h3 id="the-szr-model">The SZR model</h3>
+<p>This SZR model treats the population as compartmentalized into the 3 groups: Susceptible (S), Zombie (Z), and Removed (R). Movement between these groups is illustrated below.</p>
+<p><img src="/images/content/assets/images/szr.png" alt="The SZR model"></p>
+<p>Susceptibles can become zombies through an encounter with a zombie. Zombies can move to the removed compartment by being destroyed in classic manners (e.g., Dawn of the Dead). Susceptibles can move to the removed compartment through death by a non-zombie encounter. Finally, removed individuals can become zombies through typical resurrection techniques (e.g., Live and Let Die).</p>
+<p>The deterministic model includes transfer rates we have seen before, but we include the rates of transfer from susceptible to removed ($\delta$) and removed to zombie ($\xi$).</p>
+<p>$$\dfrac{dS}{dt} = - \beta S Z - \delta S$$
+$$\dfrac{dZ}{dt} = \beta S Z + \xi R - \gamma S Z$$
+$$\dfrac{dR}{dt} = \delta S +\gamma SZ - \xi R$$</p>
+<p>For given values of values of $\beta$, $\gamma$, $\delta$, and $\xi$, we can solve these equations numerically.</p>
+<h3 id="tasks-for-today">Tasks for today</h3>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Work with your group to model the SIS and SIR systems. Choose values or non-dimensionalize the equations to reduce the number of parameters.</li>
+<li>Consider the many tools we have used to investigate ODEs. What more information can you extract from these models? What are the limitations of these models?</li>
+<li>Do the same for the SZR model. What are the limitations of this model? What are the advantages of this model?</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
+</span></span></code></pre></div><h3 id="challenges">Challenges</h3>
+<p><strong>✅ Do this</strong></p>
+<ol start="4">
+<li><strong>Challenge</strong>: Build an SZQR model where the CDC quarantines some number of susecptibles and zombies (at different rates). How does this change the dynamics of the system?</li>
+<li><strong>Challenge</strong>: Introduce stochasticity into the model. What happened if instead there were a probability of infection or death? How does this change the dynamics of the system? If you are interested in this, look at <a href="../assets/papers/z-epidemic.pdf">this paper</a>.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"></code></pre></div>
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/4---randomness-and-distributions/notes-mcmc/">4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

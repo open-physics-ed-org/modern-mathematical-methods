@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 - E&amp;M and PDEs | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <h1>2 - E&amp;M and PDEs</h1>
+    <p>This section contains course materials for 2 - E&amp;M and PDEs.</p>
+
+
+    
+    <section style="margin-top: 30px;">
+        <h2>Pages in this section:</h2>
+        <ul>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/notes-em_intro/"><strong>26 Sept 23 - Notes: Maxwell&#39;s Equations</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/notes-static_fields/"><strong>26 Sept 23 - Notes: Static Fields</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-efields/"><strong>26 Sep 23 - Activity: Electrostatic Fields</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-superposition/"><strong>28 Sep 23 - Activity: Superposition of Fields</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/notes-electric_potential/"><strong>3 Oct 23 - Notes: Electric Potential - a scalar field</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-sep_var/"><strong>3 Oct 23 - Activity: PDEs and Separation of Variables</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-sep_var_spherical/"><strong>5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/notes-relaxation/"><strong>9 Oct 23 - Notes: Method of Relaxation</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-sep_var_spherical_examples/"><strong>10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-relaxation_2d/"><strong>12 Oct 23 - Activity: Method of Relaxation</strong></a>
+                
+            </li>
+            
+        </ul>
+    </section>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

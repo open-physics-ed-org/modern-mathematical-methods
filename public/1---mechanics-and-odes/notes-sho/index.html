@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>29 Aug 23 - Notes: Simple Harmonic Oscillator | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>29 Aug 23 - Notes: Simple Harmonic Oscillator</h1>
+        
+    </header>
+
+    <h2 id="a-linear-restoring-force">A Linear Restoring Force</h2>
+<p>The SHO model, as we will see, is the root of many more sophisticated models in physics &ndash; across many subdisciplines. There&rsquo;s a reason for this. The SHO is a simple model that captures the essence of many physical systems. It is a mathematical model for a &ldquo;linear restoring force&rdquo;. Such a force gives rise to local stability, that is, a tendency for the system to return to a stable equilibrium position. The richness of this statement is not entirely clear, but we will see that it is a very powerful idea, that is related to to energy minimization, and the idea of a potential energy function.</p>
+<p>A linear restoring force is simply one in which the size of the force is in direct proportion to some displacement and is directed opposite to the displacement. For example, a coiled spring exerts (rooughly) a linear restoring force. If you pull on a spring, the spring exerts a force on your hand that is proportional to the distance you pull the spring. It is directed opposite to the direction you pull.</p>
+<p>In 1D, we can write this as:</p>
+<p>$$F_{\rm spring} = -kx$$</p>
+<p>where $k$ is the spring constant. The negative sign indicates that the force is directed opposite to the displacement, and $x$ is the displacement from the equilibrium position. As we are going to consider more general motion, we can abstract this concept of a linear restoring force to three dimensions, and write:</p>
+<p>$$\vec{F}_{\rm spring} = -k \Delta \vec{x}$$</p>
+<p>where $\Delta \vec{x}$ is the displacement vector from the equilibrium position.</p>
+<h2 id="the-sho-mathematical-model">The SHO mathematical model</h2>
+<p>We have seen that the canonical one-dimensional harmonic oscillator is described with the following <strong>2nd order linear</strong> differential equation:</p>
+<p>$$m\ddot{s} = -k{s}$$</p>
+<p>where $s$ represents the distance from the oscillator&rsquo;s equilibrium position. It&rsquo;s important to note that this model for a linear restoring force gives rise to at <strong>second order</strong> differential equation. As you will see, there would be no ability for cycles or recurrent behavior without two dimensions (the two dimensions here are the position, $s$, and velocity of the oscillator, $\dot{s}$). It is also important that the differential equation is <strong>linear</strong>.</p>
+<h3 id="linearity-of-differential-equations">Linearity of differential equations</h3>
+<p>This is something that is easy to confuse because we use the term <strong>linear</strong> in different ways at different times. In many cases this prompts us to think of a line, so that we might think the only linear differential equations are ones where the variable of interest (in this case the position of the oscillator) appears only <em>linearly</em> in the equation.</p>
+<div class="admonition admonition-warning " role="note" aria-label="Warning"><p class="admonition-title">Warning</p><div class="admonition-content">
+    <p>So you might think that Nth order differential equations of the form:</p>
+<p>$$\dfrac{d^n x}{dt^n} = c;x$$</p>
+<p>are the only ones that are linear. <em>Note for the harmonic oscillator $n=2$; $c&lt;0$.</em></p>
+<p><strong>That is not the case and this is key.</strong></p>
+<p>The linearity refers to the fact that we can write the differential equation as a <strong>linear combination of the derivatives</strong>.</p>
+
+  </div>
+</div>
+
+<div class="admonition admonition-admonition note" role="note" aria-label="Admonition"><p class="admonition-title">Linear Differential Equations</p><div class="admonition-content">
+    <p>So an $N$th linear differential equation (e.g., for position and time) can have the general form:</p>
+<p>$$\sum_{i=0}^N a_i(t)\dfrac{d^ix}{dt} = f(t)$$</p>
+<p>where $\dfrac{d^ix}{dt}$ is the $i$th derivative of $x$ (e.g., $i=0$, $\dfrac{d^0x}{dt}=x$; $i=1$, $\dfrac{d^1x}{dt}=\dfrac{dx}{dt}$) The coefficients are allowed to depend explicitly on time (i.e., $a_i(t)$; you have probably seen <em>constant coefficients</em> in the past (where $\dfrac{da_i(t)}{dt}=0$, i.e., $a_i(t) =$ constant). In addition, as you can explore later, the system can be driven by a function that depends only on time (e.g., some forcing function, $f(t)$).</p>
+
+  </div>
+</div>
+
+<h3 id="why-does-linearity-matter">Why does linearity matter?</h3>
+<p>Because much of nature can be modeled with linear differential equations (or approximately so) and linear differential equations have really nice solution properties. *The solutions to linear differential equations are <strong>holonomic functions</strong>. This is just a fancy word for functions you know like polynomials, sine, cosine, exponentiale, and some special functions (e.g., Airy, Bessel, hypergeometric). But these solutions are really important because they are smooth as are their derivatives, so they have really nice properties.</p>
+<p>In many cases, we can lean on strong properties derived from linearity:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Cauchy%E2%80%93Kowalevski_theorem">Uniqueness</a>: If we find a solution to the differential equation and it satisfies the boundary/initial conditions, we are guaranteed that this is the only solution.</li>
+<li>Linear combinations: The linear nature of the differential equation means linear combinations of general solutions are unchanged. We can build solutions from known general solutions.</li>
+</ul>
+<div class="admonition admonition-admonition note" role="note" aria-label="Admonition"><p class="admonition-title">The Cauchy-Kowaleski theorem</p><div class="admonition-content">
+    <p>This theorem is typically called the Cauchy theorem (or the uniqueness theorem) for <a href="https://en.wikipedia.org/wiki/Augustin-Louis_Cauchy">Augustin Louis-Cachy</a>, a French mathematician who contributed much to the field of complex analysis. However, Cauchy only proved this theorem in a special case.  A Russian Mathematician, <a href="https://en.wikipedia.org/wiki/Sofya_Kovalevskaya">Sofya Kovalevskaya</a>, who was the first woman to earn a PhD in Mathematics (earned 1874, University of Göttingen), proved the theorem, in general, in her dissertation.</p>
+<p><strong>So, it is really the &ldquo;Kovalevskaya-Cauchy&rdquo; theorem.</strong></p>
+
+  </div>
+</div>
+
+<h3 id="general-solution-to-the-sho">General Solution to the SHO</h3>
+<p>We can start with the differential equation:</p>
+<p>$$\ddot{x} = -\omega^2 x$$</p>
+<p>where $x$ is the position relative to equilibrium and $\omega^2 = k/m$. We know this is a linear, second-order ODE, so we expect the solutions to be <a href="https://en.wikipedia.org/wiki/Holonomic_function">holonomic functions</a> - that is, many of the functions we have seen before. Moreover, we need something that when we take two derivatives, we get the same functions back.</p>
+<p><em>This is a key to suggest $\sin$ and $\cos$ as our proposed linear combination.</em></p>
+<p>Now, we have to decide how to do that. Because <strong>ANY</strong> linear combination is a good starting guess, but not all of them a reasonable guesses. How do we decide?</p>
+<div class="admonition admonition-admonition tip" role="note" aria-label="Admonition"><p class="admonition-title">Discussion Question</p><div class="admonition-content">
+    <p>Below are several choices of potential general solution guesses, called &ldquo;ansatz&rdquo; in many books and classes.</p>
+<p>Which of them will work for us? How do you know? Demonstrate that one solution you chose works.</p>
+<p>$$x(t) = A\cos(\omega t)$$
+$$x(t) = B\sin(\omega t)$$
+$$x(t) = A\cos(\omega t)+B\sin(\omega t)$$
+$$x(t) = B\sin(\omega t+ \phi_B)$$
+$$x(t) = \sum_i^N A_i\cos(\omega_i t) + B_i\sin(\omega_i t)$$</p>
+<p><strong>What other general solution forms will work?</strong></p>
+
+  </div>
+</div>
+
+<details>
+<summary>Hint</summary>
+<p>Can you think of other functions that when you take two derivatives, you get the same function back with a sign change?</p>
+<p>What if the function were complex (recall: $i^2 = -1$)?</p>
+</details>
+<h3 id="particular-solutions">Particular Solutions</h3>
+<p>Let&rsquo;s pick two general solutions. Notice that both have two unknown constants. We can use the initial conditions to determine the values of these constants, and thus our particular solutions.</p>
+<p>$$x(t) = A\cos(\omega t) + B\sin(\omega t)$$</p>
+<p>$$x(t) = C\sin(\omega t + \phi_C)$$</p>
+<p>To determine a particular solution is to solve for the <strong>trajectory</strong> of the system given a set of initial conditions. You can think about a falling object, but any physical system that is evolving in time will have a trajectory in the general sense of various changing observable quantities. We will revisit this idea later once we make the connection to <a href="https://en.wikipedia.org/wiki/Dynamical_system">Dynamical Systems</a>.</p>
+<h4 id="find-a-particular-solution">Find a particular solution</h4>
+<p>For an SHO ($\omega=\omega_0 = 1$) that is pulled to a point $x_0$ and let go at $t=0$, let&rsquo;s find the particular solutions using both general forms (they will give us this).</p>
+<p>$$x_1(t) = x_0\cos(\omega_0 t)$$
+$$x_2(t) = x_0\sin(\omega_0 t + \pi/2)$$
+$$x_2(t) = -x_0\sin(\omega_0 t + 3\pi/2)$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Adjust code to fit your needs #</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">0.1</span>)
+</span></span><span style="display:flex;"><span>x0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>omega0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x1 <span style="color:#f92672">=</span> x0<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>cos(omega0<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>x2a <span style="color:#f92672">=</span> x0<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sin(omega0<span style="color:#f92672">*</span>t <span style="color:#f92672">+</span> np<span style="color:#f92672">.</span>pi<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># to make it offset</span>
+</span></span><span style="display:flex;"><span>x2b <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>x0<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sin(omega0<span style="color:#f92672">*</span>t <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># to make it offset</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t,x1)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t,x2a)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t,x2b)
+</span></span></code></pre></div><pre><code>[&lt;matplotlib.lines.Line2D at 0x11518d510&gt;]
+</code></pre>
+<p><img src="output_7_1.png" alt="png"></p>
+<h2 id="resources">Resources</h2>
+<p>Here are scans of four sections of four books (that you can look over at my office, or find elsewhere) that are useful for our study of the SHO and will help you with your project ideas and plans.</p>
+<p><em>Sorry for the potato quality, and apparently the orientations, which I corrected but github refuses to keep the same orientation.  I will do better next class and try to fix these later.</em></p>
+<ul>
+<li><a href="https://github.com/dannycab/phy415msu/blob/main/MMIPbook/assets/pdfs/scans/Boas_ODEs_8.5.pdf">Boas, Mathematical Methods, Sec 8.5</a>
+<ul>
+<li>This section goes into all the math (in general) for ODEs like the SHO, which are second order ($\ddot{x}$), have constant coefficients (e.g., no explicit time dependence of the coefficients), and that are &ldquo;homogenous&rdquo; (i.e., have no constant terms or explicit functions of time).</li>
+<li>If you want to be reminded about all the ODE things, it&rsquo;s a good read.</li>
+</ul>
+</li>
+<li><a href="https://github.com/dannycab/phy415msu/blob/main/MMIPbook/assets/pdfs/scans/Crawford_Waves_1.1-1.2.pdf">Crawford, Waves, Secs. 1.1-1.2</a>
+<ul>
+<li>This is an excellent book in general, but this a good reminder of all the things we did today in book form. His analysis and presenttation are formal, but really jammed packed with information. Crawford doesn&rsquo;t waste words. This book is out of print, but really worth reading if you are interested in waves. I tried to reproduce some of this in my own notes below.</li>
+</ul>
+</li>
+<li><a href="https://github.com/dannycab/phy415msu/blob/main/MMIPbook/assets/pdfs/scans/Marion_Thornton_Oscillations_3.1-3.2.pdf">Marion and Thorton, Classical Mechanics, Secs. 3.1-3.2</a>
+<ul>
+<li>This is a canonical text, that is boring. But it was all the things we did today and some stuff about the energetics.</li>
+</ul>
+</li>
+<li><a href="https://github.com/dannycab/phy415msu/blob/main/MMIPbook/assets/pdfs/scans/Strogatz_Nonlinear_Ch5.1.pdf">Strogatz, Nonlinear Dynamics, Sec. 5.1</a>
+<ul>
+<li>This book is great. We are jumping into the middle of it, but the description of phase space analysis is so important and useful. I have tried to reproduce this in my own notes below.</li>
+</ul>
+</li>
+</ul>
+<h2 id="handwritten-notes">Handwritten Notes</h2>
+<p>Below, I have worked up some additional notes that describe the conceptual and procedural aspects of what we did today. Think: derivations and examples for learning from for your project. They are linked below:</p>
+<ul>
+<li><a href="../../assets/notes/Notes-SHO.pdf">The SHO</a></li>
+</ul>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/1---mechanics-and-odes/notes_frames/">← 31 Aug 23 - Notes: Frames and Coordinates</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

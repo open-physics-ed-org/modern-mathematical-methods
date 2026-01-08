@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Nov 23 - Activity: Monte Carlo Integration | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>30 Nov 23 - Activity: Monte Carlo Integration</h1>
+        
+    </header>
+
+    <p>A useful approach to making models of systems is using randomness to find solutions to problems that are stable or static. One such approach is called <a href="https://en.wikipedia.org/wiki/Monte_Carlo_integration">Monte Carlo integration</a> that can be used to find particularly problematic integrals. It&rsquo;s a useful pedagogical introduction to what we are attempting to do, use <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo approaches</a> to model thermodynamical systems using the <a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm">Metropolis-Hastings algorithm</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random <span style="color:#66d9ef">as</span> random
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%</span>matplotlib inline
+</span></span></code></pre></div><h2 id="finding-pi">Finding Pi</h2>
+<p>This is a classic use of Monte Carlo integration that illustrates many of the concepts of the technique. Effectively, we can assume there&rsquo;s a constant (undetermined) that links that the area of a circle and the radius squared.</p>
+<p>$$A_{circle} = c r^2$$</p>
+<p>We assume it&rsquo;s radius squared as a test because we know that boxes go like length times width and a sqaure with side length $r$ has:</p>
+<p>$$A_{square} = r^2$$</p>
+<p>Thus the ratio of the area of the circle to the area of the sqaure would give the constant!</p>
+<p>$$\dfrac{A_{circle}}{A_{square}} = \dfrac{c r^2}{r^2} = c$$</p>
+<p>This is true for any radius $r$, so we choose $r=1$. We also notice that we can solve this problem in one quadrant and multiple by four.  So let&rsquo;s graph that.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>step <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.001</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span>step,step)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>x<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x,y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_3_0.png" alt="png"></p>
+<h3 id="the-drop-algorithm">The Drop Algorithm</h3>
+<p>The concept behind this is watching rain hit the ground and counting the droplets inside and outside a circle. We can simulate this with random drops in the range from 0 to 1 in $x$ and $y$. Let&rsquo;s start with 500 drops. We plot the drops below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ndrops <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>drops <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros([ndrops,<span style="color:#ae81ff">2</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(ndrops):
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    xrand <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>random()
+</span></span><span style="display:flex;"><span>    yrand <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>random()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    drops[i] <span style="color:#f92672">=</span> xrand,yrand
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x,y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(drops[:,<span style="color:#ae81ff">0</span>],drops[:,<span style="color:#ae81ff">1</span>], c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;C1&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_6_0.png" alt="png"></p>
+<p>Notice that some of the drops are outside the curve and some are inside. We can use the formula for a circle of radius 1 to find which are which.</p>
+<p>$$x^2 + y^2 = 1$$</p>
+<p>If this produce is below 1, the drop is inside the curve; otherwise it&rsquo;s outside. The statement below forms a binary filter. You might have seen something like this before in CMSE 201. We can use those filters on the arrays are replot to confirm. The use of of the tilde (~) reverses the filter (true becomes false and vice versa).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>insideCurve <span style="color:#f92672">=</span> drops[:,<span style="color:#ae81ff">0</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span>drops[:,<span style="color:#ae81ff">1</span>]<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x, y, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;circle&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(drops[insideCurve,<span style="color:#ae81ff">0</span>],drops[insideCurve,<span style="color:#ae81ff">1</span>], c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;C1&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;inside&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>scatter(drops[<span style="color:#f92672">~</span>insideCurve,<span style="color:#ae81ff">0</span>],drops[<span style="color:#f92672">~</span>insideCurve,<span style="color:#ae81ff">1</span>], c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;C2&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;outside&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_8_0.png" alt="png"></p>
+<h3 id="computing-pi">Computing Pi</h3>
+<p>We assumed our approach would bear out a constant.</p>
+<p>$$c=\dfrac{A_{circle}}{A_{square}}$$</p>
+<p>We can compute an estimate of it using the number of drops, which are proxies for the area of a quarter circle.</p>
+<p>$$c \approx 4\dfrac{N_{inside}}{N}$$</p>
+<p>Our estimate is below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pi_estimate <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>len(drops[insideCurve])<span style="color:#f92672">/</span>len(drops)
+</span></span><span style="display:flex;"><span>print(pi_estimate)
+</span></span></code></pre></div><pre><code>3.152
+</code></pre>
+<h2 id="seeking-convergence">Seeking Convergence</h2>
+<p>So the estimate was probably not great. But we can make it better by choosing more drops. So rewrite this approach a function where you can send the number of drops in and return the estimate of pi. Then use it to plot this estimate over many choices of N. Show what the value converges to.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
+</span></span></code></pre></div><h2 id="finding-the-values-of-integrals">Finding the values of integrals</h2>
+<p>So that was a cool trick, but the power of this form of Monte Carlo is being able to compute very difficult integrals. It&rsquo;s not efficient as other integrators, but it&rsquo;s sometimes the only choice.</p>
+<h3 id="integrating-sine">Integrating sine</h3>
+<p>Using the same approach as before where we take the proportion of drops &lsquo;under the curve&rsquo; compared to all drops, find the integral of $sin(x)$ over one interval.</p>
+<ul>
+<li>Find the number of drops needed to make a reasonable estimate.</li>
+<li>Use the long term behavior (plot it?) to estimate the value and uncertainty in the integral</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
+</span></span></code></pre></div><h3 id="a-pathologically-terrible-integral">A Pathologically Terrible Integral</h3>
+<p>Consider the function below over the interval from 0 to 2.</p>
+<p>$$y = \sin^2\left[\dfrac{1}{x(2-x)}\right]$$</p>
+<p>Let&rsquo;s plot this son of gun.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0.00001</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">0.00001</span>)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>(x<span style="color:#f92672">*</span>(<span style="color:#ae81ff">2</span><span style="color:#f92672">-</span>x)))<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x,y)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_16_0.png" alt="png"></p>
+<p>Let&rsquo;s zoom in on one of the wings, and we can see the problem. The integral varies wildly!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0.00001</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">0.00001</span>)
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>(x<span style="color:#f92672">*</span>(<span style="color:#ae81ff">2</span><span style="color:#f92672">-</span>x)))<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(x,y)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axis([<span style="color:#ae81ff">1.75</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span></code></pre></div><p><img src="output_18_0.png" alt="png"></p>
+<h2 id="bring-in-monte-carlo">Bring in Monte Carlo</h2>
+<p>Following the same approach estimate the value of the integral for this function and the uncertainty in your estimate.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
+</span></span></code></pre></div>
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/4---randomness-and-distributions/notes-mcmc/">← 4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/4---randomness-and-distributions/activity-thermal_contact/">28 Nov 23 - Activity: Model of Two Bodies in Thermal Contact →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

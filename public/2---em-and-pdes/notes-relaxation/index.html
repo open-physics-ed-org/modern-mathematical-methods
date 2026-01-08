@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9 Oct 23 - Notes: Method of Relaxation | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>9 Oct 23 - Notes: Method of Relaxation</h1>
+        
+    </header>
+
+    <p>We&rsquo;ve found a number of potential ways to solve Laplace&rsquo;s equation. All of them have so far been analytical &ndash; making use of special functions and introducing basis functions to expand our solutions and develop (potentially infinite) series solutions. As we saw with spherical problems, this is a very powerful method to use, but it is not always possible to find a solution in this way. In some cases you might be able to find general solutions of the form (or in alternative coordinate systems)):</p>
+<p>$$\Phi(x,y,z)=X(x)Y(y)Z(z)$$</p>
+<p>But nothing about Laplace&rsquo;s equation guarantees that such solutions are possible. However, there are two major consequences of the solutions to Laplace&rsquo;s Equation that give us a suggestion for a numerical approach. These are because Laplace&rsquo;s equation is a linear, second order, partial differential equation.</p>
+<ol>
+<li>The value of the potential at a point is the average of the potential at all points around it.</li>
+<li>The solution that matches the boundary conditions is unique.</li>
+</ol>
+<p>So we can imagine taking a bubble or a sheet of rubber or plastic wrap and stretching it over the region of interest. The shape and height of the edges (barring the gravitational pull) set the shape of the resulting bubble/sheet. Here we leave out gravity as it has a directional pull, which Laplace&rsquo;s equation does not. The method we propose below is called the <a href="https://en.wikipedia.org/wiki/Relaxation_(iterative_method)">Method of Relaxation</a>. It is a numerical method for solving PDEs where the solution is determined iteratively using the two properties above.</p>
+<h2 id="the-method-of-relaxation">The Method of Relaxation</h2>
+<p>The basic approach to the method of relaxation is laid out below:</p>
+<ol>
+<li>Divide the region into a grid of points. <em>This is the discretization of the region. The smaller the grid, the more accurate the solution.</em> This is called &ldquo;a mesh&rdquo; in the literature.</li>
+<li>Assign an initial value to each point in the grid. <em>This is the initial guess for the solution.</em> This can be random or informed.</li>
+<li>Set the value of each point on the boundary to the value expected by the boundary conditions. <em>This is what makes this a boundary value problem.</em></li>
+<li>Step through each non-boundary point and set its value to the average values of the points around it. <em>This is the relaxation step.</em></li>
+<li>Repeat step 4 until the values of the points stop changing. <em>This is the convergence step.</em></li>
+</ol>
+<p>There&rsquo;s a lot of nuance to these five steps, and we will get into this a bit. Let&rsquo;s just write this up for the 1D problem.</p>
+<h2 id="the-1-dimensional-case">The 1 Dimensional Case</h2>
+<p>Consider the 1D case of Laplace&rsquo;s equation:</p>
+<p>$$\frac{d^2\Phi}{dx^2}=0$$</p>
+<p>We can solve this problem quite easily, as we know the only non-zero solution is a linear function.</p>
+<p>$$\Phi(x)=ax+b$$</p>
+<p>We can set the boundary conditions to be $\Phi(0)=V_0$ and $\Phi(L)=0$ to find that $b=V_0$ and $a=-V_0/L$. So the solution is:</p>
+<p>$$\Phi(x)=-V_0\dfrac{x}{L}+V_0$$</p>
+<p>It is a unique solution, and it is the average of the boundary conditions (and also equally spaced points).</p>
+<p>Let&rsquo;s solve it using the method of relaxation. Recall that:</p>
+<p>$$f&rsquo;(x)\approx \frac{f(x+a)+f(x-a)}{2}$$</p>
+<p>so that,</p>
+<p>$$f&rsquo;&rsquo;(x)\approx \frac{f(x+a)-2f(x)+f(x-a)}{(a)^2}$$</p>
+<p>So we can write Laplace&rsquo;s equation as:</p>
+<p>$$\frac{\Phi(x+a)-2\Phi(x)+\Phi(x-a)}{(a)^2}=0$$</p>
+<p>Or in terms of the grid spacing $a$ starting at $x_i$:</p>
+<p>$$\Phi(x_i+a)-2\Phi(x_i)+\Phi(x_i-a)=0$$</p>
+<p>So that we can solve for the value of $V(x_i)$ at each point in the grid.</p>
+<p>$$\Phi(x_i)=\frac{1}{2}\left[\Phi(x_i+a)+\Phi(x_i-a)\right]$$</p>
+<p>which is precisely the average of the value of the potential to the left and right of the grid point. Let&rsquo;s write this in Python.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">relax</span>(initial_array, tolerance<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-6</span>, n<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&#39;&#39;Relaxation method for solving Laplace&#39;s equation in 1D. 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Requires the initial array and the tolerance.&#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">=</span> initial_array<span style="color:#f92672">.</span>copy() <span style="color:#75715e"># to avoid overwriting the initial array</span>
+</span></span><span style="display:flex;"><span>    convergence <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span> <span style="color:#75715e"># to check if the solution has converged</span>
+</span></span><span style="display:flex;"><span>    iterations <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># to count the number of iterations</span>
+</span></span><span style="display:flex;"><span>    arrays <span style="color:#f92672">=</span> [a<span style="color:#f92672">.</span>copy()]  <span style="color:#75715e"># to store the array at each iteration</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#f92672">not</span> convergence:
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Compute the average of the two neighboring points</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># as long as they are not boundaries</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># and do so until you reach the desired tolerance</span>
+</span></span><span style="display:flex;"><span>        iterations <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        new_a <span style="color:#f92672">=</span> a<span style="color:#f92672">.</span>copy()
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Computing the average of the two neighboring points</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, len(a) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>):  <span style="color:#75715e"># Excluding boundaries</span>
+</span></span><span style="display:flex;"><span>            new_a[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> (a[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> a[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># checking if the solution has converged (i.e., achieved the desired tolerance)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># this is point by point convergence (See why?)</span>
+</span></span><span style="display:flex;"><span>        convergence <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>all(np<span style="color:#f92672">.</span>abs(new_a <span style="color:#f92672">-</span> a) <span style="color:#f92672">&lt;</span> tolerance)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        a <span style="color:#f92672">=</span> new_a<span style="color:#f92672">.</span>copy()
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># store every nth iteration (default is 50)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> iterations <span style="color:#f92672">%</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            arrays<span style="color:#f92672">.</span>append(a<span style="color:#f92672">.</span>copy())
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> arrays, iterations
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_relaxation</span>(arrays, total_iterations):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;The solution converged after </span><span style="color:#e6db74">{</span>total_iterations<span style="color:#e6db74">}</span><span style="color:#e6db74"> iterations.&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Set up the figure and axis</span>
+</span></span><span style="display:flex;"><span>    fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>    colors <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>viridis(np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, len(arrays)))  <span style="color:#75715e"># Create a colormap for the iterations</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, array <span style="color:#f92672">in</span> enumerate(arrays):
+</span></span><span style="display:flex;"><span>        ax<span style="color:#f92672">.</span>plot(array, color<span style="color:#f92672">=</span>colors[i], label<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Iteration: </span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Relaxation Method: Overlaid Iterations&#39;</span>)
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;Position (x)&#39;</span>)
+</span></span><span style="display:flex;"><span>    ax<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;Electric Potential (V)&#39;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> fig, ax
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># number of grid points</span>
+</span></span><span style="display:flex;"><span>arr <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(N) <span style="color:#75715e"># initial array</span>
+</span></span><span style="display:flex;"><span>tol <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span> <span style="color:#75715e"># tolerance</span>
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span> <span style="color:#75715e"># store every nth iteration</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Boundary conditions</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># left boundary (100 V)</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># right boundary (0 V)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>arrays, total_iterations <span style="color:#f92672">=</span> relax(arr, tol, n)
+</span></span><span style="display:flex;"><span>plot_relaxation(arrays, total_iterations);
+</span></span></code></pre></div><pre><code>The solution converged after 21980 iterations.
+</code></pre>
+<p><img src="output_5_1.png" alt="png"></p>
+<h3 id="experiments">Experiments</h3>
+<p>We can change the number of grid points, the number of iterations, and the initial guess to see how the solution changes; in particular, how quickly the solution converges.</p>
+<h4 id="random-initial-guess">Random Initial Guess</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># number of grid points</span>
+</span></span><span style="display:flex;"><span>arr <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(N) <span style="color:#75715e"># initial array</span>
+</span></span><span style="display:flex;"><span>tol <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span> <span style="color:#75715e"># tolerance</span>
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span> <span style="color:#75715e"># store every nth iteration</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Boundary conditions</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># left boundary (100 V)</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># right boundary (0 V)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>arrays, total_iterations <span style="color:#f92672">=</span> relax(arr, tol, n)
+</span></span><span style="display:flex;"><span>plot_relaxation(arrays, total_iterations);
+</span></span></code></pre></div><pre><code>The solution converged after 25315 iterations.
+</code></pre>
+<p><img src="output_7_1.png" alt="png"></p>
+<h4 id="sinusoidal-initial-guess">Sinusoidal Initial Guess</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># number of grid points</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi, N)
+</span></span><span style="display:flex;"><span>arr <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>sin(x) <span style="color:#75715e"># initial array</span>
+</span></span><span style="display:flex;"><span>tol <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span> <span style="color:#75715e"># tolerance</span>
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span> <span style="color:#75715e"># store every nth iteration</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Boundary conditions</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># left boundary (100 V)</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># right boundary (0 V)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>arrays, total_iterations <span style="color:#f92672">=</span> relax(arr, tol, n)
+</span></span><span style="display:flex;"><span>plot_relaxation(arrays, total_iterations);
+</span></span></code></pre></div><pre><code>The solution converged after 21980 iterations.
+</code></pre>
+<p><img src="output_9_1.png" alt="png"></p>
+<h4 id="linear-initial-guess">Linear Initial Guess</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># number of grid points</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, N, N)
+</span></span><span style="display:flex;"><span>arr <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>x<span style="color:#f92672">+</span><span style="color:#ae81ff">100</span> <span style="color:#75715e"># initial array</span>
+</span></span><span style="display:flex;"><span>tol <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span> <span style="color:#75715e"># tolerance</span>
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span> <span style="color:#75715e"># store every nth iteration</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Boundary conditions</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># left boundary (100 V)</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># right boundary (0 V)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>arrays, total_iterations <span style="color:#f92672">=</span> relax(arr, tol, n)
+</span></span><span style="display:flex;"><span>plot_relaxation(arrays, total_iterations);
+</span></span></code></pre></div><pre><code>The solution converged after 1 iterations.
+</code></pre>
+<p><img src="output_11_1.png" alt="png"></p>
+<h4 id="linear-initial-guess-with-a-touch-of-white-noise">Linear Initial Guess with a touch of white noise</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># number of grid points</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, N, N)
+</span></span><span style="display:flex;"><span>gamma <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#75715e"># strength of noise</span>
+</span></span><span style="display:flex;"><span>arr <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>x<span style="color:#f92672">+</span><span style="color:#ae81ff">100</span><span style="color:#f92672">+</span>gamma<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand() <span style="color:#75715e"># initial array</span>
+</span></span><span style="display:flex;"><span>tol <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span> <span style="color:#75715e"># tolerance</span>
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span> <span style="color:#75715e"># store every nth iteration</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Boundary conditions</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># left boundary (100 V)</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># right boundary (0 V)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>arrays, total_iterations <span style="color:#f92672">=</span> relax(arr, tol, n)
+</span></span><span style="display:flex;"><span>plot_relaxation(arrays, total_iterations);
+</span></span></code></pre></div><pre><code>The solution converged after 6285 iterations.
+</code></pre>
+<p><img src="output_13_1.png" alt="png"></p>
+<h4 id="random-initial-guess-with-lower-tolerance">Random Initial Guess with lower tolerance</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># number of grid points</span>
+</span></span><span style="display:flex;"><span>arr <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(N) <span style="color:#75715e"># initial array</span>
+</span></span><span style="display:flex;"><span>tol <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-3</span> <span style="color:#75715e"># tolerance</span>
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span> <span style="color:#75715e"># store every nth iteration</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Boundary conditions</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#75715e"># left boundary (100 V)</span>
+</span></span><span style="display:flex;"><span>arr[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># right boundary (0 V)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>arrays, total_iterations <span style="color:#f92672">=</span> relax(arr, tol, n)
+</span></span><span style="display:flex;"><span>plot_relaxation(arrays, total_iterations);
+</span></span></code></pre></div><pre><code>The solution converged after 9413 iterations.
+</code></pre>
+<p><img src="output_15_1.png" alt="png"></p>
+<h2 id="relaxation-method-in-2d">Relaxation Method in 2D</h2>
+<p>The two-dimensional case is a bit more complicated but it follows the same basic idea. You will write the code to solve a problem like this, but the underlying mathematics follows from our discretization of the Laplacian. Maxwell&rsquo;s equations give us Laplace&rsquo;s equation for potential $\Phi$ with no source charges:</p>
+<p>$$\nabla^2 \Phi = 0 $$</p>
+<p>in two-dimensional Cartesian coordinates, this reads:</p>
+<p>$$
+\frac{\partial^2 \Phi}{\partial x^2} + \frac{\partial^2 \Phi}{\partial y^2} = 0.
+$$</p>
+<p>We&rsquo;re choosing the 2D version simply because it is easier to visualize. Because this is a PDE, we will need to specify <strong>boundary conditions</strong> for $\Phi$ along the edges of the box as opposed to initial conditions like we&rsquo;ve seen for ODEs. Let&rsquo;s choose $\Phi = V_0$ along the top of the box and $\Phi = 0$ on the other sides.</p>
+<p>Numerically we can approximate the 2nd partial x derivative of $\Phi$ as:</p>
+<p>$$
+\frac{\partial^2 \Phi}{\partial x^2} \approx \frac{\Phi(x+h,y) + \Phi(x-h,y) - 2\Phi(x,y)}{h^2}
+$$</p>
+<p>for some small positive real number $h$.</p>
+<p>We can write this for the y direction as well:</p>
+<p>$$
+\frac{\partial^2 \Phi}{\partial y^2} \approx \frac{\Phi(x,y+h) + \Phi(x,y-h) - 2\Phi(x,y)}{h^2}
+$$</p>
+<p>Adding these gives us Laplace&rsquo;s equation:</p>
+<p>$$
+\frac{\partial^2 \Phi}{\partial x^2} + \frac{\partial^2 \Phi}{\partial y^2}  = \frac{\Phi(x+h,y) + \Phi(x-h,y) - 2\Phi(x,y) + \Phi(x,y+h) + \Phi(x,y-h) - 2\Phi(x,y)}{h^2} = 0
+$$</p>
+<p>or more simply:</p>
+<p>$$
+\Phi(x+h,y) + \Phi(x-h,y) + \Phi(x,y+h) + \Phi(x,y-h) - 4\Phi(x,y)= 0
+$$</p>
+<p>We want to know $\Phi(x,y)$ and this equation thankfully has a $\Phi(x,y)$ term so we can solve for it:</p>
+<p>$$
+\Phi(x,y) = \frac{1}{4}\left[\Phi(x+h,y) + \Phi(x-h,y) + \Phi(x,y+h) + \Phi(x,y-h) \right]
+$$</p>
+<p>This is saying that we can approximate $\Phi(x,y)$ by the average of the grid points that surround it, which should feel intuitive. Here comes the clever bit for how we turn this into a solver - We first the boundary points of our grid to our boundary conditions and set all the interior points to zero. Then we use this equation to update each interior point by its neighbors, that is:</p>
+<p>$$
+\Phi_{k+1}(x,y) = \frac{1}{4}\left[\Phi_{k}(x+h,y) + \Phi_{k}(x-h,y) + \Phi_{k}(x,y+h) + \Phi_{k}(x,y-h) \right]
+$$</p>
+<p>Then we iterate this process, for many values of $i$ until our system converges (If it converges! This method isn&rsquo;t guarenteed to converge.). To check for convergence, we can calculate the change $\delta = |\Phi_{k+1}(x,y) - \Phi(x,y)|$ and terminate the algorithm when $\delta$ is sufficiently small.</p>
+<p>It might seem fairly obvious that the 3D version of this is just an extension of the 2D version, and it is. The 3D version is:</p>
+<p>$$\Phi_{k+1}(x,y,z) = \frac{1}{6}\left[\Phi_{k}(x+h,y,z) + \Phi_{k}(x-h,y,z) + \Phi_{k}(x,y+h,z) + \Phi_{k}(x,y-h,z) + \Phi_{k}(x,y,z+h) + \Phi_{k}(x,y,z-h) \right]$$</p>
+<h2 id="additional-resources">Additional Resources</h2>
+<h3 id="handwritten-notes">Handwritten Notes</h3>
+<ul>
+<li><a href="../../assets/notes/Notes_Laplaces_Equation.pdf">Laplace&rsquo;s Equation</a></li>
+<li><a href="../../assets/notes/Notes-Method_of_Relaxation.pdf">Method of Relaxation</a></li>
+</ul>
+<h3 id="videos">Videos</h3>
+<p>These videos from 3Blue1Brown about Partial Differential Equations are really great. But not necessary to grasp what we are doing.</p>
+<p><a href="https://inv.tux.pizza/watch?v=ly4S0oi3Yz8"><img src="https://markdown-videos-api.jorgenkh.no/youtube/ly4S0oi3Yz8?width=720&amp;height=405" alt="What is a PDE"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=ly4S0oi3Yz8">https://inv.tux.pizza/watch?v=ly4S0oi3Yz8</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=ly4S0oi3Yz8">https://youtube.com/watch?v=ly4S0oi3Yz8</a></li>
+</ul>
+<p><a href="https://inv.tux.pizza/watch?v=ToIXSwZ1pJU"><img src="https://markdown-videos-api.jorgenkh.no/youtube/ToIXSwZ1pJU?width=720&amp;height=405" alt="Solving the Heat Equation"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=ToIXSwZ1pJU">https://inv.tux.pizza/watch?v=ToIXSwZ1pJU</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=ToIXSwZ1pJU">https://youtube.com/watch?v=ToIXSwZ1pJU</a></li>
+</ul>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/2---em-and-pdes/activity-sep_var_spherical_examples/">← 10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/2---em-and-pdes/activity-sep_var_spherical/">5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

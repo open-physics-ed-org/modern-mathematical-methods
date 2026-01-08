@@ -1,0 +1,63 @@
+baseURL = ""
+languageCode = "en"
+title = "PHY 415 Fall 2023"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "monokai"
+    lineNos = false
+
+[params]
+  author = "Danny Caballero, Alia Valentine"
+  description = "PHY 415 Fall 2023"
+  math = true
+
+# KaTeX configuration for math rendering
+[params.katex]
+  enable = true
+
+
+[[menu.main]]
+  identifier = "0---intro-and-syllabus"
+  name = "0 - Intro and Syllabus"
+  url = "/0---intro-and-syllabus/"
+  weight = 1
+
+[[menu.main]]
+  identifier = "1---mechanics-and-odes"
+  name = "1 - Mechanics and ODEs"
+  url = "/1---mechanics-and-odes/"
+  weight = 2
+
+[[menu.main]]
+  identifier = "2---em-and-pdes"
+  name = "2 - E&M and PDEs"
+  url = "/2---em-and-pdes/"
+  weight = 3
+
+[[menu.main]]
+  identifier = "3---waves-and-oscillations"
+  name = "3 - Waves and Oscillations"
+  url = "/3---waves-and-oscillations/"
+  weight = 4
+
+[[menu.main]]
+  identifier = "4---randomness-and-distributions"
+  name = "4 - Randomness and Distributions"
+  url = "/4---randomness-and-distributions/"
+  weight = 5
+
+[[menu.main]]
+  identifier = "assignments"
+  name = "Assignments"
+  url = "/assignments/"
+  weight = 6
+
+[[menu.main]]
+  identifier = "appendices"
+  name = "Appendices"
+  url = "/appendices/"
+  weight = 7

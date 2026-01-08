@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators</h1>
+        
+    </header>
+
+    <p>Now that we have discussed and built some facility with Lagrangian dynamics, let&rsquo;s see how using it makes our study of normal modes much simpler than Newtonian mechanics. We will couple this analysis to solving an eigenvalue problem by guessing the form of the solutions. This technique is very common in theoretical physics with different guesses for the solution forms giving rise to different eigenvalue problems (e.g., <a href="https://en.wikipedia.org/wiki/Bessel_function">Bessel functions for 2D surface problems</a> or <a href="https://en.wikipedia.org/wiki/Hermite_polynomials">Hermite polynomials for the Quantum Harmonic Oscillator</a>.</p>
+<h2 id="three-coupled-oscillators">Three Coupled Oscillators</h2>
+<p>Consider the setup below consisting of three masses connected by springs to each other. We intend to find the normal modes of the system by denoting each mass&rsquo;s displacement ($x_1$, $x_2$, and $x_3$).</p>
+<p><img src="/images/content/assets/images/3_coupled_osc.png" alt="3 Coupled Oscillators"></p>
+<h2 id="finding-the-normal-mode-frequencies">Finding the Normal Mode Frequencies</h2>
+<p><strong>✅ Do this</strong></p>
+<p>This is not magic as we will see, it follows from our choices of solution. Here&rsquo;s the steps and what you might notice about them:</p>
+<ol>
+<li>Guess what the normal modes might look like? Write your guesses down; how should the masses move? (It&rsquo;s ok if you are not sure about all of them, try to determine one of them)</li>
+<li>Write down the energy for the whole system, $T$ and $U$ (We have done this before, but not for this many particles)</li>
+<li>Use the Euler-Lagrange Equation to find the equations of motion for $x_1$, $x_2$, and $x_3$. (We have done this lots, so make sure it feels solid)</li>
+<li>Reformulate the equations of motion as a matrix equation $\ddot{\mathbf{x}} = \mathbf{A} \mathbf{x}$. What is $\mathbf{A}$? (We have done this, but only quickly, so take your time)</li>
+<li>Consider solutions of the form $Ce^{i{\omega}t}$, plug that into $x_1$, $x_2$, and $x_3$ to show you get $\mathbf{A}\mathbf{x} = -\omega^2 \mathbf{x}$. (We have not done this, we just assumed it works! It&rsquo;s ok if this is annoying, we only have to show it once.)</li>
+<li>Find the normal mode frequencies by taking the determinant of $\mathbf{A} - \mathbf{I}\lambda$. Note that this produces the following definition: $\lambda = -\omega^2$ (We have not done this together and we can if it&rsquo;s confusing.)</li>
+</ol>
+<h2 id="finding-the-normal-modes-amplitudes">Finding the Normal Modes Amplitudes</h2>
+<p>Ok, now we need to find the normal mode amplitudes. That is we assumed sinusoidal oscillations, but at what amplitudes? We will show how to do this with one frequency ($\omega_1$), and then break up the work of the the other two. These frequencies are:</p>
+<p>$$\omega^2_A = 2\dfrac{k}{m}; \qquad \omega^2_B = \left(2-\sqrt{2}\right)\dfrac{k}{m}; \qquad \omega^2_C = \left(2+\sqrt{2}\right)\dfrac{k}{m}\qquad$$</p>
+<p><strong>✅ Do this</strong></p>
+<p>After we do the first one, pick another frequencies and repeat. Answer the follow questions:</p>
+<ol>
+<li>What does this motion physically look like? What are the masses doing?</li>
+<li>How does the frequency of oscillation make sense? Why is it higher or lower than $\omega_A$?</li>
+</ol>
+<h2 id="finding-the-eigenvalues-and-eigenvectors-using-numerical-approaches">Finding the Eigenvalues and Eigenvectors using Numerical Approaches</h2>
+<p>Now that we have developed solutions for the 3 coupled oscillators, let&rsquo;s try to reproduce that work numerically and plots the modes to make sense of what they are doing for us.</p>
+<p>We can then apply these tools to $N$ identically coupled 1D oscillators.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy.linalg <span style="color:#66d9ef">as</span> la <span style="color:#75715e">## For the numerical eigenvalue methods</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sympy <span style="color:#f92672">import</span> <span style="color:#f92672">*</span> <span style="color:#75715e">## For symbolic eigenvalue methods</span>
+</span></span><span style="display:flex;"><span>init_printing(use_unicode<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)  <span style="color:#75715e">## display nice math</span>
+</span></span></code></pre></div><p>We reduced our normal mode problem to the following:</p>
+<p>$$\mathbf{A}\mathbf{x} = -\omega^2\mathbf{x}$$</p>
+<p>And earlier we found these eigenvalues and eigenvectors for the 3 Oscillator model:</p>
+<p>$$\omega_A = 2\dfrac{k}{m}; \qquad \omega_B = \left(2-\sqrt{2}\right)\dfrac{k}{m}; \qquad \omega_C = \left(2+\sqrt{2}\right)\dfrac{k}{m}\qquad$$</p>
+<p>Python has two main libraries for helping us find these numerically. One is <code>numpy.linalg</code>, which is a powerful set of linear algebra tools that are used widely. The other is <code>sympy</code>, which is a symbolic calculator like Mathematica. Both will help you find eigenvalues and eigenvectors, but do so in entirely different ways.</p>
+<ul>
+<li><code>numpy.linalg</code> will use the common numerical tools that decompose matrices. For example, <a href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a> is one of the most common techniques to use for symmetric and Hermitian matrices, which are the most common in physics.</li>
+<li><code>sympy</code> is a symbolic calculator, that attempts to determine a closed form solution for the eigenvalues. These methods are often proprietary (e.g., Mathematica and Matlab), but the source code for <a href="https://github.com/sympy/sympy">sympy is available to review</a>.</li>
+</ul>
+<p>At issue is that each of these methods requires a slight different input. The first method will take a <code>numpy</code> matrix, but the second requires a <code>sympy</code> matrix, which can we easily constructed from our <code>numpy</code> matrix.</p>
+<p>Below, we form both matrices.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>M <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matrix([[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]]) <span style="color:#75715e">## numpy matrix</span>
+</span></span><span style="display:flex;"><span>M2 <span style="color:#f92672">=</span> Matrix(M) <span style="color:#75715e">## Take numpy matrix and make it a sympy one</span>
+</span></span><span style="display:flex;"><span>print(M)
+</span></span><span style="display:flex;"><span>print(M2)
+</span></span></code></pre></div><pre><code>[[-2  1  0]
+ [ 1 -2  1]
+ [ 0  1 -2]]
+Matrix([[-2, 1, 0], [1, -2, 1], [0, 1, -2]])
+</code></pre>
+<p>Finding eigenvalues with numpy.lingalg is quite simple. We just call <code>eigenvals, eigenvecs = la.eig(M)</code>. Note they are numericaly values. Also, these eigenvectors are normalized. Do you notice anything strange?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>eigenvals, eigenvecs <span style="color:#f92672">=</span> la<span style="color:#f92672">.</span>eig(M)
+</span></span><span style="display:flex;"><span>print(eigenvals)
+</span></span><span style="display:flex;"><span>print(eigenvecs)
+</span></span></code></pre></div><pre><code>[-3.41421356 -2.         -0.58578644]
+[[ 5.00000000e-01  7.07106781e-01  5.00000000e-01]
+ [-7.07106781e-01 -4.05925293e-16  7.07106781e-01]
+ [ 5.00000000e-01 -7.07106781e-01  5.00000000e-01]]
+</code></pre>
+<p>Finding the eigenvectors and eigenvalues with <code>sympy</code> is just as simple. Notice that these are symbolic and the eigenvectors are NOT normalized.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>M2<span style="color:#f92672">.</span>eigenvects()
+</span></span></code></pre></div><p>$\displaystyle \left[ \left( -2, \  1, \  \left[ \left[\begin{matrix}-1\0\1\end{matrix}\right]\right]\right), \  \left( -2 - \sqrt{2}, \  1, \  \left[ \left[\begin{matrix}1\- \sqrt{2}\1\end{matrix}\right]\right]\right), \  \left( -2 + \sqrt{2}, \  1, \  \left[ \left[\begin{matrix}1\\sqrt{2}\1\end{matrix}\right]\right]\right)\right]$</p>
+<h2 id="plotting-the-modes">Plotting the modes</h2>
+<p>Awesome. Now we have our modes, but what do they mean? Remember, in a given mode every object oscillates at the mode frequency, just with different amplitudes. That means everyone has the following form:</p>
+<p>$$A\cos(\omega t)$$</p>
+<p>just with different $A$&rsquo;s. So plot the motion of each mass in each mode. Make sure you have the right frequencies with the right modes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Analysis and Plotting code here</span>
+</span></span></code></pre></div><h2 id="extending-your-work">Extending your work</h2>
+<p>Given what we have done thus far, you can see that we could easily construct the matrix for a $N$ dimensional chain of 1D oscillators. So let&rsquo;s do that.</p>
+<p>Repeat this analysis for a set of $N$ oscillators. Your code should be able to:</p>
+<ol>
+<li>Take a value of $N$ and construct the right matrix representation</li>
+<li>Find the eigenvalues and eigenvectors for this matrix.</li>
+<li>(BONUS) plots the modes automatically</li>
+<li>(CHALLENGE) time the execution of the analysis</li>
+</ol>
+<p>Be careful not to pick to large of an $N$ value to work with because you could melt your CPU easily. Make sure your code can do something like $N=10$. If you get the timing working, plot time vs number of objects to see how the problem scales with more oscillators.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Your code here</span>
+</span></span></code></pre></div><h2 id="even-further">Even further</h2>
+<p>These models can be used with lattices (solid objects). Draw a sketch of 4 oscillators in a plane connected together in a square shape. Write down the energy equations for this system (assume the springs do not move laterally much). What do the EOMs look like?</p>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/3---waves-and-oscillations/notes-solve_the_wave_eq/">← 25 Oct 23 - Notes: Solutions to The Wave Equation</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/3---waves-and-oscillations/activity-coupledosc-normalmodes/">17 Oct 23 - Activity: Normal Modes →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

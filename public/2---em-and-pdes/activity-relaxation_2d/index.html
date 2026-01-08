@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 Oct 23 - Activity: Method of Relaxation | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>12 Oct 23 - Activity: Method of Relaxation</h1>
+        
+    </header>
+
+    <p>As we discussed, we can use the relaxation approach to solve Laplace&rsquo;s equation. As a reminder the process for doing this is as follows:</p>
+<ol>
+<li>Divide the region into a grid</li>
+<li>Set the boundary conditions on the edges of the grid</li>
+<li>Guess the starting values for the potential in the interior of the grid (not on the edges)</li>
+<li>Calculate the potential at each point in the grid using the average of the neighboring points (replacing the value as you go)</li>
+<li>Repeat step 4 until the values in the grid stops changing</li>
+</ol>
+<p>Below, we have written up a 1D code that performs each of these steps. Your task is to modify this code to work in 2D. You will need to write the functions that compute the potential at each point in the 2D grid as well as the function that sets the boundary conditions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span></code></pre></div><h2 id="1-dimensional-relaxation">1 Dimensional Relaxation</h2>
+<p>The 1D problem is rather simple in that it produces a linear function &ndash; always. This is because the only solution to the 1D Laplace&rsquo;s equation is a linear function.</p>
+<p>$$\frac{d^2V}{dx^2} = 0$$</p>
+<p>The solution to this equation is $V(x) = ax + b$. We can use this to test our relaxation code and make sure that it is accurate. In general, you cannot do this and instead need to have some other mechanism for checking the accuracy of your code (like <a href="https://en.wikipedia.org/wiki/Rate_of_convergence">convergence</a>).</p>
+<p>Below, we have written the 1D code as a set of functions.</p>
+<h3 id="initialize-the-grid-and-set-the-boundary-conditions">Initialize the Grid and set the Boundary Conditions</h3>
+<p>We wrote two functions <code>initialize_grid</code> and <code>set_boundary_conditions</code> that initialize a linear grid and also set the boundary conditions. The <code>initialize_grid</code> function simply sets all values to zero and then <code>set_boundary_conditions</code> sets the values at the edges to the correct values.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize_grid</span>(size):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">## Set the initial values of the grid</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>zeros(size)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_boundary_conditions</span>(grid, left_val, right_val):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">## Set the boundary conditions</span>
+</span></span><span style="display:flex;"><span>    grid[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> left_val
+</span></span><span style="display:flex;"><span>    grid[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> right_val
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> grid
+</span></span></code></pre></div><h3 id="relaxation">Relaxation</h3>
+<p>The core relaxation function is <code>run_relaxation</code>. Notice that it takes in the number of iterations (<code>num_iterations</code>); that is, the number of times you want the relaxation algorithm to run. That is, it will calculate the average of the neighboring points fully, and repeat it a limited number of times.</p>
+<p><strong>This is not how the typical relaxation approach works.</strong></p>
+<p>Normally, you would run the algorithm until the changes between each iteration are below some error tolerance you&rsquo;ve chosen. This can lead to (near)infinite loops if your approach: (1) doesn&rsquo;t converge or (2) converges very slowly.  So it is important to have a maximum number of iterations to run. <strong>You will modify the 1D code to do this.</strong></p>
+<p>Notice that our relaxation function stores the values of the potential at set iterations (<code>store_freq</code>). This is to allow us to plot the potential at different points in the relaxation process. But we don&rsquo;t want to keep them all as that can become memory intensive.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_relaxation</span>(grid, num_iterations, store_freq<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">## Run the relaxation algorithm</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">## Store the grid at regular intervals</span>
+</span></span><span style="display:flex;"><span>    stored_iterations <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">## Run the relaxation</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num_iterations):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, len(grid)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">## Update the grid point with the average of the neighboring points</span>
+</span></span><span style="display:flex;"><span>            grid[j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> (grid[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> grid[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">## Store the grid every store_freq iterations</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span> store_freq <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            stored_iterations<span style="color:#f92672">.</span>append(np<span style="color:#f92672">.</span>copy(grid))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> stored_iterations
+</span></span></code></pre></div><h3 id="plotting">Plotting</h3>
+<p>Our relaxtion algorithm stores a list of grids at different points in the relaxation process. We can use this to plot the potential at different points. Below, we have a function that does just that.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_results</span>(stored_iterations):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">## Plot the results (including all stored iterations)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, grid <span style="color:#f92672">in</span> enumerate(stored_iterations):
+</span></span><span style="display:flex;"><span>        plt<span style="color:#f92672">.</span>plot(grid, label<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Iteration </span><span style="color:#e6db74">{</span>i<span style="color:#f92672">*</span>store_freq<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Grid Index&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Potential&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;1D Relaxation&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><h3 id="lets-run-it">Let&rsquo;s run it</h3>
+<p>We run the code below for linear grid of 100 points. The left boundary condition ($x=0$) is set to zero and the right one ($x=a$) is set to 10. Notice that there is an exact solution:</p>
+<p>$$V(x) = 10\frac{x}{a}$$</p>
+<p>We can compare to that exact solution to see how well our relaxation algorithm is working. We will do that in a moment. First, let&rsquo;s run the code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Parameters</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>dx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.005</span>
+</span></span><span style="display:flex;"><span>grid_size <span style="color:#f92672">=</span> int(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>dx)
+</span></span><span style="display:flex;"><span>left_bc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>right_bc <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>num_iterations <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>store_freq <span style="color:#f92672">=</span> <span style="color:#ae81ff">250</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Execution</span>
+</span></span><span style="display:flex;"><span>grid <span style="color:#f92672">=</span> initialize_grid(grid_size)
+</span></span><span style="display:flex;"><span>grid <span style="color:#f92672">=</span> set_boundary_conditions(grid, left_bc, right_bc)
+</span></span><span style="display:flex;"><span>stored_iterations <span style="color:#f92672">=</span> run_relaxation(grid, num_iterations, store_freq)
+</span></span><span style="display:flex;"><span>plot_results(stored_iterations)
+</span></span></code></pre></div><p><img src="output_9_0.png" alt="png"></p>
+<p>It definitely looks like it gets close to the exact solution. But how close? Let&rsquo;s plot the difference between the exact solution and the solution from our relaxation algorithm. The code below computes the exact solution and then plots the absolute value of the difference between the two at each point on the grid.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compute_exact_solution</span>(grid, left_bc, right_bc):
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, len(grid)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, len(grid))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> left_bc <span style="color:#f92672">+</span> x <span style="color:#f92672">*</span> (right_bc <span style="color:#f92672">-</span> left_bc) <span style="color:#f92672">/</span> (len(grid)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_error</span>(stored_iterations, exact_solution):
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Plotting error</span>
+</span></span><span style="display:flex;"><span>    final_result <span style="color:#f92672">=</span> stored_iterations[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    error <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>abs(final_result <span style="color:#f92672">-</span> exact_solution)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>plot(error, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Error&#34;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Grid Index&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Error&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Error in 1D Relaxation&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>exact_solution <span style="color:#f92672">=</span> compute_exact_solution(grid, left_bc, right_bc)
+</span></span><span style="display:flex;"><span>plot_error(stored_iterations, exact_solution)
+</span></span></code></pre></div><p><img src="output_12_0.png" alt="png"></p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Make sure you can run the code above and you have conceptual understanding of what it is doing. Test it and make sure it follows your intuition.</li>
+<li>Modify the code to do a better job of predicting the exact solution. Get the maximum absolute error below 0.01, 0.001, 1e-4, 1e-5. How many iterations does it take to get to each of these values?</li>
+<li>Modify the code to stop when the maximum absolute error is below a value of your choosing. Did you include a <code>max_iterations</code> variable? If not, do so to avoid infinite loops.</li>
+</ol>
+<h2 id="2d-relaxation">2D Relaxation</h2>
+<p>The 2D relaxation code is very similar to the 1D code. One difference is that the grid has to be traversed in both directions. This means that you will need to move systematically through the 2D grid. The second is that you have to ensure the boundary conditions are set across the entire edge of the grid.</p>
+<p>We recommend breaking the approach into similar functions as above.</p>
+<ol>
+<li>Initialize the 2D grid of a chosen size (we&rsquo;ve done that for you)</li>
+<li>Set the boundary conditions (here you want a functions that can set each edge to a value or array of values) <em>Hint: try using cases or if else to send edge information (&rsquo;top&rsquo;, &rsquo;left&rsquo;) and then use the <code>:</code> with the correct index to set the values for a full row or column (e.g., V[:,0])</em></li>
+<li>Relax the grid (here you will need to loop through the grid in both directions)</li>
+</ol>
+<p>We&rsquo;ve started the code for you below. You will need to finish it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize_grid_2d</span>(size):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&#39;&#39;Initialize the grid of potential values&#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>zeros((size, size))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_boundary</span>(phi, edge, value):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&#39;&#39;phi is the whole grid of potential values that you initialized
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    edge is the edge of the grid that you want to set (top, bottom, left, right)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    value is the value you want to set the edge to (single number or array)&#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">relax</span>(phi, N, tolerance, max_iterations<span style="color:#f92672">=</span><span style="color:#ae81ff">10000</span>, store_frequency<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&#39;&#39;phi is the grid of potential values that you initialized
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    after you set the boundary conditions. That is key!
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    N is the size of the grid (assumed square
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    tolerance is the stopping criterion - you control this; be careful
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    max_iterations is the maximum number of iterations to run (stops loop if not converged)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    store_frequency is how often you want to store the phi values (for plotting)&#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    iterations <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e">## Keep track of the number of iterations</span>
+</span></span><span style="display:flex;"><span>    delta <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#75715e">## Initialize delta (error) to be larger than tolerance</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    stored_phi <span style="color:#f92672">=</span> [] <span style="color:#75715e">## Keep track of phi values for plotting</span>
+</span></span><span style="display:flex;"><span>    stored_deltas <span style="color:#f92672">=</span> []  <span style="color:#75715e">## Keep track of delta values for plotting</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">## Loop condition to run until convergence or max_iterations</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> delta <span style="color:#f92672">&gt;</span> tolerance <span style="color:#f92672">and</span> iterations <span style="color:#f92672">&lt;</span> max_iterations:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Store the old phi values to calculate delta later</span>
+</span></span><span style="display:flex;"><span>        phi_old <span style="color:#f92672">=</span> phi<span style="color:#f92672">.</span>copy()
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">######################</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">### YOUR CODE HERE ###</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">######################</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Calculate delta: max difference between new and old phi values</span>
+</span></span><span style="display:flex;"><span>        delta <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>max(np<span style="color:#f92672">.</span>abs(phi <span style="color:#f92672">-</span> phi_old))
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">## Increment the iteration counter</span>
+</span></span><span style="display:flex;"><span>        iterations <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">## Store phi and delta values every store_frequency iterations</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> iterations <span style="color:#f92672">%</span> store_frequency <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            stored_phi<span style="color:#f92672">.</span>append(phi<span style="color:#f92672">.</span>copy())
+</span></span><span style="display:flex;"><span>            stored_deltas<span style="color:#f92672">.</span>append(delta)
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Iteration: </span><span style="color:#e6db74">{</span>iterations<span style="color:#e6db74">}</span><span style="color:#e6db74">, Delta: </span><span style="color:#e6db74">{</span>delta<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> stored_phi, stored_deltas, iterations
+</span></span></code></pre></div><p><strong>✅ Do this</strong></p>
+<p>Finish the 2D relaxation code (below we&rsquo;ve written up an example use case that it should work for)</p>
+<ol>
+<li>You need to make sure the boundary conditions are set correctly</li>
+<li>You need to traverse the grid and calculate the average of the neighboring points</li>
+</ol>
+<p>It should be that once you have that working, the code below will run. You will need to plot it to see if it is working correctly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example Usage</span>
+</span></span><span style="display:flex;"><span>L <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
+</span></span><span style="display:flex;"><span>h <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>
+</span></span><span style="display:flex;"><span>tolerance <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-5</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> int(L<span style="color:#f92672">/</span>h)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>phi <span style="color:#f92672">=</span> initialize_grid_2d(N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set varying potential on top boundary</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, L, N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>V_top <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> x)
+</span></span><span style="display:flex;"><span>set_boundary(phi, <span style="color:#e6db74">&#39;top&#39;</span>, V_top)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set constant potential on other boundaries</span>
+</span></span><span style="display:flex;"><span>set_boundary(phi, <span style="color:#e6db74">&#39;bottom&#39;</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>set_boundary(phi, <span style="color:#e6db74">&#39;left&#39;</span>, <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>set_boundary(phi, <span style="color:#e6db74">&#39;right&#39;</span>, <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Relaxation</span>
+</span></span><span style="display:flex;"><span>stored_phi, stored_deltas, iterations <span style="color:#f92672">=</span> relax(phi, N, tolerance)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Converged in </span><span style="color:#e6db74">{</span>iterations<span style="color:#e6db74">}</span><span style="color:#e6db74"> iterations.&#34;</span>)
+</span></span></code></pre></div><pre><code>Converged in 1 iterations.
+</code></pre>
+<h2 id="what-about-poissons-equation">What about Poisson&rsquo;s equation?</h2>
+<p>It turns out we can use a very similar approach when we have charges! Alia has written up a script that implements the relaxation approach for Poisson&rsquo;s equation. You can find it below along with the derivation.</p>
+<p>$$\nabla^2 \phi = -\frac{\rho}{\epsilon_0}$$</p>
+<p>Where $\rho$ is a <strong>charge density</strong>.</p>
+<p>Substituting our 2nd partial derivative equations gives us:</p>
+<p>$$
+\frac{\partial^2 \phi}{\partial x^2} + \frac{\partial^2 \phi}{\partial y^2}  = \frac{\phi(x+h,y) + \phi(x-h,y) - 2\phi(x,y) + \phi(x,y+h) + \phi(x,y-h) - 2\phi(x,y)}{h^2} = -\frac{\rho}{\epsilon_0}
+$$</p>
+<p>Which in turn gives us the update equation:</p>
+<p>$$
+\phi_{k+1}(x,y) = \frac{1}{4}\left[\phi_{k}(x+h,y) + \phi_{k}(x-h,y) + \phi_{k}(x,y+h) + \phi_{k}(x,y-h) \right] + \frac{h^2}{4\epsilon_0} \rho(x,y)
+$$</p>
+<p>We can implement this (warning: this takes a long time to converge).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># constants and parameters</span>
+</span></span><span style="display:flex;"><span>L <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>h <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>
+</span></span><span style="display:flex;"><span>V <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> int(L<span style="color:#f92672">/</span><span style="color:#ae81ff">0.01</span>)
+</span></span><span style="display:flex;"><span>tol <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-2</span>
+</span></span><span style="display:flex;"><span>epsilon0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">8.854e-12</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># setup phi, phiprime arrays</span>
+</span></span><span style="display:flex;"><span>phi <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>phiprime <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>copy(phi) <span style="color:#75715e"># to play the part of phi (k+1)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rho</span>(i,j):
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> i <span style="color:#f92672">*</span> h
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> j <span style="color:#f92672">*</span> h
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> x <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0.6</span> <span style="color:#f92672">and</span> x <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.8</span> <span style="color:#f92672">and</span> y <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0.2</span> <span style="color:#f92672">and</span> y <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.4</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1e-7</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> x <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0.2</span> <span style="color:#f92672">and</span> x <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.4</span> <span style="color:#f92672">and</span> y <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0.6</span> <span style="color:#f92672">and</span> y <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.8</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1e-7</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># track number of iterations</span>
+</span></span><span style="display:flex;"><span>delta <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#75715e"># initial delta</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> delta <span style="color:#f92672">&gt;</span> tol: <span style="color:#75715e"># run until converged</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> i <span style="color:#f92672">==</span> N <span style="color:#f92672">or</span> j <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span>  j <span style="color:#f92672">==</span> N: <span style="color:#75715e"># don&#39;t update boundary</span>
+</span></span><span style="display:flex;"><span>                phiprime[i,j] <span style="color:#f92672">=</span> phi[i,j]
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># relaxation update equation</span>
+</span></span><span style="display:flex;"><span>                phiprime[i,j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.25</span> <span style="color:#f92672">*</span> (phi[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,j] <span style="color:#f92672">+</span> phi[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,j] <span style="color:#f92672">+</span> phi[i,j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> phi[i,j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]) <span style="color:#f92672">+</span> h<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> (<span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> epsilon0) <span style="color:#f92672">*</span> rho(i,j)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># find max difference for delta</span>
+</span></span><span style="display:flex;"><span>    delta <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>abs(phi<span style="color:#f92672">-</span>phiprime)<span style="color:#f92672">.</span>max()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># swap arrays to keep iterating</span>
+</span></span><span style="display:flex;"><span>    phi,phiprime <span style="color:#f92672">=</span> phiprime,phi 
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># track iterations</span>
+</span></span><span style="display:flex;"><span>    k <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> k<span style="color:#f92672">%</span><span style="color:#ae81ff">500</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> k <span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;iter:&#34;</span>,k,<span style="color:#e6db74">&#34;delta:&#34;</span>,delta)         
+</span></span><span style="display:flex;"><span>    delta <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>abs(phi<span style="color:#f92672">-</span>phiprime)<span style="color:#f92672">.</span>max()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(k)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>imshow(phi)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><pre><code>iter: 1 delta: 0.28235825615541005
+iter: 500 delta: 0.06832141135411973
+iter: 1000 delta: 0.03251014051510026
+iter: 1500 delta: 0.017114857647044346
+1931
+</code></pre>
+<p><img src="output_19_1.png" alt="png"></p>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/2---em-and-pdes/activity-sep_var_spherical_examples/">10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

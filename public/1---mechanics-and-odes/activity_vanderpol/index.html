@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14 Sept 23 - Conducting a complete analysis of an ODE | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>14 Sept 23 - Conducting a complete analysis of an ODE</h1>
+        
+    </header>
+
+    <p>We&rsquo;ve built up all the tools that we use to investigate ODEs. Now we are going to practice with an oscillator that exhibits really interesting dynamics: the <a href="https://en.wikipedia.org/wiki/Van_der_Pol_oscillator">Van der Pol oscillator</a>. This equation originates from nonlinear circuits in early radios, but has now also been used in neuroscience and geology. It is given by the differential equation:</p>
+<p>$$
+\ddot{x} = -\mu (x^2 - 1)\dot{x} - x
+$$</p>
+<p>or, written as two first order equations:</p>
+<p>$$
+\dot{x} = v \hspace{1in} \dot{v} = -\mu (x^2 - 1)v - x
+$$</p>
+<p>With $\mu &gt; 0$. Note that this equation is simply the harmonic oscillator when $\mu = 0$. The strange $-\mu (x^2 - 1)\dot{x}$ represents damping, but this damping behaves strangely, because when $|x|&lt;1$ it is negative damping, that is it boosts oscillations smaller than $1$, while still slowing down oscillations larger than $1$.</p>
+<p>Now we play the usual game of trying to figure out how this system behaves:</p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Identify the fixed point of this system. Follow the linearization procedure to characterize it.</li>
+<li>Edit the code below to produce a phase plot for the Van der Pol oscillator. This code also numerically integrates a trajectory and plots it. Add a second trajectory and plot that as well.</li>
+<li>What happens to phase space when you change the value of $\mu$? What if you make it negative?</li>
+<li>What behavior do you notice here that&rsquo;s different than you&rsquo;ve seen before? What is attracting the trajectories?</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.integrate <span style="color:#f92672">import</span> solve_ivp
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">VP_eqn</span>(x, v, mu <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.</span>):
+</span></span><span style="display:flex;"><span>    xdot, vdot <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>] <span style="color:#75715e">## CHANGE</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> xdot, vdot
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">VP_phase</span>(X, VX, mu):
+</span></span><span style="display:flex;"><span>    xdot, vdot <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(X<span style="color:#f92672">.</span>shape), np<span style="color:#f92672">.</span>zeros(VX<span style="color:#f92672">.</span>shape)
+</span></span><span style="display:flex;"><span>    Xlim, Ylim <span style="color:#f92672">=</span> X<span style="color:#f92672">.</span>shape
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(Xlim):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(Ylim):
+</span></span><span style="display:flex;"><span>            xloc <span style="color:#f92672">=</span> X[i, j]
+</span></span><span style="display:flex;"><span>            yloc <span style="color:#f92672">=</span> VX[i, j]
+</span></span><span style="display:flex;"><span>            xdot[i,j], vdot[i,j] <span style="color:#f92672">=</span> VP_eqn(xloc, yloc,mu)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> xdot, vdot
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">VP_eqn_for_solve_ivp</span>(t,curr_vals, mu<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>): <span style="color:#75715e"># need to rephrase this to work with what solve_ivp expects</span>
+</span></span><span style="display:flex;"><span>    x, v <span style="color:#f92672">=</span> curr_vals 
+</span></span><span style="display:flex;"><span>    xdot, vdot <span style="color:#f92672">=</span> VP_eqn(x,v,mu)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> xdot,vdot
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Numerical Integration</span>
+</span></span><span style="display:flex;"><span>tmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>dt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>
+</span></span><span style="display:flex;"><span>tspan <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>,tmax)
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,tmax,dt)
+</span></span><span style="display:flex;"><span>mu <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.</span>
+</span></span><span style="display:flex;"><span>initial_condition <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>] 
+</span></span><span style="display:flex;"><span>solved <span style="color:#f92672">=</span> solve_ivp(VP_eqn_for_solve_ivp,tspan,initial_condition,t_eval <span style="color:#f92672">=</span> t, args <span style="color:#f92672">=</span> (mu,),method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;RK45&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Plotting stuff</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">3.</span>, <span style="color:#ae81ff">3.</span>, N)
+</span></span><span style="display:flex;"><span>v <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">3.</span>, <span style="color:#ae81ff">3.</span>, N)
+</span></span><span style="display:flex;"><span>X, V <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>meshgrid(x, v)
+</span></span><span style="display:flex;"><span>xdot, vdot <span style="color:#f92672">=</span> VP_phase(X, V,mu)
+</span></span><span style="display:flex;"><span>ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span>Q <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>streamplot(X, V, xdot, vdot, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;k&#39;</span>,broken_streamlines <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(solved<span style="color:#f92672">.</span>y[<span style="color:#ae81ff">0</span>],solved<span style="color:#f92672">.</span>y[<span style="color:#ae81ff">1</span>],lw <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>,c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;red&#39;</span>) <span style="color:#75715e"># plot trajectory from solve_ivp</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;$x$&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;$v$&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><img src="output_1_0.png" alt="png"></p>
+<p><strong>✅ Do this</strong></p>
+<p>Based on the phase space diagram, what do you expect actual trajectories to look like in $x$ vs $t$ space? Use the numerically integrated trajectories to plot that.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"></code></pre></div><h2 id="limit-cycles">Limit Cycles</h2>
+<p>The new behavior we&rsquo;ve seen from this equation is what&rsquo;s called a <strong>limit cycle</strong>, where the system is attracted/reppeled from a closed curve instead of a fixed point(s). There&rsquo;s a lot of really great math here that&rsquo;s a bit beyond what we can cover in class, but it would be a great thing to look into for a project!</p>
+<p><strong>✅ Do this</strong></p>
+<p>Spend the rest of class investigating the Van der Pol oscillator. Here are a few investigations you could do:</p>
+<ul>
+<li>When $\mu$ changes from negative to positive, this system undergoes what is known as a <strong>Hopf Bifurcation</strong> Look up what bifurcations are to understand what this means and show that it is true using numerical integration.</li>
+<li>Add an $A\sin(t)$ driving force term to the differential equation and numerically integrate. What do these trajectories look like in $x$ vs $t$ and in phase space?</li>
+<li>Examine the energetics of this system. Is energy conserved or does it have some interesting behavior? Why?</li>
+</ul>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/1---mechanics-and-odes/notes-linearization_odes/">← 19 Sep 23 - Notes: Heading towards Chaos</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/1---mechanics-and-odes/activity-phase_space/">12 Sep 23 - Activity: The Dynamical Systems Approach and Phase Portraits →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

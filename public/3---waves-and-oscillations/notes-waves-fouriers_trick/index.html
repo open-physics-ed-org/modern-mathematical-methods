@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Oct 2023 - Notes: Deconstructing Waves | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>30 Oct 2023 - Notes: Deconstructing Waves</h1>
+        
+    </header>
+
+    <p>While we observe waves in many places, it&rsquo;s the case that we don&rsquo;t often have the luxury of constructing them as we want. In fact, much of the science we do relies on measurements of voltage or current to represent the dynamics of the system.</p>
+<ul>
+<li>Want to measure distance? Interferometry gives you a voltage to calibrate.</li>
+<li>Want to measure material surface properties? Voltage jumps across probes give you proxies</li>
+<li>Viscosity? Stick the stuff in a rheometer, squeeze it, and measure voltage changes.</li>
+<li>AYO exoplanets? Light curves are really just measures of voltage across a CCD.</li>
+</ul>
+<p>The point is that you will almost always be dealing with signals that are proxies for the actual thing you care about. So let&rsquo;s construct some and deconstruct them.</p>
+<h2 id="the-cosmic-microwave-background">The Cosmic Microwave Background</h2>
+<p>The <a href="https://en.wikipedia.org/wiki/Cosmic_microwave_background">Cosmic Microwave Background</a> is the oldest light in the universe. It&rsquo;s the light that was emitted when the universe cooled enough for electrons to bind to protons and form neutral hydrogen. This happened about 380,000 years after the Big Bang. This signal came in the form of a noise that was found in every observation we seemed to make. The kind of work we are starting (signal deconstruction) underlies much of the analysis used to unpack the CMB, and to continue understanding it. There&rsquo;s a great video from Fermilab about the CMB.</p>
+<p><a href="https://inv.tux.pizza/watch?v=AYFDN2DSVgc"><img src="https://markdown-videos-api.jorgenkh.no/youtube/AYFDN2DSVgc?width=720&amp;height=405" alt="CMB"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=AYFDN2DSVgc">https://inv.tux.pizza/watch?v=AYFDN2DSVgc</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=AYFDN2DSVgc">https://youtube.com/watch?v=AYFDN2DSVgc</a></li>
+</ul>
+<h2 id="constructing-waves">Constructing Waves</h2>
+<p>Below is a little code that will generate superposed waves. We will use this to generate some intuition about how waves add together, which will help us deconstruct them.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%</span>matplotlib inline
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>omega1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>omega2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">105</span>
+</span></span><span style="display:flex;"><span>omega3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>A1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>A2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.9</span>
+</span></span><span style="display:flex;"><span>A3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y1 <span style="color:#f92672">=</span> A1<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>cos(omega1<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y2 <span style="color:#f92672">=</span> A2<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>cos(omega2<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>y3 <span style="color:#f92672">=</span> A2<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>cos(omega3<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>y4 <span style="color:#f92672">=</span> A3<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>cos(omega2<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>y5 <span style="color:#f92672">=</span> A3<span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>cos(omega3<span style="color:#f92672">*</span>t)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CloseAmpCloseFreq <span style="color:#f92672">=</span> y1<span style="color:#f92672">+</span>y2
+</span></span><span style="display:flex;"><span>CloseAmpFarFreq <span style="color:#f92672">=</span> y1<span style="color:#f92672">+</span>y3
+</span></span><span style="display:flex;"><span>FarAmpCloseFreq <span style="color:#f92672">=</span> y1<span style="color:#f92672">+</span>y4
+</span></span><span style="display:flex;"><span>FarAmpFarFreq <span style="color:#f92672">=</span> y1<span style="color:#f92672">+</span>y5
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t,CloseAmpCloseFreq<span style="color:#f92672">+</span><span style="color:#ae81ff">6</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Close Amp; Close Freq&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t,CloseAmpFarFreq<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Close Amp; Far Freq&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t,FarAmpCloseFreq<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Far Amp; Close Freq&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t,FarAmpFarFreq<span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Far Amp; Far Freq&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span></code></pre></div><pre><code>&lt;matplotlib.legend.Legend at 0x117112f70&gt;
+</code></pre>
+<p><img src="output_2_1.png" alt="png"></p>
+<p><strong>✅ Do this</strong></p>
+<ol>
+<li>Adjust the signals to show qualitatively how the different signals behave as you change frequencies and amplitudes.</li>
+<li>Build a table that discusses qualitatively what happens as each change is made.</li>
+</ol>
+<p>Think about the answers to the following questions:</p>
+<ol>
+<li>Does it seem easier to see how you can deconstruct a superposed wave if the frequencies are close together or far apart?</li>
+<li>What about the amplitudes? Does it matter if one is really big and one is really small? If they are comparable?</li>
+</ol>
+<h2 id="dealing-with-real-signals">Dealing with &ldquo;Real&rdquo; Signals</h2>
+<p>Ok, but can we find these frequencies given a signal? Or rather, how might we find the signal we need? We can use a little mathematics from Fourier. The <a href="https://en.wikipedia.org/wiki/Fourier_transform">Fourier transform</a> is a mathematical tool that allows us to deconstruct a signal into its constituent frequencies. There&rsquo;s an excellent introduction to it from 3Blue1Brown.</p>
+<p><a href="https://inv.tux.pizza/watch?v=spUNpyF58BY"><img src="https://markdown-videos-api.jorgenkh.no/youtube/spUNpyF58BY?width=720&amp;height=405" alt="Fourier Transform"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=spUNpyF58BY">https://inv.tux.pizza/watch?v=spUNpyF58BY</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=spUNpyF58BY">https://youtube.com/watch?v=spUNpyF58BY</a></li>
+</ul>
+<p>So any periodic function in 1 dimension can be expanded as a general sum of sines and cosines:</p>
+<p>$$f(t) = \dfrac{a_0}{2} + \sum_{n=1}^{\infty} \left(a_n sin(\omega_n t) + b_n cos(\omega_n t) \right)$$</p>
+<p>We can show this can be written like:</p>
+<p>$$f(t) = \sum_{-\infty}^{+\infty} c_n e^{i\omega_n t}$$</p>
+<p>But how does this get us what we need? Our goal is to find the expansion coefficients ($a_n$&rsquo;s &amp; $b_n$&rsquo;s or just the $c_n$&rsquo;s), which tells us the right mix of signals to add together to get the observed one. Why is that important? Consider the signals below? How might we analyze them?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.signal <span style="color:#f92672">import</span> sawtooth, square, chirp
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>saw <span style="color:#f92672">=</span> sawtooth(t)
+</span></span><span style="display:flex;"><span>sq <span style="color:#f92672">=</span> square(t)
+</span></span><span style="display:flex;"><span>ch <span style="color:#f92672">=</span> chirp(t,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">8</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t, saw, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Sawtooth Wave&#34;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t, sq<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Square Wave&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t, ch<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Chirp&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span></code></pre></div><pre><code>&lt;matplotlib.legend.Legend at 0x17b39f670&gt;
+</code></pre>
+<p><img src="output_5_1.png" alt="png"></p>
+<h2 id="decomposing-signals">Decomposing Signals</h2>
+<p>Consider the Fourier Expansion of your choosing:</p>
+<p>$$f(t) = \dfrac{a_0}{2} + \sum_{n=1}^{\infty} \left(a_n \sin(\omega_n t) + b_n \cos(\omega_n t) \right) \qquad f(t) = \sum_{-\infty}^{+\infty} c_n e^{i\omega_n t}$$</p>
+<p>In terms of the longest period, $T_0$,</p>
+<p>$$f(t) = \dfrac{a_0}{2} + \sum_{n=1}^{\infty} \left(a_n \sin(\dfrac{2n\pi t}{T_0}) + b_n \cos(\dfrac{2n\pi t}{T_0}) \right) \qquad f(t) = \sum_{-\infty}^{+\infty} c_n e^{i\dfrac{2n\pi t}{T_0}}$$</p>
+<p>We can find the expansion coefficients for the following signals (think before you integrate):</p>
+<ol>
+<li>$f(t) = \cos(\omega_0 t)$ here $\omega_0$ corresponds to the longest known period $T_0$.</li>
+<li>$f(t) = 2\sin(\omega_0 t) + 3\cos(2*\omega_0t)$</li>
+<li>$f(t) = 2\sin(\omega_0 t+\pi/2) + 3\cos(2*\omega_0t)$</li>
+<li>$f(t) = 1$ from 0 to $T_0/2$ and 0 from $T_0/2$ to $T_0$ repeating&hellip;.</li>
+</ol>
+<h3 id="pick-off-the-coefficients">Pick off the coefficients</h3>
+<p>For the first two cases, we can pick off the coefficients because they match the model</p>
+<p>$$f(t) = \dfrac{a_0}{2} + \sum_{n=1}^{\infty} \left(a_n \sin(\dfrac{2n\pi t}{T_0}) + b_n \cos(\dfrac{2n\pi t}{T_0}) \right)$$</p>
+<p>For $f(t) = \cos(\omega_0 t)$, all the terms are zero except for $b_1$ which is 1.</p>
+<p>For $f(t) = 2 \sin(\omega_0 t) + 3 \cos(2\omega_0 t)$, all the terms are zero except for $a_1$ which is 2 and $b_2$ which is 3.</p>
+<p>What about the 3rd one?</p>
+<p>$$f(t) = 2\sin(\omega_0 t+\pi/2) + 3\cos(2*\omega_0t)$$</p>
+<p>It&rsquo;s clever to change this to a cosine and read off the values:</p>
+<p>$$f(t) = 2\sin(\omega_0 t+\pi/2) + 3\cos(2*\omega_0t) = 2\cos(\omega_0 t) + 3\cos(2*\omega_0t)$$</p>
+<p>And thus: $b_1 = 2$ and $b_2=3$ and everything else vanishes.</p>
+<p>Can we do the integrals and get the same results? Sure. But it&rsquo;s a lot more work.</p>
+<h3 id="what-about-the-last-one">What about the last one?</h3>
+<p>That function is a classic &ldquo;square wave&rdquo;, or <a href="https://en.wikipedia.org/wiki/Duty_cycle">half duty cycle</a>. It&rsquo;s a function that is 1 for half the period and 0 for the other half. It&rsquo;s a function that is used in digital electronics to encode information. That function we have to solve by integrating. The handwritten notes show how. The more general duty cycle function is shown below.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/0/02/PWM_duty_cycle_with_label.gif" alt="Duty cycle gif"></p>
+<h2 id="resources">Resources</h2>
+<h3 id="handwritten-notes">Handwritten notes</h3>
+<ul>
+<li><a href="../assets/notes/Notes-Fourier_Example.pdf">Introduction to Signal Analysis</a></li>
+</ul>
+<h3 id="additional-videos">Additional Videos</h3>
+<p><a href="https://inv.tux.pizza/watch?v=mgXSevZmjPc"><img src="https://markdown-videos-api.jorgenkh.no/youtube/mgXSevZmjPc?width=720&amp;height=405" alt="Fourier Series"></a></p>
+<ul>
+<li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=mgXSevZmjPc">https://inv.tux.pizza/watch?v=mgXSevZmjPc</a></li>
+<li>Commercial Link: <a href="https://youtube.com/watch?v=mgXSevZmjPc">https://youtube.com/watch?v=mgXSevZmjPc</a></li>
+</ul>
+
+
+    
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/3---waves-and-oscillations/activity-waves-signals/">← 31 Oct 23 - Activity: Signal Deconstruction</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/3---waves-and-oscillations/activity-waves-1d/">26 Oct 2023 - Activity: 1-Dimensional Travelling Waves →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>

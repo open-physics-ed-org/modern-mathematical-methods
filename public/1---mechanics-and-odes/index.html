@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 - Mechanics and ODEs | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
+        </ul>
+    </nav>
+
+    <main role="main">
+        
+<article>
+    <h1>1 - Mechanics and ODEs</h1>
+    <p>This section contains course materials for 1 - Mechanics and ODEs.</p>
+
+
+    
+    <section style="margin-top: 30px;">
+        <h2>Pages in this section:</h2>
+        <ul>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/notes-sho/"><strong>29 Aug 23 - Notes: Simple Harmonic Oscillator</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/notes_frames/"><strong>31 Aug 23 - Notes: Frames and Coordinates</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/activity-frames/"><strong>31 Aug 23 - Activity: Frames and Coordinates</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/notes-lagrangian-dynamics/"><strong>5 Sept 23 - Notes: Lagrangian Dynamics</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/activity-lagrange_1/"><strong>5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/notes-numerical_integration_1d/"><strong>7 Sept 23 - Notes: Numerical Integration in 1D</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/activity-lagrange_2/"><strong>7 Sep 23 - Activity: Numerical Integration and More Lagrangians</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/notes-phase_space/"><strong>12 Sept 23 - Notes: Dynamical Systems and Phase Space</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/activity-phase_space/"><strong>12 Sep 23 - Activity: The Dynamical Systems Approach and Phase Portraits</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/activity_vanderpol/"><strong>14 Sept 23 - Conducting a complete analysis of an ODE</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/notes-linearization_odes/"><strong>19 Sep 23 - Notes: Heading towards Chaos</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/1---mechanics-and-odes/activity-duffing/"><strong>19 Sep 23 - The Duffing Oscillator</strong></a>
+                
+            </li>
+            
+        </ul>
+    </section>
+    
+</article>
+
+    </main>
+
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+        
+        <p>Danny Caballero, Alia Valentine</p>
+        
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
+</body>
+</html>
