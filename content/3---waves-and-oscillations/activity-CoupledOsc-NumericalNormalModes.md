@@ -12,7 +12,7 @@ Now that we have discussed and built some facility with Lagrangian dynamics, let
 
 Consider the setup below consisting of three masses connected by springs to each other. We intend to find the normal modes of the system by denoting each mass's displacement ($x_1$, $x_2$, and $x_3$).
 
-![3 Coupled Oscillators](/images/content/assets/images/3_coupled_osc.png)
+{{< figure src="/images/content/assets/images/3_coupled_osc.png" alt="3 Coupled Oscillators" >}}
 
 
 ## Finding the Normal Mode Frequencies

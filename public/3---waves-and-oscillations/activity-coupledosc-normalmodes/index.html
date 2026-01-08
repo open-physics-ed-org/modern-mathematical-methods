@@ -11,7 +11,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
             onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     
-    <link rel="stylesheet" href="/css/accessibility.css">
+    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -83,7 +83,7 @@
 <body>
     <nav role="navigation" aria-label="Main navigation">
         <ul>
-            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
             
             
             <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
@@ -130,7 +130,9 @@
 <p>There is still plenty of room for pencil and paper. We will explore this numerically later.</p>
 <p>We will start with a form of guided lecture and build the understanding of these methods together. Then you will apply what you learned to a new system.</p>
 <p>Let&rsquo;s assume you have a chain of two mass connected by springs (all the same $k$) as below.</p>
-<p><img src="/images/content/assets/images/two-coupled-gliders-diagram.png" alt="Coupled Oscillator set up. Two oscillators connected by three springs in a horizontal line."></p>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/images/two-coupled-gliders-diagram.png" alt="Coupled Oscillator set up. Two oscillators connected by three springs in a horizontal line." loading="lazy"></figure>
+
 <h3 id="deriving-the-equations-of-motion">Deriving the Equations of Motion</h3>
 <p>Let&rsquo;s write the Lagrangian for this system to get equations of motion. The kinetic and potential energies are:</p>
 <p>$$T=\frac{1}{2}m\dot{x}_1^2+\frac{1}{2}m\dot{x}_2^2$$
@@ -200,7 +202,9 @@ $$\ddot{x}_2 = -\frac{2k}{m}x_2 + \frac{k}{m}x_1$$</p>
 </span></span></code></pre></div><h2 id="applying-normal-modes-to-a-new-system">Applying Normal Modes to a New System</h2>
 <h3 id="two-vertical-pendulums-connected-by-a-spring">Two vertical pendulums connected by a spring</h3>
 <p>Consider two vertical pendulums of length $l$ connected via their masses $M$ by a weak spring $k$. By weak, we mean that the spring constant is small. See below for a canonical setup:</p>
-<p><img src="/images/content/assets/images/coupled_diag.jpg" alt="Coupled pendulua diagram"></p>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/images/coupled_diag.jpg" alt="Coupled pendulua diagram" loading="lazy"></figure>
+
 <p><strong>✅ Do this</strong></p>
 <ol>
 <li>In this limit, write down the pair of second order linear differential equations for the horizontal motion of each pendulum bob around its equilibrium.</li>
@@ -209,7 +213,9 @@ $$\ddot{x}_2 = -\frac{2k}{m}x_2 + \frac{k}{m}x_1$$</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
 </span></span></code></pre></div><h2 id="three-coupled-oscillators">Three Coupled Oscillators</h2>
 <p>Consider the setup below consisting of three masses connected by springs to each other. We intend to find the normal modes of the system by denoting each mass&rsquo;s displacement ($x_1$, $x_2$, and $x_3$).</p>
-<p><img src="/images/content/assets/images/3_coupled_osc.png" alt="3 Coupled Oscillators"></p>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/images/3_coupled_osc.png" alt="3 Coupled Oscillators" loading="lazy"></figure>
+
 <h2 id="finding-the-normal-mode-frequencies">Finding the Normal Mode Frequencies</h2>
 <p><strong>✅ Do this</strong></p>
 <p>This is not magic as we will see, it follows from our choices of solution. Here&rsquo;s the steps and what you might notice about them:</p>

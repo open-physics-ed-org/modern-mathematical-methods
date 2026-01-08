@@ -11,7 +11,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
             onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     
-    <link rel="stylesheet" href="/css/accessibility.css">
+    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -83,7 +83,7 @@
 <body>
     <nav role="navigation" aria-label="Main navigation">
         <ul>
-            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
             
             
             <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
@@ -127,7 +127,9 @@
     <p>Now that we have discussed and built some facility with Lagrangian dynamics, let&rsquo;s see how using it makes our study of normal modes much simpler than Newtonian mechanics. We will couple this analysis to solving an eigenvalue problem by guessing the form of the solutions. This technique is very common in theoretical physics with different guesses for the solution forms giving rise to different eigenvalue problems (e.g., <a href="https://en.wikipedia.org/wiki/Bessel_function">Bessel functions for 2D surface problems</a> or <a href="https://en.wikipedia.org/wiki/Hermite_polynomials">Hermite polynomials for the Quantum Harmonic Oscillator</a>.</p>
 <h2 id="three-coupled-oscillators">Three Coupled Oscillators</h2>
 <p>Consider the setup below consisting of three masses connected by springs to each other. We intend to find the normal modes of the system by denoting each mass&rsquo;s displacement ($x_1$, $x_2$, and $x_3$).</p>
-<p><img src="/images/content/assets/images/3_coupled_osc.png" alt="3 Coupled Oscillators"></p>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/images/3_coupled_osc.png" alt="3 Coupled Oscillators" loading="lazy"></figure>
+
 <h2 id="finding-the-normal-mode-frequencies">Finding the Normal Mode Frequencies</h2>
 <p><strong>✅ Do this</strong></p>
 <p>This is not magic as we will see, it follows from our choices of solution. Here&rsquo;s the steps and what you might notice about them:</p>

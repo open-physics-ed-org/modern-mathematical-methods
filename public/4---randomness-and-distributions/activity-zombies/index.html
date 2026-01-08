@@ -11,7 +11,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
             onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     
-    <link rel="stylesheet" href="/css/accessibility.css">
+    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -83,7 +83,7 @@
 <body>
     <nav role="navigation" aria-label="Main navigation">
         <ul>
-            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
             
             
             <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
@@ -142,7 +142,9 @@
 <p>The <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology">compartmental model</a> is a simple way to model the spread of a disease and where we will start.</p>
 <h3 id="the-sis-model">The SIS model</h3>
 <p>The Susceptible-Infected-Susceptible (SIS) model describes an epidemic in which healthy individuals (Susceptibles) can become infected with the disease in question (Infected). The infected individuals can be cured but retain no natural immunity to the disease (i.e., become susceptible again). The figure below illustrates the compartments and flux of individuals in the SIS model. Such models are suitable for bacterial infections.</p>
-<p><img src="/images/content/assets/images/sis.png" alt="The SIS model"></p>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/images/sis.png" alt="The SIS model" loading="lazy"></figure>
+
 <p>The dynamics are given by,</p>
 <p>$$\dfrac{dS}{dt} = -\beta S I + \gamma I$$
 $$\dfrac{dI}{dt} = \beta S I - \gamma I$$</p>
@@ -152,7 +154,9 @@ $$I(t) = N - S(t)$$</p>
 <p>For given values of $\beta$ and $\gamma$, we can solve these equations numerically.</p>
 <h3 id="the-sir-model">The SIR model</h3>
 <p>The Susceptible-Infected-Recovered (SIR) model describes an epidemic in which healthy individuals (Susceptibles) can become infected with the disease in question (Infected). The infected individuals can be cured and retain a natural immunity to the disease (Recovered). The figure below illustrates the compartments and flux of individuals in the SIR model. Such models are suitable for viral infections. We can modify this model for the zombies.</p>
-<p><img src="/images/content/assets/images/sir.png" alt="The SIR model"></p>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/images/sir.png" alt="The SIR model" loading="lazy"></figure>
+
 <p>The transfer rates can be defined for the SIR model as was for the SIS model. The rate equations that govern this model are three ordinary non-linear differential equations. Again, we have neglected the birth and death rates of the populations by making the approximation the epidemic occurs very quickly.</p>
 <p>$$\dfrac{dS}{dt} = -\beta S I$$
 $$\dfrac{dI}{dt} = \beta S I - \gamma I$$
@@ -160,7 +164,9 @@ $$\dfrac{dR}{dt} = \gamma I$$</p>
 <p>Again, for given values of $\beta$ and $\gamma$, we can solve these equations numerically.</p>
 <h3 id="the-szr-model">The SZR model</h3>
 <p>This SZR model treats the population as compartmentalized into the 3 groups: Susceptible (S), Zombie (Z), and Removed (R). Movement between these groups is illustrated below.</p>
-<p><img src="/images/content/assets/images/szr.png" alt="The SZR model"></p>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/images/szr.png" alt="The SZR model" loading="lazy"></figure>
+
 <p>Susceptibles can become zombies through an encounter with a zombie. Zombies can move to the removed compartment by being destroyed in classic manners (e.g., Dawn of the Dead). Susceptibles can move to the removed compartment through death by a non-zombie encounter. Finally, removed individuals can become zombies through typical resurrection techniques (e.g., Live and Let Die).</p>
 <p>The deterministic model includes transfer rates we have seen before, but we include the rates of transfer from susceptible to removed ($\delta$) and removed to zombie ($\xi$).</p>
 <p>$$\dfrac{dS}{dt} = - \beta S Z - \delta S$$

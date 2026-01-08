@@ -18,7 +18,7 @@ Book Reading:
 
 In many cases, we can do this. But consider the picture below of a bead sliding inside a cone. How would you write down the contact force between the cone and the bead for all space and time?
 
-![Cone](/images/content/assets/cylindrical_cone_mass.jpg)
+{{< figure src="/images/content/assets/cylindrical_cone_mass.jpg" alt="Cone" >}}
 
 
 

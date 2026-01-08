@@ -11,7 +11,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
             onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
     
-    <link rel="stylesheet" href="/css/accessibility.css">
+    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -83,7 +83,7 @@
 <body>
     <nav role="navigation" aria-label="Main navigation">
         <ul>
-            <li class="menu-home"><a href="/">PHY 415 Fall 2023</a></li>
+            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
             
             
             <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
@@ -166,7 +166,9 @@
 <p>where $I_{enc}$ is the current enclosed by the path of integration. This integral is always true, but like Gauss&rsquo;&rsquo;s Law, it is not useful unless there&rsquo;s a high degree of symmetry.</p>
 <h4 id="a-thin-wire">A thin wire</h4>
 <p>The example of a thin wire is common and forms the basis for more complex forms of Ampere&rsquo;s Law. Consider a thin wire with a steady current $I$. We are a distance $r$ from the wire. We know the magnetic field circulates around the wire, so we choose a circular path a distance $r$ from the wire.</p>
-<p><img src="/images/content/assets/images/ampere_loop.jpg" alt="Thin wire"></p>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/images/ampere_loop.jpg" alt="Thin wire" loading="lazy"></figure>
+
 <p>In this case the (as of yet uncomputed) magnetic field is always parallel to out choice of path. Moerover, we have no reason to believe the magnetic field strength is different at different locations along the circle. So the integral simplifies:</p>
 <p>$$\oint \mathbf{B} \cdot d\mathbf{l} = \oint B dl = B \oint dl = B 2\pi r$$</p>
 <p>where $B$ is the magnitude of the magnetic field. The total current is just $I$ so that,</p>
@@ -175,7 +177,9 @@
 <p>where $\hat{\phi}$ is the unit vector in the azimuthal direction &ndash; around the wire.</p>
 <h3 id="a-thick-wire">A thick wire</h3>
 <p>Consider a thick wire (radius $a$) that has a steady current density $\mathbf{J}(\mathbf{r}) = J_0 \hat{z}$ where $J_0$ is some constant. See the figure below.</p>
-<p><img src="/images/content/assets/images/ampere-thick.png" alt="Thick wire"></p>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/images/ampere-thick.png" alt="Thick wire" loading="lazy"></figure>
+
 <p><strong>✅ Do this</strong></p>
 <ol>
 <li>Use Ampere&rsquo;s Law to find the magnetic field inside and outside the wire.</li>

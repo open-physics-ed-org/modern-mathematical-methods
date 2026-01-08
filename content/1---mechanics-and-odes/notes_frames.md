@@ -30,7 +30,7 @@ A note on notation: $r_{A/B}$ means "the position of **object** $A$ in **frame**
 
 
 
-<img src="/images/content/assets/squirrel1.png" alt="squirrel1" width=500px/>
+{{< figure src="/images/content/assets/squirrel1.png" alt="" >}}
 
 ### Reminders about frames and linear frame changes
 
@@ -77,7 +77,7 @@ Hopefully these are intuitive from what you've learned back in introductory phys
 
 This is relatively simple to understand if we consider the position of one object (C) in two different frames (A and B). The location of object C in frame A is $\mathbf{r}_{C/A}$ and in frame B is $\mathbf{r}_{C/B}$. Note that these vectors point from the origin of the frame (A or B) to the position of the object (C). See below.
 
-<img src="/images/content/assets/frame_vectors.png" alt="Diagram showing relative position vectors for three different points to illustrate the mathematical relationship between the position vectors." width=500px/>
+{{< figure src="/images/content/assets/frame_vectors.png" alt="" >}}
 
 From this diagram it is clear that we can write the following relationship between the position vectors:
 
@@ -114,7 +114,7 @@ Let's use these transformations in a problem.
 A second squirrel appears, which we'll call squirrel $C$. This scares the first squirrel into running toward you ($\mathbf{v}_{B/A}$), while the new squirrel runs away ($\mathbf{v}_{C/A}$).
 
 
-<img src="/images/content/assets/squirrel2.png" alt="Picutre of person and two squirrels, show the first squirrel running towards the person and the second running away." width=650px/>
+{{< figure src="/images/content/assets/squirrel2.png" alt="" >}}
 
 Consider the following question:
 

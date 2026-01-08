@@ -32,7 +32,7 @@ The [compartmental model](https://en.wikipedia.org/wiki/Compartmental_models_in_
 
 The Susceptible-Infected-Susceptible (SIS) model describes an epidemic in which healthy individuals (Susceptibles) can become infected with the disease in question (Infected). The infected individuals can be cured but retain no natural immunity to the disease (i.e., become susceptible again). The figure below illustrates the compartments and flux of individuals in the SIS model. Such models are suitable for bacterial infections.
 
-![The SIS model](/images/content/assets/images/sis.png)
+{{< figure src="/images/content/assets/images/sis.png" alt="The SIS model" >}}
 
 The dynamics are given by,
 
@@ -50,7 +50,7 @@ For given values of $\beta$ and $\gamma$, we can solve these equations numerical
 
 The Susceptible-Infected-Recovered (SIR) model describes an epidemic in which healthy individuals (Susceptibles) can become infected with the disease in question (Infected). The infected individuals can be cured and retain a natural immunity to the disease (Recovered). The figure below illustrates the compartments and flux of individuals in the SIR model. Such models are suitable for viral infections. We can modify this model for the zombies.
 
-![The SIR model](/images/content/assets/images/sir.png)
+{{< figure src="/images/content/assets/images/sir.png" alt="The SIR model" >}}
 
 The transfer rates can be defined for the SIR model as was for the SIS model. The rate equations that govern this model are three ordinary non-linear differential equations. Again, we have neglected the birth and death rates of the populations by making the approximation the epidemic occurs very quickly.
 
@@ -64,7 +64,7 @@ Again, for given values of $\beta$ and $\gamma$, we can solve these equations nu
 
 This SZR model treats the population as compartmentalized into the 3 groups: Susceptible (S), Zombie (Z), and Removed (R). Movement between these groups is illustrated below.
 
-![The SZR model](/images/content/assets/images/szr.png)
+{{< figure src="/images/content/assets/images/szr.png" alt="The SZR model" >}}
 
 Susceptibles can become zombies through an encounter with a zombie. Zombies can move to the removed compartment by being destroyed in classic manners (e.g., Dawn of the Dead). Susceptibles can move to the removed compartment through death by a non-zombie encounter. Finally, removed individuals can become zombies through typical resurrection techniques (e.g., Live and Let Die).
 
