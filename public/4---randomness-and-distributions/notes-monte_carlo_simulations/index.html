@@ -1,149 +1,229 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>27 Nov 23 - Notes: Monte Carlo Simulations | PHY 415 Fall 2023</title>
-    <meta name="description" content="PHY 415 Fall 2023">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    
-    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>27 Nov 23 - Notes: Monte Carlo Simulations | PHY 415 Fall 2023</title>
+<meta name="keywords" content="">
+<meta name="description" content="Monte Carlo Simulations are a class of computational algorithms that rely on repeated random sampling to obtain numerical results. The method is named after the Monte Carlo Casino in Monaco, reflecting its foundational principle of randomness and chance. Initially developed as part of the Manhattan Project during World War II, Monte Carlo simulations have since evolved into a crucial tool in both physics and a myriad of other fields.
+Overview of Monte Carlo Simulations
+At its core, a Monte Carlo simulation involves using randomness to solve problems that might be deterministic in principle. It&rsquo;s particularly useful for systems with a large number of variables, where traditional analytical methods become impractical.">
+<meta name="author" content="Danny Caballero, Alia Valentine">
+<link rel="canonical" href="//localhost:1313/4---randomness-and-distributions/notes-monte_carlo_simulations/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:1313/4---randomness-and-distributions/notes-monte_carlo_simulations/">
+<noscript>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
+        #theme-toggle,
+        .top-link {
+            display: none;
         }
-        nav {
-            background: #f4f4f4;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 5px;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        nav a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            color: #222;
-            margin-top: 1.5em;
-        }
-        h1 {
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: "SF Mono", Monaco, Consolas, monospace;
-        }
-        pre {
-            background: #f4f4f4;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        pre code {
-            background: none;
-            padding: 0;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        a {
-            color: #0066cc;
-        }
-        .menu-home {
-            font-weight: bold;
-            margin-right: 30px;
-        }
+
     </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+
+
 </head>
-<body>
-    <nav role="navigation" aria-label="Main navigation">
-        <ul>
-            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
-            
-            
-            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
-            
-            
-            
-            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
-            
-            
-            
-            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
-            
-            
-            
-            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
-            
-            
-            
-            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
-            
-            
-            
-            <li><a href="/assignments/">Assignments</a></li>
-            
-            
-            
-            <li><a href="/appendices/">Appendices</a></li>
-            
-            
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:1313/" accesskey="h" title="PHY 415 Fall 2023 (Alt + H)">PHY 415 Fall 2023</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:1313/0---intro-and-syllabus/" title="0 - Intro and Syllabus">
+                    <span>0 - Intro and Syllabus</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/1---mechanics-and-odes/" title="1 - Mechanics and ODEs">
+                    <span>1 - Mechanics and ODEs</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/2---em-and-pdes/" title="2 - E&amp;M and PDEs">
+                    <span>2 - E&amp;M and PDEs</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/3---waves-and-oscillations/" title="3 - Waves and Oscillations">
+                    <span>3 - Waves and Oscillations</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/4---randomness-and-distributions/" title="4 - Randomness and Distributions">
+                    <span>4 - Randomness and Distributions</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/assignments/" title="Assignments">
+                    <span>Assignments</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/appendices/" title="Appendices">
+                    <span>Appendices</span>
+                </a>
+            </li>
         </ul>
     </nav>
+</header>
+<main class="main">
 
-    <main role="main">
-        
-<article>
-    <header>
-        <h1>27 Nov 23 - Notes: Monte Carlo Simulations</h1>
-        
-    </header>
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="//localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="//localhost:1313/4---randomness-and-distributions/">4 - Randomness and Distributions</a></div>
+    <h1 class="post-title entry-hint-parent">
+      27 Nov 23 - Notes: Monte Carlo Simulations
+    </h1>
+    <div class="post-meta"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span>
 
-    <p><strong>Monte Carlo Simulations</strong> are a class of computational algorithms that rely on repeated random sampling to obtain numerical results. The method is named after the Monte Carlo Casino in Monaco, reflecting its foundational principle of randomness and chance. Initially developed as part of the Manhattan Project during World War II, Monte Carlo simulations have since evolved into a crucial tool in both physics and a myriad of other fields.</p>
-<h2 id="overview-of-monte-carlo-simulations">Overview of Monte Carlo Simulations</h2>
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#overview-of-monte-carlo-simulations" aria-label="Overview of Monte Carlo Simulations">Overview of Monte Carlo Simulations</a></li>
+                <li>
+                    <a href="#how-monte-carlo-simulations-work" aria-label="How Monte Carlo Simulations Work">How Monte Carlo Simulations Work</a><ul>
+                        
+                <li>
+                    <a href="#boltzmann-distribution" aria-label="Boltzmann Distribution">Boltzmann Distribution</a></li>
+                <li>
+                    <a href="#lecture-video" aria-label="Lecture Video">Lecture Video</a></li>
+                <li>
+                    <a href="#basic-components-of-a-monte-carlo-simulation" aria-label="Basic Components of a Monte Carlo Simulation">Basic Components of a Monte Carlo Simulation</a></li></ul>
+                </li>
+                <li>
+                    <a href="#applications-in-physics-and-astronomy" aria-label="Applications in Physics and Astronomy">Applications in Physics and Astronomy</a><ul>
+                        
+                <li>
+                    <a href="#statistical-physics" aria-label="Statistical Physics">Statistical Physics</a></li>
+                <li>
+                    <a href="#quantum-mechanics" aria-label="Quantum Mechanics">Quantum Mechanics</a></li>
+                <li>
+                    <a href="#astronomy-and-astrophysics" aria-label="Astronomy and Astrophysics">Astronomy and Astrophysics</a></li>
+                <li>
+                    <a href="#cross-disciplinary-examples" aria-label="Cross-disciplinary Examples">Cross-disciplinary Examples</a></li></ul>
+                </li>
+                <li>
+                    <a href="#a-common-example-estimating-pi" aria-label="A Common Example: Estimating Pi">A Common Example: Estimating Pi</a></li>
+                <li>
+                    <a href="#additional-resoures" aria-label="Additional Resoures">Additional Resoures</a><ul>
+                        
+                <li>
+                    <a href="#lecture-video-1" aria-label="Lecture Video">Lecture Video</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><strong>Monte Carlo Simulations</strong> are a class of computational algorithms that rely on repeated random sampling to obtain numerical results. The method is named after the Monte Carlo Casino in Monaco, reflecting its foundational principle of randomness and chance. Initially developed as part of the Manhattan Project during World War II, Monte Carlo simulations have since evolved into a crucial tool in both physics and a myriad of other fields.</p>
+<h2 id="overview-of-monte-carlo-simulations">Overview of Monte Carlo Simulations<a hidden class="anchor" aria-hidden="true" href="#overview-of-monte-carlo-simulations">#</a></h2>
 <p>At its core, a <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo simulation</a> involves using randomness to solve problems that might be deterministic in principle. It&rsquo;s particularly useful for systems with a large number of variables, where traditional analytical methods become impractical.</p>
 <p>In physics, Monte Carlo methods are indispensable for studying complex systems where analytical solutions are unattainable. They are widely used in statistical physics, quantum mechanics, and astrophysics, among other areas. For instance, as we will show they can help model the behavior of gases, liquids, and solids at the atomic level, and simulate the evolution of stars and galaxies. In mathematics, these methods offer a way to approximate solutions to complex integrals and differential equations. While our primary focus here is on physics and astronomy, it&rsquo;s worth noting that Monte Carlo methods have been successfully applied in numerous other domains. For instance, in finance, they are used to model and predict stock market behaviors and in risk analysis. In engineering, they help in reliability analysis and optimization problems. Even in healthcare, they assist in radiation therapy planning and epidemiological studies.</p>
-<h2 id="how-monte-carlo-simulations-work">How Monte Carlo Simulations Work</h2>
+<h2 id="how-monte-carlo-simulations-work">How Monte Carlo Simulations Work<a hidden class="anchor" aria-hidden="true" href="#how-monte-carlo-simulations-work">#</a></h2>
 <p><em>We will go into this later in detail</em></p>
 <p>Monte Carlo simulations are grounded in the principle of random sampling and uses the power of statistical analysis to solve problems that, to be honest, the have no business working for. MC sims use randomness to explore a large set of possible solutions to a problem, where direct computation would be impractical or impossible. They then find the most likely outcomes and use them to approximate the true solution.</p>
 <p>A key concept for this work is the use of <a href="https://en.wikipedia.org/wiki/Probability_distribution">probability distributions</a>. In many physical problems, certain outcomes are more likely than others, and these probabilities can be used to guide the random sampling process. As westarted to see with microstates and macrostates &ndash; at thermal equilibrium the most probable macrostate is easily determined.</p>
-<h3 id="boltzmann-distribution">Boltzmann Distribution</h3>
+<h3 id="boltzmann-distribution">Boltzmann Distribution<a hidden class="anchor" aria-hidden="true" href="#boltzmann-distribution">#</a></h3>
 <p>For example, in thermal physics, the distribution of particle energies can often be described by the <a href="https://en.wikipedia.org/wiki/Boltzmann_distribution">Boltzmann distribution</a>. This distribution tells us that the probability of a particle having a certain energy is proportional to the exponential of the negative of that energy divided by the temperature. This distribution is used in Monte Carlo simulations to determine the probability of a particle having a certain energy. The Boltzmann distribution is given by:</p>
 <p>$$P(E) = \frac{e^{-E/kT}}{Z},$$</p>
 <p>where $E$ is the energy state, $k$ is the Boltzmann constant, $T$ is the temperature, and $Z$ is the <a href="https://en.wikipedia.org/wiki/Partition_function_(statistical_mechanics)">partition function</a>.</p>
-<h3 id="lecture-video">Lecture Video</h3>
+<h3 id="lecture-video">Lecture Video<a hidden class="anchor" aria-hidden="true" href="#lecture-video">#</a></h3>
 <p>This introduction aims to provide a foundational understanding of Monte Carlo methods; we will delve deeper into the workings, applications, and mathematical aspects of these simulations.</p>
-<p><a href="https://inv.tux.pizza/watch?v=7ESK5SaP-bc"><img src="https://markdown-videos-api.jorgenkh.no/youtube/7ESK5SaP-bc?width=720&amp;height=405" alt="Monte Carlo Simulations"></a></p>
+<p><a href="https://inv.tux.pizza/watch?v=7ESK5SaP-bc"><img alt="Monte Carlo Simulations" loading="lazy" src="https://markdown-videos-api.jorgenkh.no/youtube/7ESK5SaP-bc?width=720&height=405"></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=7ESK5SaP-bc">https://inv.tux.pizza/watch?v=7ESK5SaP-bc</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=7ESK5SaP-bc">https://youtube.com/watch?v=7ESK5SaP-bc</a></li>
 </ul>
-<h3 id="basic-components-of-a-monte-carlo-simulation">Basic Components of a Monte Carlo Simulation</h3>
+<h3 id="basic-components-of-a-monte-carlo-simulation">Basic Components of a Monte Carlo Simulation<a hidden class="anchor" aria-hidden="true" href="#basic-components-of-a-monte-carlo-simulation">#</a></h3>
 <p>The basic elements of any Monte Carlo Simulation are as follows:</p>
 <ol>
 <li><strong>Random Number Generators (RNGs)</strong>: These are algorithms that generate sequences of numbers that approximate the properties of random numbers. RNGs are the backbone of any Monte Carlo simulation. They are used to generate random samples from probability distributions, which are then used to approximate the solution to a problem.</li>
@@ -152,29 +232,29 @@
 <p>In the Metropolis-Hastings algorithm, the probability of moving from a state $i$ to a state $j$ is given by:</p>
 <p>$$P(i \rightarrow j) = \min\left(1, \frac{e^{-E_j/kT}}{e^{-E_i/kT}}\right),$$</p>
 <p>where $E_i$ and $E_j$ are the energies of states $i$ and $j$ respectively.</p>
-<h2 id="applications-in-physics-and-astronomy">Applications in Physics and Astronomy</h2>
+<h2 id="applications-in-physics-and-astronomy">Applications in Physics and Astronomy<a hidden class="anchor" aria-hidden="true" href="#applications-in-physics-and-astronomy">#</a></h2>
 <p>Monte Carlo simulations are widely used in physics and astronomy, where they help in modeling complex systems and phenomena. Here are some examples:</p>
-<h3 id="statistical-physics">Statistical Physics</h3>
+<h3 id="statistical-physics">Statistical Physics<a hidden class="anchor" aria-hidden="true" href="#statistical-physics">#</a></h3>
 <ul>
 <li><strong>Phase Transitions and Critical Phenomena</strong>: Monte Carlo simulations are instrumental in studying phase transitions, like the transition from a ferromagnetic to a paramagnetic state, by allowing for the exploration of large lattice systems.</li>
 <li><strong>Ising Model of Ferromagnetism</strong>: This model uses a lattice where each site has a spin that interacts with its neighbors. Monte Carlo methods help in simulating and understanding the magnetic properties of materials.</li>
 </ul>
-<h3 id="quantum-mechanics">Quantum Mechanics</h3>
+<h3 id="quantum-mechanics">Quantum Mechanics<a hidden class="anchor" aria-hidden="true" href="#quantum-mechanics">#</a></h3>
 <ul>
 <li><strong>Quantum Monte Carlo Methods</strong>: These are used to study systems of many interacting quantum particles, providing insights into the ground state and excited state properties.</li>
 <li><strong>Applications in Atomic and Molecular Physics</strong>: Monte Carlo methods help in calculating the properties of atoms and molecules, which are otherwise difficult due to the complexity of quantum interactions.</li>
 </ul>
-<h3 id="astronomy-and-astrophysics">Astronomy and Astrophysics</h3>
+<h3 id="astronomy-and-astrophysics">Astronomy and Astrophysics<a hidden class="anchor" aria-hidden="true" href="#astronomy-and-astrophysics">#</a></h3>
 <ul>
 <li><strong>Stellar Evolution Simulations</strong>: By simulating the life cycles of stars, Monte Carlo methods help in understanding phenomena like supernovae, neutron stars, and black hole formation.</li>
 <li><strong>Galactic Dynamics and Dark Matter Modeling</strong>: They are used to simulate galaxy formation and the distribution of dark matter in the universe.</li>
 </ul>
-<h3 id="cross-disciplinary-examples">Cross-disciplinary Examples</h3>
+<h3 id="cross-disciplinary-examples">Cross-disciplinary Examples<a hidden class="anchor" aria-hidden="true" href="#cross-disciplinary-examples">#</a></h3>
 <ul>
 <li><strong>Climate Modeling</strong>: Monte Carlo simulations are used to predict climate change by accounting for the numerous variables and uncertainties in climate systems.</li>
 <li><strong>Biological Systems</strong>: In biology, they assist in modeling complex systems like protein folding and the spread of diseases.</li>
 </ul>
-<h2 id="a-common-example-estimating-pi">A Common Example: Estimating Pi</h2>
+<h2 id="a-common-example-estimating-pi">A Common Example: Estimating Pi<a hidden class="anchor" aria-hidden="true" href="#a-common-example-estimating-pi">#</a></h2>
 <p>The two most common examples of Monte Carlo are:</p>
 <ul>
 <li><strong>Estimating Pi</strong>: A simple application of Monte Carlo is the estimation of $\pi$ by randomly placing points in a square and counting how many fall inside a quarter circle.</li>
@@ -223,41 +303,101 @@
 </span></span><span style="display:flex;"><span>widgets<span style="color:#f92672">.</span>interactive(monte_carlo_pi_plot, num_samples<span style="color:#f92672">=</span>slider)
 </span></span></code></pre></div><pre><code>interactive(children=(IntSlider(value=100, continuous_update=False, description='Samples:', max=10000, min=100…
 </code></pre>
-<h2 id="additional-resoures">Additional Resoures</h2>
-<h3 id="lecture-video-1">Lecture Video</h3>
+<h2 id="additional-resoures">Additional Resoures<a hidden class="anchor" aria-hidden="true" href="#additional-resoures">#</a></h2>
+<h3 id="lecture-video-1">Lecture Video<a hidden class="anchor" aria-hidden="true" href="#lecture-video-1">#</a></h3>
 <p>If you want to see more about how Monte Carlo simulations can work, in particular, with respect to data science, check out this video.</p>
-<p><a href="https://inv.tux.pizza/watch?v=EaR3C4e600k"><img src="https://markdown-videos-api.jorgenkh.no/youtube/EaR3C4e600k?width=720&amp;height=405" alt="Monte Carlo Simulations in Data Science"></a></p>
+<p><a href="https://inv.tux.pizza/watch?v=EaR3C4e600k"><img alt="Monte Carlo Simulations in Data Science" loading="lazy" src="https://markdown-videos-api.jorgenkh.no/youtube/EaR3C4e600k?width=720&height=405"></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=EaR3C4e600k">https://inv.tux.pizza/watch?v=EaR3C4e600k</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=EaR3C4e600k">https://youtube.com/watch?v=EaR3C4e600k</a></li>
 </ul>
 
 
-    
-    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
-        <div style="display: flex; justify-content: space-between;">
-            <div>
-                
-                <a href="/4---randomness-and-distributions/activity-thermal_contact/">← 28 Nov 23 - Activity: Model of Two Bodies in Thermal Contact</a>
-                
-            </div>
-            <div style="text-align: right;">
-                
-                <a href="/4---randomness-and-distributions/notes-counting_and_combinatorics/">27 Nov 23 - Notes: Counting and Combinatorics →</a>
-                
-            </div>
-        </div>
-    </nav>
-    
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+
+  </footer>
 </article>
-
     </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="//localhost:1313/">PHY 415 Fall 2023</a></span> · 
 
-    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
         
-        <p>Danny Caballero, Alia Valentine</p>
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
         
-        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
-    </footer>
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

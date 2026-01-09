@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>0 - Intro and Syllabus on PHY 415 Fall 2023</title>
     <link>//localhost:1313/0---intro-and-syllabus/</link>
     <description>Recent content in 0 - Intro and Syllabus on PHY 415 Fall 2023</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.154.3</generator>
     <language>en</language>
     <lastBuildDate>Thu, 08 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/0---intro-and-syllabus/index.xml" rel="self" type="application/rss+xml" />
@@ -13,56 +13,185 @@
       <link>//localhost:1313/0---intro-and-syllabus/1_goals/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/0---intro-and-syllabus/1_goals/</guid>
-      <description>&lt;p&gt;This course emphasizes making models of physical phenomenon and how we use various tools at our disposal to investigate those models. Hence, we have learning objectives for making models of these systems and for learning specific tools.&lt;/p&gt;&#xA;&lt;div class=&#34;admonition admonition-admonition tip&#34; role=&#34;note&#34; aria-label=&#34;Admonition&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;Principle Learning Objectives&lt;/p&gt;&lt;div class=&#34;admonition-content&#34;&gt;&#xA;    &lt;p&gt;Students will demonstrate they can:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;investigate physical systems of their choosing using a variety of tools and approaches&lt;/li&gt;&#xA;&lt;li&gt;construct and document a reproducible process for those investigations&lt;/li&gt;&#xA;&lt;li&gt;use analytical, computational, and graphical approaches to answer specific questions in those investigations&lt;/li&gt;&#xA;&lt;li&gt;provide evidence of the quality of their work using a variety of sources&lt;/li&gt;&#xA;&lt;li&gt;collaborate effectively and contribute to a inclusive learning environment&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;  &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;Each of these learning objectives contributes to your development as a physicist. I recognize that these are &lt;strong&gt;big&lt;/strong&gt; ideas to think about. What I mean is that the objectives above are quite broad and you might be able to see a little about what or why they are included. But, below, I added more detail about each one along with a smaller scale list of objectives that you will engage with. Throughout our course, you will have opportunities to demonstrate these objectives in your work. &lt;em&gt;My aim is to make what you are assessed on in this course something you are interested in, so these objectives reflect that.&lt;/em&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;This course emphasizes making models of physical phenomenon and how we use various tools at our disposal to investigate those models. Hence, we have learning objectives for making models of these systems and for learning specific tools.&lt;/p&gt;
+&lt;div class=&#34;admonition admonition-admonition tip&#34; role=&#34;note&#34; aria-label=&#34;Admonition&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;Principle Learning Objectives&lt;/p&gt;&lt;div class=&#34;admonition-content&#34;&gt;
+    &lt;p&gt;Students will demonstrate they can:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;investigate physical systems of their choosing using a variety of tools and approaches&lt;/li&gt;
+&lt;li&gt;construct and document a reproducible process for those investigations&lt;/li&gt;
+&lt;li&gt;use analytical, computational, and graphical approaches to answer specific questions in those investigations&lt;/li&gt;
+&lt;li&gt;provide evidence of the quality of their work using a variety of sources&lt;/li&gt;
+&lt;li&gt;collaborate effectively and contribute to a inclusive learning environment&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Each of these learning objectives contributes to your development as a physicist. I recognize that these are &lt;strong&gt;big&lt;/strong&gt; ideas to think about. What I mean is that the objectives above are quite broad and you might be able to see a little about what or why they are included. But, below, I added more detail about each one along with a smaller scale list of objectives that you will engage with. Throughout our course, you will have opportunities to demonstrate these objectives in your work. &lt;em&gt;My aim is to make what you are assessed on in this course something you are interested in, so these objectives reflect that.&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Syllabus and Overview of PHY 415</title>
       <link>//localhost:1313/0---intro-and-syllabus/0_syllabus/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/0---intro-and-syllabus/0_syllabus/</guid>
-      <description>&lt;p&gt;In designing this course, we plan to emphasize more independent learning on your part and greater agency for you in determining what you learn and how you demonstrate you have learned. So you should expect:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;to read a variety of pieces of information to coordinate information&lt;/li&gt;&#xA;&lt;li&gt;to present your ideas publicly and to discuss them&lt;/li&gt;&#xA;&lt;li&gt;to learn new approaches and novel techniques on your own&lt;/li&gt;&#xA;&lt;li&gt;to become more expert than me in the areas of your interest&lt;/li&gt;&#xA;&lt;li&gt;to learn more about scientists that you have not learned about&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;This is not to say that you are on your own. Here&amp;rsquo;s what you can expect from us:&lt;/p&gt;</description>
+      <description>&lt;p&gt;In designing this course, we plan to emphasize more independent learning on your part and greater agency for you in determining what you learn and how you demonstrate you have learned. So you should expect:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;to read a variety of pieces of information to coordinate information&lt;/li&gt;
+&lt;li&gt;to present your ideas publicly and to discuss them&lt;/li&gt;
+&lt;li&gt;to learn new approaches and novel techniques on your own&lt;/li&gt;
+&lt;li&gt;to become more expert than me in the areas of your interest&lt;/li&gt;
+&lt;li&gt;to learn more about scientists that you have not learned about&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is not to say that you are on your own. Here&amp;rsquo;s what you can expect from us:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Course Design</title>
       <link>//localhost:1313/0---intro-and-syllabus/2_design/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/0---intro-and-syllabus/2_design/</guid>
-      <description>&lt;p&gt;For most of you, 415 is an elective course that you are taking to learn more about how we use mathematical techniques in physics. As such, this course is designed under several different principles than a standard course. Below, I provide those principles and their rationale.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;415 should help you learn the central tenets of modeling physical systems&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The sheer volume of mathematical and computational physics knowledge out there is immense and impossible for any one person to learn. However, the central elements of making models, how to learn about specific techniques, and how to debug your approaches are things we can learn and employ broadly as well as to specific problems.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;415 should be a celebration of your knowledge&#xA;&lt;ul&gt;&#xA;&lt;li&gt;For most of you, this course is part of your senior level coursework. What you have achieved in the last three to four years should be celebrated and enjoyed. This course will provide ample opportunities for you to share what things you know and what things you are learning with me and with each other.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;415 should give you opportunities to engage in professional practice&#xA;&lt;ul&gt;&#xA;&lt;li&gt;As you start towards your professional career, it&amp;rsquo;s important to learn what professional scientists do. You have probably already begun this work in advanced lab and research projects that you have worked on. We will continue developing your professional skills in this course through the use of course projects.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;415 will illustrate that we can learn from each other&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Even though I&amp;rsquo;ve been learning physics for almost 20 years, I don&amp;rsquo;t know everything. I am excited to learn from you and I hope that you are excited to learn from me and each other.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;optional-purchases&#34;&gt;Optional purchases:&lt;/h2&gt;&#xA;&lt;p&gt;The core readings and work for this course will be this jupyterbook. I will find resources online, make my own, and provide as much organized free material as possible. If you want to have a textbook that helps you organize your readings, please obtain copies of:&lt;/p&gt;</description>
+      <description>&lt;p&gt;For most of you, 415 is an elective course that you are taking to learn more about how we use mathematical techniques in physics. As such, this course is designed under several different principles than a standard course. Below, I provide those principles and their rationale.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;415 should help you learn the central tenets of modeling physical systems
+&lt;ul&gt;
+&lt;li&gt;The sheer volume of mathematical and computational physics knowledge out there is immense and impossible for any one person to learn. However, the central elements of making models, how to learn about specific techniques, and how to debug your approaches are things we can learn and employ broadly as well as to specific problems.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;415 should be a celebration of your knowledge
+&lt;ul&gt;
+&lt;li&gt;For most of you, this course is part of your senior level coursework. What you have achieved in the last three to four years should be celebrated and enjoyed. This course will provide ample opportunities for you to share what things you know and what things you are learning with me and with each other.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;415 should give you opportunities to engage in professional practice
+&lt;ul&gt;
+&lt;li&gt;As you start towards your professional career, it&amp;rsquo;s important to learn what professional scientists do. You have probably already begun this work in advanced lab and research projects that you have worked on. We will continue developing your professional skills in this course through the use of course projects.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;415 will illustrate that we can learn from each other
+&lt;ul&gt;
+&lt;li&gt;Even though I&amp;rsquo;ve been learning physics for almost 20 years, I don&amp;rsquo;t know everything. I am excited to learn from you and I hope that you are excited to learn from me and each other.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;optional-purchases&#34;&gt;Optional purchases:&lt;/h2&gt;
+&lt;p&gt;The core readings and work for this course will be this jupyterbook. I will find resources online, make my own, and provide as much organized free material as possible. If you want to have a textbook that helps you organize your readings, please obtain copies of:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Assessments</title>
       <link>//localhost:1313/0---intro-and-syllabus/3_assessments/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/0---intro-and-syllabus/3_assessments/</guid>
-      <description>&lt;h2 id=&#34;formative-assessment&#34;&gt;Formative Assessment&lt;/h2&gt;&#xA;&lt;p&gt;Formative assessment is often ungraded and reflective assessment. It is meant to help you make changes to your thinking, approaches, or practice. It is not evaluative, it&amp;rsquo;s corrective; to help you make changes. We will make heavy use of ungraded formative feedback throughout the course. Our weekly readings and your worked problems are meant to be formative; meaning most folks will receive full credit, but the important part to review the feedback and reflect on it.&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;formative-assessment&#34;&gt;Formative Assessment&lt;/h2&gt;
+&lt;p&gt;Formative assessment is often ungraded and reflective assessment. It is meant to help you make changes to your thinking, approaches, or practice. It is not evaluative, it&amp;rsquo;s corrective; to help you make changes. We will make heavy use of ungraded formative feedback throughout the course. Our weekly readings and your worked problems are meant to be formative; meaning most folks will receive full credit, but the important part to review the feedback and reflect on it.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Project Rubrics</title>
       <link>//localhost:1313/0---intro-and-syllabus/4_rubric/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/0---intro-and-syllabus/4_rubric/</guid>
-      <description>&lt;h2 id=&#34;preliminary-for-first-out-of-class-project&#34;&gt;Preliminary (For first out of class project)&lt;/h2&gt;&#xA;&lt;p&gt;We have worked together to define elements of a rubric that matter for making physical models. These elements appear as part of major learning goals below.&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Goal&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: right&#34;&gt;Fractional Importance&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Investigate physical systems&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;0.30&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Construct and document a reproducible process&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;0.10&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Use analytical, computational, and graphical approaches&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;0.30&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Provide evidence of the quality of their work&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;0.10&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Collaborate effectively&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: right&#34;&gt;0.20&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h3 id=&#34;goal-investigate-physical-systems-030&#34;&gt;Goal: Investigate physical systems (0.30)&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well does your computational essay predict or explain the system of interest?&lt;/li&gt;&#xA;&lt;li&gt;How well does your computational essay allow the user to explore and investigate the system?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;goal-construct-and-document-a-reproducible-process-010&#34;&gt;Goal: Construct and document a reproducible process (0.10)&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well does your computational essay reproduce your results and claims?&lt;/li&gt;&#xA;&lt;li&gt;How  well documented is your computational essay?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;goal-use-analytical-computational-and-graphical-approaches-030&#34;&gt;Goal: Use analytical, computational, and graphical approaches (0.30)&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well does your computational essay document your assumptions?&lt;/li&gt;&#xA;&lt;li&gt;How well does your computational essay produce an understandable and parsimonious model?&lt;/li&gt;&#xA;&lt;li&gt;How well does your computational essay explain the limitations of your analysis?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;goal-provide-evidence-of-the-quality-of-their-work&#34;&gt;Goal: Provide evidence of the quality of their work&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well does your computational essay present  the case for its claims?&lt;/li&gt;&#xA;&lt;li&gt;How well validated  is your model?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;goal-collaborate-effectively&#34;&gt;Goal: Collaborate effectively&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well did you share  in the class&amp;rsquo;s knowledge?&#xA;&lt;ul&gt;&#xA;&lt;li&gt;How well is that documented in your computational essay?&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;How well did you work with your partner ? &lt;em&gt;For those choosing to do so&lt;/em&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+      <description>&lt;h2 id=&#34;preliminary-for-first-out-of-class-project&#34;&gt;Preliminary (For first out of class project)&lt;/h2&gt;
+&lt;p&gt;We have worked together to define elements of a rubric that matter for making physical models. These elements appear as part of major learning goals below.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Goal&lt;/th&gt;
+          &lt;th style=&#34;text-align: right&#34;&gt;Fractional Importance&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Investigate physical systems&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;0.30&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Construct and document a reproducible process&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;0.10&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Use analytical, computational, and graphical approaches&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;0.30&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Provide evidence of the quality of their work&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;0.10&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Collaborate effectively&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;0.20&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;goal-investigate-physical-systems-030&#34;&gt;Goal: Investigate physical systems (0.30)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;How well does your computational essay predict or explain the system of interest?&lt;/li&gt;
+&lt;li&gt;How well does your computational essay allow the user to explore and investigate the system?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;goal-construct-and-document-a-reproducible-process-010&#34;&gt;Goal: Construct and document a reproducible process (0.10)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;How well does your computational essay reproduce your results and claims?&lt;/li&gt;
+&lt;li&gt;How  well documented is your computational essay?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;goal-use-analytical-computational-and-graphical-approaches-030&#34;&gt;Goal: Use analytical, computational, and graphical approaches (0.30)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;How well does your computational essay document your assumptions?&lt;/li&gt;
+&lt;li&gt;How well does your computational essay produce an understandable and parsimonious model?&lt;/li&gt;
+&lt;li&gt;How well does your computational essay explain the limitations of your analysis?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;goal-provide-evidence-of-the-quality-of-their-work&#34;&gt;Goal: Provide evidence of the quality of their work&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;How well does your computational essay present  the case for its claims?&lt;/li&gt;
+&lt;li&gt;How well validated  is your model?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;goal-collaborate-effectively&#34;&gt;Goal: Collaborate effectively&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;How well did you share  in the class&amp;rsquo;s knowledge?
+&lt;ul&gt;
+&lt;li&gt;How well is that documented in your computational essay?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;How well did you work with your partner ? &lt;em&gt;For those choosing to do so&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     <item>
       <title>Calendar</title>
       <link>//localhost:1313/0---intro-and-syllabus/5_calendar/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/0---intro-and-syllabus/5_calendar/</guid>
-      <description>&lt;p&gt;In this course, we will cover four principal topics in physics (in this order):&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Classical Mechanics and Ordinary Differential Equations&lt;/li&gt;&#xA;&lt;li&gt;Electromagnetism and Partial Differential Equations&lt;/li&gt;&#xA;&lt;li&gt;Waves and Fourier Analysis&lt;/li&gt;&#xA;&lt;li&gt;Statistical Mechanics and Monte Carlo models&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;The class is roughly broken into equal parts for each section. Below we indicate how each week will be spent. This is subject to change based on your input and feedback. But roughly you can expect the following:&lt;/p&gt;</description>
+      <description>&lt;p&gt;In this course, we will cover four principal topics in physics (in this order):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Classical Mechanics and Ordinary Differential Equations&lt;/li&gt;
+&lt;li&gt;Electromagnetism and Partial Differential Equations&lt;/li&gt;
+&lt;li&gt;Waves and Fourier Analysis&lt;/li&gt;
+&lt;li&gt;Statistical Mechanics and Monte Carlo models&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The class is roughly broken into equal parts for each section. Below we indicate how each week will be spent. This is subject to change based on your input and feedback. But roughly you can expect the following:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Classroom Environment</title>
       <link>//localhost:1313/0---intro-and-syllabus/6_environment/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/0---intro-and-syllabus/6_environment/</guid>
-      <description>&lt;h2 id=&#34;commitment-to-an-inclusive-classroom&#34;&gt;Commitment to an Inclusive Classroom&lt;/h2&gt;&#xA;&lt;p&gt;I am deeply committed to creating an inclusive classroom - one where you and your classmates&#xA;feel comfortable, intellectually challenged, and able to speak up about your ideas&#xA;and experiences. This means that our classroom, our virtual environments, and our interactions&#xA;need to be as inclusive as possible. Mutual respect, civility, and the ability to listen&#xA;and observe others are central to creating a classroom that is inclusive. I will strive to&#xA;do this and I ask that you do the same. If I can do anything to make the classroom a better&#xA;learning environment for you, please let me know.&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;commitment-to-an-inclusive-classroom&#34;&gt;Commitment to an Inclusive Classroom&lt;/h2&gt;
+&lt;p&gt;I am deeply committed to creating an inclusive classroom - one where you and your classmates
+feel comfortable, intellectually challenged, and able to speak up about your ideas
+and experiences. This means that our classroom, our virtual environments, and our interactions
+need to be as inclusive as possible. Mutual respect, civility, and the ability to listen
+and observe others are central to creating a classroom that is inclusive. I will strive to
+do this and I ask that you do the same. If I can do anything to make the classroom a better
+learning environment for you, please let me know.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Resources</title>
       <link>//localhost:1313/0---intro-and-syllabus/7_resources/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/0---intro-and-syllabus/7_resources/</guid>
-      <description>&lt;h2 id=&#34;confidentiality-and-mandatory-reporting&#34;&gt;Confidentiality and Mandatory Reporting&lt;/h2&gt;&#xA;&lt;p&gt;College students often experience issues that may interfere with academic success such as academic stress, sleep problems, juggling responsibilities, life events, relationship concerns, or feelings of anxiety, hopelessness, or depression.&#xA;As your instructor, one of my responsibilities is to help create a safe learning environment and to support you through these situations and experiences.&#xA;I also have a mandatory reporting responsibility related to my role as a University employee.&#xA;It is my goal that you feel able to share information related to your life experiences in classroom&#xA;discussions, in written work, and in one-on-one meetings.&#xA;I will seek to keep information you share private to the greatest extent possible.&#xA;However, under Title IX, I am required to share information regarding sexual misconduct, relationship violence, or information&#xA;about criminal activity on MSU&amp;rsquo;s campus with the University including the Office of Institutional Equity (OIE).&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;confidentiality-and-mandatory-reporting&#34;&gt;Confidentiality and Mandatory Reporting&lt;/h2&gt;
+&lt;p&gt;College students often experience issues that may interfere with academic success such as academic stress, sleep problems, juggling responsibilities, life events, relationship concerns, or feelings of anxiety, hopelessness, or depression.
+As your instructor, one of my responsibilities is to help create a safe learning environment and to support you through these situations and experiences.
+I also have a mandatory reporting responsibility related to my role as a University employee.
+It is my goal that you feel able to share information related to your life experiences in classroom
+discussions, in written work, and in one-on-one meetings.
+I will seek to keep information you share private to the greatest extent possible.
+However, under Title IX, I am required to share information regarding sexual misconduct, relationship violence, or information
+about criminal activity on MSU&amp;rsquo;s campus with the University including the Office of Institutional Equity (OIE).&lt;/p&gt;</description>
     </item>
     <item>
       <title>Worked Problems</title>

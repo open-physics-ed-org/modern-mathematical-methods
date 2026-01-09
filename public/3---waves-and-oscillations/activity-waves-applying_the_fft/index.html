@@ -1,135 +1,207 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>9 Nov 23 - Activity: Applying The Fast Fourier Transform | PHY 415 Fall 2023</title>
-    <meta name="description" content="PHY 415 Fall 2023">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    
-    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>9 Nov 23 - Activity: Applying The Fast Fourier Transform | PHY 415 Fall 2023</title>
+<meta name="keywords" content="">
+<meta name="description" content="We were able to find the complex expansion coefficients for a signal using a Fourier series. However, this method is only applicable to periodic signals. Here we will introduce the Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT) which can be used to find the complex expansion coefficients for any signal. The DFT is the discrete analog to our expansion approach, the FFT improves the algorithmic efficiency of the DFT, which we won&rsquo;t describe.">
+<meta name="author" content="Danny Caballero, Alia Valentine">
+<link rel="canonical" href="//localhost:1313/3---waves-and-oscillations/activity-waves-applying_the_fft/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:1313/3---waves-and-oscillations/activity-waves-applying_the_fft/">
+<noscript>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
+        #theme-toggle,
+        .top-link {
+            display: none;
         }
-        nav {
-            background: #f4f4f4;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 5px;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        nav a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            color: #222;
-            margin-top: 1.5em;
-        }
-        h1 {
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: "SF Mono", Monaco, Consolas, monospace;
-        }
-        pre {
-            background: #f4f4f4;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        pre code {
-            background: none;
-            padding: 0;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        a {
-            color: #0066cc;
-        }
-        .menu-home {
-            font-weight: bold;
-            margin-right: 30px;
-        }
+
     </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+
+
 </head>
-<body>
-    <nav role="navigation" aria-label="Main navigation">
-        <ul>
-            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
-            
-            
-            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
-            
-            
-            
-            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
-            
-            
-            
-            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
-            
-            
-            
-            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
-            
-            
-            
-            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
-            
-            
-            
-            <li><a href="/assignments/">Assignments</a></li>
-            
-            
-            
-            <li><a href="/appendices/">Appendices</a></li>
-            
-            
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:1313/" accesskey="h" title="PHY 415 Fall 2023 (Alt + H)">PHY 415 Fall 2023</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:1313/0---intro-and-syllabus/" title="0 - Intro and Syllabus">
+                    <span>0 - Intro and Syllabus</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/1---mechanics-and-odes/" title="1 - Mechanics and ODEs">
+                    <span>1 - Mechanics and ODEs</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/2---em-and-pdes/" title="2 - E&amp;M and PDEs">
+                    <span>2 - E&amp;M and PDEs</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/3---waves-and-oscillations/" title="3 - Waves and Oscillations">
+                    <span>3 - Waves and Oscillations</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/4---randomness-and-distributions/" title="4 - Randomness and Distributions">
+                    <span>4 - Randomness and Distributions</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/assignments/" title="Assignments">
+                    <span>Assignments</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/appendices/" title="Appendices">
+                    <span>Appendices</span>
+                </a>
+            </li>
         </ul>
     </nav>
+</header>
+<main class="main">
 
-    <main role="main">
-        
-<article>
-    <header>
-        <h1>9 Nov 23 - Activity: Applying The Fast Fourier Transform</h1>
-        
-    </header>
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="//localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="//localhost:1313/3---waves-and-oscillations/">3 - Waves and Oscillations</a></div>
+    <h1 class="post-title entry-hint-parent">
+      9 Nov 23 - Activity: Applying The Fast Fourier Transform
+    </h1>
+    <div class="post-meta"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span>
 
-    <p>We were able to find the complex expansion coefficients for a signal using a Fourier series. However, this method is only applicable to periodic signals. Here we will introduce the Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT) which can be used to find the complex expansion coefficients for any signal. The DFT is the discrete analog to our expansion approach, the FFT improves the algorithmic efficiency of the DFT, which we won&rsquo;t describe.</p>
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#a-sinusoidal-signal-with-a-dc-offset" aria-label="A sinusoidal signal with a DC offset">A sinusoidal signal with a DC offset</a></li>
+                <li>
+                    <a href="#extracting-the-fourier-coefficients" aria-label="Extracting the Fourier coefficients">Extracting the Fourier coefficients</a><ul>
+                        
+                <li>
+                    <a href="#where-are-the-coefficients" aria-label="Where are the coefficients?">Where are the coefficients?</a></li></ul>
+                </li>
+                <li>
+                    <a href="#the-discrete-fourier-transform" aria-label="The Discrete Fourier Transform">The Discrete Fourier Transform</a><ul>
+                        
+                <li>
+                    <a href="#enter-the-discrete-fourier-transform" aria-label="Enter the Discrete Fourier Transform">Enter the Discrete Fourier Transform</a></li>
+                <li>
+                    <a href="#assumptions" aria-label="Assumptions">Assumptions</a></li></ul>
+                </li>
+                <li>
+                    <a href="#the-fast-fourier-transform" aria-label="The Fast Fourier Transform">The Fast Fourier Transform</a><ul>
+                        
+                <li>
+                    <a href="#the-fft-in-numpyfft" aria-label="The FFT in numpy.fft">The FFT in numpy.fft</a></li>
+                <li>
+                    <a href="#computing-and-plotting-fourier-coefficients" aria-label="Computing and plotting Fourier Coefficients">Computing and plotting Fourier Coefficients</a></li>
+                <li>
+                    <a href="#investigating-the-fft" aria-label="Investigating the FFT">Investigating the FFT</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>We were able to find the complex expansion coefficients for a signal using a Fourier series. However, this method is only applicable to periodic signals. Here we will introduce the Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT) which can be used to find the complex expansion coefficients for any signal. The DFT is the discrete analog to our expansion approach, the FFT improves the algorithmic efficiency of the DFT, which we won&rsquo;t describe.</p>
 <p>Let&rsquo;s remind ourselves of the Fourier series expansion for a periodic signal $x(t)$ with some period $T_0$.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
-</span></span></code></pre></div><h2 id="a-sinusoidal-signal-with-a-dc-offset">A sinusoidal signal with a DC offset</h2>
+</span></span></code></pre></div><h2 id="a-sinusoidal-signal-with-a-dc-offset">A sinusoidal signal with a DC offset<a hidden class="anchor" aria-hidden="true" href="#a-sinusoidal-signal-with-a-dc-offset">#</a></h2>
 <p>In this example we will use a sinusoidal signal with a DC offset. The signal is defined as:</p>
 <p>$$V(t) = A_0 \sin(2\pi f_0 t) + A_1 \sin(2\pi f_1 t) + A_2 \sin(2\pi f_2 t) + C$$</p>
 <p>We create the signal a graph it.</p>
@@ -159,8 +231,8 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
-</span></span></code></pre></div><p><img src="output_4_0.png" alt="png"></p>
-<h2 id="extracting-the-fourier-coefficients">Extracting the Fourier coefficients</h2>
+</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_4_0.png"></p>
+<h2 id="extracting-the-fourier-coefficients">Extracting the Fourier coefficients<a hidden class="anchor" aria-hidden="true" href="#extracting-the-fourier-coefficients">#</a></h2>
 <p>Let&rsquo;s extract the Fourier coefficients. We defined the base peridicity $T_0$ in the code above. If it was not changed it was 0.5 seconds. We will use this to define the base frequency of the signal $f_0 = 1/T_0 = 1/0.5 = 2$ Hz. We have two more parts of the signal from frequencies $f_1 = 4$ Hz and $f_2 = 6$ Hz. We will use the Fourier series expansion to find the complex expansion coefficients $c_n$.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compute_cn</span>(t_, f, n):
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Computes the Fourier coefficient c_n for a given time array.
@@ -193,8 +265,8 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
-</span></span></code></pre></div><p><img src="output_8_0.png" alt="png"></p>
-<h3 id="where-are-the-coefficients">Where are the coefficients?</h3>
+</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_8_0.png"></p>
+<h3 id="where-are-the-coefficients">Where are the coefficients?<a hidden class="anchor" aria-hidden="true" href="#where-are-the-coefficients">#</a></h3>
 <p>We get both positive and negative frequencies. But notice that if we add the amplitudes of the matched positive and negative amplitudes, we get the value of the coefficients in our constructed signal. This is because the signal is real, so the coefficients are conjugate symmetric. We can use this to plot the coefficients in a more intuitive way. Notice the DC part of the signal is NOT conjugate symmetric, so we don&rsquo;t add it to the negative frequency part.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>))
 </span></span><span style="display:flex;"><span>
@@ -213,8 +285,8 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
-</span></span></code></pre></div><p><img src="output_10_0.png" alt="png"></p>
-<h2 id="the-discrete-fourier-transform">The Discrete Fourier Transform</h2>
+</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_10_0.png"></p>
+<h2 id="the-discrete-fourier-transform">The Discrete Fourier Transform<a hidden class="anchor" aria-hidden="true" href="#the-discrete-fourier-transform">#</a></h2>
 <p>One of the issues about the decomposition we have done is that it assumes the signal is periodic. In practice, we often have signals that are not periodic. For example, consider the signal below, which is a wave packet that is not periodic. This signal is still of interest to us and can often contain useful physics. But the techniques we have used so far will not work for this signal.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Define the wave packet parameters</span>
 </span></span><span style="display:flex;"><span>k0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>  <span style="color:#75715e"># central wavenumber</span>
@@ -239,14 +311,14 @@
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Amplitude&#39;</span>)
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid(<span style="color:#66d9ef">True</span>)
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
-</span></span></code></pre></div><p><img src="output_12_0.png" alt="png"></p>
-<h3 id="enter-the-discrete-fourier-transform">Enter the Discrete Fourier Transform</h3>
+</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_12_0.png"></p>
+<h3 id="enter-the-discrete-fourier-transform">Enter the Discrete Fourier Transform<a hidden class="anchor" aria-hidden="true" href="#enter-the-discrete-fourier-transform">#</a></h3>
 <p>The <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform">Discrete Fourier Transform (DFT)</a> is a way to decompose a signal into a sum of sinusoids, but it does not require the signal to be periodic. You can think of it as a discretization of the processes we developed earlier. The expansion of the signal is still as it was before, but we understand it represents a finite number of samples of the signal:</p>
 <p>$$V(t) = \sum_{n=0}^{N-1} c_n e^{i n \omega t}.$$</p>
 <p>However, we now understand that the signal is only defined at discrete times $t_n = n \Delta t$ where $\Delta t$ is the time between samples. We can then write the Fourier coefficients as:</p>
 <p>$$c_n \approx \frac{1}{T_0} \sum_{k=0}^{N-1} V(t_k)e^{-i n \omega t_k} \Delta t$$</p>
 <p>where $V(t_k)$ is the value of the signal at time $t_k$ and $T_0 = N \Delta t$ is the total time of the signal.</p>
-<h3 id="assumptions">Assumptions</h3>
+<h3 id="assumptions">Assumptions<a hidden class="anchor" aria-hidden="true" href="#assumptions">#</a></h3>
 <p>In doing this, we are not creating a tool that will always work. We note a few important assumptions and caveats:</p>
 <ol>
 <li>
@@ -262,9 +334,9 @@
 <p><strong>Equally-Spaced Samples</strong>: The samples are assumed to be evenly spaced in time (or space, depending on the context of the signal). This uniform spacing is critical because non-uniformly spaced samples would require a different transform, such as the Non-uniform Discrete Fourier Transform (NDFT).</p>
 </li>
 </ol>
-<h2 id="the-fast-fourier-transform">The Fast Fourier Transform</h2>
+<h2 id="the-fast-fourier-transform">The Fast Fourier Transform<a hidden class="anchor" aria-hidden="true" href="#the-fast-fourier-transform">#</a></h2>
 <p>While we can use the DFT directly, the FFT is more efficient and has become the standard way to perform these analyses. The code to have <code>numpy.fft</code> perform the FFT is pretty simple. But there&rsquo;s many things to understand about the FFT and a variety of ways to produce spurious and incoherent results. Let&rsquo;s use the simple signal we have above to make go through an analysis.</p>
-<h3 id="the-fft-in-numpyfft">The FFT in <code>numpy.fft</code></h3>
+<h3 id="the-fft-in-numpyfft">The FFT in <code>numpy.fft</code><a hidden class="anchor" aria-hidden="true" href="#the-fft-in-numpyfft">#</a></h3>
 <p>We start by importing the libraries. Then we need to:</p>
 <ol>
 <li>Define the time array</li>
@@ -284,8 +356,8 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
-</span></span></code></pre></div><p><img src="output_16_0.png" alt="png"></p>
-<h3 id="computing-and-plotting-fourier-coefficients">Computing and plotting Fourier Coefficients</h3>
+</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_16_0.png"></p>
+<h3 id="computing-and-plotting-fourier-coefficients">Computing and plotting Fourier Coefficients<a hidden class="anchor" aria-hidden="true" href="#computing-and-plotting-fourier-coefficients">#</a></h3>
 <p>We now use <code>fft</code> to calculate the Fourier transform of the signal and <code>fftfreq</code> to calculate the frequencies associated with the transform. This is a standard way to do this analysis, but the most common mistakes involve the frequencies. Because it is a real signal, we don&rsquo;t worry about the negative frequencies, they are duplicate information. The amplitudes of the non DC frequencies are doubled like before to illustrate the Fourier coefficients.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>t_ <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>, T0, dt)  <span style="color:#75715e"># Time points for a single period</span>
 </span></span><span style="display:flex;"><span>one_cycle <span style="color:#f92672">=</span> summed[:len(t_)] <span style="color:#75715e"># One cycle of the summed signal</span>
@@ -309,7 +381,7 @@
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xticks(np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">2</span>))
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
-</span></span></code></pre></div><p><img src="output_19_0.png" alt="png"></p>
+</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_19_0.png"></p>
 <p>Notice the FFT looks precisely the same as before. But the Amplitudes are scaled differently. The total amplitude is not the same, but the relative values are still meaningful. If the maximum amplitude is scaled to the amplitude we had before, then the signal would look the same. However, it&rsquo;s typical to instead plot these scaled in some way. The most common way is to either scale them by the maximum amplitude or the sum of all the amplitudes. Each have their own purpose and meaning. Below we plot them both for comparison.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">4</span>))
 </span></span><span style="display:flex;"><span>
@@ -341,8 +413,8 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
-</span></span></code></pre></div><p><img src="output_21_0.png" alt="png"></p>
-<h3 id="investigating-the-fft">Investigating the FFT</h3>
+</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_21_0.png"></p>
+<h3 id="investigating-the-fft">Investigating the FFT<a hidden class="anchor" aria-hidden="true" href="#investigating-the-fft">#</a></h3>
 <p>Now that you have developed some code and some conceptual understanding of the FFT process, let&rsquo;s investigate some of the more nuanced aspects.</p>
 <p><strong>✅ Do this</strong></p>
 <ol>
@@ -359,31 +431,103 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
 </span></span></code></pre></div>
 
-    
-    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
-        <div style="display: flex; justify-content: space-between;">
-            <div>
-                
-                <a href="/3---waves-and-oscillations/notes-using-ffts/">← 13 Nov 23 - Notes: Applications of FFTs</a>
-                
-            </div>
-            <div style="text-align: right;">
-                
-                <a href="/3---waves-and-oscillations/activity-waves-introduction_to_fft/">7 Nov 23 - Activity: The Fast Fourier Transform →</a>
-                
-            </div>
-        </div>
-    </nav>
-    
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="//localhost:1313/3---waves-and-oscillations/activity-waves-introduction_to_fft/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>7 Nov 23 - Activity: The Fast Fourier Transform</span>
+  </a>
+  <a class="next" href="//localhost:1313/3---waves-and-oscillations/notes-using-ffts/">
+    <span class="title">Next »</span>
+    <br>
+    <span>13 Nov 23 - Notes: Applications of FFTs</span>
+  </a>
+</nav>
+
+  </footer>
 </article>
-
     </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="//localhost:1313/">PHY 415 Fall 2023</a></span> · 
 
-    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
         
-        <p>Danny Caballero, Alia Valentine</p>
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
         
-        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
-    </footer>
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

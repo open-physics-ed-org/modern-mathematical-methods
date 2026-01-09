@@ -283,7 +283,7 @@ The Large Angle Pendulum is the first of a number of nonlinear differential equa
 
 Here's the pendulum in all it's glory.
 
-{{< figure src="/images/content/assets/images/pendulum_bob.png" alt="Large Angle Pendulum" >}}
+![Large Angle Pendulum](/images/content/assets/images/pendulum_bob.png)
 
 
 The analytical solution for the period is given by:

@@ -1,205 +1,400 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignments | PHY 415 Fall 2023</title>
-    <meta name="description" content="PHY 415 Fall 2023">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    
-    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Assignments | PHY 415 Fall 2023</title>
+<meta name="keywords" content="">
+<meta name="description" content="This section contains course materials for Assignments.">
+<meta name="author" content="Danny Caballero, Alia Valentine">
+<link rel="canonical" href="//localhost:1313/assignments/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="//localhost:1313/assignments/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="//localhost:1313/assignments/">
+<noscript>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
+        #theme-toggle,
+        .top-link {
+            display: none;
         }
-        nav {
-            background: #f4f4f4;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 5px;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        nav a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            color: #222;
-            margin-top: 1.5em;
-        }
-        h1 {
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: "SF Mono", Monaco, Consolas, monospace;
-        }
-        pre {
-            background: #f4f4f4;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        pre code {
-            background: none;
-            padding: 0;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        a {
-            color: #0066cc;
-        }
-        .menu-home {
-            font-weight: bold;
-            margin-right: 30px;
-        }
+
     </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+
+
 </head>
-<body>
-    <nav role="navigation" aria-label="Main navigation">
-        <ul>
-            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
-            
-            
-            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
-            
-            
-            
-            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
-            
-            
-            
-            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
-            
-            
-            
-            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
-            
-            
-            
-            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
-            
-            
-            
-            <li><a href="/assignments/">Assignments</a></li>
-            
-            
-            
-            <li><a href="/appendices/">Appendices</a></li>
-            
-            
+<body class="list" id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:1313/" accesskey="h" title="PHY 415 Fall 2023 (Alt + H)">PHY 415 Fall 2023</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:1313/0---intro-and-syllabus/" title="0 - Intro and Syllabus">
+                    <span>0 - Intro and Syllabus</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/1---mechanics-and-odes/" title="1 - Mechanics and ODEs">
+                    <span>1 - Mechanics and ODEs</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/2---em-and-pdes/" title="2 - E&amp;M and PDEs">
+                    <span>2 - E&amp;M and PDEs</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/3---waves-and-oscillations/" title="3 - Waves and Oscillations">
+                    <span>3 - Waves and Oscillations</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/4---randomness-and-distributions/" title="4 - Randomness and Distributions">
+                    <span>4 - Randomness and Distributions</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/assignments/" title="Assignments">
+                    <span class="active">Assignments</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/appendices/" title="Appendices">
+                    <span>Appendices</span>
+                </a>
+            </li>
         </ul>
     </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="//localhost:1313/">Home</a></div>
+  <h1>
+    Assignments
+  </h1>
+</header>
+<div class="post-content"><p>This section contains course materials for Assignments.</p>
 
-    <main role="main">
-        
-<article>
-    <h1>Assignments</h1>
-    <p>This section contains course materials for Assignments.</p>
 
+</div>
 
-    
-    <section style="margin-top: 30px;">
-        <h2>Pages in this section:</h2>
-        <ul>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/updated_rubric/"><strong>Updated Rubric for Worked Problems and Projects</strong></a>
-                
-            </li>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/worked-problem-1/"><strong>Worked Problem Assignment 1</strong></a>
-                
-            </li>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/worked-problem-2/"><strong>Worked Problem Assignment 2</strong></a>
-                
-            </li>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/project-1/"><strong>Project 1 - Classical Mechanics and ODEs</strong></a>
-                
-            </li>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/worked-problem-3/"><strong>Worked Problem Assignment 3</strong></a>
-                
-            </li>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/worked-problem-4/"><strong>Worked Problem Assignment 4</strong></a>
-                
-            </li>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/project-2/"><strong>Project 2 - PDEs, Laplace&#39;s Equation, and the Method of Relaxation</strong></a>
-                
-            </li>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/worked-problem-5/"><strong>Worked Problem Assignment 5</strong></a>
-                
-            </li>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/worked-problem-6/"><strong>Worked Problem Assignment 6</strong></a>
-                
-            </li>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/project-3/"><strong>Project 3 - Waves and Fourier Analysis</strong></a>
-                
-            </li>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/worked-problem-7/"><strong>Worked Problem Assignment 7</strong></a>
-                
-            </li>
-            
-            <li style="margin-bottom: 10px;">
-                <a href="/assignments/project-4/"><strong>Project 4 - Probabilistic Modeling</strong></a>
-                
-            </li>
-            
-        </ul>
-    </section>
-    
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Updated Rubric for Worked Problems and Projects
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>19 Oct 2023
+Choosing and Explaining an Appropriate Problem (30%) 30 points total - An appropriate problem is often one one on the border of analytical and numerical methods (or one that can be simplified or extended to be either). If you can solve it completely analytically, then consider how it can be extended for a computing activity. If you have questions or thoughts, please ask Danny, Alia, or Ian.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
+  <a class="entry-link" aria-label="post link to Updated Rubric for Worked Problems and Projects" href="//localhost:1313/assignments/updated_rubric/"></a>
 </article>
 
-    </main>
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Worked Problem Assignment 1
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Due 15 Sep 23
+In this first few class periods, we have discussed formulating mechanics using Lagrangian Dynamics to produce equations of motion and how we can use numerical integration to solve for trajectories.
+Grading Rubric
+Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.
+Places to find candidate problems: Classical mechanics textbooks; look at the problems in the Lagrangian chapters Differential equations textbooks; look at ODEs that represent real systems Wikipedia has lists of named differential equations and problems List of named Diffy Qs List of nonlinear differential equations Ask on Slack Developing Equations of Motion Remember that the process we have developed is:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
+  <a class="entry-link" aria-label="post link to Worked Problem Assignment 1" href="//localhost:1313/assignments/worked-problem-1/"></a>
+</article>
 
-    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Worked Problem Assignment 2
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Due 22 Sep 23
+We have spent much of our time on a dynamical systems view of ODEs. In this assignment, you will choose an ODE and work through a dynamical analysis of the system.
+Grading Rubric
+Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.
+Places to find candidate problems: Classical mechanics textbooks; look at the problems in the Lagrangian chapters (you only need to the ODEs) Differential equations textbooks; look at ODEs that represent real systems Wikipedia has lists of named differential equations and problems List of named Diffy Qs List of nonlinear differential equations Ask on Slack Starting your Analysis You will need to orient us to your problem as there are many ODEs available. You should limit yourself to systems with two degrees of freedom (either 3d with a constraint or 2d with no constraint).
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
+  <a class="entry-link" aria-label="post link to Worked Problem Assignment 2" href="//localhost:1313/assignments/worked-problem-2/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Project 1 - Classical Mechanics and ODEs
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Due 29 Sep 23
+Project 1 will focus on the the topic of ordinary differential equations in physics. Differential equations are often how we describe nature because nature often changes continuously (quantum mechanics notwithstanding). We focused in class on various oscillators. Your job is to develop a project that investigates some nonlinear differential equation of your choosing. Our expectation is that this ODE is nonlinear, at least 2nd order or two coupled 1st order equations, and that is of interest to you personally or professionally. Below is a list of potential candidates.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
+  <a class="entry-link" aria-label="post link to Project 1 - Classical Mechanics and ODEs" href="//localhost:1313/assignments/project-1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Worked Problem Assignment 3
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Due 6 Oct 23
+We have developed tools to create general electrostatic situations. And we have worked with some analytical tools to solve for the electric field. Now you will put these together to solve for the electric field in a specific situation.
+Grading Rubric
+Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.
+Starting your Analysis You will need to orient us to your problem as there are many potential electrostatic situations. You will need to develop an analytical tractable situation that can also be explored using the numerical methods we have developed. You will need to do the following:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
+  <a class="entry-link" aria-label="post link to Worked Problem Assignment 3" href="//localhost:1313/assignments/worked-problem-3/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Worked Problem Assignment 4
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Due 13 Oct 23
+The electric potential, $\Phi$, is often a better quantity to work with when solving electrostatics problems. As we have seen, we can do direct integration to find the potential at a given point. We’ve also seen that we can solve for the potential using the Laplace equation. In this worked problem, you will explore the potential in a specific situation of your choosing.
+Grading Rubric
+Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
+  <a class="entry-link" aria-label="post link to Worked Problem Assignment 4" href="//localhost:1313/assignments/worked-problem-4/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Project 2 - PDEs, Laplace&#39;s Equation, and the Method of Relaxation
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Due 27 Oct 23
+Updated Rubric
+Project 2 will focus on the topic of partial differential equations, specifically Laplace’s equation. For this project, you will be given a choice to work alone or in a pair. If you work in a pair, we expect the work to be more in-depth and to explore more aspects of the problem. For example, you should consider one of the extensions listed below to add to your project. If you work alone, we expect the same level of depth as with project 1.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
+  <a class="entry-link" aria-label="post link to Project 2 - PDEs, Laplace&#39;s Equation, and the Method of Relaxation" href="//localhost:1313/assignments/project-2/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Worked Problem Assignment 5
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Due 3 Nov 23
+We have developed an approach to find the normal modes of a linear oscillating systems. For this problem you will choose a system that oscillates with at least 3 oscillators and explore the motion and dynamics of that system. You cannot choose coupled springs; it must be a system that you have not already explored in class.
+Updated Rubric
+Remember that a worked problem means the scale of a detailed (e.g., parts a-h) homework problem.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
+  <a class="entry-link" aria-label="post link to Worked Problem Assignment 5" href="//localhost:1313/assignments/worked-problem-5/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Worked Problem Assignment 6
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Due 10 Nov 23
+We have shown that we can use a Fourier Transform to decompose a function into its frequency components. We’ve graphed the solutions, and we’ve seen how we can construct signals with certain properties. In this assignment, you are asked to use these tools to solve a problem of your choosing. Consider a scenario where a signal of some sort is being generated and you want to understand the frequency content of the signal. You can use the tools we have developed to do this.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
+  <a class="entry-link" aria-label="post link to Worked Problem Assignment 6" href="//localhost:1313/assignments/worked-problem-6/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Project 3 - Waves and Fourier Analysis
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Due 17 Nov 23
+Updated Rubric
+Project 3 will focus on the topic of waves and Fourier analysis. You will need to do an analysis of some data of your choosing. You may start this work during the class week of 10/13 after we go through some initial work.
+What do you need to do? Think about the ways that an FFT can be used. How we can extract frequency information, clean signals, and more. You can use the FFT to explore any data you want. You can use this project to explore any data you want. It only needs to be 1D data, but you have to provide a full analysis and explanation of what you are doing.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
+  <a class="entry-link" aria-label="post link to Project 3 - Waves and Fourier Analysis" href="//localhost:1313/assignments/project-3/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="//localhost:1313/assignments/page/2/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="//localhost:1313/">PHY 415 Fall 2023</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
         
-        <p>Danny Caballero, Alia Valentine</p>
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
         
-        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
-    </footer>
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

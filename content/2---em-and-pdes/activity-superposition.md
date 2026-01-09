@@ -87,7 +87,7 @@ where $I_{enc}$ is the current enclosed by the path of integration. This integra
 
 The example of a thin wire is common and forms the basis for more complex forms of Ampere's Law. Consider a thin wire with a steady current $I$. We are a distance $r$ from the wire. We know the magnetic field circulates around the wire, so we choose a circular path a distance $r$ from the wire.
 
-{{< figure src="/images/content/assets/images/ampere_loop.jpg" alt="Thin wire" >}}
+![Thin wire](/images/content/assets/images/ampere_loop.jpg)
 
 In this case the (as of yet uncomputed) magnetic field is always parallel to out choice of path. Moerover, we have no reason to believe the magnetic field strength is different at different locations along the circle. So the integral simplifies:
 
@@ -105,7 +105,7 @@ where $\hat{\phi}$ is the unit vector in the azimuthal direction -- around the w
 
 Consider a thick wire (radius $a$) that has a steady current density $\mathbf{J}(\mathbf{r}) = J_0 \hat{z}$ where $J_0$ is some constant. See the figure below.
 
-{{< figure src="/images/content/assets/images/ampere-thick.png" alt="Thick wire" >}}
+![Thick wire](/images/content/assets/images/ampere-thick.png)
 
 **&#9989; Do this** 
 

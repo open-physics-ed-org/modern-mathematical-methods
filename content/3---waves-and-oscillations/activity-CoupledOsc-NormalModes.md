@@ -20,7 +20,7 @@ We will start with a form of guided lecture and build the understanding of these
 
 Let's assume you have a chain of two mass connected by springs (all the same $k$) as below.
 
-{{< figure src="/images/content/assets/images/two-coupled-gliders-diagram.png" alt="Coupled Oscillator set up. Two oscillators connected by three springs in a horizontal line." >}}
+![Coupled Oscillator set up. Two oscillators connected by three springs in a horizontal line.](/images/content/assets/images/two-coupled-gliders-diagram.png)
 
 
 ### Deriving the Equations of Motion
@@ -147,7 +147,7 @@ where $\pmb{I}$ is the identity matrix. This is a polynomial equation in $\omega
 
 Consider two vertical pendulums of length $l$ connected via their masses $M$ by a weak spring $k$. By weak, we mean that the spring constant is small. See below for a canonical setup:
 
-{{< figure src="/images/content/assets/images/coupled_diag.jpg" alt="Coupled pendulua diagram" >}}
+![Coupled pendulua diagram](/images/content/assets/images/coupled_diag.jpg)
 
 **&#9989; Do this** 
 
@@ -163,7 +163,7 @@ Consider two vertical pendulums of length $l$ connected via their masses $M$ by 
 
 Consider the setup below consisting of three masses connected by springs to each other. We intend to find the normal modes of the system by denoting each mass's displacement ($x_1$, $x_2$, and $x_3$).
 
-{{< figure src="/images/content/assets/images/3_coupled_osc.png" alt="3 Coupled Oscillators" >}}
+![3 Coupled Oscillators](/images/content/assets/images/3_coupled_osc.png)
 
 ## Finding the Normal Mode Frequencies
 

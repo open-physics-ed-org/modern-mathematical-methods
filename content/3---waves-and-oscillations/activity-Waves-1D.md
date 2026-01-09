@@ -100192,7 +100192,7 @@ One of the key indicators of wave like behavior is [diffraction](https://en.wiki
 
 In the case of [single-slit diffraction](https://en.wikipedia.org/wiki/Diffraction#Single-slit_diffraction), the wave is diffracted around a slit of width $a$. a forms circular wave fronts that interfere with each other.
 
-{{< figure src="/images/content/assets/images/Single_slit_diffraction.jpeg" alt="Diagram of single slit diffraction" >}}
+![Diagram of single slit diffraction](/images/content/assets/images/Single_slit_diffraction.jpeg)
 
 A screen placed a distance $L$ away from the slit will show a diffraction pattern. We can show the intensity of the diffraction pattern is:
 

@@ -1,134 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 4 - Probabilistic Modeling | PHY 415 Fall 2023</title>
-    <meta name="description" content="PHY 415 Fall 2023">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    
-    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Project 4 - Probabilistic Modeling | PHY 415 Fall 2023</title>
+<meta name="keywords" content="">
+<meta name="description" content="Due 14 Dec 23
+Updated Rubric
+Project 4 emphasizes probabilistic models. We&rsquo;ve done work with counting statistics (flipping coins and rolling die). We&rsquo;ve modeled radioactive decay and decay chains. We&rsquo;ve developed Monte Carlo simulations to do integrals and to model different systems. In this project, you are free to choose a particular probabilistic model and apply it to a new physics situation of your choosing. You may be creative in your choice of model and situation, but you must be able to justify your choices.">
+<meta name="author" content="Danny Caballero, Alia Valentine">
+<link rel="canonical" href="//localhost:1313/assignments/project-4/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:1313/assignments/project-4/">
+<noscript>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
+        #theme-toggle,
+        .top-link {
+            display: none;
         }
-        nav {
-            background: #f4f4f4;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 5px;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        nav a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            color: #222;
-            margin-top: 1.5em;
-        }
-        h1 {
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: "SF Mono", Monaco, Consolas, monospace;
-        }
-        pre {
-            background: #f4f4f4;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        pre code {
-            background: none;
-            padding: 0;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        a {
-            color: #0066cc;
-        }
-        .menu-home {
-            font-weight: bold;
-            margin-right: 30px;
-        }
+
     </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+
+
 </head>
-<body>
-    <nav role="navigation" aria-label="Main navigation">
-        <ul>
-            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
-            
-            
-            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
-            
-            
-            
-            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
-            
-            
-            
-            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
-            
-            
-            
-            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
-            
-            
-            
-            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
-            
-            
-            
-            <li><a href="/assignments/">Assignments</a></li>
-            
-            
-            
-            <li><a href="/appendices/">Appendices</a></li>
-            
-            
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:1313/" accesskey="h" title="PHY 415 Fall 2023 (Alt + H)">PHY 415 Fall 2023</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:1313/0---intro-and-syllabus/" title="0 - Intro and Syllabus">
+                    <span>0 - Intro and Syllabus</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/1---mechanics-and-odes/" title="1 - Mechanics and ODEs">
+                    <span>1 - Mechanics and ODEs</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/2---em-and-pdes/" title="2 - E&amp;M and PDEs">
+                    <span>2 - E&amp;M and PDEs</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/3---waves-and-oscillations/" title="3 - Waves and Oscillations">
+                    <span>3 - Waves and Oscillations</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/4---randomness-and-distributions/" title="4 - Randomness and Distributions">
+                    <span>4 - Randomness and Distributions</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/assignments/" title="Assignments">
+                    <span>Assignments</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/appendices/" title="Appendices">
+                    <span>Appendices</span>
+                </a>
+            </li>
         </ul>
     </nav>
+</header>
+<main class="main">
 
-    <main role="main">
-        
-<article>
-    <header>
-        <h1>Project 4 - Probabilistic Modeling</h1>
-        
-    </header>
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="//localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="//localhost:1313/assignments/">Assignments</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Project 4 - Probabilistic Modeling
+    </h1>
+    <div class="post-meta"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span>
 
-    <p><strong>Due 14 Dec 23</strong></p>
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#what-do-you-need-to-do" aria-label="What do you need to do?">What do you need to do?</a></li>
+                <li>
+                    <a href="#earning-extra-credit-for-more-explorations" aria-label="Earning extra credit for more explorations">Earning extra credit for more explorations</a></li>
+                <li>
+                    <a href="#submitting-your-work" aria-label="Submitting your work">Submitting your work</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><strong>Due 14 Dec 23</strong></p>
 <p><a href="/assignments/updated_rubric/"><strong>Updated Rubric</strong></a></p>
 <p>Project 4 emphasizes probabilistic models. We&rsquo;ve done work with counting statistics (flipping coins and rolling die). We&rsquo;ve modeled radioactive decay and decay chains. We&rsquo;ve developed Monte Carlo simulations to do integrals and to model different systems. In this project, you are free to choose a particular probabilistic model and apply it to a new physics situation of your choosing. You may be creative in your choice of model and situation, but you must be able to justify your choices.</p>
 <p><em>You also have now done 3 of these projects, so you should be able to decide for yourself what you want to use from this course module.</em></p>
-<h2 id="what-do-you-need-to-do">What do you need to do?</h2>
+<h2 id="what-do-you-need-to-do">What do you need to do?<a hidden class="anchor" aria-hidden="true" href="#what-do-you-need-to-do">#</a></h2>
 <p>Think about different systems you have seen or read about that have probabilistic individual outcomes but are part of a collection (a multiple particle system). For example, as we saw the random decay of an atom can be modeled this way to say something about the decay of a sample. It might not seem obvious, but a leaf breaking off a tree in a light breeze can be modeled as a probabilistic process. You might also consider using a Monte Carlo simulation to model a system. We&rsquo;ve used them to perform integrals, but also to show the behavior of spins in a magnetic field. Monte Carlo simulations have wide applicability.</p>
 <ul>
 <li>Choose a physical system that can be modeled using a probabilistic model
@@ -144,40 +197,102 @@
 </ul>
 </li>
 </ul>
-<h2 id="earning-extra-credit-for-more-explorations">Earning extra credit for more explorations</h2>
+<h2 id="earning-extra-credit-for-more-explorations">Earning extra credit for more explorations<a hidden class="anchor" aria-hidden="true" href="#earning-extra-credit-for-more-explorations">#</a></h2>
 <p>Monte Carlo simulations take a long time to run, so most of these are not required. If you want to explore these, you can earn extra credit.</p>
 <ul>
 <li>Explore parameter effects on your model</li>
 <li>Explore the effects of performing the Monte Carlo poorly (e.g., not enough points, not enough data, etc.)</li>
 <li>Perform a project with a 2D Monte Carlo simulation</li>
 </ul>
-<h2 id="submitting-your-work">Submitting your work</h2>
+<h2 id="submitting-your-work">Submitting your work<a hidden class="anchor" aria-hidden="true" href="#submitting-your-work">#</a></h2>
 <p>You will upload your work to D2L. It should be a single PDF of your work. If you also write code, please submit the associated files as well. If you do all of this in a Jupyter notebook, please export the notebook as a PDF and submit the notebook and PDF file. If you have any questions, please ask. We want you to enjoy working on these problems.</p>
 
 
-    
-    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
-        <div style="display: flex; justify-content: space-between;">
-            <div>
-                
-            </div>
-            <div style="text-align: right;">
-                
-                <a href="/assignments/worked-problem-7/">Worked Problem Assignment 7 →</a>
-                
-            </div>
-        </div>
-    </nav>
-    
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+
+  </footer>
 </article>
-
     </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="//localhost:1313/">PHY 415 Fall 2023</a></span> · 
 
-    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
         
-        <p>Danny Caballero, Alia Valentine</p>
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
         
-        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
-    </footer>
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>2 - E&amp;M and PDEs on PHY 415 Fall 2023</title>
     <link>//localhost:1313/2---em-and-pdes/</link>
     <description>Recent content in 2 - E&amp;M and PDEs on PHY 415 Fall 2023</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.154.3</generator>
     <language>en</language>
     <lastBuildDate>Thu, 08 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/2---em-and-pdes/index.xml" rel="self" type="application/rss+xml" />
@@ -13,35 +13,53 @@
       <link>//localhost:1313/2---em-and-pdes/notes-em_intro/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/2---em-and-pdes/notes-em_intro/</guid>
-      <description>&lt;h2 id=&#34;electromagnetic-phenomena&#34;&gt;Electromagnetic Phenomena&lt;/h2&gt;&#xA;&lt;p&gt;You have certainly experienced a wide variety of electromagnetic phenomena in your life &amp;ndash; both natural (e.g., a sun rise, a rainbow, your hair standing on end) and human-made (e.g., switching on a light, using a microwave, using a cell phone). We now know that we can explain many of those phenomenon using a set of four partial differential equations: &lt;a href=&#34;https://en.wikipedia.org/wiki/Maxwell%27s_equations&#34;&gt;Maxwell&amp;rsquo;s Equations&lt;/a&gt;. These equations describe a new mathematical object: a &lt;a href=&#34;https://en.wikipedia.org/wiki/Field_(physics)&#34;&gt;field&lt;/a&gt;. The models that we develop from this theory are still &lt;a href=&#34;https://en.wikipedia.org/wiki/Classical_physics&#34;&gt;Classical&lt;/a&gt; &amp;ndash; in that we don&amp;rsquo;t consider quantum mechanical effects. Rather we treat the fields as continuous functions of space and time.&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;electromagnetic-phenomena&#34;&gt;Electromagnetic Phenomena&lt;/h2&gt;
+&lt;p&gt;You have certainly experienced a wide variety of electromagnetic phenomena in your life &amp;ndash; both natural (e.g., a sun rise, a rainbow, your hair standing on end) and human-made (e.g., switching on a light, using a microwave, using a cell phone). We now know that we can explain many of those phenomenon using a set of four partial differential equations: &lt;a href=&#34;https://en.wikipedia.org/wiki/Maxwell%27s_equations&#34;&gt;Maxwell&amp;rsquo;s Equations&lt;/a&gt;. These equations describe a new mathematical object: a &lt;a href=&#34;https://en.wikipedia.org/wiki/Field_(physics)&#34;&gt;field&lt;/a&gt;. The models that we develop from this theory are still &lt;a href=&#34;https://en.wikipedia.org/wiki/Classical_physics&#34;&gt;Classical&lt;/a&gt; &amp;ndash; in that we don&amp;rsquo;t consider quantum mechanical effects. Rather we treat the fields as continuous functions of space and time.&lt;/p&gt;</description>
     </item>
     <item>
       <title>26 Sept 23 - Notes: Static Fields</title>
       <link>//localhost:1313/2---em-and-pdes/notes-static_fields/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/2---em-and-pdes/notes-static_fields/</guid>
-      <description>&lt;h2 id=&#34;vector-calculus&#34;&gt;Vector Calculus&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Maxwell%27s_equations&#34;&gt;Maxwell&amp;rsquo;s Equations&lt;/a&gt;, even in their static form (i.e., static charges or steady currents), are a set of coupled partial differential equations. In order to develop solutions and models to approximate the behavior of electromagnetic fields, we need to be able to use vector calculus.&lt;/p&gt;&#xA;&lt;p&gt;The video below from &lt;a href=&#34;https://www.3blue1brown.com/&#34;&gt;3Blue1Brown&lt;/a&gt; provides a conceptual introduction to the vector calculus that we are going to need for this.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://inv.tux.pizza/watch?v=rB83DpBJQsE&#34;&gt;&lt;img src=&#34;https://markdown-videos-api.jorgenkh.no/youtube/rB83DpBJQsE?width=720&amp;amp;height=405&#34; alt=&#34;Vector Calculus&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Non-Commercial Link: &lt;a href=&#34;https://inv.tux.pizza/watch?v=rB83DpBJQsE&#34;&gt;https://inv.tux.pizza/watch?v=rB83DpBJQsE&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Commercial Link: &lt;a href=&#34;https://youtube.com/watch?v=rB83DpBJQsE&#34;&gt;https://youtube.com/watch?v=rB83DpBJQsE&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;electrostatic-fields&#34;&gt;Electrostatic fields&lt;/h2&gt;&#xA;&lt;p&gt;The electrostatic field is one that is created by static (stationary) charges. This is often the first type of field that we encounter, where $\rho(\mathbf{r},t)) = \rho(\mathbf{r})$. Because the charges are stationary, the current density is zero, $\mathbf{J}(\mathbf{r},t) = \mathbf{0}$.&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;vector-calculus&#34;&gt;Vector Calculus&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Maxwell%27s_equations&#34;&gt;Maxwell&amp;rsquo;s Equations&lt;/a&gt;, even in their static form (i.e., static charges or steady currents), are a set of coupled partial differential equations. In order to develop solutions and models to approximate the behavior of electromagnetic fields, we need to be able to use vector calculus.&lt;/p&gt;
+&lt;p&gt;The video below from &lt;a href=&#34;https://www.3blue1brown.com/&#34;&gt;3Blue1Brown&lt;/a&gt; provides a conceptual introduction to the vector calculus that we are going to need for this.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://inv.tux.pizza/watch?v=rB83DpBJQsE&#34;&gt;&lt;img alt=&#34;Vector Calculus&#34; loading=&#34;lazy&#34; src=&#34;https://markdown-videos-api.jorgenkh.no/youtube/rB83DpBJQsE?width=720&amp;height=405&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Non-Commercial Link: &lt;a href=&#34;https://inv.tux.pizza/watch?v=rB83DpBJQsE&#34;&gt;https://inv.tux.pizza/watch?v=rB83DpBJQsE&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Commercial Link: &lt;a href=&#34;https://youtube.com/watch?v=rB83DpBJQsE&#34;&gt;https://youtube.com/watch?v=rB83DpBJQsE&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;electrostatic-fields&#34;&gt;Electrostatic fields&lt;/h2&gt;
+&lt;p&gt;The electrostatic field is one that is created by static (stationary) charges. This is often the first type of field that we encounter, where $\rho(\mathbf{r},t)) = \rho(\mathbf{r})$. Because the charges are stationary, the current density is zero, $\mathbf{J}(\mathbf{r},t) = \mathbf{0}$.&lt;/p&gt;</description>
     </item>
     <item>
       <title>26 Sep 23 - Activity: Electrostatic Fields</title>
       <link>//localhost:1313/2---em-and-pdes/activity-efields/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/2---em-and-pdes/activity-efields/</guid>
-      <description>&lt;p&gt;As we saw the electric field is described by the 4 Maxwell equations. But, in the electrostatic situation where the charges do not move, we find the electric field is described by the following equations:&lt;/p&gt;&#xA;&lt;p&gt;$$\nabla \cdot \mathbf{E} = \frac{\rho}{\epsilon_0}$$&lt;/p&gt;&#xA;&lt;p&gt;$$\nabla \times \mathbf{E} = 0$$&lt;/p&gt;&#xA;&lt;p&gt;These linear partial differential equations can be solved analytically for a number of situations. In this activity we will explore the electric field for a number of situations.&lt;/p&gt;</description>
+      <description>&lt;p&gt;As we saw the electric field is described by the 4 Maxwell equations. But, in the electrostatic situation where the charges do not move, we find the electric field is described by the following equations:&lt;/p&gt;
+&lt;p&gt;$$\nabla \cdot \mathbf{E} = \frac{\rho}{\epsilon_0}$$&lt;/p&gt;
+&lt;p&gt;$$\nabla \times \mathbf{E} = 0$$&lt;/p&gt;
+&lt;p&gt;These linear partial differential equations can be solved analytically for a number of situations. In this activity we will explore the electric field for a number of situations.&lt;/p&gt;</description>
     </item>
     <item>
       <title>28 Sep 23 - Activity: Superposition of Fields</title>
       <link>//localhost:1313/2---em-and-pdes/activity-superposition/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/2---em-and-pdes/activity-superposition/</guid>
-      <description>&lt;h2 id=&#34;coulombs-law&#34;&gt;Coulomb&amp;rsquo;s Law&lt;/h2&gt;&#xA;&lt;p&gt;We&amp;rsquo;ve seen that the electric field of a set of point charges if given by the vector sum of the contributions from each charge:&lt;/p&gt;&#xA;&lt;p&gt;$$\mathbf{E}(\mathbf{r}) = \sum_i \frac{1}{4\pi\epsilon_0} \frac{q_i}{(\mathbf{r}-\mathbf{r}&amp;rsquo;_i)^3} (\mathbf{r}-\mathbf{r}&amp;rsquo;_i)$$&lt;/p&gt;&#xA;&lt;p&gt;where $\mathbf{r}&amp;rsquo;_i$ is the location of the charge relative to the origin, and $\mathbf{r}$ is the location of the field point relative to the origin. This &lt;strong&gt;net electric field&lt;/strong&gt; is the result of the &lt;strong&gt;superposition&lt;/strong&gt; of the electric fields from each charge. But here the charges are discrete, we can identify each charge uniquely in terms of it&amp;rsquo;s charge and location. This concept can be abstracted to a continuous distribution of charge, where we can identify the charge at any point in space by the charge density $\rho(\mathbf{r})$. In this case, the charge is not a point charge, but rather a small chunk of charge that we model as a point charge. That is, we can write the electric field contributed by that chunk $dq$ as:&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;coulombs-law&#34;&gt;Coulomb&amp;rsquo;s Law&lt;/h2&gt;
+&lt;p&gt;We&amp;rsquo;ve seen that the electric field of a set of point charges if given by the vector sum of the contributions from each charge:&lt;/p&gt;
+&lt;p&gt;$$\mathbf{E}(\mathbf{r}) = \sum_i \frac{1}{4\pi\epsilon_0} \frac{q_i}{(\mathbf{r}-\mathbf{r}&amp;rsquo;_i)^3} (\mathbf{r}-\mathbf{r}&amp;rsquo;_i)$$&lt;/p&gt;
+&lt;p&gt;where $\mathbf{r}&amp;rsquo;_i$ is the location of the charge relative to the origin, and $\mathbf{r}$ is the location of the field point relative to the origin. This &lt;strong&gt;net electric field&lt;/strong&gt; is the result of the &lt;strong&gt;superposition&lt;/strong&gt; of the electric fields from each charge. But here the charges are discrete, we can identify each charge uniquely in terms of it&amp;rsquo;s charge and location. This concept can be abstracted to a continuous distribution of charge, where we can identify the charge at any point in space by the charge density $\rho(\mathbf{r})$. In this case, the charge is not a point charge, but rather a small chunk of charge that we model as a point charge. That is, we can write the electric field contributed by that chunk $dq$ as:&lt;/p&gt;</description>
     </item>
     <item>
       <title>3 Oct 23 - Notes: Electric Potential - a scalar field</title>
       <link>//localhost:1313/2---em-and-pdes/notes-electric_potential/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/2---em-and-pdes/notes-electric_potential/</guid>
-      <description>&lt;p&gt;We&amp;rsquo;ve seen that there&amp;rsquo;s a lot of challenges with solving field problems where the fields are vectors and described by partial differential equations. The electric and magnetic field are vector fields that have a size and direction are every points in space. They are described by a set of 4 partial differential equations, &lt;a href=&#34;https://en.wikipedia.org/wiki/Maxwell%27s_equations&#34;&gt;Maxwell&amp;rsquo;s Equations&lt;/a&gt;. In Cartesian coordinates, these equations are described by 8 coupled partial differential equations.&lt;/p&gt;&#xA;&lt;h2 id=&#34;electrostatics&#34;&gt;Electrostatics&lt;/h2&gt;&#xA;&lt;p&gt;In electrostatic situations, where charges don&amp;rsquo;t move, we&amp;rsquo;ve seen that the equations that describe the electric field are simplified to:&lt;/p&gt;</description>
+      <description>&lt;p&gt;We&amp;rsquo;ve seen that there&amp;rsquo;s a lot of challenges with solving field problems where the fields are vectors and described by partial differential equations. The electric and magnetic field are vector fields that have a size and direction are every points in space. They are described by a set of 4 partial differential equations, &lt;a href=&#34;https://en.wikipedia.org/wiki/Maxwell%27s_equations&#34;&gt;Maxwell&amp;rsquo;s Equations&lt;/a&gt;. In Cartesian coordinates, these equations are described by 8 coupled partial differential equations.&lt;/p&gt;
+&lt;h2 id=&#34;electrostatics&#34;&gt;Electrostatics&lt;/h2&gt;
+&lt;p&gt;In electrostatic situations, where charges don&amp;rsquo;t move, we&amp;rsquo;ve seen that the equations that describe the electric field are simplified to:&lt;/p&gt;</description>
     </item>
     <item>
       <title>3 Oct 23 - Activity: PDEs and Separation of Variables</title>
@@ -55,7 +73,10 @@
       <link>//localhost:1313/2---em-and-pdes/activity-sep_var_spherical/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/2---em-and-pdes/activity-sep_var_spherical/</guid>
-      <description>&lt;p&gt;We can extend the ideas we developed from Separation of Variables to solve PDEs in spherical coordinates. We propose a similar solution to the one we used for Cartesian coordinates, functions of a single variable.&lt;/p&gt;&#xA;&lt;p&gt;$$V(r,\theta,\phi) = R(r) \Theta(\theta) \Phi(\phi)$$&lt;/p&gt;&#xA;&lt;p&gt;We have &lt;a href=&#34;../../assets/notes/Notes-Separation_of_Variables_Spherical.pdf&#34;&gt;shown that we can solve this problem in general&lt;/a&gt;. We will now apply this to a specific problem. Recall these general solutions are written in the following ways:&lt;/p&gt;&#xA;&lt;p&gt;$$R(r) = A r^n + \frac{B}{r^{n+1}}$$&lt;/p&gt;</description>
+      <description>&lt;p&gt;We can extend the ideas we developed from Separation of Variables to solve PDEs in spherical coordinates. We propose a similar solution to the one we used for Cartesian coordinates, functions of a single variable.&lt;/p&gt;
+&lt;p&gt;$$V(r,\theta,\phi) = R(r) \Theta(\theta) \Phi(\phi)$$&lt;/p&gt;
+&lt;p&gt;We have &lt;a href=&#34;../../assets/notes/Notes-Separation_of_Variables_Spherical.pdf&#34;&gt;shown that we can solve this problem in general&lt;/a&gt;. We will now apply this to a specific problem. Recall these general solutions are written in the following ways:&lt;/p&gt;
+&lt;p&gt;$$R(r) = A r^n + \frac{B}{r^{n+1}}$$&lt;/p&gt;</description>
     </item>
     <item>
       <title>9 Oct 23 - Notes: Method of Relaxation</title>
@@ -69,14 +90,28 @@
       <link>//localhost:1313/2---em-and-pdes/activity-sep_var_spherical_examples/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/2---em-and-pdes/activity-sep_var_spherical_examples/</guid>
-      <description>&lt;h2 id=&#34;azimuthally-symmetric-solutions&#34;&gt;Azimuthally Symmetric Solutions&lt;/h2&gt;&#xA;&lt;p&gt;As we saw, azimuthally symmetric solutions, the electric potential is independent of $\phi$ and the solutions are of the form:&lt;/p&gt;&#xA;&lt;p&gt;$$V(r,\theta) = \sum_{n=0}^\infty \sum_{l=0}^\infty \left(A_{nl} r^n + \frac{B_{nl}}{r^{n+1}}\right) P_l(\cos\theta)$$&lt;/p&gt;&#xA;&lt;p&gt;where $P_l(\cos\theta)$ are the &lt;a href=&#34;https://en.wikipedia.org/wiki/Legendre_polynomials&#34;&gt;Legendre polynomials&lt;/a&gt;. The coefficients $A_{nl}$ and $B_{nl}$ are determined by the boundary conditions. We will practice solving for these coefficients in this activity.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;✅ Do this&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;sphere-of-constant-surface-potential&#34;&gt;Sphere of constant surface potential&lt;/h3&gt;&#xA;&lt;p&gt;Consider a sphere of with a radius $a$. If the potential on the surface is $V_0$, what is the potential inside and outside the sphere?&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;azimuthally-symmetric-solutions&#34;&gt;Azimuthally Symmetric Solutions&lt;/h2&gt;
+&lt;p&gt;As we saw, azimuthally symmetric solutions, the electric potential is independent of $\phi$ and the solutions are of the form:&lt;/p&gt;
+&lt;p&gt;$$V(r,\theta) = \sum_{n=0}^\infty \sum_{l=0}^\infty \left(A_{nl} r^n + \frac{B_{nl}}{r^{n+1}}\right) P_l(\cos\theta)$$&lt;/p&gt;
+&lt;p&gt;where $P_l(\cos\theta)$ are the &lt;a href=&#34;https://en.wikipedia.org/wiki/Legendre_polynomials&#34;&gt;Legendre polynomials&lt;/a&gt;. The coefficients $A_{nl}$ and $B_{nl}$ are determined by the boundary conditions. We will practice solving for these coefficients in this activity.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;✅ Do this&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;sphere-of-constant-surface-potential&#34;&gt;Sphere of constant surface potential&lt;/h3&gt;
+&lt;p&gt;Consider a sphere of with a radius $a$. If the potential on the surface is $V_0$, what is the potential inside and outside the sphere?&lt;/p&gt;</description>
     </item>
     <item>
       <title>12 Oct 23 - Activity: Method of Relaxation</title>
       <link>//localhost:1313/2---em-and-pdes/activity-relaxation_2d/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/2---em-and-pdes/activity-relaxation_2d/</guid>
-      <description>&lt;p&gt;As we discussed, we can use the relaxation approach to solve Laplace&amp;rsquo;s equation. As a reminder the process for doing this is as follows:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Divide the region into a grid&lt;/li&gt;&#xA;&lt;li&gt;Set the boundary conditions on the edges of the grid&lt;/li&gt;&#xA;&lt;li&gt;Guess the starting values for the potential in the interior of the grid (not on the edges)&lt;/li&gt;&#xA;&lt;li&gt;Calculate the potential at each point in the grid using the average of the neighboring points (replacing the value as you go)&lt;/li&gt;&#xA;&lt;li&gt;Repeat step 4 until the values in the grid stops changing&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Below, we have written up a 1D code that performs each of these steps. Your task is to modify this code to work in 2D. You will need to write the functions that compute the potential at each point in the 2D grid as well as the function that sets the boundary conditions.&lt;/p&gt;</description>
+      <description>&lt;p&gt;As we discussed, we can use the relaxation approach to solve Laplace&amp;rsquo;s equation. As a reminder the process for doing this is as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Divide the region into a grid&lt;/li&gt;
+&lt;li&gt;Set the boundary conditions on the edges of the grid&lt;/li&gt;
+&lt;li&gt;Guess the starting values for the potential in the interior of the grid (not on the edges)&lt;/li&gt;
+&lt;li&gt;Calculate the potential at each point in the grid using the average of the neighboring points (replacing the value as you go)&lt;/li&gt;
+&lt;li&gt;Repeat step 4 until the values in the grid stops changing&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Below, we have written up a 1D code that performs each of these steps. Your task is to modify this code to work in 2D. You will need to write the functions that compute the potential at each point in the 2D grid as well as the function that sets the boundary conditions.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

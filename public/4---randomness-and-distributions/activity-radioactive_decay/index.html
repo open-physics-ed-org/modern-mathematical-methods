@@ -1,140 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>21 Nov 23 - Activity: Introduction to Random Processes | PHY 415 Fall 2023</title>
-    <meta name="description" content="PHY 415 Fall 2023">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-    
-    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>21 Nov 23 - Activity: Introduction to Random Processes | PHY 415 Fall 2023</title>
+<meta name="keywords" content="">
+<meta name="description" content="So far we have focused on mostly deterministic systems. These are systems that are typically described by regular ODEs and PDEs; think the SHO or the Wave Equation. In these systems, the game is to analytically determine or estimate the trajectory, field, or wave given the set of equations that describe it. But many processes in nature are random or have a random element ot them.
+How do we model the decay of nuclear isotopes? The gas atoms in a container? Even things like when your bus will arrive.">
+<meta name="author" content="Danny Caballero, Alia Valentine">
+<link rel="canonical" href="//localhost:1313/4---randomness-and-distributions/activity-radioactive_decay/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:1313/4---randomness-and-distributions/activity-radioactive_decay/">
+<noscript>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
+        #theme-toggle,
+        .top-link {
+            display: none;
         }
-        nav {
-            background: #f4f4f4;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 5px;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        nav a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            color: #222;
-            margin-top: 1.5em;
-        }
-        h1 {
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: "SF Mono", Monaco, Consolas, monospace;
-        }
-        pre {
-            background: #f4f4f4;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        pre code {
-            background: none;
-            padding: 0;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        a {
-            color: #0066cc;
-        }
-        .menu-home {
-            font-weight: bold;
-            margin-right: 30px;
-        }
+
     </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
+
+
 </head>
-<body>
-    <nav role="navigation" aria-label="Main navigation">
-        <ul>
-            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
-            
-            
-            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
-            
-            
-            
-            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
-            
-            
-            
-            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
-            
-            
-            
-            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
-            
-            
-            
-            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
-            
-            
-            
-            <li><a href="/assignments/">Assignments</a></li>
-            
-            
-            
-            <li><a href="/appendices/">Appendices</a></li>
-            
-            
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:1313/" accesskey="h" title="PHY 415 Fall 2023 (Alt + H)">PHY 415 Fall 2023</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:1313/0---intro-and-syllabus/" title="0 - Intro and Syllabus">
+                    <span>0 - Intro and Syllabus</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/1---mechanics-and-odes/" title="1 - Mechanics and ODEs">
+                    <span>1 - Mechanics and ODEs</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/2---em-and-pdes/" title="2 - E&amp;M and PDEs">
+                    <span>2 - E&amp;M and PDEs</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/3---waves-and-oscillations/" title="3 - Waves and Oscillations">
+                    <span>3 - Waves and Oscillations</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/4---randomness-and-distributions/" title="4 - Randomness and Distributions">
+                    <span>4 - Randomness and Distributions</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/assignments/" title="Assignments">
+                    <span>Assignments</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/appendices/" title="Appendices">
+                    <span>Appendices</span>
+                </a>
+            </li>
         </ul>
     </nav>
+</header>
+<main class="main">
 
-    <main role="main">
-        
-<article>
-    <header>
-        <h1>21 Nov 23 - Activity: Introduction to Random Processes</h1>
-        
-    </header>
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="//localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="//localhost:1313/4---randomness-and-distributions/">4 - Randomness and Distributions</a></div>
+    <h1 class="post-title entry-hint-parent">
+      21 Nov 23 - Activity: Introduction to Random Processes
+    </h1>
+    <div class="post-meta"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span>
 
-    <p>So far we have focused on mostly deterministic systems. These are systems that are typically described by regular ODEs and PDEs; think the SHO or the Wave Equation. In these systems, the game is to analytically determine or estimate the trajectory, field, or wave given the set of equations that describe it. But many processes in nature are random or have a random element ot them.</p>
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#the-random-library" aria-label="The Random Library">The Random Library</a><ul>
+                        
+                <li>
+                    <a href="#seeding-the-number-generator" aria-label="Seeding the number generator">Seeding the number generator</a></li></ul>
+                </li>
+                <li>
+                    <a href="#creating-a-uniform-distribution" aria-label="Creating a uniform distribution">Creating a uniform distribution</a><ul>
+                        
+                <li>
+                    <a href="#make-a-biased-die" aria-label="Make a biased die">Make a biased die</a></li>
+                <li>
+                    <a href="#micro-vs-macro-states" aria-label="Micro vs Macro states">Micro vs Macro states</a></li></ul>
+                </li>
+                <li>
+                    <a href="#poisson-processes" aria-label="Poisson Processes">Poisson Processes</a><ul>
+                        
+                <li>
+                    <a href="#decay-of-an-isotope" aria-label="Decay of an isotope">Decay of an isotope</a></li>
+                <li>
+                    <a href="#decay-chains" aria-label="Decay Chains">Decay Chains</a></li>
+                <li>
+                    <a href="#a-challenge" aria-label="A Challenge">A Challenge</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>So far we have focused on mostly deterministic systems. These are systems that are typically described by regular ODEs and PDEs; think the SHO or the Wave Equation. In these systems, the game is to analytically determine or estimate the trajectory, field, or wave given the set of equations that describe it. But many processes in nature are random or have a random element ot them.</p>
 <p>How do we model the decay of nuclear isotopes? The gas atoms in a container? Even things like when your bus will arrive.</p>
 <p>Each of these processes has a randomness to it and how we model that randomness and what we can do depends a lot on the nature of the randomness. From a mathematical standpoint, what is the distribution of possible events, or the underlying probability distribution are key questions to ask in making these models. We will get there, but we will start by getting intuition from a place you have probably experienced: rolling dice.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random <span style="color:#66d9ef">as</span> rand
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
-</span></span></code></pre></div><h2 id="the-random-library">The Random Library</h2>
+</span></span></code></pre></div><h2 id="the-random-library">The Random Library<a hidden class="anchor" aria-hidden="true" href="#the-random-library">#</a></h2>
 <p>If you have not used <code>random</code>, please read this section because it has some implementation things that are useful.</p>
 <p>Random numbers generated by a computer are not random, so it&rsquo;s important to know how to use them. They aren&rsquo;t truly random because a computer must generate them with an algorithm and thus we can potentially determine every number we&rsquo;d receive if we knew the algorithm. There&rsquo;s tons of research into how to generate good random numbers and there&rsquo;s precious few ways. The main way right now is the <a href="https://en.wikipedia.org/wiki/Mersenne_Twister">Mersenne Twister method</a>. Testing the quality of a random number generator is beyond the scope of this class, but a useful exercise if you are doing research into random processes.</p>
-<h3 id="seeding-the-number-generator">Seeding the number generator</h3>
+<h3 id="seeding-the-number-generator">Seeding the number generator<a hidden class="anchor" aria-hidden="true" href="#seeding-the-number-generator">#</a></h3>
 <p>But because it&rsquo;s an algorithm, we can control the sequence of random numbers we get. That is we can tell the random number generator to create random numbers for us in the same way. This helps because we can use them and test them over and over before running a full simulation. See below on how to generate random integers. Re-run to observe what happens.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>start <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
 </span></span><span style="display:flex;"><span>stop <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
@@ -155,16 +226,16 @@ b = 2
 c = 3
 d = 2
 </code></pre>
-<h2 id="creating-a-uniform-distribution">Creating a uniform distribution</h2>
+<h2 id="creating-a-uniform-distribution">Creating a uniform distribution<a hidden class="anchor" aria-hidden="true" href="#creating-a-uniform-distribution">#</a></h2>
 <p>One of the simplest distributions to generate is one that you are likely most familiar with - a fair die or pair of dice. In the case of a single fair die, each outcome is equally likely and distinct from each other. That is rolling a one and rolling a six are different, distinct outcomes - and we can say that for each outcome.</p>
 <p>Below, write a short piece of code (maybe as a function), that rolls one N-sided die as many times as you like and returns all the outcomes. <strong>Be careful using rand.seed() here because you can just an array of all the same numbers!</strong></p>
 <p>Plot a histogram of the outcomes; vary the sides of the die and the number of times it rolls.</p>
 <p><strong>Can you come up with a scheme that quantifies how close your distribution is to uniform?</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
-</span></span></code></pre></div><h3 id="make-a-biased-die">Make a biased die</h3>
+</span></span></code></pre></div><h3 id="make-a-biased-die">Make a biased die<a hidden class="anchor" aria-hidden="true" href="#make-a-biased-die">#</a></h3>
 <p>Adjust your program so that you get even numbered rolls twice as frequently as odd rolls. This is the basis for baking in a probability function into our models. So do try to this. <strong>Make a histogram of the results of the biased die</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Your code here</span>
-</span></span></code></pre></div><h3 id="micro-vs-macro-states">Micro vs Macro states</h3>
+</span></span></code></pre></div><h3 id="micro-vs-macro-states">Micro vs Macro states<a hidden class="anchor" aria-hidden="true" href="#micro-vs-macro-states">#</a></h3>
 <p>In many random processes, the results are not distinct. Think about rolling two dice (colors are green and white) instead. How many ways can you get a sum of 2 vs a sum of 6? The state of the two dice where we indicate the number of each die can be called a &ldquo;microstate&rdquo;. The state of the sum can be called a &ldquo;macrostate.&rdquo;</p>
 <p>So as an example consider the macrostate with a sum of 4. This can be constructed of out 3 potential microstates. First the green die could have a 1 and the white one a 3, the green could have a 2 and the white a 2, and then the green could have a 3 and the white a 1. But the result I care about is not the individual die, but the sum. Regardless I get 4.</p>
 <ul>
@@ -174,7 +245,7 @@ d = 2
 <p><strong>Modify or use your code above to roll two fair die and count their sum</strong></p>
 <p>Plot the resulting histogram of macrostates. Vary the number of sides and number of rolls. What do you notice?</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## your code here</span>
-</span></span></code></pre></div><h2 id="poisson-processes">Poisson Processes</h2>
+</span></span></code></pre></div><h2 id="poisson-processes">Poisson Processes<a hidden class="anchor" aria-hidden="true" href="#poisson-processes">#</a></h2>
 <p>Many events in physics can be represented by a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson Distribution</a>, which results from events that have the following properties:</p>
 <ul>
 <li>The occurrence of one event does not affect the probability that a second event will occur. That is, events occur independently.</li>
@@ -182,7 +253,7 @@ d = 2
 <li>Two events cannot occur at exactly the same instant; instead, at each very small sub-interval, either exactly one event occurs, or no event occurs.</li>
 </ul>
 <p>Oftentimes, it&rsquo;s the average rate (think lifetime of an isotope) that we think about as helping us decide. If it&rsquo;s true that the rate is roughly constant and the events are independent, then this modeling can work reasonably well. So an event can be random, but the average result should be relatively simple (e.g., a single average decay time), then we can consider the events Poisson distributed.</p>
-<h3 id="decay-of-an-isotope">Decay of an isotope</h3>
+<h3 id="decay-of-an-isotope">Decay of an isotope<a hidden class="anchor" aria-hidden="true" href="#decay-of-an-isotope">#</a></h3>
 <p>Consider a collection of $^{208}Tl$ that decays into $^{208}Pb$ with a half-life of 3.053 minutes. Note that any one atom decays randomly at a random time, but on average, we see that $1/e$ atoms decay in 3.053 minutes (this is characteristic of a Poisson Process).</p>
 <p>The number of atoms $N$ that will remain in our sample (that is still be Thallium 208) will fall off exponentially over time (we could observe that from data):</p>
 <p>$$N(t) = N(0)2^{-t/\tau}$$</p>
@@ -226,8 +297,8 @@ d = 2
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Number of atoms&#39;</span>)
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
-</span></span></code></pre></div><p><img src="output_12_0.png" alt="png"></p>
-<h3 id="decay-chains">Decay Chains</h3>
+</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_12_0.png"></p>
+<h3 id="decay-chains">Decay Chains<a hidden class="anchor" aria-hidden="true" href="#decay-chains">#</a></h3>
 <p>Here&rsquo;s the big project for today! It is less often the case that decays happen like above. Many times there are [Decay Channels] where the atoms decay over time into different elements with different probabilities. Consider the Bismuth 213 decay to Bismuth 209. It decays in two channels:</p>
 <p>$$^{213}Bi \rightarrow  ^{209}Tl \rightarrow  ^{209}Pb \rightarrow  ^{209}Bi$$
 $$^{213}Bi \rightarrow  ^{209}Pb \rightarrow  ^{209}Bi$$</p>
@@ -235,38 +306,98 @@ $$^{213}Bi \rightarrow  ^{209}Pb \rightarrow  ^{209}Bi$$</p>
 <p>Rewrite the model above to account for both decays, which have lifetimes of 46 minutes ($^{213}Bi \rightarrow ^{209}Pb$) and 3.3 hours ($^{209}Pb \rightarrow  ^{209}Bi$) respectively.</p>
 <p><strong>Plot the number of all three atoms as a function of time</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Your code here</span>
-</span></span></code></pre></div><h3 id="a-challenge">A Challenge</h3>
+</span></span></code></pre></div><h3 id="a-challenge">A Challenge<a hidden class="anchor" aria-hidden="true" href="#a-challenge">#</a></h3>
 <p>Model the entire decay including the random but clearly biased split between Lead 209 and Thallium 209, which has a halflife of 2.2 minutes.</p>
 <p><em>Note: We are not including the transition between Bismuth 213 and Polonium 209, which is a very short lived isotope.</em></p>
 <p><strong>Plot the number of all four atoms as a function of time</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Your code here</span>
 </span></span></code></pre></div>
 
-    
-    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
-        <div style="display: flex; justify-content: space-between;">
-            <div>
-                
-                <a href="/4---randomness-and-distributions/notes-counting_and_combinatorics/">← 27 Nov 23 - Notes: Counting and Combinatorics</a>
-                
-            </div>
-            <div style="text-align: right;">
-                
-                <a href="/4---randomness-and-distributions/notes-randomness/">20 Nov 23 - Notes: Random Processes →</a>
-                
-            </div>
-        </div>
-    </nav>
-    
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+
+  </footer>
 </article>
-
     </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="//localhost:1313/">PHY 415 Fall 2023</a></span> · 
 
-    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
         
-        <p>Danny Caballero, Alia Valentine</p>
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
         
-        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
-    </footer>
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>3 - Waves and Oscillations on PHY 415 Fall 2023</title>
     <link>//localhost:1313/3---waves-and-oscillations/</link>
     <description>Recent content in 3 - Waves and Oscillations on PHY 415 Fall 2023</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.154.3</generator>
     <language>en</language>
     <lastBuildDate>Thu, 08 Jan 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/3---waves-and-oscillations/index.xml" rel="self" type="application/rss+xml" />
@@ -27,7 +27,8 @@
       <link>//localhost:1313/3---waves-and-oscillations/activity-coupledosc-normalmodes/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/3---waves-and-oscillations/activity-coupledosc-normalmodes/</guid>
-      <description>&lt;p&gt;As we begin to work with multi-particle systems, we begin to open the number of degrees of freedom of the system. We increase the complexity of it and the challenge of modeling it. We will increasingly need tools that help us take less tractable issues and make them palatable. One such tool that forms the basis of many others is &lt;strong&gt;Normal Modes&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Normal modes are ways of breaking up our understanding of a system into discrete (potentially infinite and hopefully vanishingly small) pieces. This lets us get at the big picture of the system and characterize how much we are neglecting. The concept of normal modes underlies much of the analysis done in quantum mechanics, field theory, fluid mechanics, and signal processing. In fact, numerical routines often make use of forms of these modes to do economize calculations &amp;ndash; &lt;em&gt;especially when we move beyond a few hundred bodies in the system&lt;/em&gt;. This stuff is part and parcel of most research in physics. For example, how we understand the &lt;a href=&#34;https://en.wikipedia.org/wiki/Cosmic_background_radiation&#34;&gt;Cosmic Background Radiation&lt;/a&gt; relies on a &lt;a href=&#34;https://www.quantamagazine.org/how-ancient-light-reveals-the-universes-contents-20200128/&#34;&gt;normal mode like analysis&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;As we begin to work with multi-particle systems, we begin to open the number of degrees of freedom of the system. We increase the complexity of it and the challenge of modeling it. We will increasingly need tools that help us take less tractable issues and make them palatable. One such tool that forms the basis of many others is &lt;strong&gt;Normal Modes&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Normal modes are ways of breaking up our understanding of a system into discrete (potentially infinite and hopefully vanishingly small) pieces. This lets us get at the big picture of the system and characterize how much we are neglecting. The concept of normal modes underlies much of the analysis done in quantum mechanics, field theory, fluid mechanics, and signal processing. In fact, numerical routines often make use of forms of these modes to do economize calculations &amp;ndash; &lt;em&gt;especially when we move beyond a few hundred bodies in the system&lt;/em&gt;. This stuff is part and parcel of most research in physics. For example, how we understand the &lt;a href=&#34;https://en.wikipedia.org/wiki/Cosmic_background_radiation&#34;&gt;Cosmic Background Radiation&lt;/a&gt; relies on a &lt;a href=&#34;https://www.quantamagazine.org/how-ancient-light-reveals-the-universes-contents-20200128/&#34;&gt;normal mode like analysis&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>19 Oct 23 - Activity: Normal Modes of N Coupled Oscillators</title>
@@ -41,7 +42,9 @@
       <link>//localhost:1313/3---waves-and-oscillations/notes-solve_the_wave_eq/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/3---waves-and-oscillations/notes-solve_the_wave_eq/</guid>
-      <description>&lt;p&gt;The wave equation is a partial differential equation that describes how waves propagate (they are fundamentally a disturbance of a medium) in space and time. The general wave equations is:&lt;/p&gt;&#xA;&lt;p&gt;$$\nabla^2 u(\mathbf{r},t) = \frac{1}{v^2} \frac{\partial^2 u(\mathbf{r},t)}{\partial t^2}$$&lt;/p&gt;&#xA;&lt;p&gt;where $u(\mathbf{r},t)$ is the displacement of the wave at position $\mathbf{r}$ and time $t$ and $v$ is the speed of the wave in the medium. Now we typically don&amp;rsquo;t solve this problem in general, like most PDEs, we need a context in which to work on the problem. Moreover, that wave equation is 4 dimensional and we really are going to have a hard time with intuition if we focus on that. Let&amp;rsquo;s instead consider the 1D wave equations:&lt;/p&gt;</description>
+      <description>&lt;p&gt;The wave equation is a partial differential equation that describes how waves propagate (they are fundamentally a disturbance of a medium) in space and time. The general wave equations is:&lt;/p&gt;
+&lt;p&gt;$$\nabla^2 u(\mathbf{r},t) = \frac{1}{v^2} \frac{\partial^2 u(\mathbf{r},t)}{\partial t^2}$$&lt;/p&gt;
+&lt;p&gt;where $u(\mathbf{r},t)$ is the displacement of the wave at position $\mathbf{r}$ and time $t$ and $v$ is the speed of the wave in the medium. Now we typically don&amp;rsquo;t solve this problem in general, like most PDEs, we need a context in which to work on the problem. Moreover, that wave equation is 4 dimensional and we really are going to have a hard time with intuition if we focus on that. Let&amp;rsquo;s instead consider the 1D wave equations:&lt;/p&gt;</description>
     </item>
     <item>
       <title>26 Oct 2023 - Activity: 1-Dimensional Travelling Waves</title>
@@ -55,7 +58,14 @@
       <link>//localhost:1313/3---waves-and-oscillations/notes-waves-fouriers_trick/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/3---waves-and-oscillations/notes-waves-fouriers_trick/</guid>
-      <description>&lt;p&gt;While we observe waves in many places, it&amp;rsquo;s the case that we don&amp;rsquo;t often have the luxury of constructing them as we want. In fact, much of the science we do relies on measurements of voltage or current to represent the dynamics of the system.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Want to measure distance? Interferometry gives you a voltage to calibrate.&lt;/li&gt;&#xA;&lt;li&gt;Want to measure material surface properties? Voltage jumps across probes give you proxies&lt;/li&gt;&#xA;&lt;li&gt;Viscosity? Stick the stuff in a rheometer, squeeze it, and measure voltage changes.&lt;/li&gt;&#xA;&lt;li&gt;AYO exoplanets? Light curves are really just measures of voltage across a CCD.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The point is that you will almost always be dealing with signals that are proxies for the actual thing you care about. So let&amp;rsquo;s construct some and deconstruct them.&lt;/p&gt;</description>
+      <description>&lt;p&gt;While we observe waves in many places, it&amp;rsquo;s the case that we don&amp;rsquo;t often have the luxury of constructing them as we want. In fact, much of the science we do relies on measurements of voltage or current to represent the dynamics of the system.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Want to measure distance? Interferometry gives you a voltage to calibrate.&lt;/li&gt;
+&lt;li&gt;Want to measure material surface properties? Voltage jumps across probes give you proxies&lt;/li&gt;
+&lt;li&gt;Viscosity? Stick the stuff in a rheometer, squeeze it, and measure voltage changes.&lt;/li&gt;
+&lt;li&gt;AYO exoplanets? Light curves are really just measures of voltage across a CCD.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The point is that you will almost always be dealing with signals that are proxies for the actual thing you care about. So let&amp;rsquo;s construct some and deconstruct them.&lt;/p&gt;</description>
     </item>
     <item>
       <title>31 Oct 23 - Activity: Signal Deconstruction</title>
@@ -69,7 +79,8 @@
       <link>//localhost:1313/3---waves-and-oscillations/activity-waves-seriesexpand/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-seriesexpand/</guid>
-      <description>&lt;p&gt;We found that it was possible to use the Fourier transform to decompose the signal into its constituent frequencies. Later we will use this idea to build up the &lt;a href=&#34;https://en.wikipedia.org/wiki/Fast_Fourier_transform&#34;&gt;Fast Fourier Transform&lt;/a&gt; (FFT) algorithm. For now, we will write everything out in full to mirror our analytical work.&lt;/p&gt;&#xA;&lt;p&gt;We will start with the same signal as before, but then you will work with other signals to achieve a particular signal decomposition.&lt;/p&gt;</description>
+      <description>&lt;p&gt;We found that it was possible to use the Fourier transform to decompose the signal into its constituent frequencies. Later we will use this idea to build up the &lt;a href=&#34;https://en.wikipedia.org/wiki/Fast_Fourier_transform&#34;&gt;Fast Fourier Transform&lt;/a&gt; (FFT) algorithm. For now, we will write everything out in full to mirror our analytical work.&lt;/p&gt;
+&lt;p&gt;We will start with the same signal as before, but then you will work with other signals to achieve a particular signal decomposition.&lt;/p&gt;</description>
     </item>
     <item>
       <title>6 Oct 23 - Notes: Fast Fourier Transform</title>
@@ -83,7 +94,12 @@
       <link>//localhost:1313/3---waves-and-oscillations/activity-waves-introduction_to_fft/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/3---waves-and-oscillations/activity-waves-introduction_to_fft/</guid>
-      <description>&lt;p&gt;We have shown how to decompose a signal using a Fourier series decomposition:&lt;/p&gt;&#xA;&lt;p&gt;$$V(t) = \sum_{n=-\infty}^{\infty} c_n e^{i n \omega t}$$&lt;/p&gt;&#xA;&lt;p&gt;where we find the Fourier coefficients $c_n$ by integrating over the period of the signal (performing a Fourier transform of the signal):&lt;/p&gt;&#xA;&lt;p&gt;$$c_n = \frac{1}{T} \int_0^T V(t) e^{-i n \omega t} dt$$&lt;/p&gt;&#xA;&lt;h2 id=&#34;extracting-the-fourier-coefficients&#34;&gt;Extracting the Fourier coefficients&lt;/h2&gt;&#xA;&lt;p&gt;We wrote some code earlier to perform the Fourier transform of a signal and obtain the coefficients. We will see how to do that using the &lt;code&gt;scipy&lt;/code&gt; library later, but let&amp;rsquo;s produce these results first without it. We are going to prepare several test signals, but you will need to make more.&lt;/p&gt;</description>
+      <description>&lt;p&gt;We have shown how to decompose a signal using a Fourier series decomposition:&lt;/p&gt;
+&lt;p&gt;$$V(t) = \sum_{n=-\infty}^{\infty} c_n e^{i n \omega t}$$&lt;/p&gt;
+&lt;p&gt;where we find the Fourier coefficients $c_n$ by integrating over the period of the signal (performing a Fourier transform of the signal):&lt;/p&gt;
+&lt;p&gt;$$c_n = \frac{1}{T} \int_0^T V(t) e^{-i n \omega t} dt$$&lt;/p&gt;
+&lt;h2 id=&#34;extracting-the-fourier-coefficients&#34;&gt;Extracting the Fourier coefficients&lt;/h2&gt;
+&lt;p&gt;We wrote some code earlier to perform the Fourier transform of a signal and obtain the coefficients. We will see how to do that using the &lt;code&gt;scipy&lt;/code&gt; library later, but let&amp;rsquo;s produce these results first without it. We are going to prepare several test signals, but you will need to make more.&lt;/p&gt;</description>
     </item>
     <item>
       <title>9 Nov 23 - Activity: Applying The Fast Fourier Transform</title>
@@ -97,14 +113,17 @@
       <link>//localhost:1313/3---waves-and-oscillations/notes-using-ffts/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/3---waves-and-oscillations/notes-using-ffts/</guid>
-      <description>&lt;p&gt;As you have learned, we can use the Fourier Transform to decompose a signal into its frequency components. This is useful for many applications, including filtering, noise removal, and compression. All of these rely on some reconstruction of the original signal from the frequency components.&lt;/p&gt;&#xA;&lt;p&gt;While this might not seem like a big deal, it is quite powerful, if we realize that we can also manipulate the frequency components before reconstructing the signal. This is the basis of many signal processing techniques. We will use this reading to highlight two common examples of data in physics where FFTs are used: time series and images. Let&amp;rsquo;s start by importing our libraries.&lt;/p&gt;</description>
+      <description>&lt;p&gt;As you have learned, we can use the Fourier Transform to decompose a signal into its frequency components. This is useful for many applications, including filtering, noise removal, and compression. All of these rely on some reconstruction of the original signal from the frequency components.&lt;/p&gt;
+&lt;p&gt;While this might not seem like a big deal, it is quite powerful, if we realize that we can also manipulate the frequency components before reconstructing the signal. This is the basis of many signal processing techniques. We will use this reading to highlight two common examples of data in physics where FFTs are used: time series and images. Let&amp;rsquo;s start by importing our libraries.&lt;/p&gt;</description>
     </item>
     <item>
       <title>14 &amp; 16 Nov 23 - Using the FFT with Real Data</title>
       <link>//localhost:1313/3---waves-and-oscillations/activity-fft-applications/</link>
       <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/3---waves-and-oscillations/activity-fft-applications/</guid>
-      <description>&lt;p&gt;Y&amp;rsquo;all have learned the main process for using an FFT on a 1D signal, so let&amp;rsquo;s use it in the context of some real world data. We&amp;rsquo;ll give you different kind of data that you can choose to work with: Transit light curve data and audio signals. Take a look at both datasets and start working on whichever one you&amp;rsquo;d like first.&lt;/p&gt;&#xA;&lt;h2 id=&#34;transit-data&#34;&gt;Transit Data&lt;/h2&gt;&#xA;&lt;p&gt;You work in a lab that is observing light curves to determine if there are transiting objects near a star and, if so, what is their period. Using the brightness of the star itself, we can determine it&amp;rsquo;s mass and then it&amp;rsquo;s a quick analysis to get the mass of the transiting objects (Thanks, Newton!).&lt;/p&gt;</description>
+      <description>&lt;p&gt;Y&amp;rsquo;all have learned the main process for using an FFT on a 1D signal, so let&amp;rsquo;s use it in the context of some real world data. We&amp;rsquo;ll give you different kind of data that you can choose to work with: Transit light curve data and audio signals. Take a look at both datasets and start working on whichever one you&amp;rsquo;d like first.&lt;/p&gt;
+&lt;h2 id=&#34;transit-data&#34;&gt;Transit Data&lt;/h2&gt;
+&lt;p&gt;You work in a lab that is observing light curves to determine if there are transiting objects near a star and, if so, what is their period. Using the brightness of the star itself, we can determine it&amp;rsquo;s mass and then it&amp;rsquo;s a quick analysis to get the mass of the transiting objects (Thanks, Newton!).&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
