@@ -1,7 +1,7 @@
 ---
 title: Project 1 - Classical Mechanics and ODEs
 weight: 4
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 ---
 

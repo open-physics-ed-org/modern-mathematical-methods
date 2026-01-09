@@ -1,7 +1,7 @@
 ---
 title: Classroom Environment
 weight: 6
-date: '2026-01-08'
+date: '2026-01-09'
 ---
 
 ## Commitment to an Inclusive Classroom

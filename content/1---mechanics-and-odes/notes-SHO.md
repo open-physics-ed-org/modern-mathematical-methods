@@ -1,7 +1,7 @@
 ---
 title: '29 Aug 23 - Notes: Simple Harmonic Oscillator'
 weight: 2
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

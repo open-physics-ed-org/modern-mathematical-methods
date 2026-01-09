@@ -1,7 +1,7 @@
 ---
 title: '20 Nov 23 - Notes: Random Processes'
 weight: 1
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

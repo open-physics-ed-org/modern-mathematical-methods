@@ -1,7 +1,7 @@
 ---
 title: Course Objectives
 weight: 1
-date: '2026-01-08'
+date: '2026-01-09'
 ---
 
 This course emphasizes making models of physical phenomenon and how we use various tools at our disposal to investigate those models. Hence, we have learning objectives for making models of these systems and for learning specific tools.

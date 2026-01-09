@@ -1,7 +1,7 @@
 ---
 title: '6 Oct 23 - Notes: Fast Fourier Transform'
 weight: 10
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 ---
 

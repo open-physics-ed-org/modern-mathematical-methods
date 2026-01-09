@@ -1,7 +1,7 @@
 ---
 title: '10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential'
 weight: 9
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

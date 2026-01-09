@@ -1,218 +1,143 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
-<title>27 Nov 23 - Notes: Counting and Combinatorics | PHY 415 Fall 2023</title>
-<meta name="keywords" content="">
-<meta name="description" content="As we discussed, entropy is a fundamental concept that quantifies the degree of disorder or randomness in a system. It was initially introduced in the mid-19th century in the field of thermodynamics by Rudolf Clausius, entropy was a measure of the unavailability of a system&rsquo;s energy to do work.
-Statistical Mechanics and Combinatorics
-In statistical mechanics, developed by Ludwig Boltzmann and J. Willard Gibbs, entropy was redefined as a measure of uncertainty or information about a system. This brings in the concept of entropy as a measure of the number of possible microstates (specific arrangements of particles) corresponding to a macrostate (the observable state of the system). As it goes, the more microstates there are, the higher the entropy, and hence, the greater the disorder. This is an over-simplification of what is a fundamentally complex and interesting set of processes. This interpretation does bridge thermodynamics with statistical mechanics, offering a deeper understanding of temperature, pressure, and phase transitions in terms of atomic or molecular behavior as we will see with the ideal gas law and the Ising model.">
-<meta name="author" content="Danny Caballero, Alia Valentine">
-<link rel="canonical" href="//localhost:1313/4---randomness-and-distributions/notes-counting_and_combinatorics/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="//localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="//localhost:1313/4---randomness-and-distributions/notes-counting_and_combinatorics/">
-<noscript>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>27 Nov 23 - Notes: Counting and Combinatorics | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
     <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
         }
-
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
     </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            .list::-webkit-scrollbar-thumb {
-                border-color: var(--code-bg);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
-    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
-
-
 </head>
-<body id="top">
-    <header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="//localhost:1313/" accesskey="h" title="PHY 415 Fall 2023 (Alt + H)">PHY 415 Fall 2023</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="//localhost:1313/0---intro-and-syllabus/" title="0 - Intro and Syllabus">
-                    <span>0 - Intro and Syllabus</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/1---mechanics-and-odes/" title="1 - Mechanics and ODEs">
-                    <span>1 - Mechanics and ODEs</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/2---em-and-pdes/" title="2 - E&amp;M and PDEs">
-                    <span>2 - E&amp;M and PDEs</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/3---waves-and-oscillations/" title="3 - Waves and Oscillations">
-                    <span>3 - Waves and Oscillations</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/4---randomness-and-distributions/" title="4 - Randomness and Distributions">
-                    <span>4 - Randomness and Distributions</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/assignments/" title="Assignments">
-                    <span>Assignments</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/appendices/" title="Appendices">
-                    <span>Appendices</span>
-                </a>
-            </li>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
         </ul>
     </nav>
-</header>
-<main class="main">
 
-<article class="post-single">
-  <header class="post-header">
-    <div class="breadcrumbs"><a href="//localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="//localhost:1313/4---randomness-and-distributions/">4 - Randomness and Distributions</a></div>
-    <h1 class="post-title entry-hint-parent">
-      27 Nov 23 - Notes: Counting and Combinatorics
-    </h1>
-    <div class="post-meta"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span>
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>27 Nov 23 - Notes: Counting and Combinatorics</h1>
+        
+    </header>
 
-</div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#statistical-mechanics-and-combinatorics" aria-label="Statistical Mechanics and Combinatorics">Statistical Mechanics and Combinatorics</a></li>
-                <li>
-                    <a href="#fundamentals-of-combinatorics-and-counting" aria-label="Fundamentals of Combinatorics and Counting">Fundamentals of Combinatorics and Counting</a><ul>
-                        
-                <li>
-                    <a href="#permutations-distinguishable-counting" aria-label="Permutations (Distinguishable Counting)">Permutations (Distinguishable Counting)</a></li>
-                <li>
-                    <a href="#choosing-a-subset-distinguishable-counting" aria-label="Choosing a subset (Distinguishable Counting)">Choosing a subset (Distinguishable Counting)</a><ul>
-                        
-                <li>
-                    <a href="#lecture-video" aria-label="Lecture Video">Lecture Video</a></li></ul>
-                </li>
-                <li>
-                    <a href="#combinations-indistinguishable-counting" aria-label="Combinations (Indistinguishable Counting)">Combinations (Indistinguishable Counting)</a></li>
-                <li>
-                    <a href="#derivation-of-the-einstein-counting-formula" aria-label="Derivation of the Einstein Counting Formula">Derivation of the Einstein Counting Formula</a><ul>
-                        
-                <li>
-                    <a href="#lecture-video-1" aria-label="Lecture Video">Lecture Video</a></li></ul>
-                </li>
-                <li>
-                    <a href="#example-the-einstein-model-of-a-small-solid" aria-label="Example: The Einstein Model of a small solid">Example: The Einstein Model of a small solid</a></li>
-                <li>
-                    <a href="#what-about-the-entropy" aria-label="What about the entropy?">What about the entropy?</a></li></ul>
-                </li>
-                <li>
-                    <a href="#additional-resources" aria-label="Additional Resources">Additional Resources</a>
-                </li>
-            </ul>
-        </div>
-    </details>
-</div>
-
-  <div class="post-content"><p>As we discussed, <a href="https://en.wikipedia.org/wiki/Entropy">entropy</a> is a fundamental concept that quantifies the degree of disorder or randomness in a system. It was initially introduced in the mid-19th century in the field of <a href="https://en.wikipedia.org/wiki/Thermodynamics">thermodynamics</a> by Rudolf Clausius, entropy was a measure of the unavailability of a system&rsquo;s energy to do work.</p>
-<h2 id="statistical-mechanics-and-combinatorics">Statistical Mechanics and Combinatorics<a hidden class="anchor" aria-hidden="true" href="#statistical-mechanics-and-combinatorics">#</a></h2>
+    <p>As we discussed, <a href="https://en.wikipedia.org/wiki/Entropy">entropy</a> is a fundamental concept that quantifies the degree of disorder or randomness in a system. It was initially introduced in the mid-19th century in the field of <a href="https://en.wikipedia.org/wiki/Thermodynamics">thermodynamics</a> by Rudolf Clausius, entropy was a measure of the unavailability of a system&rsquo;s energy to do work.</p>
+<h2 id="statistical-mechanics-and-combinatorics">Statistical Mechanics and Combinatorics</h2>
 <p>In <a href="https://en.wikipedia.org/wiki/Statistical_mechanics">statistical mechanics</a>, developed by Ludwig Boltzmann and J. Willard Gibbs, entropy was redefined as a measure of uncertainty or information about a system. This brings in the concept of entropy as a measure of the number of possible microstates (specific arrangements of particles) corresponding to a macrostate (the observable state of the system). As it goes, the more microstates there are, the higher the entropy, and hence, the greater the disorder. This is an over-simplification of what is a fundamentally complex and interesting set of processes. This interpretation does bridge thermodynamics with statistical mechanics, offering a deeper understanding of temperature, pressure, and phase transitions in terms of atomic or molecular behavior as we will see with <a href="https://en.wikipedia.org/wiki/Ideal_gas_law">the ideal gas law</a> and the <a href="https://en.wikipedia.org/wiki/Ising_model">Ising model</a>.</p>
 <p>As we transition from a conceptual understanding of entropy to its mathematical formulation, combinatorics plays a crucial role. <a href="https://en.wikipedia.org/wiki/Combinatorics">Combinatorics</a> is the branch of mathematics dealing with combinations and arrangements of objects, becomes essential in quantifying the number of microstates in a system. For instance, the concept of permutations and combinations helps in counting the possible arrangements of particles under given constraints, which is fundamental in calculating entropy.</p>
 <p>In statistical mechanics, the number of microstates ($\Omega$) is directly used in Boltzmann&rsquo;s entropy formula,</p>
 <p>$$S = k \log(\Omega),$$</p>
 <p>where $k$ is Boltzmann&rsquo;s constant. This formula encapsulates the idea that entropy is a measure of the logarithm of the number of ways in which a system can be arranged. The combinatorial approach in statistical mechanics provides a quantitative method to explore how microscopic properties (like the positions and velocities of particles) lead to macroscopic phenomena (like temperature and pressure) through the lens of entropy.</p>
-<h2 id="fundamentals-of-combinatorics-and-counting">Fundamentals of Combinatorics and Counting<a hidden class="anchor" aria-hidden="true" href="#fundamentals-of-combinatorics-and-counting">#</a></h2>
+<h2 id="fundamentals-of-combinatorics-and-counting">Fundamentals of Combinatorics and Counting</h2>
 <p>We have to learn to count microstates and do that efficiently. These calculations will underlie a lot of the fundamentals to the statistical mechanics we will be doing. We will start with the basics of counting and combinatorics, which will be the foundation for understanding entropy and statistical mechanics. We will separate this into permutations (where the objects are distinguishable) and combinations (where the objects are indistinguishable).</p>
-<h3 id="permutations-distinguishable-counting">Permutations (Distinguishable Counting)<a hidden class="anchor" aria-hidden="true" href="#permutations-distinguishable-counting">#</a></h3>
+<h3 id="permutations-distinguishable-counting">Permutations (Distinguishable Counting)</h3>
 <p>Permutations are arrangements of objects where the order matters. You have to be able to tell the difference between every object. For example, you might be wanting to determine the ways you can arrange 5 balls that are all different colors. <em>We get this is contrived, but it&rsquo;s helpful to illustrate</em> Well, there are five ways to pick the first ball, four ways to pick the second ball, three ways to pick the third ball, two ways to pick the fourth ball, and one way to pick the fifth ball. This gives us a total of 120 ways to arrange 5 balls. We can summarize this with $\Omega$ = number of ways,</p>
 <p>$$\Omega(n) = n!$$</p>
 <p>This <a href="https://en.wikipedia.org/wiki/Factorial">factorial</a> function is the product of all positive integers up to $n$. For example, $5! = 5 \times 4 \times 3 \times 2 \times 1 = 120$.</p>
-<h3 id="choosing-a-subset-distinguishable-counting">Choosing a subset (Distinguishable Counting)<a hidden class="anchor" aria-hidden="true" href="#choosing-a-subset-distinguishable-counting">#</a></h3>
+<h3 id="choosing-a-subset-distinguishable-counting">Choosing a subset (Distinguishable Counting)</h3>
 <p>What if you are trying to choose a subset of these distinguishable objects? For example, you want to find the number of ways you can pick 3 of these objects out. Well there&rsquo;s five ways to pick the first object, four ways to pick the second object, and three ways to pick the third object. This gives us a total of 60 distinct ways to pick 3 items from 5 objects where the order matters.</p>
 <p>But can we better quantify that process. If we have $n$ objects and we want to choose $k$ objects, we can write this as,</p>
 <p>$$\Omega(n,k) = \frac{n!}{(n-k)!}$$</p>
@@ -248,36 +173,36 @@ In statistical mechanics, developed by Ludwig Boltzmann and J. Willard Gibbs, en
   </tbody>
 </table>
 <p><em>Note that these numbers can get really big and cause issues with overflow.</em> Sometimes you have to be careful how you form your calculations or store your numerical variables.</p>
-<h4 id="lecture-video">Lecture Video<a hidden class="anchor" aria-hidden="true" href="#lecture-video">#</a></h4>
+<h4 id="lecture-video">Lecture Video</h4>
 <p><a href="https://inv.tux.pizza/channel/UC5KbWmC93TBhinPLqh5j2kg">Johnathan Gardner</a> has a nice set of videos on Thermodynamics and Statistical Mechanics. Below is short one on counting and combinatorics.</p>
-<p><a href="https://inv.tux.pizza/watch?v=tEQFftB1Pao"><img alt="Permutations and Combinations" loading="lazy" src="https://markdown-videos-api.jorgenkh.no/youtube/tEQFftB1Pao?width=720&height=405"></a></p>
+<p><a href="https://inv.tux.pizza/watch?v=tEQFftB1Pao"><img src="https://markdown-videos-api.jorgenkh.no/youtube/tEQFftB1Pao?width=720&amp;height=405" alt="Permutations and Combinations"></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=tEQFftB1Pao">https://inv.tux.pizza/watch?v=tEQFftB1Pao</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=tEQFftB1Pao">https://youtube.com/watch?v=tEQFftB1Pao</a></li>
 </ul>
-<h3 id="combinations-indistinguishable-counting">Combinations (Indistinguishable Counting)<a hidden class="anchor" aria-hidden="true" href="#combinations-indistinguishable-counting">#</a></h3>
+<h3 id="combinations-indistinguishable-counting">Combinations (Indistinguishable Counting)</h3>
 <p>In statistical mechanics, our work is typically different from simple permutations. We are often interested in the arrangement of some important quantity (like energy) over the different bodies (atoms, molecules, etc) in the system. Here you can think of having a bunch of balls, each corresponding to an energy quantum. What we want to do is arrange those quanta over different bodies, put each ball into a bin.</p>
 <p>For example, for the <a href="https://en.wikipedia.org/wiki/Quantum_harmonic_oscillator">quantum harmonic oscillator</a>, we have a bunch of energy quanta that we want to arrange over the different energy levels. We don&rsquo;t care about the order of the energy quanta, just the number of quanta in each energy level. This is where combinations come in. For a system with 3 atoms, we don&rsquo;t care which atom is in which state, just that we know which states the collections of atoms are in. So</p>
 <p>Because ultimately, it&rsquo;s the combination of how the energy are distributed that determine the system&rsquo;s state. it&rsquo;s not how each quanta are distributed on each atom, molecule, or body. Let&rsquo;s do an example. Suppose we have $q=5$ quanta of energy to distribute amongst $N=2$ oscillators (think of them as atoms being put into a particular energy state). We can write down all the possible states if we use the pair of numbers ($N_1$, $N_2$) to denote the number of quanta in each oscillator. For example, (3, 2) means that oscillator 1 has 3 quanta of energy and oscillator 2 has 2 quanta of energy. We could write down all the possible states and count them up, but that&rsquo;s definitely not efficient, nor do we care about the order of the quanta.</p>
-<h3 id="derivation-of-the-einstein-counting-formula">Derivation of the Einstein Counting Formula<a hidden class="anchor" aria-hidden="true" href="#derivation-of-the-einstein-counting-formula">#</a></h3>
+<h3 id="derivation-of-the-einstein-counting-formula">Derivation of the Einstein Counting Formula</h3>
 <p>The problem we set up is a classic one in statistical physics. It was originally attributed to Einstein. In fact the concept of an <a href="https://en.wikipedia.org/wiki/Einstein_solid">Einstein solid</a> continues to be used. It is a model of a solid based on two assumptions:</p>
 <ol>
 <li>Each atom in the solid is an independent 3D quantum harmonic oscillator.</li>
 <li>All atoms oscillate with the same frequency.</li>
 </ol>
 <p>The first assumption is a good one. The second one is not. But it&rsquo;s a good approximation for many solids. If we model the quanta as stars and the oscillators as lines. Where the lines separate the stars into bins.  This is the so called <a href="https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)">Stars and bars model</a>. We avoid that language because in the US because it associated with a Southern hate group. In any event, here&rsquo;s an image to make sense of the model:</p>
-<p><img alt="Cookies given to friends" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Colored_circle_starsbars_1.svg/566px-Colored_circle_starsbars_1.svg.png"></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Colored_circle_starsbars_1.svg/566px-Colored_circle_starsbars_1.svg.png" alt="Cookies given to friends"></p>
 <p>We can show that the total number of symbols we have is $q+N-1$, we get the $N-1$ because we need one less line to make a two bins. We can then write down the number of ways to arrange the symbols as,</p>
 <p>$$\Omega(q,N) = \frac{(q+N-1)!}{q!(N-1)!}$$</p>
 <p>where the denominator is the number of ways to arrange the $q$ quanta (stars) and the $N-1$ lines (or $N$ oscillators) separately. We can apply this model to a solid to compute the number of potential microstates for a given macrostate.</p>
-<h4 id="lecture-video-1">Lecture Video<a hidden class="anchor" aria-hidden="true" href="#lecture-video-1">#</a></h4>
+<h4 id="lecture-video-1">Lecture Video</h4>
 <p>The video below does precisely that.</p>
-<p><a href="https://inv.tux.pizza/watch?v=71fk3n88t48"><img alt="The Einstein Model of a Solid" loading="lazy" src="https://markdown-videos-api.jorgenkh.no/youtube/71fk3n88t48?width=720&height=405"></a></p>
+<p><a href="https://inv.tux.pizza/watch?v=71fk3n88t48"><img src="https://markdown-videos-api.jorgenkh.no/youtube/71fk3n88t48?width=720&amp;height=405" alt="The Einstein Model of a Solid"></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=71fk3n88t48">https://inv.tux.pizza/watch?v=71fk3n88t48</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=71fk3n88t48">https://youtube.com/watch?v=71fk3n88t48</a></li>
 </ul>
-<h3 id="example-the-einstein-model-of-a-small-solid">Example: The Einstein Model of a small solid<a hidden class="anchor" aria-hidden="true" href="#example-the-einstein-model-of-a-small-solid">#</a></h3>
+<h3 id="example-the-einstein-model-of-a-small-solid">Example: The Einstein Model of a small solid</h3>
 <p>Consider an Einstein solid consisting of 5 atoms, 15 oscillators. Let&rsquo;s allow ourselves to have 20 quantum of energy to distribute amongst the oscillators. How many microstates are there for this system? We can use the formula above to calculate this. But better yet, let&rsquo;s use Python to calculate and display the results.</p>
 <p>Here $N=15$, but $q$ is anywhere from 0 to 20. So we will need to loop through and calculate.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
@@ -322,8 +247,8 @@ In statistical mechanics, developed by Ludwig Boltzmann and J. Willard Gibbs, en
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Adjust layout for better visualization</span>
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
-</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_6_0.png"></p>
-<h3 id="what-about-the-entropy">What about the entropy?<a hidden class="anchor" aria-hidden="true" href="#what-about-the-entropy">#</a></h3>
+</span></span></code></pre></div><p><img src="output_6_0.png" alt="png"></p>
+<h3 id="what-about-the-entropy">What about the entropy?</h3>
 <p>We can compute it using the formula above, but for our purposes, we will just use the logarithm of the number of microstates.</p>
 <p>$$S/k = \log(\Omega)$$</p>
 <p>Notice that our log scale graph above looks exactly like the entropy graph. The number of microstates is a measure of the entropy.</p>
@@ -334,101 +259,41 @@ In statistical mechanics, developed by Ludwig Boltzmann and J. Willard Gibbs, en
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xticks(quanta_values[::<span style="color:#ae81ff">2</span>])
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>grid()
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
-</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_8_0.png"></p>
-<h2 id="additional-resources">Additional Resources<a hidden class="anchor" aria-hidden="true" href="#additional-resources">#</a></h2>
+</span></span></code></pre></div><p><img src="output_8_0.png" alt="png"></p>
+<h2 id="additional-resources">Additional Resources</h2>
 <p>If you want more details on combinatorics, please review this longer lecture.</p>
-<p><a href="https://inv.tux.pizza/watch?v=6oV3pKLgW2I"><img alt="Counting and Combinatorics Lecture" loading="lazy" src="https://markdown-videos-api.jorgenkh.no/youtube/6oV3pKLgW2I?width=720&height=405"></a></p>
+<p><a href="https://inv.tux.pizza/watch?v=6oV3pKLgW2I"><img src="https://markdown-videos-api.jorgenkh.no/youtube/6oV3pKLgW2I?width=720&amp;height=405" alt="Counting and Combinatorics Lecture"></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=6oV3pKLgW2I">https://inv.tux.pizza/watch?v=6oV3pKLgW2I</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=6oV3pKLgW2I">https://youtube.com/watch?v=6oV3pKLgW2I</a></li>
 </ul>
 
 
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-
-  </footer>
-</article>
-    </main>
     
-<footer class="footer">
-        <span>&copy; 2026 <a href="//localhost:1313/">PHY 415 Fall 2023</a></span> · 
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/4---randomness-and-distributions/notes-monte_carlo_simulations/">← 27 Nov 23 - Notes: Monte Carlo Simulations</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/4---randomness-and-distributions/activity-radioactive_decay/">21 Nov 23 - Activity: Introduction to Random Processes →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
 
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
+    </main>
 
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
         
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
+        <p>Danny Caballero, Alia Valentine</p>
         
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
 </body>
-
 </html>

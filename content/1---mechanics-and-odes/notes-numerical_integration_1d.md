@@ -1,7 +1,7 @@
 ---
 title: '7 Sept 23 - Notes: Numerical Integration in 1D'
 weight: 7
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 ---
 

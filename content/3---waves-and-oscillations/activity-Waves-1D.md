@@ -1,7 +1,7 @@
 ---
 title: '26 Oct 2023 - Activity: 1-Dimensional Travelling Waves'
 weight: 6
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---
@@ -100192,7 +100192,7 @@ One of the key indicators of wave like behavior is [diffraction](https://en.wiki
 
 In the case of [single-slit diffraction](https://en.wikipedia.org/wiki/Diffraction#Single-slit_diffraction), the wave is diffracted around a slit of width $a$. a forms circular wave fronts that interfere with each other.
 
-![Diagram of single slit diffraction](/images/content/assets/images/Single_slit_diffraction.jpeg)
+{{< figure src="/images/content/assets/images/Single_slit_diffraction.jpeg" alt="Diagram of single slit diffraction" >}}
 
 A screen placed a distance $L$ away from the slit will show a diffraction pattern. We can show the intensity of the diffraction pattern is:
 

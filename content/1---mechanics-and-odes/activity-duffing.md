@@ -1,7 +1,7 @@
 ---
 title: 19 Sep 23 - The Duffing Oscillator
 weight: 13
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: '19 Sep 23 - Notes: Heading towards Chaos'
 weight: 12
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

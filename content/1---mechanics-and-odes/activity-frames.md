@@ -1,7 +1,7 @@
 ---
 title: '31 Aug 23 - Activity: Frames and Coordinates'
 weight: 4
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 ---
 

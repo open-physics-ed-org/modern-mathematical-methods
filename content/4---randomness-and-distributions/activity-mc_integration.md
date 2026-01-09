@@ -1,7 +1,7 @@
 ---
 title: '30 Nov 23 - Activity: Monte Carlo Integration'
 weight: 6
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

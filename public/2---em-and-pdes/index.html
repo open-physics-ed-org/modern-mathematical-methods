@@ -1,384 +1,195 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
-<title>2 - E&amp;M and PDEs | PHY 415 Fall 2023</title>
-<meta name="keywords" content="">
-<meta name="description" content="This section contains course materials for 2 - E&amp;M and PDEs.">
-<meta name="author" content="Danny Caballero, Alia Valentine">
-<link rel="canonical" href="//localhost:1313/2---em-and-pdes/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="//localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="//localhost:1313/2---em-and-pdes/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="//localhost:1313/2---em-and-pdes/">
-<noscript>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 - E&amp;M and PDEs | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
     <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
         }
-
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
     </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            .list::-webkit-scrollbar-thumb {
-                border-color: var(--code-bg);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
-    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
-
-
 </head>
-<body class="list" id="top">
-    <header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="//localhost:1313/" accesskey="h" title="PHY 415 Fall 2023 (Alt + H)">PHY 415 Fall 2023</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="//localhost:1313/0---intro-and-syllabus/" title="0 - Intro and Syllabus">
-                    <span>0 - Intro and Syllabus</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/1---mechanics-and-odes/" title="1 - Mechanics and ODEs">
-                    <span>1 - Mechanics and ODEs</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/2---em-and-pdes/" title="2 - E&amp;M and PDEs">
-                    <span class="active">2 - E&amp;M and PDEs</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/3---waves-and-oscillations/" title="3 - Waves and Oscillations">
-                    <span>3 - Waves and Oscillations</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/4---randomness-and-distributions/" title="4 - Randomness and Distributions">
-                    <span>4 - Randomness and Distributions</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/assignments/" title="Assignments">
-                    <span>Assignments</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/appendices/" title="Appendices">
-                    <span>Appendices</span>
-                </a>
-            </li>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
         </ul>
     </nav>
-</header>
-<main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="//localhost:1313/">Home</a></div>
-  <h1>
-    2 - E&amp;M and PDEs
-  </h1>
-</header>
-<div class="post-content"><p>This section contains course materials for 2 - E&amp;M and PDEs.</p>
+
+    <main role="main">
+        
+<article>
+    <h1>2 - E&amp;M and PDEs</h1>
+    <p>This section contains course materials for 2 - E&amp;M and PDEs.</p>
 
 
-</div>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">26 Sept 23 - Notes: Maxwell&#39;s Equations
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Electromagnetic Phenomena You have certainly experienced a wide variety of electromagnetic phenomena in your life – both natural (e.g., a sun rise, a rainbow, your hair standing on end) and human-made (e.g., switching on a light, using a microwave, using a cell phone). We now know that we can explain many of those phenomenon using a set of four partial differential equations: Maxwell’s Equations. These equations describe a new mathematical object: a field. The models that we develop from this theory are still Classical – in that we don’t consider quantum mechanical effects. Rather we treat the fields as continuous functions of space and time.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
-  <a class="entry-link" aria-label="post link to 26 Sept 23 - Notes: Maxwell&#39;s Equations" href="//localhost:1313/2---em-and-pdes/notes-em_intro/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">26 Sept 23 - Notes: Static Fields
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Vector Calculus Maxwell’s Equations, even in their static form (i.e., static charges or steady currents), are a set of coupled partial differential equations. In order to develop solutions and models to approximate the behavior of electromagnetic fields, we need to be able to use vector calculus.
-The video below from 3Blue1Brown provides a conceptual introduction to the vector calculus that we are going to need for this.
-Non-Commercial Link: https://inv.tux.pizza/watch?v=rB83DpBJQsE Commercial Link: https://youtube.com/watch?v=rB83DpBJQsE Electrostatic fields The electrostatic field is one that is created by static (stationary) charges. This is often the first type of field that we encounter, where $\rho(\mathbf{r},t)) = \rho(\mathbf{r})$. Because the charges are stationary, the current density is zero, $\mathbf{J}(\mathbf{r},t) = \mathbf{0}$.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
-  <a class="entry-link" aria-label="post link to 26 Sept 23 - Notes: Static Fields" href="//localhost:1313/2---em-and-pdes/notes-static_fields/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">26 Sep 23 - Activity: Electrostatic Fields
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>As we saw the electric field is described by the 4 Maxwell equations. But, in the electrostatic situation where the charges do not move, we find the electric field is described by the following equations:
-$$\nabla \cdot \mathbf{E} = \frac{\rho}{\epsilon_0}$$
-$$\nabla \times \mathbf{E} = 0$$
-These linear partial differential equations can be solved analytically for a number of situations. In this activity we will explore the electric field for a number of situations.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
-  <a class="entry-link" aria-label="post link to 26 Sep 23 - Activity: Electrostatic Fields" href="//localhost:1313/2---em-and-pdes/activity-efields/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">28 Sep 23 - Activity: Superposition of Fields
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Coulomb’s Law We’ve seen that the electric field of a set of point charges if given by the vector sum of the contributions from each charge:
-$$\mathbf{E}(\mathbf{r}) = \sum_i \frac{1}{4\pi\epsilon_0} \frac{q_i}{(\mathbf{r}-\mathbf{r}’_i)^3} (\mathbf{r}-\mathbf{r}’_i)$$
-where $\mathbf{r}’_i$ is the location of the charge relative to the origin, and $\mathbf{r}$ is the location of the field point relative to the origin. This net electric field is the result of the superposition of the electric fields from each charge. But here the charges are discrete, we can identify each charge uniquely in terms of it’s charge and location. This concept can be abstracted to a continuous distribution of charge, where we can identify the charge at any point in space by the charge density $\rho(\mathbf{r})$. In this case, the charge is not a point charge, but rather a small chunk of charge that we model as a point charge. That is, we can write the electric field contributed by that chunk $dq$ as:
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
-  <a class="entry-link" aria-label="post link to 28 Sep 23 - Activity: Superposition of Fields" href="//localhost:1313/2---em-and-pdes/activity-superposition/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">3 Oct 23 - Notes: Electric Potential - a scalar field
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>We’ve seen that there’s a lot of challenges with solving field problems where the fields are vectors and described by partial differential equations. The electric and magnetic field are vector fields that have a size and direction are every points in space. They are described by a set of 4 partial differential equations, Maxwell’s Equations. In Cartesian coordinates, these equations are described by 8 coupled partial differential equations.
-Electrostatics In electrostatic situations, where charges don’t move, we’ve seen that the equations that describe the electric field are simplified to:
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
-  <a class="entry-link" aria-label="post link to 3 Oct 23 - Notes: Electric Potential - a scalar field" href="//localhost:1313/2---em-and-pdes/notes-electric_potential/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">3 Oct 23 - Activity: PDEs and Separation of Variables
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>As we have realized, solving field problems using vector equations is not always the best way to go about solving our problems. The integrals can be difficult to set up and the equations might be difficult, if not, impossible to solve (e.g., because there is no anti-derivative for the integrand). While we might not fully eliminate the need for vector equations, in electrostatic situations, we can posit the electric potential, $\Phi$.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
-  <a class="entry-link" aria-label="post link to 3 Oct 23 - Activity: PDEs and Separation of Variables" href="//localhost:1313/2---em-and-pdes/activity-sep_var/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>We can extend the ideas we developed from Separation of Variables to solve PDEs in spherical coordinates. We propose a similar solution to the one we used for Cartesian coordinates, functions of a single variable.
-$$V(r,\theta,\phi) = R(r) \Theta(\theta) \Phi(\phi)$$
-We have shown that we can solve this problem in general. We will now apply this to a specific problem. Recall these general solutions are written in the following ways:
-$$R(r) = A r^n &#43; \frac{B}{r^{n&#43;1}}$$
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
-  <a class="entry-link" aria-label="post link to 5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates" href="//localhost:1313/2---em-and-pdes/activity-sep_var_spherical/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">9 Oct 23 - Notes: Method of Relaxation
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>We’ve found a number of potential ways to solve Laplace’s equation. All of them have so far been analytical – making use of special functions and introducing basis functions to expand our solutions and develop (potentially infinite) series solutions. As we saw with spherical problems, this is a very powerful method to use, but it is not always possible to find a solution in this way. In some cases you might be able to find general solutions of the form (or in alternative coordinate systems)):
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
-  <a class="entry-link" aria-label="post link to 9 Oct 23 - Notes: Method of Relaxation" href="//localhost:1313/2---em-and-pdes/notes-relaxation/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Azimuthally Symmetric Solutions As we saw, azimuthally symmetric solutions, the electric potential is independent of $\phi$ and the solutions are of the form:
-$$V(r,\theta) = \sum_{n=0}^\infty \sum_{l=0}^\infty \left(A_{nl} r^n &#43; \frac{B_{nl}}{r^{n&#43;1}}\right) P_l(\cos\theta)$$
-where $P_l(\cos\theta)$ are the Legendre polynomials. The coefficients $A_{nl}$ and $B_{nl}$ are determined by the boundary conditions. We will practice solving for these coefficients in this activity.
-✅ Do this
-Sphere of constant surface potential Consider a sphere of with a radius $a$. If the potential on the surface is $V_0$, what is the potential inside and outside the sphere?
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
-  <a class="entry-link" aria-label="post link to 10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential" href="//localhost:1313/2---em-and-pdes/activity-sep_var_spherical_examples/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">12 Oct 23 - Activity: Method of Relaxation
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>As we discussed, we can use the relaxation approach to solve Laplace’s equation. As a reminder the process for doing this is as follows:
-Divide the region into a grid Set the boundary conditions on the edges of the grid Guess the starting values for the potential in the interior of the grid (not on the edges) Calculate the potential at each point in the grid using the average of the neighboring points (replacing the value as you go) Repeat step 4 until the values in the grid stops changing Below, we have written up a 1D code that performs each of these steps. Your task is to modify this code to work in 2D. You will need to write the functions that compute the potential at each point in the 2D grid as well as the function that sets the boundary conditions.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span></footer>
-  <a class="entry-link" aria-label="post link to 12 Oct 23 - Activity: Method of Relaxation" href="//localhost:1313/2---em-and-pdes/activity-relaxation_2d/"></a>
-</article>
-    </main>
     
-<footer class="footer">
-        <span>&copy; 2026 <a href="//localhost:1313/">PHY 415 Fall 2023</a></span> · 
+    <section style="margin-top: 30px;">
+        <h2>Pages in this section:</h2>
+        <ul>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/notes-em_intro/"><strong>26 Sept 23 - Notes: Maxwell&#39;s Equations</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/notes-static_fields/"><strong>26 Sept 23 - Notes: Static Fields</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-efields/"><strong>26 Sep 23 - Activity: Electrostatic Fields</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-superposition/"><strong>28 Sep 23 - Activity: Superposition of Fields</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/notes-electric_potential/"><strong>3 Oct 23 - Notes: Electric Potential - a scalar field</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-sep_var/"><strong>3 Oct 23 - Activity: PDEs and Separation of Variables</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-sep_var_spherical/"><strong>5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/notes-relaxation/"><strong>9 Oct 23 - Notes: Method of Relaxation</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-sep_var_spherical_examples/"><strong>10 Oct 23 - Activity: Matching Boundary Conditions and Plotting the Potential</strong></a>
+                
+            </li>
+            
+            <li style="margin-bottom: 10px;">
+                <a href="/2---em-and-pdes/activity-relaxation_2d/"><strong>12 Oct 23 - Activity: Method of Relaxation</strong></a>
+                
+            </li>
+            
+        </ul>
+    </section>
+    
+</article>
 
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
+    </main>
 
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
         
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
+        <p>Danny Caballero, Alia Valentine</p>
         
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
 </body>
-
 </html>

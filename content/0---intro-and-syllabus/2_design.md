@@ -1,7 +1,7 @@
 ---
 title: Course Design
 weight: 2
-date: '2026-01-08'
+date: '2026-01-09'
 ---
 
 For most of you, 415 is an elective course that you are taking to learn more about how we use mathematical techniques in physics. As such, this course is designed under several different principles than a standard course. Below, I provide those principles and their rationale.

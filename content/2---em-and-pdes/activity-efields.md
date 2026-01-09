@@ -1,7 +1,7 @@
 ---
 title: '26 Sep 23 - Activity: Electrostatic Fields'
 weight: 3
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: Project Rubrics
 weight: 4
-date: '2026-01-08'
+date: '2026-01-09'
 ---
 
 ## Preliminary (For first out of class project)

@@ -1,7 +1,7 @@
 ---
 title: Updated Rubric for Worked Problems and Projects
 weight: 1
-date: '2026-01-08'
+date: '2026-01-09'
 ---
 
 **19 Oct 2023**

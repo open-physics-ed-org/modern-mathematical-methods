@@ -1,7 +1,7 @@
 ---
 title: '12 Oct 23 - Activity: Method of Relaxation'
 weight: 10
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

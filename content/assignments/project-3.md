@@ -1,7 +1,7 @@
 ---
 title: Project 3 - Waves and Fourier Analysis
 weight: 10
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 ---
 

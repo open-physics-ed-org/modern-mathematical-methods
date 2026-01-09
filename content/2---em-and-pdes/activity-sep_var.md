@@ -1,7 +1,7 @@
 ---
 title: '3 Oct 23 - Activity: PDEs and Separation of Variables'
 weight: 6
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

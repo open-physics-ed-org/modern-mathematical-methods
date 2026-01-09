@@ -1,7 +1,7 @@
 ---
 title: '7 Nov 23 - Activity: The Fast Fourier Transform'
 weight: 11
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

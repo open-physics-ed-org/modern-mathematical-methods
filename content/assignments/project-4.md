@@ -1,7 +1,7 @@
 ---
 title: Project 4 - Probabilistic Modeling
 weight: 12
-date: '2026-01-08'
+date: '2026-01-09'
 ---
 
 **Due 14 Dec 23**

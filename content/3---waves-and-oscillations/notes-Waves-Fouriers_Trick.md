@@ -1,7 +1,7 @@
 ---
 title: '30 Oct 2023 - Notes: Deconstructing Waves'
 weight: 7
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

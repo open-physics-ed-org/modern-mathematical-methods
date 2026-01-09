@@ -1,7 +1,7 @@
 ---
 title: '13 Nov 23 - Notes: Applications of FFTs'
 weight: 13
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

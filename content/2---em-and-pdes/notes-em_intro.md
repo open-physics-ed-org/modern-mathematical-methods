@@ -1,7 +1,7 @@
 ---
 title: '26 Sept 23 - Notes: Maxwell''s Equations'
 weight: 1
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 ---
 

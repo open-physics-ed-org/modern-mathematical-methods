@@ -1,217 +1,143 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
-<title>20 Nov 23 - Notes: Random Processes | PHY 415 Fall 2023</title>
-<meta name="keywords" content="">
-<meta name="description" content="Until now, all of our work has been with deterministic systems. That is, we have a set of equations that allow us to describe the future of the system in space and time with certainty. Some differential equations are deterministic and all the ones that we have worked on so far are. Our analysis of ordinary differential equations, partial differential equations, and the wave equation have all been drawn from deterministic systems. We obtain equations or results that we can predict with (up to numerical) certainty.">
-<meta name="author" content="Danny Caballero, Alia Valentine">
-<link rel="canonical" href="//localhost:1313/4---randomness-and-distributions/notes-randomness/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="//localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="//localhost:1313/4---randomness-and-distributions/notes-randomness/">
-<noscript>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 Nov 23 - Notes: Random Processes | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
     <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
         }
-
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
     </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            .list::-webkit-scrollbar-thumb {
-                border-color: var(--code-bg);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
-    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
-
-
 </head>
-<body id="top">
-    <header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="//localhost:1313/" accesskey="h" title="PHY 415 Fall 2023 (Alt + H)">PHY 415 Fall 2023</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="//localhost:1313/0---intro-and-syllabus/" title="0 - Intro and Syllabus">
-                    <span>0 - Intro and Syllabus</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/1---mechanics-and-odes/" title="1 - Mechanics and ODEs">
-                    <span>1 - Mechanics and ODEs</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/2---em-and-pdes/" title="2 - E&amp;M and PDEs">
-                    <span>2 - E&amp;M and PDEs</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/3---waves-and-oscillations/" title="3 - Waves and Oscillations">
-                    <span>3 - Waves and Oscillations</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/4---randomness-and-distributions/" title="4 - Randomness and Distributions">
-                    <span>4 - Randomness and Distributions</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/assignments/" title="Assignments">
-                    <span>Assignments</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/appendices/" title="Appendices">
-                    <span>Appendices</span>
-                </a>
-            </li>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
         </ul>
     </nav>
-</header>
-<main class="main">
 
-<article class="post-single">
-  <header class="post-header">
-    <div class="breadcrumbs"><a href="//localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="//localhost:1313/4---randomness-and-distributions/">4 - Randomness and Distributions</a></div>
-    <h1 class="post-title entry-hint-parent">
-      20 Nov 23 - Notes: Random Processes
-    </h1>
-    <div class="post-meta"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span>
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>20 Nov 23 - Notes: Random Processes</h1>
+        
+    </header>
 
-</div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
-
-        <div class="inner"><ul><ul>
-                <li>
-                    <a href="#entropy" aria-label="Entropy">Entropy</a><ul>
-                        
-                <li>
-                    <a href="#video" aria-label="Video">Video</a></li></ul>
-                </li>
-                <li>
-                    <a href="#modeling-randomness" aria-label="Modeling Randomness">Modeling Randomness</a><ul>
-                        
-                <li>
-                    <a href="#video-1" aria-label="Video">Video</a></li>
-                <li>
-                    <a href="#coin-flipping-model" aria-label="Coin Flipping Model">Coin Flipping Model</a></li>
-                <li>
-                    <a href="#microstates" aria-label="Microstates">Microstates</a></li></ul>
-                </li></ul>
-                    
-                <li>
-                    <a href="#macrostates" aria-label="Macrostates">Macrostates</a><ul>
-                        
-                <li>
-                    <a href="#additional-resources" aria-label="Additional Resources">Additional Resources</a><ul>
-                        
-                <li>
-                    <a href="#videos" aria-label="Videos">Videos</a>
-                </li>
-            </ul>
-            </li>
-            </ul>
-            </li>
-            </ul>
-        </div>
-    </details>
-</div>
-
-  <div class="post-content"><p>Until now, all of our work has been with <a href="https://en.wikipedia.org/wiki/Deterministic_system">deterministic systems</a>. That is, we have a set of equations that allow us to describe the future of the system in space and time with certainty. Some differential equations are deterministic and all the ones that we have worked on so far are. Our analysis of ordinary differential equations, partial differential equations, and the wave equation have all been drawn from deterministic systems. We obtain equations or results that we can predict with (up to numerical) certainty.</p>
+    <p>Until now, all of our work has been with <a href="https://en.wikipedia.org/wiki/Deterministic_system">deterministic systems</a>. That is, we have a set of equations that allow us to describe the future of the system in space and time with certainty. Some differential equations are deterministic and all the ones that we have worked on so far are. Our analysis of ordinary differential equations, partial differential equations, and the wave equation have all been drawn from deterministic systems. We obtain equations or results that we can predict with (up to numerical) certainty.</p>
 <p>However, many processes in nature are not deterministic. These processes are stochastic, probabilistic, or <a href="https://en.wikipedia.org/wiki/Randomness">random</a>. We use these terms interchangeably, but ultimately the all describe a system with probabilistic states. These can be things like <a href="https://en.wikipedia.org/wiki/Ideal_gas">the ideal gas in statistical mechanics</a> or <a href="https://en.wikipedia.org/wiki/Hydrogen_atom">the hydrogen atom in quantum mechanics</a>. But this work applies in contexts like the <a href="https://bsj.berkeley.edu/how-scientists-are-using-statistical-physics-to-predict-the-stock-market/">stock market</a>, <a href="https://en.wikipedia.org/wiki/Numerical_weather_prediction">weather</a>, <a href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.104.014132">the spread of disease</a>, and even <a href="https://en.wikipedia.org/wiki/Information_theory">information theory</a>.</p>
-<h2 id="entropy">Entropy<a hidden class="anchor" aria-hidden="true" href="#entropy">#</a></h2>
+<h2 id="entropy">Entropy</h2>
 <p>We will start with the concept of <a href="https://en.wikipedia.org/wiki/Entropy">entropy</a>, which serves as a major organizing idea for many statistical physics models and results. For example, conservation of energy tells us that the same amount of energy is needed for a ball to change its height (moving up or down), but the concept of increasing entropy indicates the ball won&rsquo;t spontaneously jump off the table.</p>
-<h3 id="video">Video<a hidden class="anchor" aria-hidden="true" href="#video">#</a></h3>
+<h3 id="video">Video</h3>
 <p>Later, we will develop a mathematical definition of entropy, when we introduce <a href="https://en.wikipedia.org/wiki/Combinatorics">counting statistics</a>. The result, developed by <a href="https://en.wikipedia.org/wiki/Ludwig_Boltzmann">Ludwig Boltzmann</a>, is quoted below:</p>
 <p>$$S = k \ln(\Omega)$$</p>
 <p>where $k$ is the <a href="https://en.wikipedia.org/wiki/Boltzmann_constant">Boltzmann constant</a> and $\Omega$ is the <a href="https://en.wikipedia.org/wiki/Multiplicity_(statistical_mechanics)">&ldquo;multiplicity&rdquo;</a> of the system. The video below from <a href="https://www.youtube.com/channel/UCHnyfMqiRRG1u-2MsSQLbXA">Veritasium</a> provides a nice introduction to the concept of entropy.</p>
-<p><a href="https://inv.tux.pizza/watch?v=DxL2HoqLbyA"><img alt="Entropy" loading="lazy" src="https://markdown-videos-api.jorgenkh.no/youtube/DxL2HoqLbyA?width=720&height=405"></a></p>
+<p><a href="https://inv.tux.pizza/watch?v=DxL2HoqLbyA"><img src="https://markdown-videos-api.jorgenkh.no/youtube/DxL2HoqLbyA?width=720&amp;height=405" alt="Entropy"></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=DxL2HoqLbyA">https://inv.tux.pizza/watch?v=DxL2HoqLbyA</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=DxL2HoqLbyA">https://youtube.com/watch?v=DxL2HoqLbyA</a></li>
 </ul>
-<h2 id="modeling-randomness">Modeling Randomness<a hidden class="anchor" aria-hidden="true" href="#modeling-randomness">#</a></h2>
+<h2 id="modeling-randomness">Modeling Randomness</h2>
 <p>Underlying much of what we will study is the concept of randomness. <a href="https://en.wikipedia.org/wiki/Randomness">Randomness</a> is a field of study across many disciplines. Modeling randomness is a fundamentally different way of approaching physics for several reasons:</p>
 <ol>
 <li>we often have to construct models that describe the probability of a system being in a particular state,</li>
@@ -224,14 +150,14 @@
 <li>Microstate - tracks individual constituent states as if they were unique</li>
 <li>Macrostate - a group of microstates that share something</li>
 </ul>
-<h3 id="video-1">Video<a hidden class="anchor" aria-hidden="true" href="#video-1">#</a></h3>
+<h3 id="video-1">Video</h3>
 <p>In this needs to be a bit more concrete, here&rsquo;s a short example with 3 coins, which we will simulate for N coins below.</p>
-<p><a href="https://inv.tux.pizza/watch?v=9rYvq6kbUUA"><img alt="Microstates and Macrostates" loading="lazy" src="https://markdown-videos-api.jorgenkh.no/youtube/9rYvq6kbUUA?width=720&height=405"></a></p>
+<p><a href="https://inv.tux.pizza/watch?v=9rYvq6kbUUA"><img src="https://markdown-videos-api.jorgenkh.no/youtube/9rYvq6kbUUA?width=720&amp;height=405" alt="Microstates and Macrostates"></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=9rYvq6kbUUA">https://inv.tux.pizza/watch?v=9rYvq6kbUUA</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=9rYvq6kbUUA">https://youtube.com/watch?v=9rYvq6kbUUA</a></li>
 </ul>
-<h3 id="coin-flipping-model">Coin Flipping Model<a hidden class="anchor" aria-hidden="true" href="#coin-flipping-model">#</a></h3>
+<h3 id="coin-flipping-model">Coin Flipping Model</h3>
 <p>To demonstrate the concept of microstates and macrostates, we will start with a simple model of flipping coins. The coins are distinguishable, so we can track them individually. We note those different coins by the order of the array. Below, we have written a couple functions that flip a coin <code>flip_coin()</code> and simulate flipping several coins and for a number of times. We import a few relevant libraries including <code>random</code> and <code>seaborn</code> for plotting. We will use <code>seaborn</code> for plotting because it has a nice <code>histplot</code> function that we will use to plot the results of our coin flips.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> random
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
@@ -250,7 +176,7 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>flip_coins(<span style="color:#ae81ff">10</span>)
 </span></span></code></pre></div><pre><code>[0, 1, 1, 0, 1, 1, 0, 1, 0, 0]
 </code></pre>
-<h3 id="microstates">Microstates<a hidden class="anchor" aria-hidden="true" href="#microstates">#</a></h3>
+<h3 id="microstates">Microstates</h3>
 <p>We can run a short simulation of flipping 10 coins 3 times to see the different potential microstates. We show the code to run the simulation, but have hidden the visualization code for now. It is not important to understand the visualization code, but it is important to understand the visualization. The purple squares are heads (1) and the yellow squares are tails (0). The rows are the different coins and the columns are the different flips.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>num_coins <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
 </span></span><span style="display:flex;"><span>num_trials <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
@@ -289,8 +215,8 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Show the plot</span>
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
-</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_10_0.png"></p>
-<h1 id="macrostates">Macrostates<a hidden class="anchor" aria-hidden="true" href="#macrostates">#</a></h1>
+</span></span></code></pre></div><p><img src="output_10_0.png" alt="png"></p>
+<h1 id="macrostates">Macrostates</h1>
 <p>To illustrate the macrostates, we will run simulations for 10 coins for various numbers of flips. Because the number of heads (H) and the number of tails (T) are equal to 10:</p>
 <p>$$H+T = 10$$</p>
 <p>It&rsquo;s sufficient to use the number of heads (H) as the macrostate. We can use this to develop a distribution of the macrostates and thus the probabilities for different macrostates. We will use the <code>histplot</code> function from <code>seaborn</code> to plot the distribution of the macrostates. We wrote a couple functions to simulate the coin flips and plot the results.</p>
@@ -334,7 +260,7 @@
 </span></span><span style="display:flex;"><span>    plot_histogram(heads, trials, index, coins)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
-</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_14_0.png"></p>
+</span></span></code></pre></div><p><img src="output_14_0.png" alt="png"></p>
 <p>This is useful, but the important part of this kind of modeling is to determine the probablities of the macrostates. We can compute those by simply determining the number of times a particular macrostate occurs and dividing by the total number of trials. We wrote two functions to compute and plot these.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_probabilities</span>(trials, coins):
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Simulate flipping coins for each trial</span>
@@ -379,103 +305,41 @@
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
-</span></span></code></pre></div><p><img alt="png" loading="lazy" src="output_17_0.png"></p>
+</span></span></code></pre></div><p><img src="output_17_0.png" alt="png"></p>
 <p>It&rsquo;s quite easy to see form here that more trials leads to more stable and concrete probabilities for each state.</p>
-<h2 id="additional-resources">Additional Resources<a hidden class="anchor" aria-hidden="true" href="#additional-resources">#</a></h2>
-<h3 id="videos">Videos<a hidden class="anchor" aria-hidden="true" href="#videos">#</a></h3>
+<h2 id="additional-resources">Additional Resources</h2>
+<h3 id="videos">Videos</h3>
 <p>Here&rsquo;s an interesting application of the models of Poisson process and Queueing</p>
-<p><a href="https://inv.tux.pizza/watch?v=rBIQmwaoZfs"><img alt="Queuing theory and Poisson process" loading="lazy" src="https://markdown-videos-api.jorgenkh.no/youtube/rBIQmwaoZfs?width=720&height=405"></a></p>
+<p><a href="https://inv.tux.pizza/watch?v=rBIQmwaoZfs"><img src="https://markdown-videos-api.jorgenkh.no/youtube/rBIQmwaoZfs?width=720&amp;height=405" alt="Queuing theory and Poisson process"></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=rBIQmwaoZfs">https://inv.tux.pizza/watch?v=rBIQmwaoZfs</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=rBIQmwaoZfs">https://youtube.com/watch?v=rBIQmwaoZfs</a></li>
 </ul>
 
 
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-
-  </footer>
-</article>
-    </main>
     
-<footer class="footer">
-        <span>&copy; 2026 <a href="//localhost:1313/">PHY 415 Fall 2023</a></span> · 
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/4---randomness-and-distributions/activity-radioactive_decay/">← 21 Nov 23 - Activity: Introduction to Random Processes</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
 
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
+    </main>
 
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
         
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
+        <p>Danny Caballero, Alia Valentine</p>
         
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
 </body>
-
 </html>

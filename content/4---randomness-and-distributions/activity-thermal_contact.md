@@ -1,7 +1,7 @@
 ---
 title: '28 Nov 23 - Activity: Model of Two Bodies in Thermal Contact'
 weight: 5
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

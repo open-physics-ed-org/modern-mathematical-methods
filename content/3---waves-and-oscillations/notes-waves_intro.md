@@ -1,7 +1,7 @@
 ---
 title: '16 Oct 23 - Notes: Introduction to Waves'
 weight: 2
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 ---
 

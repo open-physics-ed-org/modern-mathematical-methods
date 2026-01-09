@@ -1,7 +1,7 @@
 ---
 title: 14 & 16 Nov 23 - Using the FFT with Real Data
 weight: 14
-date: '2026-01-08'
+date: '2026-01-09'
 highlight: true
 ---
 

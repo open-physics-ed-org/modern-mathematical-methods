@@ -1,7 +1,7 @@
 ---
 title: '5 Sep 23 - Activity: Calculus of Variations and Lagrangian Dynamics'
 weight: 6
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

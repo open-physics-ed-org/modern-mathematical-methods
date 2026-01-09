@@ -1,209 +1,147 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
-<title>31 Aug 23 - Notes: Frames and Coordinates | PHY 415 Fall 2023</title>
-<meta name="keywords" content="">
-<meta name="description" content="A Frame of Reference, Reference Frame, or simply Frame is a set of coordinates. These coordinates describe where things are. Sometimes it makes sense to choose different coordinates to describe the same situation. It is also important to recognize when to change coordinates to make a problem easier to work with. This will lead us to the concept of generalized coordinates, which are quite powerful in working with mechanical systems.
-In physics, we often seek to work with a problem in the simplest way possible. That means we are typically looking to work with a problem in an inertial frame. Now, this is not always possible, consider systems that can flow and deform like in fluid mechanics or continuum mechanics. But, regardless, we should always know what frame we are working in.">
-<meta name="author" content="Danny Caballero, Alia Valentine">
-<link rel="canonical" href="//localhost:1313/1---mechanics-and-odes/notes_frames/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="//localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="//localhost:1313/1---mechanics-and-odes/notes_frames/">
-<noscript>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>31 Aug 23 - Notes: Frames and Coordinates | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
     <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
         }
-
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
     </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            .list::-webkit-scrollbar-thumb {
-                border-color: var(--code-bg);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
-    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
-
-
 </head>
-<body id="top">
-    <header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="//localhost:1313/" accesskey="h" title="PHY 415 Fall 2023 (Alt + H)">PHY 415 Fall 2023</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="//localhost:1313/0---intro-and-syllabus/" title="0 - Intro and Syllabus">
-                    <span>0 - Intro and Syllabus</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/1---mechanics-and-odes/" title="1 - Mechanics and ODEs">
-                    <span>1 - Mechanics and ODEs</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/2---em-and-pdes/" title="2 - E&amp;M and PDEs">
-                    <span>2 - E&amp;M and PDEs</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/3---waves-and-oscillations/" title="3 - Waves and Oscillations">
-                    <span>3 - Waves and Oscillations</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/4---randomness-and-distributions/" title="4 - Randomness and Distributions">
-                    <span>4 - Randomness and Distributions</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/assignments/" title="Assignments">
-                    <span>Assignments</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/appendices/" title="Appendices">
-                    <span>Appendices</span>
-                </a>
-            </li>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
         </ul>
     </nav>
-</header>
-<main class="main">
 
-<article class="post-single">
-  <header class="post-header">
-    <div class="breadcrumbs"><a href="//localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="//localhost:1313/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></div>
-    <h1 class="post-title entry-hint-parent">
-      31 Aug 23 - Notes: Frames and Coordinates
-    </h1>
-    <div class="post-meta"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span>
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>31 Aug 23 - Notes: Frames and Coordinates</h1>
+        
+    </header>
 
-</div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#video-reminder-about-inertial-frames" aria-label="Video Reminder about Inertial Frames">Video Reminder about Inertial Frames</a></li>
-                <li>
-                    <a href="#relative-velocities-in-cartesian-coordinates" aria-label="Relative Velocities in Cartesian Coordinates">Relative Velocities in Cartesian Coordinates</a><ul>
-                        
-                <li>
-                    <a href="#reminders-about-frames-and-linear-frame-changes" aria-label="Reminders about frames and linear frame changes">Reminders about frames and linear frame changes</a></li></ul>
-                </li>
-                <li>
-                    <a href="#is-there-a-relationship-between-mathbfvba-and-mathbfvab" aria-label="Is there a relationship between $\mathbf{v}{B/A}$ and $\mathbf{v}{A/B}$?">Is there a relationship between $\mathbf{v}{B/A}$ and $\mathbf{v}{A/B}$?</a><ul>
-                        
-                <li>
-                    <a href="#what-about-the-velocities" aria-label="What about the velocities?">What about the velocities?</a></li>
-                <li>
-                    <a href="#example" aria-label="Example">Example</a></li></ul>
-                </li>
-                <li>
-                    <a href="#the-galilean-transformation" aria-label="The Galilean Transformation">The Galilean Transformation</a>
-                </li>
-            </ul>
-        </div>
-    </details>
-</div>
-
-  <div class="post-content"><p>A <strong>Frame of Reference</strong>, <strong>Reference Frame</strong>, or simply <strong>Frame</strong> is a set of coordinates. These coordinates describe where things are. Sometimes it makes sense to choose different coordinates to describe the same situation. It is also important to recognize when to change coordinates to make a problem easier to work with. This will lead us to the concept of <a href="https://en.wikipedia.org/wiki/Generalized_coordinates">generalized coordinates</a>, which are quite powerful in working with mechanical systems.</p>
+    <p>A <strong>Frame of Reference</strong>, <strong>Reference Frame</strong>, or simply <strong>Frame</strong> is a set of coordinates. These coordinates describe where things are. Sometimes it makes sense to choose different coordinates to describe the same situation. It is also important to recognize when to change coordinates to make a problem easier to work with. This will lead us to the concept of <a href="https://en.wikipedia.org/wiki/Generalized_coordinates">generalized coordinates</a>, which are quite powerful in working with mechanical systems.</p>
 <p>In physics, we often seek to work with a problem in the simplest way possible. That means we are typically looking to work with a problem in an <strong>inertial frame</strong>. Now, this is not always possible, consider systems that can flow and deform like in fluid mechanics or continuum mechanics. But, regardless, we should always know what frame we are working in.</p>
 <p>An <strong>inertial frame</strong> is a reference frame where Newton&rsquo;s First Law holds, which means that in this frame a net force of zero means an acceleration of zero. In practice, this means that if you have two frames that are moving at a constant velocity relative to each other (without rotation), these are inertial frames.</p>
-<h2 id="video-reminder-about-inertial-frames">Video Reminder about Inertial Frames<a hidden class="anchor" aria-hidden="true" href="#video-reminder-about-inertial-frames">#</a></h2>
+<h2 id="video-reminder-about-inertial-frames">Video Reminder about Inertial Frames</h2>
 <p>From Physics Professor <a href="https://www.youtube.com/user/yoprofmatt">Matt Anderson</a> (6min 33s)</p>
-<p><a href="https://inv.tux.pizza/watch?v=WqWWM0673bk"><img loading="lazy" src="https://markdown-videos-api.jorgenkh.no/youtube/WqWWM0673bk?width=720&height=405"></a></p>
+<p><a href="https://inv.tux.pizza/watch?v=WqWWM0673bk"><img src="https://markdown-videos-api.jorgenkh.no/youtube/WqWWM0673bk?width=720&amp;height=405" alt=""></a></p>
 <ul>
 <li>Non-Commercial Link: <a href="https://inv.tux.pizza/watch?v=WqWWM0673bk">https://inv.tux.pizza/watch?v=WqWWM0673bk</a></li>
 <li>Commercial Link: <a href="https://youtube.com/watch?v=WqWWM0673bk">https://youtube.com/watch?v=WqWWM0673bk</a></li>
 </ul>
-<h2 id="relative-velocities-in-cartesian-coordinates">Relative Velocities in Cartesian Coordinates<a hidden class="anchor" aria-hidden="true" href="#relative-velocities-in-cartesian-coordinates">#</a></h2>
+<h2 id="relative-velocities-in-cartesian-coordinates">Relative Velocities in Cartesian Coordinates</h2>
 <p>Suppose you&rsquo;re walking down Shaw Lane eager to get to BPS for your favorite physics class at constant velocity $v_A$ when you notice a <a href="https://www.instagram.com/qualitysquirrelsofmsu/">squirrel</a> sitting stationary on the sidewalk $d$ meters in front of you. Like an reasonable person, you naturally feel the urge to unnecessarily and mathematically analyze this situation using reference frames.</p>
 <p>Let&rsquo;s call your reference frame $A$ and the squirrel&rsquo;s $B$. We&rsquo;ll ignore height differences between you and the squirrel, which we assume are negligible given the amount of food our squirrels are consuming lately.</p>
 <p>A note on notation: $r_{A/B}$ means &ldquo;the position of <strong>object</strong> $A$ in <strong>frame</strong> $B$,&rdquo; or simply &ldquo;the position of $A$ relative to $B$.&rdquo;</p>
-<img src="/images/content/assets/squirrel1.png" alt="squirrel1" width=500px/>
-<h3 id="reminders-about-frames-and-linear-frame-changes">Reminders about frames and linear frame changes<a hidden class="anchor" aria-hidden="true" href="#reminders-about-frames-and-linear-frame-changes">#</a></h3>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/squirrel1.png" alt="" loading="lazy"></figure>
+
+<h3 id="reminders-about-frames-and-linear-frame-changes">Reminders about frames and linear frame changes</h3>
 <ol>
 <li>What is the squirrel&rsquo;s position in your frame, $\mathbf{r}_{B/A}$?</li>
 </ol>
@@ -237,13 +175,15 @@ In physics, we often seek to work with a problem in the simplest way possible. T
 <p>In the squirrel&rsquo;s frame, you are now stationary, the distance between you and the squirrel remains constant. Thus, $\mathbf{v}_{B/A} = \mathbf{0}$.</p>
 </details>
 <p>Hopefully these are intuitive from what you&rsquo;ve learned back in introductory physics, but there are subtleties to the mathematics that you just did. These issues are incredibly important for working in other coordinate systems and do analysis between frames.</p>
-<h2 id="is-there-a-relationship-between-mathbfvba-and-mathbfvab">Is there a relationship between $\mathbf{v}<em>{B/A}$ and $\mathbf{v}</em>{A/B}$?<a hidden class="anchor" aria-hidden="true" href="#is-there-a-relationship-between-mathbfvba-and-mathbfvab">#</a></h2>
+<h2 id="is-there-a-relationship-between-mathbfvba-and-mathbfvab">Is there a relationship between $\mathbf{v}<em>{B/A}$ and $\mathbf{v}</em>{A/B}$?</h2>
 <p>This is relatively simple to understand if we consider the position of one object (C) in two different frames (A and B). The location of object C in frame A is $\mathbf{r}<em>{C/A}$ and in frame B is $\mathbf{r}</em>{C/B}$. Note that these vectors point from the origin of the frame (A or B) to the position of the object (C). See below.</p>
-<img src="/images/content/assets/frame_vectors.png" alt="Diagram showing relative position vectors for three different points to illustrate the mathematical relationship between the position vectors." width=500px/>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/frame_vectors.png" alt="" loading="lazy"></figure>
+
 <p>From this diagram it is clear that we can write the following relationship between the position vectors:</p>
 <p>$$\mathbf{r}<em>{C/A} = \mathbf{r}</em>{B/A} + \mathbf{r}_{C/B}$$</p>
 <p>In words this states, if we measure the distance vector from A to C, then that is the same as adding the distance vectors that measure from A to B and then B to C. This distance concept holds in any coordinate system and even where the concept of coordinates is more abstract. We can define relationships between locations in real (and imagined) spaces using vectors.</p>
-<h3 id="what-about-the-velocities">What about the velocities?<a hidden class="anchor" aria-hidden="true" href="#what-about-the-velocities">#</a></h3>
+<h3 id="what-about-the-velocities">What about the velocities?</h3>
 <p>Here we have to be a bit more careful. Normally, you would think we can simply take derivatives like this:</p>
 <p>$$\dot{\mathbf{r}}<em>{C/A} = \dot{\mathbf{r}}</em>{B/A} + \dot{\mathbf{r}}_{C/B}$$</p>
 <div class="admonition admonition-admonition warning" role="note" aria-label="Admonition"><p class="admonition-title">Careful!</p><div class="admonition-content">
@@ -258,10 +198,12 @@ In physics, we often seek to work with a problem in the simplest way possible. T
 <p>Then take a time derivative, we simply get</p>
 <p>$$\dot{\mathbf{r}} = \frac{d}{dt} \mathbf{r} = \frac{dx}{dt}\mathbf{\hat x} + \frac{d\mathbf{\hat x}}{dt} x + \frac{dy}{dt}\mathbf{\hat y} + \frac{d\mathbf{\hat y}}{dt} y + \frac{dz}{dt}\mathbf{\hat z} + \frac{d\mathbf{\hat z}}{dt} z = \dot{x}\mathbf{\hat x} + \dot{y}\mathbf{\hat y} + \dot{z} \mathbf{\hat z}.$$</p>
 <p>because the derivatives of the unit vectors vanish. Later, we&rsquo;ll figure out what happens when you have non-constant unit vectors.</p>
-<h3 id="example">Example<a hidden class="anchor" aria-hidden="true" href="#example">#</a></h3>
+<h3 id="example">Example</h3>
 <p>Let&rsquo;s use these transformations in a problem.</p>
 <p>A second squirrel appears, which we&rsquo;ll call squirrel $C$. This scares the first squirrel into running toward you ($\mathbf{v}<em>{B/A}$), while the new squirrel runs away ($\mathbf{v}</em>{C/A}$).</p>
-<img src="/images/content/assets/squirrel2.png" alt="Picutre of person and two squirrels, show the first squirrel running towards the person and the second running away." width=650px/>
+<figure class="figure " role="figure">
+  <img src="/images/content/assets/squirrel2.png" alt="" loading="lazy"></figure>
+
 <p>Consider the following question:</p>
 <p>What is the velocity of squirrel $B$ relative to squirrel $C$?</p>
 <details>
@@ -273,7 +215,7 @@ In physics, we often seek to work with a problem in the simplest way possible. T
 <p>Because all the measurements are in Cartesian coordinates, we can take the time derivative of both sides to get:</p>
 <p>$$\mathbf{v}<em>{B/C} = \mathbf{v}</em>{B/A} - \mathbf{v}_{C/A}$$</p>
 </details>
-<h2 id="the-galilean-transformation">The Galilean Transformation<a hidden class="anchor" aria-hidden="true" href="#the-galilean-transformation">#</a></h2>
+<h2 id="the-galilean-transformation">The Galilean Transformation</h2>
 <p>We just did an example of a <a href="https://https://en.wikipedia.org/wiki/Galilean_transformation"><strong>Galilean Transformation</strong></a>. Traditionally, if we have a frame $B$ that with moves with constant velocity $v_{B/A}$ with respect to frame $A$, we re-write the above equations as the following:</p>
 <p>$$\mathbf{v}_B = \mathbf{v}<em>A - \textbf{v}</em>{B/A}$$</p>
 <p>$$\mathbf{r}_B = \mathbf{r}<em>A - \mathbf{v}</em>{B/A} t$$</p>
@@ -281,91 +223,31 @@ In physics, we often seek to work with a problem in the simplest way possible. T
 <p>$$t_B = t_A$$</p>
 
 
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-
-  </footer>
-</article>
-    </main>
     
-<footer class="footer">
-        <span>&copy; 2026 <a href="//localhost:1313/">PHY 415 Fall 2023</a></span> · 
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/1---mechanics-and-odes/activity-frames/">← 31 Aug 23 - Activity: Frames and Coordinates</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+                <a href="/1---mechanics-and-odes/notes-sho/">29 Aug 23 - Notes: Simple Harmonic Oscillator →</a>
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
 
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
+    </main>
 
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
         
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
+        <p>Danny Caballero, Alia Valentine</p>
         
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
 </body>
-
 </html>

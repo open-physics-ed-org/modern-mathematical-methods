@@ -1,7 +1,7 @@
 ---
 title: '5 Oct 23 - Activity: Solving PDEs in Spherical Coordinates'
 weight: 7
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

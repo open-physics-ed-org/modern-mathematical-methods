@@ -1,7 +1,7 @@
 ---
 title: Project 2 - PDEs, Laplace's Equation, and the Method of Relaxation
 weight: 7
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 ---
 

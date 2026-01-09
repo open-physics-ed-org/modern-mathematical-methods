@@ -1,7 +1,7 @@
 ---
 title: '12 Sep 23 - Activity: The Dynamical Systems Approach and Phase Portraits'
 weight: 10
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---
@@ -283,7 +283,7 @@ The Large Angle Pendulum is the first of a number of nonlinear differential equa
 
 Here's the pendulum in all it's glory.
 
-![Large Angle Pendulum](/images/content/assets/images/pendulum_bob.png)
+{{< figure src="/images/content/assets/images/pendulum_bob.png" alt="Large Angle Pendulum" >}}
 
 
 The analytical solution for the period is given by:

@@ -1,7 +1,7 @@
 ---
 title: '2 Nov 23 - Activity: Automated Signal Deconstruction & Reconstruction'
 weight: 9
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

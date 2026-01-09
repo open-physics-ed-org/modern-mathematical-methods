@@ -1,7 +1,7 @@
 ---
 title: Worked Problem Assignment 3
 weight: 5
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: '4 Dec 23 - Notes: Markov Chain Monte Carlo Modeling'
 weight: 7
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 ---
 

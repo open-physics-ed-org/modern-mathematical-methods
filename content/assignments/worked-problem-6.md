@@ -1,7 +1,7 @@
 ---
 title: Worked Problem Assignment 6
 weight: 9
-date: '2026-01-08'
+date: '2026-01-09'
 ---
 
 **Due 10 Nov 23**

@@ -1,7 +1,7 @@
 ---
 title: Calendar
 weight: 5
-date: '2026-01-08'
+date: '2026-01-09'
 ---
 
 In this course, we will cover four principal topics in physics (in this order):

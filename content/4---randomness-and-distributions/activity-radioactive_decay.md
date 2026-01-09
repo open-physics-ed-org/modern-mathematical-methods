@@ -1,7 +1,7 @@
 ---
 title: '21 Nov 23 - Activity: Introduction to Random Processes'
 weight: 2
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

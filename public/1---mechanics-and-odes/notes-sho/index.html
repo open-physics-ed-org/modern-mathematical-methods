@@ -1,198 +1,130 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
-<title>29 Aug 23 - Notes: Simple Harmonic Oscillator | PHY 415 Fall 2023</title>
-<meta name="keywords" content="">
-<meta name="description" content="A Linear Restoring Force
-The SHO model, as we will see, is the root of many more sophisticated models in physics &ndash; across many subdisciplines. There&rsquo;s a reason for this. The SHO is a simple model that captures the essence of many physical systems. It is a mathematical model for a &ldquo;linear restoring force&rdquo;. Such a force gives rise to local stability, that is, a tendency for the system to return to a stable equilibrium position. The richness of this statement is not entirely clear, but we will see that it is a very powerful idea, that is related to to energy minimization, and the idea of a potential energy function.">
-<meta name="author" content="Danny Caballero, Alia Valentine">
-<link rel="canonical" href="//localhost:1313/1---mechanics-and-odes/notes-sho/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="//localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="//localhost:1313/1---mechanics-and-odes/notes-sho/">
-<noscript>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>29 Aug 23 - Notes: Simple Harmonic Oscillator | PHY 415 Fall 2023</title>
+    <meta name="description" content="PHY 415 Fall 2023">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+    
+    <link rel="stylesheet" href="//localhost:1313/css/accessibility.css">
     <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
         }
-
+        nav {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #222;
+            margin-top: 1.5em;
+        }
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        a {
+            color: #0066cc;
+        }
+        .menu-home {
+            font-weight: bold;
+            margin-right: 30px;
+        }
     </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            .list::-webkit-scrollbar-thumb {
-                border-color: var(--code-bg);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
-    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false});"></script>
-
-
 </head>
-<body id="top">
-    <header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="//localhost:1313/" accesskey="h" title="PHY 415 Fall 2023 (Alt + H)">PHY 415 Fall 2023</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="//localhost:1313/0---intro-and-syllabus/" title="0 - Intro and Syllabus">
-                    <span>0 - Intro and Syllabus</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/1---mechanics-and-odes/" title="1 - Mechanics and ODEs">
-                    <span>1 - Mechanics and ODEs</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/2---em-and-pdes/" title="2 - E&amp;M and PDEs">
-                    <span>2 - E&amp;M and PDEs</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/3---waves-and-oscillations/" title="3 - Waves and Oscillations">
-                    <span>3 - Waves and Oscillations</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/4---randomness-and-distributions/" title="4 - Randomness and Distributions">
-                    <span>4 - Randomness and Distributions</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/assignments/" title="Assignments">
-                    <span>Assignments</span>
-                </a>
-            </li>
-            <li>
-                <a href="//localhost:1313/appendices/" title="Appendices">
-                    <span>Appendices</span>
-                </a>
-            </li>
+<body>
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li class="menu-home"><a href="//localhost:1313/">PHY 415 Fall 2023</a></li>
+            
+            
+            <li><a href="/0---intro-and-syllabus/">0 - Intro and Syllabus</a></li>
+            
+            
+            
+            <li><a href="/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></li>
+            
+            
+            
+            <li><a href="/2---em-and-pdes/">2 - E&amp;M and PDEs</a></li>
+            
+            
+            
+            <li><a href="/3---waves-and-oscillations/">3 - Waves and Oscillations</a></li>
+            
+            
+            
+            <li><a href="/4---randomness-and-distributions/">4 - Randomness and Distributions</a></li>
+            
+            
+            
+            <li><a href="/assignments/">Assignments</a></li>
+            
+            
+            
+            <li><a href="/appendices/">Appendices</a></li>
+            
+            
         </ul>
     </nav>
-</header>
-<main class="main">
 
-<article class="post-single">
-  <header class="post-header">
-    <div class="breadcrumbs"><a href="//localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="//localhost:1313/1---mechanics-and-odes/">1 - Mechanics and ODEs</a></div>
-    <h1 class="post-title entry-hint-parent">
-      29 Aug 23 - Notes: Simple Harmonic Oscillator
-    </h1>
-    <div class="post-meta"><span title='2026-01-08 00:00:00 +0000 UTC'>January 8, 2026</span>&nbsp;·&nbsp;<span>Danny Caballero, Alia Valentine</span>
+    <main role="main">
+        
+<article>
+    <header>
+        <h1>29 Aug 23 - Notes: Simple Harmonic Oscillator</h1>
+        
+    </header>
 
-</div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#a-linear-restoring-force" aria-label="A Linear Restoring Force">A Linear Restoring Force</a></li>
-                <li>
-                    <a href="#the-sho-mathematical-model" aria-label="The SHO mathematical model">The SHO mathematical model</a><ul>
-                        
-                <li>
-                    <a href="#linearity-of-differential-equations" aria-label="Linearity of differential equations">Linearity of differential equations</a></li>
-                <li>
-                    <a href="#why-does-linearity-matter" aria-label="Why does linearity matter?">Why does linearity matter?</a></li>
-                <li>
-                    <a href="#general-solution-to-the-sho" aria-label="General Solution to the SHO">General Solution to the SHO</a></li>
-                <li>
-                    <a href="#particular-solutions" aria-label="Particular Solutions">Particular Solutions</a><ul>
-                        
-                <li>
-                    <a href="#find-a-particular-solution" aria-label="Find a particular solution">Find a particular solution</a></li></ul>
-                </li></ul>
-                </li>
-                <li>
-                    <a href="#resources" aria-label="Resources">Resources</a></li>
-                <li>
-                    <a href="#handwritten-notes" aria-label="Handwritten Notes">Handwritten Notes</a>
-                </li>
-            </ul>
-        </div>
-    </details>
-</div>
-
-  <div class="post-content"><h2 id="a-linear-restoring-force">A Linear Restoring Force<a hidden class="anchor" aria-hidden="true" href="#a-linear-restoring-force">#</a></h2>
+    <h2 id="a-linear-restoring-force">A Linear Restoring Force</h2>
 <p>The SHO model, as we will see, is the root of many more sophisticated models in physics &ndash; across many subdisciplines. There&rsquo;s a reason for this. The SHO is a simple model that captures the essence of many physical systems. It is a mathematical model for a &ldquo;linear restoring force&rdquo;. Such a force gives rise to local stability, that is, a tendency for the system to return to a stable equilibrium position. The richness of this statement is not entirely clear, but we will see that it is a very powerful idea, that is related to to energy minimization, and the idea of a potential energy function.</p>
 <p>A linear restoring force is simply one in which the size of the force is in direct proportion to some displacement and is directed opposite to the displacement. For example, a coiled spring exerts (rooughly) a linear restoring force. If you pull on a spring, the spring exerts a force on your hand that is proportional to the distance you pull the spring. It is directed opposite to the direction you pull.</p>
 <p>In 1D, we can write this as:</p>
@@ -200,11 +132,11 @@ The SHO model, as we will see, is the root of many more sophisticated models in 
 <p>where $k$ is the spring constant. The negative sign indicates that the force is directed opposite to the displacement, and $x$ is the displacement from the equilibrium position. As we are going to consider more general motion, we can abstract this concept of a linear restoring force to three dimensions, and write:</p>
 <p>$$\vec{F}_{\rm spring} = -k \Delta \vec{x}$$</p>
 <p>where $\Delta \vec{x}$ is the displacement vector from the equilibrium position.</p>
-<h2 id="the-sho-mathematical-model">The SHO mathematical model<a hidden class="anchor" aria-hidden="true" href="#the-sho-mathematical-model">#</a></h2>
+<h2 id="the-sho-mathematical-model">The SHO mathematical model</h2>
 <p>We have seen that the canonical one-dimensional harmonic oscillator is described with the following <strong>2nd order linear</strong> differential equation:</p>
 <p>$$m\ddot{s} = -k{s}$$</p>
 <p>where $s$ represents the distance from the oscillator&rsquo;s equilibrium position. It&rsquo;s important to note that this model for a linear restoring force gives rise to at <strong>second order</strong> differential equation. As you will see, there would be no ability for cycles or recurrent behavior without two dimensions (the two dimensions here are the position, $s$, and velocity of the oscillator, $\dot{s}$). It is also important that the differential equation is <strong>linear</strong>.</p>
-<h3 id="linearity-of-differential-equations">Linearity of differential equations<a hidden class="anchor" aria-hidden="true" href="#linearity-of-differential-equations">#</a></h3>
+<h3 id="linearity-of-differential-equations">Linearity of differential equations</h3>
 <p>This is something that is easy to confuse because we use the term <strong>linear</strong> in different ways at different times. In many cases this prompts us to think of a line, so that we might think the only linear differential equations are ones where the variable of interest (in this case the position of the oscillator) appears only <em>linearly</em> in the equation.</p>
 <div class="admonition admonition-warning " role="note" aria-label="Warning"><p class="admonition-title">Warning</p><div class="admonition-content">
     <p>So you might think that Nth order differential equations of the form:</p>
@@ -224,7 +156,7 @@ The SHO model, as we will see, is the root of many more sophisticated models in 
   </div>
 </div>
 
-<h3 id="why-does-linearity-matter">Why does linearity matter?<a hidden class="anchor" aria-hidden="true" href="#why-does-linearity-matter">#</a></h3>
+<h3 id="why-does-linearity-matter">Why does linearity matter?</h3>
 <p>Because much of nature can be modeled with linear differential equations (or approximately so) and linear differential equations have really nice solution properties. *The solutions to linear differential equations are <strong>holonomic functions</strong>. This is just a fancy word for functions you know like polynomials, sine, cosine, exponentiale, and some special functions (e.g., Airy, Bessel, hypergeometric). But these solutions are really important because they are smooth as are their derivatives, so they have really nice properties.</p>
 <p>In many cases, we can lean on strong properties derived from linearity:</p>
 <ul>
@@ -238,7 +170,7 @@ The SHO model, as we will see, is the root of many more sophisticated models in 
   </div>
 </div>
 
-<h3 id="general-solution-to-the-sho">General Solution to the SHO<a hidden class="anchor" aria-hidden="true" href="#general-solution-to-the-sho">#</a></h3>
+<h3 id="general-solution-to-the-sho">General Solution to the SHO</h3>
 <p>We can start with the differential equation:</p>
 <p>$$\ddot{x} = -\omega^2 x$$</p>
 <p>where $x$ is the position relative to equilibrium and $\omega^2 = k/m$. We know this is a linear, second-order ODE, so we expect the solutions to be <a href="https://en.wikipedia.org/wiki/Holonomic_function">holonomic functions</a> - that is, many of the functions we have seen before. Moreover, we need something that when we take two derivatives, we get the same functions back.</p>
@@ -262,12 +194,12 @@ $$x(t) = \sum_i^N A_i\cos(\omega_i t) + B_i\sin(\omega_i t)$$</p>
 <p>Can you think of other functions that when you take two derivatives, you get the same function back with a sign change?</p>
 <p>What if the function were complex (recall: $i^2 = -1$)?</p>
 </details>
-<h3 id="particular-solutions">Particular Solutions<a hidden class="anchor" aria-hidden="true" href="#particular-solutions">#</a></h3>
+<h3 id="particular-solutions">Particular Solutions</h3>
 <p>Let&rsquo;s pick two general solutions. Notice that both have two unknown constants. We can use the initial conditions to determine the values of these constants, and thus our particular solutions.</p>
 <p>$$x(t) = A\cos(\omega t) + B\sin(\omega t)$$</p>
 <p>$$x(t) = C\sin(\omega t + \phi_C)$$</p>
 <p>To determine a particular solution is to solve for the <strong>trajectory</strong> of the system given a set of initial conditions. You can think about a falling object, but any physical system that is evolving in time will have a trajectory in the general sense of various changing observable quantities. We will revisit this idea later once we make the connection to <a href="https://en.wikipedia.org/wiki/Dynamical_system">Dynamical Systems</a>.</p>
-<h4 id="find-a-particular-solution">Find a particular solution<a hidden class="anchor" aria-hidden="true" href="#find-a-particular-solution">#</a></h4>
+<h4 id="find-a-particular-solution">Find a particular solution</h4>
 <p>For an SHO ($\omega=\omega_0 = 1$) that is pulled to a point $x_0$ and let go at $t=0$, let&rsquo;s find the particular solutions using both general forms (they will give us this).</p>
 <p>$$x_1(t) = x_0\cos(\omega_0 t)$$
 $$x_2(t) = x_0\sin(\omega_0 t + \pi/2)$$
@@ -292,8 +224,8 @@ $$x_2(t) = -x_0\sin(\omega_0 t + 3\pi/2)$$</p>
 </span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t,x2b)
 </span></span></code></pre></div><pre><code>[&lt;matplotlib.lines.Line2D at 0x11518d510&gt;]
 </code></pre>
-<p><img alt="png" loading="lazy" src="output_7_1.png"></p>
-<h2 id="resources">Resources<a hidden class="anchor" aria-hidden="true" href="#resources">#</a></h2>
+<p><img src="output_7_1.png" alt="png"></p>
+<h2 id="resources">Resources</h2>
 <p>Here are scans of four sections of four books (that you can look over at my office, or find elsewhere) that are useful for our study of the SHO and will help you with your project ideas and plans.</p>
 <p><em>Sorry for the potato quality, and apparently the orientations, which I corrected but github refuses to keep the same orientation.  I will do better next class and try to fix these later.</em></p>
 <ul>
@@ -319,98 +251,36 @@ $$x_2(t) = -x_0\sin(\omega_0 t + 3\pi/2)$$</p>
 </ul>
 </li>
 </ul>
-<h2 id="handwritten-notes">Handwritten Notes<a hidden class="anchor" aria-hidden="true" href="#handwritten-notes">#</a></h2>
+<h2 id="handwritten-notes">Handwritten Notes</h2>
 <p>Below, I have worked up some additional notes that describe the conceptual and procedural aspects of what we did today. Think: derivations and examples for learning from for your project. They are linked below:</p>
 <ul>
 <li><a href="../../assets/notes/Notes-SHO.pdf">The SHO</a></li>
 </ul>
 
 
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-
-  </footer>
-</article>
-    </main>
     
-<footer class="footer">
-        <span>&copy; 2026 <a href="//localhost:1313/">PHY 415 Fall 2023</a></span> · 
+    <nav style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <a href="/1---mechanics-and-odes/notes_frames/">← 31 Aug 23 - Notes: Frames and Coordinates</a>
+                
+            </div>
+            <div style="text-align: right;">
+                
+            </div>
+        </div>
+    </nav>
+    
+</article>
 
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
+    </main>
 
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
+    <footer role="contentinfo" style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.9em;">
         
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
+        <p>Danny Caballero, Alia Valentine</p>
         
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
+        <p>Built with <a href="https://gohugo.io/">Hugo</a> | Converted with jupyter2hugo</p>
+    </footer>
 </body>
-
 </html>

@@ -1,7 +1,7 @@
 ---
 title: 14 Sept 23 - Conducting a complete analysis of an ODE
 weight: 11
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

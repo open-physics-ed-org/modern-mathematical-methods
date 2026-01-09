@@ -1,7 +1,7 @@
 ---
 title: '12 Sept 23 - Notes: Dynamical Systems and Phase Space'
 weight: 9
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 highlight: true
 ---

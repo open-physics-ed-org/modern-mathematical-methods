@@ -1,7 +1,7 @@
 ---
 title: Worked Problems
 weight: 8
-date: '2026-01-08'
+date: '2026-01-09'
 ---
 
 In lieu of homework sets where we ask you to reproduce work that we've done in class, or try to solve problems that are similar to what we've done, we will instead ask you to investigate a problem that you are interested in using the techniques we have developed in class. For example, we've all taken an introductory physics course where we learn how to analyze a problem using energy conservation. So if this were an introductory course, you might develop a scenario where energy conservation applies and then show how you can apply it (doing some calculations and graphing), and discuss what the meaning of those calculations and graphs are.

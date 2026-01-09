@@ -1,7 +1,7 @@
 ---
 title: Syllabus and Overview of PHY 415
 weight: 1
-date: '2026-01-08'
+date: '2026-01-09'
 ---
 
 In designing this course, we plan to emphasize more independent learning on your part and greater agency for you in determining what you learn and how you demonstrate you have learned. So you should expect:

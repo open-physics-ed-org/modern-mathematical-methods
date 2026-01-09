@@ -1,7 +1,7 @@
 ---
 title: '25 Oct 23 - Notes: Solutions to The Wave Equation'
 weight: 5
-date: '2026-01-08'
+date: '2026-01-09'
 math: true
 ---
 
